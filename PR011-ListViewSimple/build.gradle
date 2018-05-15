@@ -1,0 +1,32 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext.kotlin_version = '1.2.40'
+    repositories {
+        jcenter()
+        google()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        google()
+    }
+}
+
+
+ext {
+    compileSdkVersion = 27
+    minSdkVersion = 21
+    buildToolsVersion = "27.0.3"
+    junit_version = "4.12"
+    espresso_version = "3.0.1"
+    support_library_version = "27.1.1"
+    arch_version = "1.1.1"
+    support_test_version = "1.0.0"
+    ktx_version = "0.3"
+}

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:animateLayoutChanges="true"
+             tools:ignore="MergeRootFrame">
+
+    <ImageView
+        android:id="@+id/imgPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/foto_del_dia"
+        android:scaleType="centerCrop"
+        android:src="@drawable/foto"/>
+
+    <RelativeLayout
+        android:id="@+id/rlPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:animateLayoutChanges="true"
+        android:background="@color/translucent_grey"
+        android:padding="@dimen/panel_padding">
+
+        <TextView
+            android:id="@+id/lblTitle"
+            style="@style/Base.TextAppearance.AppCompat.Headline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/imgDetail"
+            app:fontFamily="@font/alegreya"
+            android:text="@string/foto_del_dia"
+            android:textColor="@android:color/white"
+            android:textStyle="bold|italic"/>
+
+        <TextView
+            android:id="@+id/lblSubtitle"
+            style="@style/Base.TextAppearance.AppCompat.Subhead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/lblTitle"
+            android:layout_toStartOf="@+id/imgDetail"
+            app:fontFamily="@font/alegreya"
+            android:text="@string/londres"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:id="@+id/imgDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:contentDescription="@string/abrir_detalle"
+            android:tint="@color/white"
+            app:srcCompat="@drawable/collapse_anim"/>
+
+        <TextView
+            android:id="@+id/lblDetail"
+            style="@style/Base.TextAppearance.AppCompat.Body2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lblSubtitle"
+            app:fontFamily="@font/alegreya"
+            android:padding="@dimen/panel_padding"
+            android:text="@string/detalle"
+            android:textColor="@android:color/white"/>
+    </RelativeLayout>
+
+</FrameLayout>

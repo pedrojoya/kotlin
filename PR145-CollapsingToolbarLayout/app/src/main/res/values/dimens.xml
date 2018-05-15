@@ -1,0 +1,5 @@
+<resources>
+    <dimen name="activity_main_txtLorem_padding">20dp</dimen>
+    <dimen name="activity_main_appbarLayout_height">192dp</dimen>
+    <dimen name="activity_main_collapsingToolbar_titleMarginStart">32dp</dimen>
+</resources>

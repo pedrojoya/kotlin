@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Dial</string>
+    <string name="activity_main_btnDelete">Del</string>
+</resources>

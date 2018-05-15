@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Navigation drawer -->
+    <dimen name="activity_main_drawer_rlDrawerHeaderRoot_padding">16dp</dimen>
+    <dimen name="activity_main_drawer_rlDrawerHeaderRoot_height">178dp</dimen>
+    <dimen name="navigation_drawer_header_profile_marginTop">16dp</dimen>
+
+    <!-- Fake Status Bar -->
+    <dimen name="activity_detail_toolbar_height">@dimen/abc_action_bar_default_height_material</dimen>
+
+    <!-- RecyclerView -->
+    <dimen name="fragment_tab1_padding">8dp</dimen>
+
+    <!-- Single line with avatar list item -->
+    <dimen name="two_line_tile_height">72dp</dimen>
+    <dimen name="two_line_avatar_width">40dp</dimen>
+    <dimen name="two_line_avatar_height">40dp</dimen>
+    <dimen name="two_line_avatar_marginTop">20dp</dimen>
+    <dimen name="two_line_avatar_marginLeft">16dp</dimen>
+    <dimen name="two_line_text_paddingTop">18dp</dimen>
+    <dimen name="two_line_secundary_text_paddingBottom">20dp</dimen>
+    <dimen name="two_line_text_paddingLeft">72dp</dimen>
+    <dimen name="two_line_text_marginRight">16dp</dimen>
+
+    <!-- FAB -->
+    <dimen name="fab_margin_right">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <!-- Collapsing Toolbar -->
+    <dimen name="fragment_collapsing_appbarLayout_height">200dp</dimen>
+    <dimen name="activity_detail_appbarLayout_height">240dp</dimen>
+    <dimen name="fragment_tab2_margin">16dp</dimen>
+    <dimen name="nestedscroll_padding">16dp</dimen>
+    <dimen name="activity_detail_collapsingToolbar_expandedTitleMarginEnd">
+        16dp
+    </dimen>
+    <dimen name="activity_detail_collapsingToolbar_expandedTitleMarginStart">
+        48dp
+    </dimen>
+    <dimen name="activity_detail_lblText_padding">16dp</dimen>
+    <dimen name="activity_main_drawer_imgProfile_width">64dp</dimen>
+    <dimen name="fragment_collapsing_nestedScrollView_padding">10dp</dimen>
+    <dimen name="fragment_collapsing_lblText_padding">10dp</dimen>
+
+</resources>

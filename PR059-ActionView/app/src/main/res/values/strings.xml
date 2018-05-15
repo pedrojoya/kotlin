@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ActionView</string>
+
+    <string name="activity_main_mnuSearch">Buscar %1$s</string>
+
+    <string name="main_activity_student_clicked">"Clicked on %1$s"</string>
+
+</resources>

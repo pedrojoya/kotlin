@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">GridView</string>
+
+    <string name="activity_main_item_imgPhoto">Concepto</string>
+
+    <string name="main_activity_translation">%1$s se dice %2$s</string>
+</resources>

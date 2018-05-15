@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ConstraintLayout</string>
+    <string name="activity_main_lblTitle">Conexión</string>
+    <string name="activity_main_lblUsername">Usuario</string>
+    <string name="activity_main_lblPassword">Clave</string>
+    <string name="activity_main_btnAcept">Aceptar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="conectando_con_el_usuario">Conectando con el usuario %1$s…</string>
+</resources>

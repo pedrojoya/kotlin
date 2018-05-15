@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activity_main_margin">16dp</dimen>
+    <dimen name="activity_main_item_rlWord_padding">4dp</dimen>
+    <dimen name="activity_main_item_imgPhoto_marginRight">10dp</dimen>
+    <dimen name="activity_main_item_imgPhoto_width">40dp</dimen>
+</resources>

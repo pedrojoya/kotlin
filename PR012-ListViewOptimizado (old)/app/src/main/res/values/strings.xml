@@ -1,0 +1,17 @@
+<resources>
+
+    <string name="app_name">ListView optimizado</string>
+    <string name="activity_main_lblEmpty">Listado de data</string>
+    <string name="activity_main_item_imgPhoto">Foto del student</string>
+    <plurals name="main_activity_age">
+        <item quantity="one">%1$d año</item>
+        <item quantity="other">%1$d años</item>
+    </plurals>
+    <string name="main_activity_grade_and_level">%1$s del %2$s</string>
+    <string name="activity_main_item_btnMarks">Notas</string>
+    <string name="activity_main_item_btnCall">Llamar</string>
+    <string name="llamar_a">Llamar a %1$s</string>
+    <string name="ver_notas_de">Ver notas de %1$s</string>
+    <string name="activity_main_item_lblRepeater">REP</string>
+
+</resources>

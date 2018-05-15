@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Tema -->
+    <color name="primary">#673AB7</color>
+    <color name="primary_dark">#512DA8</color>
+    <color name="accent">#8BC34A</color>
+    <!-- Preguntas y respuestas -->
+    <color name="activity_fondo">#F0E2EC</color>
+    <color name="activity_main_btncheck_background_color">#975B99</color>
+    <color name="respuesta_fondo">#611E63</color>
+    <color name="general_button_disabled">#7A747A</color>
+    <color name="puntuacion_fondo_correcto">#64588C</color>
+    <color name="puntuacion_borde_correcto">#341F79</color>
+    <color name="puntuacion_fondo_incorrecto">#BF6F6F</color>
+    <color name="puntuacion_borde_incorrecto">#A62525</color>
+</resources>

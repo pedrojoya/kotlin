@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Spinner</string>
+
+    <string name="activity_main_btnShow">Show</string>
+    <string name="activity_main_lblCountry">Country</string>
+
+    <string name="activity_main_item_imgFlag">Flag</string>
+
+    <string name="main_activity_choose_one_country">[Choose a country]</string>
+</resources>

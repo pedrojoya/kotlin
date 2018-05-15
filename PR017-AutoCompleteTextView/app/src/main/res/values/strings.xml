@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">AutoCompleteTextView</string>
+
+    <string name="activity_main_lblWord">Word</string>
+    <string name="activity_main_btnTranslate">Translate</string>
+    <string name="activity_main_item_imgPhoto">Photo</string>
+    <string name="activity_main_txtWord">(in english)</string>
+</resources>

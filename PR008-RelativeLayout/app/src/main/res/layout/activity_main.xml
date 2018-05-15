@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/main_activity_margin"
+    android:paddingRight="@dimen/main_activity_margin"
+    android:paddingTop="@dimen/main_activity_margin">
+
+    <TextView
+        android:id="@+id/lblTitle"
+        style="?android:attr/listSeparatorTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="@string/activity_main_lblTitle"/>
+
+    <TextView
+        android:id="@+id/lblUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lblTitle"
+        android:layout_marginTop="@dimen/main_activity_margin"
+        android:text="@string/activity_main_lblUsername"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        tools:visibility="visible"/>
+
+    <EditText
+        android:id="@+id/txtUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lblUsername"
+        android:hint="@string/activity_main_txtUsername"
+        android:imeOptions="actionNext"
+        android:inputType="text"
+        android:maxLength="@integer/activity_main_txtUsername_maxLength"
+        android:maxLines="1"
+        android:paddingTop="0dp">
+
+        <requestFocus/>
+    </EditText>
+
+    <TextView
+        android:id="@+id/lblPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtUsername"
+        android:layout_marginTop="@dimen/main_activity_margin"
+        android:text="@string/activity_main_lblPassword"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:visibility="invisible"
+        tools:visibility="visible"/>
+
+    <EditText
+        android:id="@+id/txtPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lblPassword"
+        android:hint="@string/activity_main_txtPassword"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        android:maxLength="@integer/activity_main_txtPassword_maxLength"
+        android:maxLines="1"
+        android:paddingTop="0dp"/>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/llButtonBar"
+        android:background="?android:attr/listDivider"/>
+
+    <LinearLayout
+        android:id="@+id/llButtonBar"
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/btnCancel"
+            style="?android:buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/activitiy_main_btnCancel"/>
+
+        <Button
+            android:id="@+id/btnLogin"
+            style="?android:buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/activity_main_btnLogin"/>
+    </LinearLayout>
+
+</RelativeLayout>

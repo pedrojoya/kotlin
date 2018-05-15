@@ -1,0 +1,69 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/general_activity_margin">
+
+        <Button
+            android:id="@+id/btnDatePicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/general_activity_margin"
+            android:text="@string/activity_main_btnDatePicker"/>
+
+        <Button
+            android:id="@+id/btnTimePicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/general_activity_margin"
+            android:text="@string/activity_main_btnTimePicker"/>
+
+        <Button
+            android:id="@+id/btnYesNoAlert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/general_activity_margin"
+            android:text="@string/activity_main_btnYesNoAlert"/>
+
+        <Button
+            android:id="@+id/btnDirectSelectionAlert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/general_activity_margin"
+            android:text="@string/activity_main_btnDirectSelectionAlert"/>
+
+        <Button
+            android:id="@+id/btnSimpleSelectionAlert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/general_activity_margin"
+            android:text="@string/activity_main_btnSimpleSelectionAlert"/>
+
+        <Button
+            android:id="@+id/btnMultipleSelectionAlert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/general_activity_margin"
+            android:text="@string/activity_main_btnMultipleSelectionAlert"/>
+
+        <Button
+            android:id="@+id/btnCustomLayoutAlert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/general_activity_margin"
+            android:text="@string/activity_main_btnCustomLayoutAlert"/>
+
+        <Button
+            android:id="@+id/btnAdapterAlert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/general_activity_margin"
+            android:text="@string/activity_main_btnAdapterAlert"/>
+    </LinearLayout>
+
+</ScrollView>
