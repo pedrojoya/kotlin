@@ -23,7 +23,7 @@
         <!-- FileProvider para compartir archivos (necesario para proporcionar
      la URI del archivo al programa para mostrar el archivo -->
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="es.iessaladillo.pedrojoya.pr119.provider"
             android:exported="false"
             android:grantUriPermissions="true">

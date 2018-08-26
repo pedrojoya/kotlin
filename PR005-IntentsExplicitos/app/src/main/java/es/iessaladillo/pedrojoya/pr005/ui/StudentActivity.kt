@@ -3,11 +3,12 @@ package es.iessaladillo.pedrojoya.pr005.ui
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
+import es.iessaladillo.pedrojoya.pr005.DEFAULT_AGE
+import es.iessaladillo.pedrojoya.pr005.MAX_AGE
 import es.iessaladillo.pedrojoya.pr005.R
-import es.iessaladillo.pedrojoya.pr005.extensions.afterTextChanged
-import es.iessaladillo.pedrojoya.pr005.extensions.isNotBlank
+import es.iessaladillo.pedrojoya.pr005.extensions.*
 import kotlinx.android.synthetic.main.activity_student.*
 
 private const val EXTRA_NAME = "EXTRA_NAME"
@@ -15,13 +16,8 @@ private const val EXTRA_AGE = "EXTRA_AGE"
 
 class StudentActivity : AppCompatActivity() {
 
-    private val name by lazy {
-        intent?.getStringExtra(EXTRA_NAME) ?: ""
-    }
-
-    private val age by lazy {
-        intent?.getIntExtra(EXTRA_AGE, DEFAULT_AGE) ?: DEFAULT_AGE
-    }
+    private val name by extraString(EXTRA_NAME, "")
+    private val age by extraInt(EXTRA_AGE, DEFAULT_AGE)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,11 +26,19 @@ class StudentActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        with(txtName) {
+        txtName.run {
             setText(name)
-            afterTextChanged { btnSend.isEnabled = isValidForm() }
+            // Opción sencilla.
+            // afterTextChanged { btnSend.isEnabled = isValidForm() }
+            // Opción más completa porque permite especifcar más listener del TextWatcher
+            // además de afterTextChanged.
+            addTextChangeListener {
+                afterTextChanged {
+                    btnSend.isEnabled = isValidForm()
+                }
+            }
         }
-        with(txtAge) {
+        txtAge.run {
             setText(age.toString())
             afterTextChanged { btnSend.isEnabled = isValidForm() }
         }

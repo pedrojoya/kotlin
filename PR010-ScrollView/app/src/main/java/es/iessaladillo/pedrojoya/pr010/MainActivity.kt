@@ -1,8 +1,8 @@
 package es.iessaladillo.pedrojoya.pr010
 
 import android.os.Bundle
-import android.support.v4.widget.NestedScrollView
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.NestedScrollView
 import es.iessaladillo.pedrojoya.pr010.extensions.afterTextChanged
 import es.iessaladillo.pedrojoya.pr010.extensions.isNotBlank
 import es.iessaladillo.pedrojoya.pr010.extensions.onActionDone
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        with (txtMessage) {
+        txtMessage.apply {
             onActionDone {
                 sendMessage(text.toString())
             }

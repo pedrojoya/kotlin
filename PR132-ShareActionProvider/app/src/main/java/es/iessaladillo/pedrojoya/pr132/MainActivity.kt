@@ -2,11 +2,11 @@ package es.iessaladillo.pedrojoya.pr132
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.view.MenuItemCompat
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.ShareActionProvider
 import android.view.Menu
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.ShareActionProvider
+import androidx.core.view.MenuItemCompat
 import es.iessaladillo.pedrojoya.pr132.extensions.getStringArray
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -24,12 +24,9 @@ class MainActivity : AppCompatActivity() {
     private fun initViews() {
         mAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1,
                 arrayListOf(*getStringArray(R.array.students)))
-        with(lstStudents) {
+        lstStudents.run {
             emptyView = lblEmpty
             adapter = mAdapter
-            setOnItemClickListener { _, _, position, _ ->
-                remove(mAdapter.getItem(position))
-            }
         }
     }
 
@@ -45,12 +42,6 @@ class MainActivity : AppCompatActivity() {
     private fun createShareIntent() = Intent(Intent.ACTION_SEND).apply {
         type = "text/plain"
         putExtra(Intent.EXTRA_TEXT, getStringArray(R.array.students).joinToString("\n"))
-    }
-
-    private fun remove(elemento: String?) {
-        mAdapter.remove(elemento)
-        // Update share intent.
-        mShareActionProvider?.setShareIntent(createShareIntent())
     }
 
 }

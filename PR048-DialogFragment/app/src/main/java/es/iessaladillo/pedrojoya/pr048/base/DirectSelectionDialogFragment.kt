@@ -3,8 +3,8 @@ package es.iessaladillo.pedrojoya.pr048.base
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
-import android.support.v7.app.AlertDialog
+import androidx.fragment.app.DialogFragment
+import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 
 private const val ARG_TITLE = "ARG_TITLE"

@@ -1,10 +1,10 @@
 package es.iessaladillo.pedrojoya.pr015.main
 
-import android.arch.lifecycle.ViewModel
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.View
-import androidx.core.widget.toast
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
 import es.iessaladillo.pedrojoya.pr015.R
 import es.iessaladillo.pedrojoya.pr015.base.AdapterViewBaseAdapter
 import es.iessaladillo.pedrojoya.pr015.data.Database
@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        with (grdWords) {
+        grdWords.apply {
             adapter = MainActivityAdapter(viewModel.data)
             setOnItemClickListener { _, _, position, _ -> showWord(position) }
         }
@@ -36,18 +36,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun showWord(position: Int) {
         val word = grdWords.getItemAtPosition(position) as Word
-        toast(getString(R.string.main_activity_translation, word.spanish, word.english))
+        Toast.makeText(this, getString(R.string.main_activity_translation, word.spanish, word.english), Toast.LENGTH_SHORT).show()
     }
 
 }
 
-class MainActivityViewModel(private val repository: Repository) : ViewModel() {
+private class MainActivityViewModel(private val repository: Repository) :
+ViewModel() {
 
-    internal val data by lazy { repository.queryWords() }
+    val data by lazy { repository.queryWords() }
 
 }
 
-internal class MainActivityAdapter(data: List<Word>): AdapterViewBaseAdapter<Word,
+private class MainActivityAdapter(data: List<Word>) :
+        AdapterViewBaseAdapter<Word,
         ViewHolder>(data, R.layout.activity_main_item) {
 
     override fun onCreateViewHolder(itemView: View) = ViewHolder(itemView)
@@ -58,10 +60,10 @@ internal class MainActivityAdapter(data: List<Word>): AdapterViewBaseAdapter<Wor
 
 }
 
-internal class ViewHolder(override val containerView: View): LayoutContainer {
+private class ViewHolder(override val containerView: View) : LayoutContainer {
 
     fun bind(word: Word) {
-        with (word) {
+        word.apply {
             imgPhoto.setImageResource(photoResId)
             lblEnglish.text = english
             lblSpanish.text = spanish

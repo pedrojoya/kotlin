@@ -1,7 +1,6 @@
 package es.iessaladillo.pedrojoya.pr057.main
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.ActionMode
 import android.view.Menu
 import android.view.MenuItem
@@ -9,7 +8,8 @@ import android.view.View
 import android.widget.AbsListView.MultiChoiceModeListener
 import android.widget.ArrayAdapter
 import android.widget.ListView
-import androidx.core.widget.toast
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import es.iessaladillo.pedrojoya.pr057.R
 import es.iessaladillo.pedrojoya.pr057.extensions.getQuantityString
 import es.iessaladillo.pedrojoya.pr057.extensions.getSelectedItems
@@ -39,23 +39,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startContextualMode(v: View) {
-        startSupportActionMode(object : android.support.v7.view.ActionMode.Callback {
+        startSupportActionMode(object : androidx.appcompat.view.ActionMode.Callback {
 
-            override fun onPrepareActionMode(mode: android.support.v7.view.ActionMode, menu:
+            override fun onPrepareActionMode(mode: androidx.appcompat.view.ActionMode, menu:
             Menu): Boolean = false
 
-            override fun onCreateActionMode(mode: android.support.v7.view.ActionMode, menu: Menu): Boolean =
+            override fun onCreateActionMode(mode: androidx.appcompat.view.ActionMode, menu: Menu): Boolean =
                     mode.menuInflater.inflate(R.menu.activity_main_contextual, menu).thenTrue()
 
-            override fun onActionItemClicked(mode: android.support.v7.view.ActionMode,
+            override fun onActionItemClicked(mode: androidx.appcompat.view.ActionMode,
                                              item: MenuItem): Boolean =
-                when (item.itemId) {
-                    R.id.mnuEvaluate -> evaluateStudent().thenTrue()
-                    R.id.mnuDelete -> removeStudent().thenTrue()
-                    else -> false
-                }
+                    when (item.itemId) {
+                        R.id.mnuEvaluate -> evaluateStudent().thenTrue()
+                        R.id.mnuDelete -> removeStudent().thenTrue()
+                        else -> false
+                    }
 
-            override fun onDestroyActionMode(arg0: android.support.v7.view.ActionMode) { }
+            override fun onDestroyActionMode(arg0: androidx.appcompat.view.ActionMode) {}
 
         })
         // Select view.
@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun evaluateStudent() {
-        toast(getString(R.string.main_activity_evaluate_student, txtStudent!!.text.toString()))
+        Toast.makeText(this, getString(R.string.main_activity_evaluate_student, txtStudent!!.text.toString()), Toast.LENGTH_SHORT).show()
     }
 
     private fun setupSubjectList() {
@@ -82,16 +82,16 @@ class MainActivity : AppCompatActivity() {
                 override fun onDestroyActionMode(mode: ActionMode) {}
 
                 override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean =
-                    mode.menuInflater.inflate(R.menu.activity_main_contextual, menu).thenTrue()
+                        mode.menuInflater.inflate(R.menu.activity_main_contextual, menu).thenTrue()
 
                 override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean =
-                    when (item.itemId) {
-                        R.id.mnuEvaluate -> evaluateSubjects(lstSubjects
-                                .getSelectedItems(false)).thenTrue()
-                        R.id.mnuDelete -> deleteSubjects(lstSubjects
-                                .getSelectedItems(true)).thenTrue()
-                        else -> false
-                    }
+                        when (item.itemId) {
+                            R.id.mnuEvaluate -> evaluateSubjects(lstSubjects
+                                    .getSelectedItems(false)).thenTrue()
+                            R.id.mnuDelete -> deleteSubjects(lstSubjects
+                                    .getSelectedItems(true)).thenTrue()
+                            else -> false
+                        }
 
                 override fun onItemCheckedStateChanged(mode: ActionMode, position: Int, id: Long,
                                                        checked: Boolean) {
@@ -108,15 +108,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun evaluateSubjects(subjectList: List<String>) {
-        toast(getString(R.string.main_activity_evaluate_subjects,
-                subjectList.joinToString(", ")))
+        Toast.makeText(this, getString(R.string.main_activity_evaluate_subjects,
+                subjectList.joinToString(", ")), Toast.LENGTH_SHORT).show()
     }
 
     private fun deleteSubjects(subjectList: List<String>) {
-        with(subjectList) {
+        subjectList.apply {
             forEach { mAdapter.remove(it) }
             mAdapter.notifyDataSetChanged()
-            toast(getQuantityString(R.plurals.main_activity_subjects_deleted, size, size))
+            Toast.makeText(this@MainActivity, getQuantityString(R.plurals.main_activity_subjects_deleted, size, size), Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -4,7 +4,6 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "es.iessaladillo.pedrojoya.pr235"
@@ -20,22 +19,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        encoding "UTF-8"
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "com.android.support:appcompat-v7:$rootProject.ext.support_library_version"
-    implementation "com.android.support.constraint:constraint-layout:$rootProject.ext.constraintlayout_version"
-    implementation "com.android.support:design:$rootProject.ext.support_library_version"
-    implementation "com.takisoft.fix:preference-v7:$rootProject.ext.preferencefix_version"
-    implementation "com.takisoft.fix:preference-v7-extras:$rootProject.ext.preferencefix_version"
-
+    implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha1'
+    implementation 'com.google.android.material:material:1.0.0-beta01'
+    implementation "com.takisoft.preferencex:preferencex:$rootProject.ext.preferencefix_version"
+    implementation "com.takisoft.preferencex:preferencex-colorpicker:$rootProject.ext.preferencefix_version"
+    implementation "com.takisoft.preferencex:preferencex-datetimepicker:$rootProject.ext.preferencefix_version"
+    implementation "com.takisoft.preferencex:preferencex-ringtone:$rootProject.ext.preferencefix_version"
+    implementation "com.takisoft.preferencex:preferencex-simplemenu:$rootProject.ext.preferencefix_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.core:core-ktx:0.3'
+    implementation 'androidx.core:core-ktx:1.0.0-beta01'
 }

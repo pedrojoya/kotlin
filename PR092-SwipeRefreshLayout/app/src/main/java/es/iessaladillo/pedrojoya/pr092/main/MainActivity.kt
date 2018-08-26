@@ -1,7 +1,7 @@
 package es.iessaladillo.pedrojoya.pr092.main
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import es.iessaladillo.pedrojoya.pr092.R
 import es.iessaladillo.pedrojoya.pr092.extensions.replaceFragment
 import kotlinx.android.synthetic.main.activity_main.*

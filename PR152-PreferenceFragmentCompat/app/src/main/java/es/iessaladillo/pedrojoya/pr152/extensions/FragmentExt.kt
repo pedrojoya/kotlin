@@ -1,9 +1,9 @@
 package es.iessaladillo.pedrojoya.pr152.extensions
 
 import android.content.res.Resources
-import android.support.annotation.BoolRes
-import android.support.annotation.NonNull
-import android.support.v4.app.Fragment
+import androidx.annotation.BoolRes
+import androidx.annotation.NonNull
+import androidx.fragment.app.Fragment
 
 @NonNull
 @Throws(Resources.NotFoundException::class)

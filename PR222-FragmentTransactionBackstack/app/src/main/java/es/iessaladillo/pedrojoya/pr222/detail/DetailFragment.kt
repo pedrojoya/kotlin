@@ -2,11 +2,11 @@ package es.iessaladillo.pedrojoya.pr222.detail
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import es.iessaladillo.pedrojoya.pr222.R
 import kotlinx.android.synthetic.main.fragment_detail.*
 
@@ -19,7 +19,6 @@ class DetailFragment : Fragment() {
     }
     private var listener: Callback? = null
 
-    // Communication interface.
     interface Callback {
         fun onDetailShown(item: String)
     }

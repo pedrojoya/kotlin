@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">DownloadManager</string>
+
+    <string name="fragment_main_item_imgPlaying">Download</string>
+    <string name="fragment_main_mnuDownloads">Downloads</string>
+    <string name="fragment_main_lblEmptyView">No songs available</string>
+
+    <string name="main_fragment_downloading">Downloading %1$s</string>
+    <string name="main_fragment_download_failed">Error downloading. Reason: %1$s</string>
+    <string name="main_fragment_description">%1$s (%2$s)</string>
+
+    <string name="main_activity_error_permission_required">Action can\'t be
+        done without the required permission</string>
+    <string name="main_activity_permission_required_explanation">We need the
+        external storage write access permission to export the file to
+        external storage</string>
+
+
+</resources>

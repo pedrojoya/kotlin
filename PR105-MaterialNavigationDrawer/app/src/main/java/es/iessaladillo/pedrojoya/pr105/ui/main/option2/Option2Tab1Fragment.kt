@@ -2,15 +2,15 @@ package es.iessaladillo.pedrojoya.pr105.ui.main.option2
 
 
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
-import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
-import android.support.v4.view.ViewCompat
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import es.iessaladillo.pedrojoya.pr105.R
 import es.iessaladillo.pedrojoya.pr105.data.local.Database
 import kotlinx.android.synthetic.main.fragment_option2.*
@@ -37,7 +37,7 @@ class Option2Tab1Fragment : Fragment() {
 
     private fun setupRecyclerView() {
         mAdapter = Option2Tab1Adapter(Database.queryStudents())
-        with(lstStudents) {
+        lstStudents.run {
             setHasFixedSize(true)
             adapter = mAdapter
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -46,7 +46,8 @@ class Option2Tab1Fragment : Fragment() {
     }
 
     private fun setupFab() {
-        val fab: FloatingActionButton = ViewCompat.requireViewById(parentFragment!!.view!!, R.id.fab)
+        val fab: FloatingActionButton = ViewCompat.requireViewById(parentFragment!!.view!!, R.id
+                .fab)
         fab.setOnClickListener { showMessage() }
     }
 

@@ -1,14 +1,14 @@
 package es.iessaladillo.pedrojoya.pr016
 
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v4.view.ViewCompat
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.widget.toast
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 import es.iessaladillo.pedrojoya.pr016.base.StardardExpandableListAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -26,17 +26,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        with (lstStudents) {
+        lstStudents.apply {
             setAdapter(mAdapter)
             // All groups initially expanded.
             for (i in 0 until mAdapter.groupCount) {
                 expandGroup(i)
             }
             setOnChildClickListener { _, _, groupPosition, childPosition, _ ->
-                // Use getExpandableListAdapter() instead of getMAdapter() in case you need the mAdapter.
+                // Use getExpandableListAdapter() instead of getAdapter() in
+                // case you need the adapter.
                 val (name, _, level, grade) = mAdapter.getChild(groupPosition, childPosition)
-                toast(getString(R.string.main_activity_student_info, name, grade,
-                        level))
+                Toast.makeText(this@MainActivity, getString(R.string.main_activity_student_info, name, grade,
+                        level), Toast.LENGTH_SHORT).show()
                 true
             }
         }
@@ -70,75 +71,76 @@ class MainActivity : AppCompatActivity() {
         return StudentsAdapter(groups, children)
     }
 
-    private class StudentsAdapter internal constructor(
-            private val groups: ArrayList<String>,
-            private val children: ArrayList<ArrayList<Student>>)
-        : StardardExpandableListAdapter<String, Student, GroupViewHolder, ChildViewHolder>(
-            groups, children, R.layout.activity_main_group, R.layout.activity_main_child) {
+}
 
-        override fun onCreateChildViewHolder(itemView: View) = ChildViewHolder(itemView)
+private class StudentsAdapter(
+        private val groups: ArrayList<String>,
+        private val children: ArrayList<ArrayList<Student>>)
+    : StardardExpandableListAdapter<String, Student, GroupViewHolder, ChildViewHolder>(
+        groups, children, R.layout.activity_main_group, R.layout.activity_main_child) {
 
-        override fun onBindChildViewHolder(viewHolder: ChildViewHolder, groupPosition: Int, childPosition: Int) {
-            viewHolder.bind(children[groupPosition][childPosition])
-        }
+    override fun onCreateChildViewHolder(itemView: View) = ChildViewHolder(itemView)
 
-        override fun onBindGroupViewHolder(viewHolder: GroupViewHolder, groupPosition: Int, expanded: Boolean) {
-            viewHolder.bind(groups[groupPosition], getChildrenCount(groupPosition), expanded)
-        }
-
-        override fun onCreateGroupViewHolder(itemView: View) = GroupViewHolder(itemView)
-
+    override fun onBindChildViewHolder(viewHolder: ChildViewHolder, groupPosition: Int, childPosition: Int) {
+        viewHolder.bind(children[groupPosition][childPosition])
     }
 
-    private class ChildViewHolder internal constructor(itemView: View) {
-
-        private val lblName: TextView by lazy {
-            ViewCompat.requireViewById<TextView>(itemView, R.id.lblName)
-        }
-        private val lblGrade: TextView by lazy {
-            ViewCompat.requireViewById<TextView>(itemView, R.id.lblGrade)
-        }
-
-        internal fun bind(student: Student) {
-            lblName.text = student.name
-            lblGrade.text = student.grade
-            lblName.setTextColor(
-                    if (student.age < ADULT_AGE) ContextCompat.getColor(lblName.context, R.color.primary_400)
-                    else ContextCompat.getColor(lblName.context, R.color.primary_text)
-            )
-        }
+    override fun onBindGroupViewHolder(viewHolder: GroupViewHolder, groupPosition: Int, expanded: Boolean) {
+        viewHolder.bind(groups[groupPosition], getChildrenCount(groupPosition), expanded)
     }
 
-    private class GroupViewHolder internal constructor(itemView: View) {
+    override fun onCreateGroupViewHolder(itemView: View) = GroupViewHolder(itemView)
 
-        private val lblLevelHeader: TextView by lazy {
-            ViewCompat.requireViewById<TextView>(itemView, R.id.lblLevelHeader)
-        }
-        private val imgIndicator: ImageView by lazy {
-            ViewCompat.requireViewById<ImageView>(itemView, R.id.imgIndicator)
-        }
-        private val llColumnsHeader: LinearLayout by lazy {
-            ViewCompat.requireViewById<LinearLayout>(itemView, R.id.llColumnsHeader)
-        }
+}
 
-        internal fun bind(group: String, childrenCount: Int, isExpanded: Boolean) {
-            lblLevelHeader.text = group
-            // Show or hide columns header and change indicator.
-            if (childrenCount == 0) {
-                imgIndicator.visibility = View.INVISIBLE
-                llColumnsHeader.visibility = View.GONE
+private class ChildViewHolder(itemView: View) {
+
+    private val lblName: TextView by lazy {
+        ViewCompat.requireViewById<TextView>(itemView, R.id.lblName)
+    }
+    private val lblGrade: TextView by lazy {
+        ViewCompat.requireViewById<TextView>(itemView, R.id.lblGrade)
+    }
+
+    internal fun bind(student: Student) {
+        lblName.text = student.name
+        lblGrade.text = student.grade
+        lblName.setTextColor(
+                if (student.age < ADULT_AGE) ContextCompat.getColor(lblName.context, R.color.primary_400)
+                else ContextCompat.getColor(lblName.context, R.color.primary_text)
+        )
+    }
+}
+
+private class GroupViewHolder(itemView: View) {
+
+    private val lblLevelHeader: TextView by lazy {
+        ViewCompat.requireViewById<TextView>(itemView, R.id.lblLevelHeader)
+    }
+    private val imgIndicator: ImageView by lazy {
+        ViewCompat.requireViewById<ImageView>(itemView, R.id.imgIndicator)
+    }
+    private val llColumnsHeader: LinearLayout by lazy {
+        ViewCompat.requireViewById<LinearLayout>(itemView, R.id.llColumnsHeader)
+    }
+
+    internal fun bind(group: String, childrenCount: Int, isExpanded: Boolean) {
+        lblLevelHeader.text = group
+        // Show or hide columns header and change indicator.
+        if (childrenCount == 0) {
+            imgIndicator.visibility = View.INVISIBLE
+            llColumnsHeader.visibility = View.GONE
+        } else {
+            imgIndicator.visibility = View.VISIBLE
+            if (isExpanded) {
+                imgIndicator.setImageResource(R.drawable.ic_expand_less_white_24dp)
+                llColumnsHeader.visibility = View.VISIBLE
             } else {
-                imgIndicator.visibility = View.VISIBLE
-                if (isExpanded) {
-                    imgIndicator.setImageResource(R.drawable.ic_expand_less_white_24dp)
-                    llColumnsHeader.visibility = View.VISIBLE
-                } else {
-                    imgIndicator.setImageResource(R.drawable.ic_expand_more_white_24dp)
-                    llColumnsHeader.visibility = View.GONE
-                }
+                imgIndicator.setImageResource(R.drawable.ic_expand_more_white_24dp)
+                llColumnsHeader.visibility = View.GONE
             }
         }
-
     }
 
 }
+

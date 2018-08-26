@@ -3,8 +3,8 @@ package es.iessaladillo.pedrojoya.pr156.ui.student
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import es.iessaladillo.pedrojoya.pr156.R
 import es.iessaladillo.pedrojoya.pr156.data.DEFAULT_AGE
@@ -59,7 +59,7 @@ class StudentActivity : AppCompatActivity() {
     }
 
     override fun onNavigateUp(): Boolean {
-        onBackPressed();
+        onBackPressed()
         return true
     }
 

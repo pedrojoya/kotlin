@@ -1,8 +1,8 @@
 package pedrojoya.iessaladillo.es.pr201.ui.main
 
-import android.support.v7.util.DiffUtil
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.activity_main_item.*
 import pedrojoya.iessaladillo.es.pr201.R
@@ -14,7 +14,7 @@ import pedrojoya.iessaladillo.es.pr201.extensions.loadUrl
 
 class MainActivityAdapter(data: List<Student>) : BaseListAdapter<Student, ViewHolder>(data) {
 
-    internal class DiffStudentsCallback(private val oldStudents: List<Student>, private val newStudents: List<Student>) : DiffUtil.Callback() {
+    class DiffStudentsCallback(private val oldStudents: List<Student>, private val newStudents: List<Student>) : DiffUtil.Callback() {
 
         override fun getOldListSize(): Int = oldStudents.size
 

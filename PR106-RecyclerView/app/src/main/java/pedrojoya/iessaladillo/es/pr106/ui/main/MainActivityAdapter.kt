@@ -24,7 +24,7 @@ class ViewHolder(override val containerView: View, adapter: MainActivityAdapter)
 
 
     override fun bind(item: Student) {
-        with (item) {
+        item.run {
             lblName.text = name
             lblAddress.text = address
             imgAvatar.loadUrl(photoUrl, R.drawable.ic_person_black_24dp, R.drawable.ic_person_black_24dp)

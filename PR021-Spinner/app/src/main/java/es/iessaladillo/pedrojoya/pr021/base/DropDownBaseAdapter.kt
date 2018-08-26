@@ -1,9 +1,9 @@
 package es.iessaladillo.pedrojoya.pr021.base
 
-import android.support.annotation.LayoutRes
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import androidx.annotation.LayoutRes
 import es.iessaladillo.pedrojoya.pr021.extensions.inflate
 
 abstract class DropDownBaseAdapter<out T, CVH, EVH>
@@ -11,9 +11,9 @@ protected constructor(protected val data: List<T>,
                       @LayoutRes private val collapsedLayoutResId: Int,
                       @LayoutRes private val expandedLayoutResId: Int) : BaseAdapter() {
 
-    @Suppress("UNCHECKED_CAST")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val itemView = convertView ?: parent.inflate(collapsedLayoutResId)
+        @Suppress("UNCHECKED_CAST")
         val viewHolder: CVH = convertView?.tag as? CVH ?: onCreateCollapsedViewHolder(itemView)
         itemView.tag = viewHolder
         onBindCollapsedViewHolder(viewHolder, position)
@@ -30,9 +30,9 @@ protected constructor(protected val data: List<T>,
 
     protected abstract fun onBindCollapsedViewHolder(holder: CVH, position: Int)
 
-    @Suppress("UNCHECKED_CAST")
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
         val itemView = convertView ?: parent.inflate(expandedLayoutResId)
+        @Suppress("UNCHECKED_CAST")
         val viewHolder: EVH = convertView?.tag as? EVH ?: onCreateExpandedViewHolder(itemView)
         itemView.tag = viewHolder
         onBindExpandedViewHolder(viewHolder, position)

@@ -1,10 +1,10 @@
 package es.iessaladillo.pedrojoya.pr012.main
 
-import android.arch.lifecycle.ViewModel
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModel
 import es.iessaladillo.pedrojoya.pr012.R
 import es.iessaladillo.pedrojoya.pr012.base.AdapterViewBaseAdapter
 import es.iessaladillo.pedrojoya.pr012.data.Database
@@ -38,13 +38,14 @@ class MainActivity : AppCompatActivity() {
 
 }
 
-class MainActivityViewModel(private val repository: Repository) : ViewModel() {
+private class MainActivityViewModel(private val repository: Repository) :
+ViewModel() {
 
     internal val data by lazy { repository.queryStudents() }
 
 }
 
-internal class MainActivityAdapter(data: List<Student>)
+private class MainActivityAdapter(data: List<Student>)
     : AdapterViewBaseAdapter<Student, MainActivityAdapter.ViewHolder>(data, R.layout.activity_main_item) {
 
     override fun onCreateViewHolder(itemView: View) = ViewHolder(itemView)

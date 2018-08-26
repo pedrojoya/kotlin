@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.marcinmoskala.activitystarter:activitystarter-1.11-beta">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/activitystarter-1.11-beta.aar/d22f9eb28442d56cfde0e7565d6f5826/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/activitystarter-1.11-beta.aar/d22f9eb28442d56cfde0e7565d6f5826/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-activitystarter-1.11-beta.aar/ba964abd8e24d040a5e5900f58516092/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-activitystarter-1.11-beta.aar/ba964abd8e24d040a5e5900f58516092/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

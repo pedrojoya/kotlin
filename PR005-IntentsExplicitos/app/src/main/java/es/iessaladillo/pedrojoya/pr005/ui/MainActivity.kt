@@ -3,13 +3,12 @@ package es.iessaladillo.pedrojoya.pr005.ui
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
+import es.iessaladillo.pedrojoya.pr005.DEFAULT_AGE
 import es.iessaladillo.pedrojoya.pr005.R
 import kotlinx.android.synthetic.main.activity_main.*
 
-const val DEFAULT_AGE = 18
-const val MAX_AGE = 150
-const val RC_STUDENT = 1
+private const val RC_STUDENT = 1
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,12 +24,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun initViews() {
         btnRequest.setOnClickListener {
-            StudentActivity.startForResult(this@MainActivity, name, age, RC_STUDENT)
+            StudentActivity.startForResult(this, name, age, RC_STUDENT)
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-        if (resultCode == Activity.RESULT_OK && requestCode == RC_STUDENT) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK && requestCode == RC_STUDENT &&
+                data != null) {
             getResultData(data)
         }
     }

@@ -1,9 +1,9 @@
 package pedrojoya.iessaladillo.es.pr104
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.toolbar.*
 
 
@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean =
             when (item.itemId) {
-                R.id.mnuNext -> { SecundaryActivity.start(this); true }
+                R.id.mnuNext -> { SecondaryActivity.start(this); true }
                 else -> super.onOptionsItemSelected(item)
     }
 

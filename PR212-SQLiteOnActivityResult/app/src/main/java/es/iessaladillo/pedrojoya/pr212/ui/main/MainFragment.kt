@@ -1,20 +1,16 @@
 package es.iessaladillo.pedrojoya.pr212.ui.main
 
 import android.app.Activity
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.*
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import es.iessaladillo.pedrojoya.pr212.R
 import es.iessaladillo.pedrojoya.pr212.data.Repository
 import es.iessaladillo.pedrojoya.pr212.data.RepositoryImpl
@@ -22,7 +18,6 @@ import es.iessaladillo.pedrojoya.pr212.data.local.DbHelper
 import es.iessaladillo.pedrojoya.pr212.data.local.StudentDao
 import es.iessaladillo.pedrojoya.pr212.data.model.Student
 import es.iessaladillo.pedrojoya.pr212.extensions.toast
-import es.iessaladillo.pedrojoya.pr212.ui.main.MainFragmentAdapter.OnItemClickListener
 import es.iessaladillo.pedrojoya.pr212.ui.student.StudentActivity
 import kotlinx.android.synthetic.main.fragment_main.*
 import java.lang.ref.WeakReference
@@ -33,7 +28,7 @@ private const val RC_EDIT_STUDENT = 2
 class MainFragment : Fragment() {
 
     private lateinit var fab: FloatingActionButton
-    private lateinit var mAdapter: MainFragmentAdapter
+    private lateinit var listAdapter: MainFragmentAdapter
     private lateinit var repository: Repository
     private lateinit var viewModel: MainActivityViewModel
 
@@ -50,7 +45,7 @@ class MainFragment : Fragment() {
                 MainActivityViewModelFactory(repository)).get(MainActivityViewModel::class.java)
         initViews()
         if (savedInstanceState != null) {
-            mAdapter.setData(viewModel.getStudents(false))
+            listAdapter.setData(viewModel.getStudents(false))
         } else {
             loadStudents()
         }
@@ -67,18 +62,13 @@ class MainFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        mAdapter = MainFragmentAdapter()
-        with(mAdapter) {
-            setOnItemClickListener(object: OnItemClickListener {
-                override fun onItemClick(view: View, student: Student, position: Int) {
-                    editStudent(student)
-                }
-            })
+        listAdapter = MainFragmentAdapter().apply {
+            setOnItemClickListener {_, student, _ -> editStudent(student) }
             setEmptyView(lblEmptyView)
         }
-        with(lstStudents) {
+        lstStudents.run {
             setHasFixedSize(true)
-            adapter = mAdapter
+            adapter = listAdapter
             layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL,
                     false)
             addItemDecoration(DividerItemDecoration(requireActivity(),
@@ -109,7 +99,7 @@ class MainFragment : Fragment() {
     }
 
     private fun deleteStudent(position: Int) {
-        DeleteStudentTask(this, repository).execute(mAdapter.getItemAtPosition(position))
+        DeleteStudentTask(this, repository).execute(listAdapter.getItemAtPosition(position))
     }
 
     private fun loadStudents() {
@@ -125,7 +115,7 @@ class MainFragment : Fragment() {
     }
 
     override fun onDestroy() {
-        mAdapter.onDestroy()
+        listAdapter.onDestroy()
         repository.onDestroy()
         super.onDestroy()
     }
@@ -148,7 +138,7 @@ class MainFragment : Fragment() {
         }
 
         override fun onPostExecute(students: List<Student>) {
-            mainFragmentWeakReference.get()?.mAdapter?.setData(students)
+            mainFragmentWeakReference.get()?.listAdapter?.setData(students)
         }
 
     }

@@ -2,10 +2,10 @@
 
 package es.iessaladillo.pedrojoya.pr049.extensions
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
-import android.support.v4.app.FragmentActivity
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.FragmentActivity
 
 inline fun <reified T : ViewModel>FragmentActivity.getViewModel(): T {
     return ViewModelProviders.of(this).get(T::class.java)

@@ -1,12 +1,12 @@
 package es.iessaladillo.pedrojoya.pr059.main
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.SearchView
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
-import androidx.core.widget.toast
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import es.iessaladillo.pedrojoya.pr059.R
 import es.iessaladillo.pedrojoya.pr059.extensions.getStringArray
 import es.iessaladillo.pedrojoya.pr059.extensions.getViewModel
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     private fun initViews() {
         mAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1,
                 getStringArray(R.array.students))
-        with(lstStudents) {
+        lstStudents.apply {
             adapter = mAdapter
             setOnItemClickListener { _, _, position, _ ->
                 showStudent(getItemAtPosition(position) as String)
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showStudent(student: String) {
-        toast(getString(R.string.main_activity_student_clicked, student))
+        Toast.makeText(this, getString(R.string.main_activity_student_clicked, student), Toast.LENGTH_SHORT).show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

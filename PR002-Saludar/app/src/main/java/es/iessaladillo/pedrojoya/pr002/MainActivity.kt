@@ -1,9 +1,8 @@
 package es.iessaladillo.pedrojoya.pr002
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
-import androidx.core.widget.toast
+import androidx.appcompat.app.AppCompatActivity
 import es.iessaladillo.pedrojoya.pr002.extensions.hideKeyboard
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -22,12 +21,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun greet() {
         hideKeyboard()
-        toast(StringBuilder()
+        Toast.makeText(this, StringBuilder()
                 .append(getString(R.string.main_activity_good_morning))
                 .append(if (chkPolite.isChecked) getString(R.string
                         .main_activity_nice_to_meet_you) else "")
                 .append(" ")
-                .append(txtName.text).toString(), Toast.LENGTH_LONG)
+                .append(txtName.text).toString(), Toast.LENGTH_LONG).show()
     }
 
     private fun changeText(isChecked: Boolean) {

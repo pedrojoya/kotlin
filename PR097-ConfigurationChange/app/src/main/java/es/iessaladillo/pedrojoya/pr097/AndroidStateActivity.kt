@@ -1,7 +1,7 @@
 package es.iessaladillo.pedrojoya.pr097
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.evernote.android.state.State
 import com.evernote.android.state.StateSaver
 import kotlinx.android.synthetic.main.activity_count.*

@@ -1,13 +1,13 @@
 package es.iessaladillo.pedrojoya.pr021.main
 
-import android.arch.lifecycle.ViewModel
 import android.os.Bundle
-import android.support.v4.view.ViewCompat
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.widget.toast
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.lifecycle.ViewModel
 import es.iessaladillo.pedrojoya.pr021.R
 import es.iessaladillo.pedrojoya.pr021.base.DropDownBaseAdapter
 import es.iessaladillo.pedrojoya.pr021.data.Country
@@ -35,11 +35,11 @@ class MainActivity : AppCompatActivity() {
                 showCountry(spnCountry.selectedItem as Country)
             }
         }
-        with(spnCountry) {
+        spnCountry.apply {
             val data = listOf(Country(R.drawable.no_flag,
                     getString(R.string.main_activity_choose_one_country)), *viewModel.data.toTypedArray())
             adapter = MainActivityAdapter(data)
-            onItemSelected({ _, _, _, _ -> checkIsValidForm() })
+            onItemSelected { _, _, _, _ -> checkIsValidForm() }
         }
     }
 
@@ -48,18 +48,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showCountry(country: Country) {
-        toast(country.name)
+        Toast.makeText(this, country.name, Toast.LENGTH_SHORT).show()
     }
 
 }
 
-internal class MainActivityViewModel(private val repository: Repository) : ViewModel() {
+private class MainActivityViewModel(private val repository: Repository) :
+        ViewModel() {
 
-    internal val data: List<Country> by lazy { repository.queryCountries() }
+    val data: List<Country> by lazy { repository.queryCountries() }
 
 }
 
-internal class MainActivityAdapter(data: List<Country>) :
+private class MainActivityAdapter(data: List<Country>) :
         DropDownBaseAdapter<Country, CollapsedViewHolder, ExpandedViewHolder>(data,
                 R.layout.activity_main_item_collapsed, R.layout.activity_main_item_expanded) {
 
@@ -81,7 +82,7 @@ internal class MainActivityAdapter(data: List<Country>) :
 
 }
 
-internal class CollapsedViewHolder(private val itemView: View) {
+private class CollapsedViewHolder(private val itemView: View) {
 
     private val imgFlag by lazy { ViewCompat.requireViewById(itemView, R.id.imgFlag) as ImageView }
     private val lblName by lazy { ViewCompat.requireViewById(itemView, R.id.lblName) as TextView }
@@ -93,7 +94,7 @@ internal class CollapsedViewHolder(private val itemView: View) {
 
 }
 
-internal class ExpandedViewHolder(private val itemView: View) {
+private class ExpandedViewHolder(private val itemView: View) {
 
     private val imgFlag by lazy { ViewCompat.requireViewById(itemView, R.id.imgFlag) as ImageView }
     private val lblName by lazy { ViewCompat.requireViewById(itemView, R.id.lblName) as TextView }

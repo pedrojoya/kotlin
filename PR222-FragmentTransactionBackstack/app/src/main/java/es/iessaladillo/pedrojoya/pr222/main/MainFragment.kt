@@ -2,11 +2,11 @@ package es.iessaladillo.pedrojoya.pr222.main
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.fragment.app.Fragment
 import es.iessaladillo.pedrojoya.pr222.R
 import es.iessaladillo.pedrojoya.pr222.extensions.getViewModel
 import es.iessaladillo.pedrojoya.pr222.extensions.inLandscape
@@ -88,11 +88,13 @@ class MainFragment : Fragment() {
         }
     }
 
-//    // Needed in case activity is destroy because of low memory.
-//    override fun onSaveInstanceState(outState: Bundle) {
-//        super.onSaveInstanceState(outState)
-//        viewModel.onSaveInstanceState(outState)
-//    }
+/*
+    // Needed in case activity is destroy because of low memory.
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        viewModel.onSaveInstanceState(outState)
+    }
+*/
 
     companion object {
 

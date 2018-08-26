@@ -4,7 +4,6 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "es.iessaladillo.pedrojoya.pr018"
@@ -25,13 +24,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "com.android.support:appcompat-v7:$rootProject.ext.support_library_version"
-    testImplementation "junit:junit:$rootProject.ext.junit_version"
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.ext.espresso_version"
-    implementation "android.arch.lifecycle:runtime:$rootProject.ext.arch_version"
-    implementation "android.arch.lifecycle:extensions:$rootProject.ext.arch_version"
-    annotationProcessor "android.arch.lifecycle:compiler:$rootProject.ext.arch_version"
-
+    implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-beta01'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "androidx.core:core-ktx:$rootProject.ext.ktx_version"
+    implementation "androidx.core:core-ktx:1.0.0-beta01"
 }

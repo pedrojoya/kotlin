@@ -9,7 +9,7 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.activity_main_item.*
 import java.util.*
 
-internal class StudentsDialogFragmentAdapter(students: ArrayList<Student>) :
+class StudentsDialogFragmentAdapter(students: ArrayList<Student>) :
         AdapterViewBaseAdapter<Student, ViewHolder>(students, R.layout.activity_main_item) {
 
     override fun onCreateViewHolder(itemView: View): ViewHolder = ViewHolder(itemView)
@@ -20,7 +20,7 @@ internal class StudentsDialogFragmentAdapter(students: ArrayList<Student>) :
 
 }
 
-internal class ViewHolder(override val containerView: View): LayoutContainer {
+class ViewHolder(override val containerView: View): LayoutContainer {
 
     fun bind(student: Student) {
         imgAvatar.loadUrl(student.photoUrl, R.drawable.ic_person_black_24dp, R.drawable.ic_person_black_24dp)

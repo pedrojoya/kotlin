@@ -1,0 +1,24 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ListView
+        android:id="@+id/lstSongs"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@drawable/item_divider"
+        android:dividerHeight="@dimen/fragment_main_lstSongs_dividerHeight"
+        android:paddingBottom="@dimen/fragment_main_lstSongs_paddingBottom"
+        android:paddingTop="@dimen/fragment_main_lstSongs_paddingTop"/>
+
+    <TextView
+        android:id="@+id/lblEmptyView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:drawableTop="@drawable/ic_playlist_add_black_24dp"
+        android:drawablePadding="@dimen/fragment_main_lblEmptyView_drawablePadding"
+        android:text="@string/fragment_main_lblEmptyView"/>
+
+</FrameLayout>

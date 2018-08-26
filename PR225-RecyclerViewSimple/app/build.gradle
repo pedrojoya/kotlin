@@ -4,7 +4,6 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "pedrojoya.iessaladillo.es.pr225"
@@ -20,12 +19,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        encoding "UTF-8"
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
 }
 
 allprojects {
@@ -40,18 +33,16 @@ androidExtensions {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "com.android.support:appcompat-v7:$rootProject.ext.support_library_version"
-    implementation "com.android.support:design:$rootProject.ext.support_library_version"
-    implementation "com.android.support:recyclerview-v7:$rootProject.ext.support_library_version"
-    implementation "com.android.support:cardview-v7:$rootProject.ext.support_library_version"
+    implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
+    implementation 'com.google.android.material:material:1.0.0-beta01'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0-beta01'
+    implementation 'androidx.cardview:cardview:1.0.0-beta01'
     implementation "com.squareup.picasso:picasso:$rootProject.ext.picasso_version"
     implementation "de.hdodenhof:circleimageview:$rootProject.ext.circleimageview_version"
     implementation "com.github.moove-it:fakeit:$rootProject.ext.fakeit_version"
-    implementation "android.arch.lifecycle:runtime:$rootProject.ext.arch_version"
-    implementation "android.arch.lifecycle:extensions:$rootProject.ext.arch_version"
-    annotationProcessor "android.arch.lifecycle:compiler:$rootProject.ext.arch_version"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-beta01'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "androidx.core:core-ktx:$rootProject.ext.ktx_version"
+    implementation "androidx.core:core-ktx:1.0.0-beta01"
 
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$rootProject.ext.leakcanary_version"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.ext.leakcanary_version"

@@ -1,12 +1,12 @@
 package es.iessaladillo.pedrojoya.pr018
 
 import android.os.Bundle
-import android.support.annotation.IdRes
-import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import androidx.core.widget.toast
+import android.widget.Toast
+import androidx.annotation.IdRes
+import androidx.appcompat.app.AppCompatActivity
 import es.iessaladillo.pedrojoya.pr018.utils.BINARY_COLOR_FILTER
 import es.iessaladillo.pedrojoya.pr018.utils.GREY_COLOR_FILTER
 import es.iessaladillo.pedrojoya.pr018.utils.INVERTED_COLOR_FILTER
@@ -64,15 +64,24 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean =
             when (item.itemId) {
-                R.id.mnuInfo -> { toast(R.string.main_activity_info); true }
+                R.id.mnuInfo -> {
+                    Toast.makeText(this, R.string.main_activity_info, Toast.LENGTH_SHORT).show()
+                    true
+                }
                 R.id.mnuVisible -> {
                     isPhotoVisible = !isPhotoVisible
                     item.isChecked = isPhotoVisible
                     imgPhoto.visibility = if (item.isChecked) View.VISIBLE else View.INVISIBLE
                     true
                 }
-                R.id.mnuEdit -> { toast(R.string.main_activity_edit); true }
-                R.id.mnuDelete -> { toast(R.string.main_activity_delete); true }
+                R.id.mnuEdit -> {
+                    Toast.makeText(this, R.string.main_activity_edit, Toast.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.mnuDelete -> {
+                    Toast.makeText(this, R.string.main_activity_delete, Toast.LENGTH_SHORT).show()
+                    true
+                }
                 R.id.mnuOriginal, R.id.mnuGrey, R.id.mnuSepia, R.id.mnuBinary, R.id.mnuInverted -> {
                     effectId = item.itemId
                     item.isChecked = true

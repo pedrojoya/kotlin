@@ -3,9 +3,9 @@ package es.iessaladillo.pedrojoya.pr152.ui.settings
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.preference.PreferenceFragmentCompat
-import android.support.v7.preference.PreferenceScreen
+import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.PreferenceScreen
 import es.iessaladillo.pedrojoya.pr152.R
 import es.iessaladillo.pedrojoya.pr152.extensions.findFragmentByTag
 import es.iessaladillo.pedrojoya.pr152.extensions.replaceFragment

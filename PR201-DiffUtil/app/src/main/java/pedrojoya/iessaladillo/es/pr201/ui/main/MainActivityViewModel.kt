@@ -1,6 +1,6 @@
 package pedrojoya.iessaladillo.es.pr201.ui.main
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import pedrojoya.iessaladillo.es.pr201.data.Repository
 import pedrojoya.iessaladillo.es.pr201.data.Student
 

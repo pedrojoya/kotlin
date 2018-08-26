@@ -1,10 +1,8 @@
 package es.iessaladillo.pedrojoya.pr178.ui.main
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import es.iessaladillo.pedrojoya.pr178.R
 import es.iessaladillo.pedrojoya.pr178.base.setOnItemClickListener
 import es.iessaladillo.pedrojoya.pr178.data.Database
@@ -34,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupToolbar() {
         setSupportActionBar(toolbar)
-        with (supportActionBar!!) {
+        supportActionBar?.run {
             setHomeButtonEnabled(true)
             setDisplayShowHomeEnabled(true)
         }
@@ -45,12 +43,12 @@ class MainActivity : AppCompatActivity() {
             setOnItemClickListener { _, item, _, _ -> showBottomSheetDialogFragment(item) }
             emptyView = lblEmptyView
         }
-        with (lstStudents) {
+        lstStudents.run {
             setHasFixedSize(true)
             adapter = mAdapter
-            layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
-            addItemDecoration(DividerItemDecoration(this@MainActivity, LinearLayoutManager.VERTICAL))
-            itemAnimator = DefaultItemAnimator()
+            layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this@MainActivity, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+            addItemDecoration(androidx.recyclerview.widget.DividerItemDecoration(this@MainActivity, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL))
+            itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
         }
     }
 

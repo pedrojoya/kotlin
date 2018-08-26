@@ -2,11 +2,11 @@ package es.iessaladillo.pedrojoya.pr049.main
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.fragment.app.Fragment
 import es.iessaladillo.pedrojoya.pr049.R
 import es.iessaladillo.pedrojoya.pr049.extensions.getViewModel
 import es.iessaladillo.pedrojoya.pr049.extensions.inLandscape
@@ -20,7 +20,6 @@ class MainFragment : Fragment() {
 
     private lateinit var viewModel: MainActivityViewModel
 
-    // Comunication interface with activity.
     interface Callback {
         fun onItemSelected(item: String)
     }

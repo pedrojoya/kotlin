@@ -1,10 +1,9 @@
 package es.iessaladillo.pedrojoya.pr147.main
 
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import es.iessaladillo.pedrojoya.pr147.R
 import es.iessaladillo.pedrojoya.pr147.extensions.forEachIndexed
 import kotlinx.android.synthetic.main.activity_main.*
@@ -30,9 +29,9 @@ class MainActivity : AppCompatActivity() {
     private fun setupViewPager() {
         val adapter = MainActivityAdapter(supportFragmentManager, this)
         viewPager.adapter = adapter
-        with(tabLayout) {
-            // Not saved properly autatically on rotation.
-            tabGravity = TabLayout.GRAVITY_FILL
+        tabLayout.run {
+            // Not saved properly automatically on rotation.
+            tabGravity = com.google.android.material.tabs.TabLayout.GRAVITY_FILL
             // ---
             setupWithViewPager(viewPager)
             forEachIndexed {index, tab ->

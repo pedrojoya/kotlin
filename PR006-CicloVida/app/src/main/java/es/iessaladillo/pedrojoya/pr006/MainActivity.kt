@@ -1,8 +1,8 @@
 package es.iessaladillo.pedrojoya.pr006
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 const val STATE_EVENT_LIST = "STATE_EVENT_LIST"
@@ -34,8 +34,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString(STATE_EVENT_LIST, events)
         showEvent(getString(R.string.main_activity_onsaveinstancestate))
+        outState.putString(STATE_EVENT_LIST, events)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {

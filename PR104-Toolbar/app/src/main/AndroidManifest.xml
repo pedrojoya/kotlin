@@ -21,8 +21,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SecundaryActivity"
-            android:label="@string/secundary_activity_title"
+            android:name=".SecondaryActivity"
+            android:label="@string/secondary_activity_title"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>

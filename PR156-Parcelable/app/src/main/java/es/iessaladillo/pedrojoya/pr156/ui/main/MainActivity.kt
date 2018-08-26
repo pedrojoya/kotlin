@@ -3,7 +3,7 @@ package es.iessaladillo.pedrojoya.pr156.ui.main
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import es.iessaladillo.pedrojoya.pr156.R
 import es.iessaladillo.pedrojoya.pr156.data.DEFAULT_AGE
 import es.iessaladillo.pedrojoya.pr156.data.Student
@@ -30,8 +30,8 @@ class MainActivity : AppCompatActivity() {
         StudentActivity.startForResult(this, student, RC_STUDENT)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-        if (resultCode == Activity.RESULT_OK && requestCode == RC_STUDENT) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK && requestCode == RC_STUDENT && data != null) {
             obtainResultData(data)
         }
     }

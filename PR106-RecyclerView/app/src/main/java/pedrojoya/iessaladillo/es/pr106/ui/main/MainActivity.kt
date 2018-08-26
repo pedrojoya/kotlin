@@ -1,10 +1,7 @@
 package pedrojoya.iessaladillo.es.pr106.ui.main
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import pedrojoya.iessaladillo.es.pr106.extensions.snackbar
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import pedrojoya.iessaladillo.es.pr106.R
 import pedrojoya.iessaladillo.es.pr106.base.setOnItemClickListener
@@ -14,6 +11,7 @@ import pedrojoya.iessaladillo.es.pr106.data.RepositoryImpl
 import pedrojoya.iessaladillo.es.pr106.data.Student
 import pedrojoya.iessaladillo.es.pr106.data.newFakeStudent
 import pedrojoya.iessaladillo.es.pr106.extensions.getViewModel
+import pedrojoya.iessaladillo.es.pr106.extensions.snackbar
 
 
 class MainActivity : AppCompatActivity() {
@@ -58,12 +56,12 @@ class MainActivity : AppCompatActivity() {
             }
             emptyView = lblEmpty
         }
-        with(lstStudents) {
+        lstStudents.run {
             setHasFixedSize(true)
             adapter = mAdapter
-            layoutManager = LinearLayoutManager(this@MainActivity,
-                    LinearLayoutManager.VERTICAL, false)
-            itemAnimator = DefaultItemAnimator()
+            layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this@MainActivity,
+                    androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+            itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
         }
     }
 

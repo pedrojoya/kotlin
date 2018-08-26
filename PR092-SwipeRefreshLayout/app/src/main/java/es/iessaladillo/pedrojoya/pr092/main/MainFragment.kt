@@ -1,13 +1,13 @@
 package es.iessaladillo.pedrojoya.pr092.main
 
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
 import android.view.*
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import es.iessaladillo.pedrojoya.pr092.R
 import kotlinx.android.synthetic.main.fragment_main.*
 import java.text.SimpleDateFormat
@@ -53,7 +53,7 @@ class MainFragment : Fragment() {
     private fun setupRecyclerView() {
         mAdapter = MainAdapter(viewModel.data)
         mAdapter.emptyView = emptyView
-        with(lstList) {
+        lstList.run {
             setHasFixedSize(true)
             adapter = mAdapter
             layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL,
@@ -64,7 +64,7 @@ class MainFragment : Fragment() {
     }
 
     private fun setupPanel() {
-        with(swipeRefreshLayout) {
+        swipeRefreshLayout.run {
             setColorSchemeResources(android.R.color.holo_blue_bright,
                     android.R.color.holo_green_light, android.R.color.holo_orange_light,
                     android.R.color.holo_red_light)

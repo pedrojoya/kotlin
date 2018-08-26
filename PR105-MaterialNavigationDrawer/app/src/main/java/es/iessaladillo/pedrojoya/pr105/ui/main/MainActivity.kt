@@ -3,17 +3,17 @@ package es.iessaladillo.pedrojoya.pr105.ui.main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.NavigationView
-import android.support.v4.view.GravityCompat
-import android.support.v4.view.ViewCompat
-import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.SwitchCompat
-import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.widget.ImageView
+import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SwitchCompat
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.edit
-import androidx.core.widget.toast
+import androidx.core.view.GravityCompat
+import androidx.core.view.ViewCompat
+import com.google.android.material.navigation.NavigationView
 import com.squareup.picasso.Picasso
 import es.iessaladillo.pedrojoya.pr105.R
 import es.iessaladillo.pedrojoya.pr105.base.OnToolbarAvailableListener
@@ -53,11 +53,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val swDownloadedOnly = navigationView.menu.findItem(
                 R.id.mnuDownloaded).actionView as SwitchCompat
         swDownloadedOnly.setOnCheckedChangeListener { _, isChecked ->
-            toast(if (isChecked)
+            Toast.makeText(this, if (isChecked)
                         getString(R.string.main_activity_downloaded_only)
                     else
                         getString(
-                                R.string.main_activity_also_not_downloaded))
+                                R.string.main_activity_also_not_downloaded), Toast.LENGTH_SHORT).show()
         }
         navigationView.setNavigationItemSelectedListener(this)
         if (!readShownPreference()) {
@@ -118,7 +118,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onToolbarAvailable(toolbar: Toolbar, title: String) {
         setSupportActionBar(toolbar)
         setTitle(title)
-        with(supportActionBar!!) {
+        supportActionBar?.run {
             setDisplayHomeAsUpEnabled(true)
             setHomeButtonEnabled(true)
             setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp)

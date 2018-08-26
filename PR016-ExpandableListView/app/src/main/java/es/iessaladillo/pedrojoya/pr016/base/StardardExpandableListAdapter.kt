@@ -1,9 +1,9 @@
 package es.iessaladillo.pedrojoya.pr016.base
 
-import android.support.annotation.LayoutRes
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
+import androidx.annotation.LayoutRes
 import es.iessaladillo.pedrojoya.pr016.extensions.inflate
 
 abstract class StardardExpandableListAdapter<G, C, GVH, CVH>(
@@ -18,10 +18,10 @@ abstract class StardardExpandableListAdapter<G, C, GVH, CVH>(
 
     override fun getChildId(groupPosition: Int, childPosition: Int) = 0L
 
-    @Suppress("UNCHECKED_CAST")
     override fun getChildView(groupPosition: Int, childPosition: Int, isLastChild: Boolean,
                               convertView: View?, parent: ViewGroup): View {
         val itemView = convertView ?: parent.inflate(childLayoutResId)
+        @Suppress("UNCHECKED_CAST")
         val viewHolder: CVH = convertView?.tag as? CVH ?: onCreateChildViewHolder(itemView)
         itemView.tag = viewHolder
         onBindChildViewHolder(viewHolder, groupPosition, childPosition)
@@ -40,10 +40,10 @@ abstract class StardardExpandableListAdapter<G, C, GVH, CVH>(
 
     override fun getGroupId(groupPosition: Int) = 0L
 
-    @Suppress("UNCHECKED_CAST")
     override fun getGroupView(groupPosition: Int, isExpanded: Boolean, convertView: View?,
                               parent: ViewGroup): View {
         val itemView = convertView ?: parent.inflate(groupLayoutResId)
+        @Suppress("UNCHECKED_CAST")
         val viewHolder: GVH = convertView?.tag as? GVH ?: onCreateGroupViewHolder(itemView)
         itemView.tag = viewHolder
         onBindGroupViewHolder(viewHolder, groupPosition, isExpanded)

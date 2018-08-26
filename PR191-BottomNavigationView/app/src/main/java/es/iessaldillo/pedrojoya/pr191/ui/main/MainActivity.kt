@@ -1,8 +1,8 @@
 package es.iessaldillo.pedrojoya.pr191.ui.main
 
 import android.os.Bundle
-import android.support.annotation.IdRes
-import android.support.v7.app.AppCompatActivity
+import androidx.annotation.IdRes
+import androidx.appcompat.app.AppCompatActivity
 import es.iessaldillo.pedrojoya.pr191.R
 import es.iessaldillo.pedrojoya.pr191.extensions.replaceFragment
 import kotlinx.android.synthetic.main.activity_main.*

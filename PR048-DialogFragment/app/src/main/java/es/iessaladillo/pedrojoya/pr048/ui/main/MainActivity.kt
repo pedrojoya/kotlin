@@ -5,11 +5,11 @@ import android.app.DatePickerDialog.OnDateSetListener
 import android.app.TimePickerDialog.OnTimeSetListener
 import android.content.DialogInterface
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
-import android.support.v7.app.AppCompatActivity
 import android.widget.DatePicker
 import android.widget.TimePicker
-import androidx.core.widget.toast
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
 import es.iessaladillo.pedrojoya.pr048.R
 import es.iessaladillo.pedrojoya.pr048.base.*
 import es.iessaladillo.pedrojoya.pr048.data.Student
@@ -84,30 +84,30 @@ class MainActivity : AppCompatActivity(), OnDateSetListener, OnTimeSetListener,
 
     @SuppressLint("DefaultLocale")
     override fun onDateSet(view: DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int) {
-        toast(getString(R.string.main_activity_selected,
+        Toast.makeText(this, getString(R.string.main_activity_selected,
                 String.format("%02d", dayOfMonth) + "/" + String.format("%02d", monthOfYear + 1)
-                        + "/" + String.format("%04d", year)))
+                        + "/" + String.format("%04d", year)), Toast.LENGTH_SHORT).show()
     }
 
     @SuppressLint("DefaultLocale")
     override fun onTimeSet(view: TimePicker, hourOfDay: Int, minute: Int) {
-        toast(getString(R.string.main_activity_selected,
-                String.format("%02d", hourOfDay) + ":" + String.format("%02d", minute)))
+        Toast.makeText(this, getString(R.string.main_activity_selected,
+                String.format("%02d", hourOfDay) + ":" + String.format("%02d", minute)), Toast.LENGTH_SHORT).show()
     }
 
     // Positive button on YesNoDialog.
     override fun onPositiveButtonClick(dialog: DialogInterface) {
-        toast(getString(R.string.main_activity_user_deleted))
+        Toast.makeText(this, getString(R.string.main_activity_user_deleted), Toast.LENGTH_SHORT).show()
     }
 
     // Negative button on YesNoDialog.
     override fun onNegativeButtonClick(dialog: DialogInterface) {
-        toast(getString(R.string.main_activity_no_delete))
+        Toast.makeText(this, getString(R.string.main_activity_no_delete), Toast.LENGTH_SHORT).show()
     }
 
     // Selection on DirectSelectionDialog. Receives the index of the selected option.
     override fun onItemSelected(dialog: DialogFragment, which: Int) {
-        toast(getString(R.string.main_activity_selected, getStringArray(R.array.shifts)[which]))
+        Toast.makeText(this, getString(R.string.main_activity_selected, getStringArray(R.array.shifts)[which]), Toast.LENGTH_SHORT).show()
     }
 
     private fun buildShiftsMessage(optionIsChecked: BooleanArray, shifts: Array<String>): String {
@@ -121,7 +121,7 @@ class MainActivity : AppCompatActivity(), OnDateSetListener, OnTimeSetListener,
 
     // Positive button on SimpleSelectionDialog. Receives the index of the selected option.
     override fun onConfirmSelection(dialog: DialogInterface, which: Int) {
-        toast(getString(R.string.main_activity_selected, getStringArray(R.array.shifts)[which]))
+        Toast.makeText(this, getString(R.string.main_activity_selected, getStringArray(R.array.shifts)[which]), Toast.LENGTH_SHORT).show()
     }
 
     // Item selected on SimpleSelectionDialog. Receives the index of the selected
@@ -132,8 +132,8 @@ class MainActivity : AppCompatActivity(), OnDateSetListener, OnTimeSetListener,
 
     // Positive button on MultipleSelectionDialog. Receives the selection state of each option.
     override fun onConfirmSelection(dialog: DialogInterface, itemsSelectedState: BooleanArray) {
-        toast(getString(R.string.multiple_selection_dialog_selected,
-                buildShiftsMessage(itemsSelectedState, getStringArray(R.array.shifts))))
+        Toast.makeText(this, getString(R.string.multiple_selection_dialog_selected,
+                buildShiftsMessage(itemsSelectedState, getStringArray(R.array.shifts))), Toast.LENGTH_SHORT).show()
     }
 
     // Item clicked on MultipleSelectionDialog. Receives the index of the option clicked and the
@@ -144,12 +144,12 @@ class MainActivity : AppCompatActivity(), OnDateSetListener, OnTimeSetListener,
 
     // Click on item in adapter. Receives selected student.
     override fun onListItemClick(dialog: DialogFragment, student: Student) {
-        toast(getString(R.string.main_activity_selected, student.name))
+        Toast.makeText(this, getString(R.string.main_activity_selected, student.name), Toast.LENGTH_SHORT).show()
     }
 
     // Positive button on custom layout dialog.
     override fun onLoginClick(dialog: DialogFragment) {
-        toast(R.string.main_activity_login)
+        Toast.makeText(this, R.string.main_activity_login, Toast.LENGTH_SHORT).show()
     }
 
     // Neutral button on custom layout dialog.

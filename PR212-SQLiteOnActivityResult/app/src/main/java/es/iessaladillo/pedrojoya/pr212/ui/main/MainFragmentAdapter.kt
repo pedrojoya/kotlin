@@ -1,10 +1,10 @@
 package es.iessaladillo.pedrojoya.pr212.ui.main
 
 
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.amulyakhare.textdrawable.TextDrawable
 import com.amulyakhare.textdrawable.util.ColorGenerator
 import es.iessaladillo.pedrojoya.pr212.R
@@ -72,9 +72,21 @@ class MainFragmentAdapter : RecyclerView.Adapter<MainFragmentAdapter.ViewHolder>
 
     fun getItemAtPosition(position: Int): Student = data!![position]
 
+    // For compatibility with Java
     fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {
         this.onItemClickListener = onItemClickListener
     }
+
+    // For Kotlin lambdas
+    fun setOnItemClickListener(action: (View, Student, Int) -> Unit) {
+        onItemClickListener = object: OnItemClickListener {
+            override fun onItemClick(view: View, student: Student, position: Int) {
+                action(view, student, position)
+            }
+
+        }
+    }
+
 
     fun setEmptyView(emptyView: View) {
         if (mEmptyView != null) {
@@ -100,7 +112,7 @@ class MainFragmentAdapter : RecyclerView.Adapter<MainFragmentAdapter.ViewHolder>
             RecyclerView.ViewHolder(containerView), LayoutContainer {
 
         fun bind(student: Student, position: Int) {
-            with(student) {
+            student.run {
                 lblName.text = name
                 lblGrade.text = grade
                 lblAddress.text = address

@@ -1,9 +1,9 @@
 package es.iessaladillo.pedrojoya.pr147.main
 
 import android.content.Context
-import android.support.annotation.DrawableRes
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
+import androidx.annotation.DrawableRes
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 
 import es.iessaladillo.pedrojoya.pr147.R
 import es.iessaladillo.pedrojoya.pr147.base.CachedFragmentPagerAdapter

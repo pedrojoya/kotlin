@@ -5,13 +5,13 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Environment
-import android.support.design.widget.Snackbar
-import android.support.v4.app.ActivityCompat
-import android.support.v4.content.FileProvider
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import androidx.core.widget.toast
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.FileProvider
+import com.google.android.material.snackbar.Snackbar
 import es.iessaladillo.pedrojoya.pr119.extensions.hasPermission
 import es.iessaladillo.pedrojoya.pr119.extensions.newInstalledAppDetailsActivityIntent
 import es.iessaladillo.pedrojoya.pr119.extensions.newViewUriIntent
@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity() {
                 addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             })
         } catch (e: Exception) {
-            toast(R.string.main_activity_error_opening_file)
+            Toast.makeText(this, R.string.main_activity_error_opening_file, Toast.LENGTH_SHORT).show()
         }
     }
 

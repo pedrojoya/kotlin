@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">StartedService</string>
+    <string name="activity_main_btnCalculate">Calculate summation</string>
+    <string name="activity_main_lblInteger">Integer</string>
+    <string name="activity_main_txtInteger">(integer)</string>
+
+</resources>

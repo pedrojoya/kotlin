@@ -1,7 +1,7 @@
 @file:JvmName("ViewPagerExt")
 package es.iessaldillo.pedrojoya.pr160.extensions
 
-import android.support.v4.view.ViewPager
+import androidx.viewpager.widget.ViewPager
 
 fun ViewPager.onPageSelected(action: (Int) -> Unit) {
     addOnPageChangeListener(object : ViewPager.OnPageChangeListener {

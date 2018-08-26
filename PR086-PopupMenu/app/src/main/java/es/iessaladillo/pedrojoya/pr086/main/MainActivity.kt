@@ -1,8 +1,8 @@
 package es.iessaladillo.pedrojoya.pr086.main
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import androidx.core.widget.toast
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import es.iessaladillo.pedrojoya.pr086.R
 import es.iessaladillo.pedrojoya.pr086.data.Database
 import es.iessaladillo.pedrojoya.pr086.data.RepositoryImpl
@@ -22,21 +22,25 @@ class MainActivity : AppCompatActivity(), MainActivityAdapter.Callback {
     }
 
     private fun initViews() {
-        with (lstStudents) {
+        lstStudents.apply {
             adapter = MainActivityAdapter(viewModel.students, this@MainActivity)
             setOnItemClickListener { _, _, position, _ ->
-                toast(getString(R.string.main_activity_click_on,
-                        (lstStudents!!.getItemAtPosition(position) as Student).name))
+                showStudent(lstStudents.getItemAtPosition(position) as Student)
             }
         }
     }
 
+    private fun showStudent(student: Student) {
+        Toast.makeText(this, getString(R.string.main_activity_click_on,
+                student.name), Toast.LENGTH_SHORT).show()
+    }
+
     override fun onCall(student: Student) {
-        toast(getString(R.string.main_activity_call_sb, student.name))
+        Toast.makeText(this, getString(R.string.main_activity_call_sb, student.name), Toast.LENGTH_SHORT).show()
     }
 
     override fun onSendMessage(student: Student) {
-        toast(getString(R.string.main_activity_send_message_to, student.name))
+        Toast.makeText(this, getString(R.string.main_activity_send_message_to, student.name), Toast.LENGTH_SHORT).show()
     }
 
 }

@@ -2,9 +2,9 @@ package es.iessaladillo.pedrojoya.pr050.main
 
 import android.content.Context
 import android.os.Bundle
-import android.support.annotation.IdRes
-import android.support.v4.app.Fragment
 import android.view.*
+import androidx.annotation.IdRes
+import androidx.fragment.app.Fragment
 import es.iessaladillo.pedrojoya.pr050.R
 import es.iessaladillo.pedrojoya.pr050.utils.BINARY_COLOR_FILTER
 import es.iessaladillo.pedrojoya.pr050.utils.GREY_COLOR_FILTER
@@ -19,7 +19,6 @@ class PhotoFragment : Fragment() {
     private var effectId: Int = R.id.mnuOriginal
     private var listener: Callback? = null
 
-    // Communication interface.
     interface Callback {
         fun onInfoClicked()
     }

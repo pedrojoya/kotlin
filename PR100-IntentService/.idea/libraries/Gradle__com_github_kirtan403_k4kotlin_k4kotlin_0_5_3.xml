@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.kirtan403.k4kotlin:k4kotlin-0.5.3">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/k4kotlin-0.5.3.aar/40f4b08f67c50a225ec38bd14679bdae/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/k4kotlin-0.5.3.aar/40f4b08f67c50a225ec38bd14679bdae/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.kirtan403.k4kotlin/k4kotlin/0.5.3/656f9d1e3ea5a818ef6cc1188dcf8c223e7dc337/k4kotlin-0.5.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,7 +1,7 @@
 package es.iessaladillo.pedrojoya.pr045.main
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import es.iessaladillo.pedrojoya.pr045.R
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        with (vpPages) {
+        vpPages.apply {
             adapter = MainActivityAdapter(this@MainActivity)
             currentItem = DEFAULT_PAGE
         }

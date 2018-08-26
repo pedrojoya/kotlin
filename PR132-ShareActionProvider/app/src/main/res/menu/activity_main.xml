@@ -4,6 +4,6 @@
     <item
         android:id="@+id/mnuShare"
         android:title="@string/activity_main_mnuShare"
-        app:actionProviderClass="android.support.v7.widget.ShareActionProvider"
+        app:actionProviderClass="androidx.appcompat.widget.ShareActionProvider"
         app:showAsAction="ifRoom"/>
 </menu>

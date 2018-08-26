@@ -1,9 +1,9 @@
 package es.iessaladillo.pedrojoya.pr123.main
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.AdapterView
+import androidx.appcompat.app.AppCompatActivity
 import es.iessaladillo.pedrojoya.pr123.R
 import es.iessaladillo.pedrojoya.pr123.extensions.addFragment
 import es.iessaladillo.pedrojoya.pr123.extensions.findFragmentByTag
@@ -21,28 +21,23 @@ private const val STATE_SELECTED_OPTION = "STATE_SELECTED_OPTION"
 class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     private var selectedOption = 0
-    private var photoFragment: PhotoFragment? = null
-    private var infoFragment: InfoFragment? = null
+    private val photoFragment: PhotoFragment by lazy {
+        findFragmentByTag(TAG_PHOTO_FRAGMENT) as? PhotoFragment
+                ?: PhotoFragment.newInstance().apply {
+                    addFragment(R.id.flContent, this, TAG_PHOTO_FRAGMENT)
+                }
+    }
+    private val infoFragment: InfoFragment by lazy {
+        findFragmentByTag(TAG_INFO_FRAGMENT) as? InfoFragment ?: InfoFragment.newInstance().apply {
+            addFragment(R.id.flContent, this, TAG_INFO_FRAGMENT)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         restoreInstanceState(savedInstanceState)
         initViews()
-        loadFragments()
-    }
-
-    private fun loadFragments() {
-        photoFragment = findFragmentByTag(TAG_PHOTO_FRAGMENT) as? PhotoFragment
-        if (photoFragment == null) {
-            photoFragment = PhotoFragment.newInstance()
-            addFragment(R.id.flContent, photoFragment!!, TAG_PHOTO_FRAGMENT)
-        }
-        infoFragment = findFragmentByTag(TAG_INFO_FRAGMENT) as? InfoFragment
-        if (infoFragment == null) {
-            infoFragment = InfoFragment.newInstance()
-            addFragment(R.id.flContent, infoFragment!!, TAG_INFO_FRAGMENT)
-        }
     }
 
     private fun restoreInstanceState(savedInstanceState: Bundle?) {
@@ -56,7 +51,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     private fun setupToolbar() {
         setSupportActionBar(toolbar)
-        supportActionBar!!.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
         spnOptions.onItemSelectedListener = this
         spnOptions.adapter = ToolbarSpinnerAdapter(
                 supportActionBar!!.themedContext,

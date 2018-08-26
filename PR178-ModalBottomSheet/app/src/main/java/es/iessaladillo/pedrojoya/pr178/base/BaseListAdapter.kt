@@ -1,7 +1,7 @@
 package es.iessaladillo.pedrojoya.pr178.base
 
-import android.support.annotation.CallSuper
-import android.support.v7.widget.RecyclerView
+import androidx.annotation.CallSuper
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import java.util.*
 import kotlin.collections.ArrayList

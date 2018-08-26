@@ -1,6 +1,6 @@
 package es.iessaladillo.pedrojoya.pr049.main
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import android.os.Bundle
 
 private const val STATE_SELECTED_ITEM = "STATE_SELECTED_ITEM"

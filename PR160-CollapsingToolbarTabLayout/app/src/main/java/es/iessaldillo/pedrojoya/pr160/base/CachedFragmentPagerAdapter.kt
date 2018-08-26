@@ -1,11 +1,10 @@
 package es.iessaldillo.pedrojoya.pr160.base
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
 import android.util.SparseArray
 import android.view.ViewGroup
-
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import java.lang.ref.WeakReference
 
 abstract class CachedFragmentPagerAdapter protected constructor(fm: FragmentManager) :
@@ -27,7 +26,7 @@ abstract class CachedFragmentPagerAdapter protected constructor(fm: FragmentMana
     }
 
     @Suppress("unused")
-// Return fragment in that position.
+    // Return fragment in that position.
     fun getFragment(position: Int): Fragment? =
             fragments.get(position)?.get()
 

@@ -3,8 +3,8 @@
 package es.iessaladillo.pedrojoya.pr012.extensions
 import android.content.Context
 import android.content.res.Resources
-import android.support.annotation.NonNull
-import android.support.annotation.PluralsRes
+import androidx.annotation.NonNull
+import androidx.annotation.PluralsRes
 
 @NonNull
 @Throws(Resources.NotFoundException::class)

@@ -3,8 +3,8 @@ package es.iessaladillo.pedrojoya.pr004
 import android.Manifest
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
-import android.support.v7.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.toast
 import es.iessaladillo.pedrojoya.pr004.extensions.*
 import kotlinx.android.synthetic.main.activity_main.*

@@ -1,9 +1,9 @@
 package es.iessaldillo.pedrojoya.pr160.main
 
 import android.content.Context
-import android.support.annotation.DrawableRes
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
+import androidx.annotation.DrawableRes
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import es.iessaldillo.pedrojoya.pr160.R
 import es.iessaldillo.pedrojoya.pr160.base.CachedFragmentPagerAdapter
 

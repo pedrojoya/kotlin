@@ -1,10 +1,9 @@
 package es.iessaldillo.pedrojoya.pr160.main
 
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import es.iessaldillo.pedrojoya.pr160.R
 import es.iessaldillo.pedrojoya.pr160.extensions.onPageSelected
 import kotlinx.android.synthetic.main.activity_main.*
@@ -35,13 +34,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupViewPager() {
         mAdapter = MainActivityAdapter(supportFragmentManager, this@MainActivity)
-        with(viewPager) {
+        viewPager.run {
             adapter = mAdapter
             offscreenPageLimit = 2
         }
-        with(tabLayout) {
-            tabLayout.setupWithViewPager(viewPager)
-            tabLayout.tabGravity = TabLayout.GRAVITY_FILL
+        tabLayout.run {
+            setupWithViewPager(viewPager)
+            tabGravity = com.google.android.material.tabs.TabLayout.GRAVITY_FILL
         }
         viewPager.onPageSelected { position ->
             updateHeader(position)

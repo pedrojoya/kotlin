@@ -1,7 +1,7 @@
 @file:JvmName("TabLayoutExt")
 package es.iessaladillo.pedrojoya.pr105.extensions
 
-import android.support.design.widget.TabLayout
+import com.google.android.material.tabs.TabLayout
 
 inline fun TabLayout.forEachIndexed(action: (index: Int, tab: TabLayout.Tab?) -> Unit) {
     for (index in 0 until tabCount) {

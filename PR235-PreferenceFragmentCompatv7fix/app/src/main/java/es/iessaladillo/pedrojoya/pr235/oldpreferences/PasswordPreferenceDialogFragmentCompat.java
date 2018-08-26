@@ -1,8 +1,8 @@
 package es.iessaladillo.pedrojoya.pr235.oldpreferences;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.preference.EditTextPreferenceDialogFragmentCompat;
+import androidx.core.view.ViewCompat;
+import androidx.preference.EditTextPreferenceDialogFragmentCompat;
 import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;

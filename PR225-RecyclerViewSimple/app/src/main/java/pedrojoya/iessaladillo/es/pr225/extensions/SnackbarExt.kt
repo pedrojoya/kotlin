@@ -2,8 +2,8 @@
 
 package pedrojoya.iessaladillo.es.pr225.extensions
 
-import android.support.annotation.StringRes
-import android.support.design.widget.Snackbar
+import androidx.annotation.StringRes
+import com.google.android.material.snackbar.Snackbar
 import android.view.View
 
 fun snackbar(view: View, @StringRes message: Int, actionText: String = "",

@@ -2,9 +2,9 @@ package es.iessaladillo.pedrojoya.pr152.ui.settings
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.support.v14.preference.MultiSelectListPreference
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.preference.*
+import androidx.preference.MultiSelectListPreference
+import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.*
 import androidx.core.os.bundleOf
 import es.iessaladillo.pedrojoya.pr152.R
 import es.iessaladillo.pedrojoya.pr152.extensions.getBoolean

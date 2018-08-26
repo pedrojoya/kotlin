@@ -15,7 +15,7 @@ fun TextView.afterTextChanged(action: (Editable?) -> Unit) {
         }
 
         override fun afterTextChanged(editable: Editable?) {
-            action.invoke(editable)
+            action(editable)
         }
     })
 }

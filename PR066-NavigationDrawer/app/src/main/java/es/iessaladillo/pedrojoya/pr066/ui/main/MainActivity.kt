@@ -1,12 +1,12 @@
 package es.iessaladillo.pedrojoya.pr066.ui.main
 
 import android.os.Bundle
-import android.support.design.widget.NavigationView
-import android.support.v4.view.GravityCompat
-import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
-import androidx.core.widget.toast
+import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import com.google.android.material.navigation.NavigationView
 import es.iessaladillo.pedrojoya.pr066.R
 import es.iessaladillo.pedrojoya.pr066.extensions.replaceFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -35,8 +35,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun setupNavigationDrawer() {
-        with (ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close)) {
+        ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close).apply {
             drawerLayout.addDrawerListener(this)
             syncState()
         }
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun showOption5Activity() {
-        toast(R.string.main_activity_show_option5)
+        Toast.makeText(this, R.string.main_activity_show_option5, Toast.LENGTH_SHORT).show()
     }
 
 }

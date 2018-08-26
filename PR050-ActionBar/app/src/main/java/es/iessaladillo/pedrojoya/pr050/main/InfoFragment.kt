@@ -2,15 +2,14 @@ package es.iessaladillo.pedrojoya.pr050.main
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.*
+import androidx.fragment.app.Fragment
 import es.iessaladillo.pedrojoya.pr050.R
 
 class InfoFragment : Fragment() {
 
     private var mListener: Callback? = null
 
-    // Communication interface.
     interface Callback {
         fun onPhotoClicked()
     }

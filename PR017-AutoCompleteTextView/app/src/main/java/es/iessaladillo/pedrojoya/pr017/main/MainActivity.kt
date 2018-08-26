@@ -1,11 +1,11 @@
 package es.iessaladillo.pedrojoya.pr017.main
 
-import android.arch.lifecycle.ViewModel
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Filter
 import android.widget.Filterable
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
 import es.iessaladillo.pedrojoya.pr017.R
 import es.iessaladillo.pedrojoya.pr017.base.AdapterViewBaseAdapter
 import es.iessaladillo.pedrojoya.pr017.data.Database
@@ -29,12 +29,13 @@ class MainActivity : AppCompatActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        getViewModel { MainActivityViewModel(RepositoryImpl(Database)) }
+        viewModel = getViewModel { MainActivityViewModel(RepositoryImpl
+        (Database)) }
         initViews()
     }
 
     private fun initViews() {
-        with (txtWord) {
+        txtWord.apply {
             setAdapter(MainActivityAdapter(viewModel.data))
             afterTextChanged { checkIsValidForm() }
         }
@@ -60,14 +61,15 @@ class MainActivity : AppCompatActivity() {
 
 }
 
-class MainActivityViewModel(private val repository: Repository) : ViewModel() {
+class MainActivityViewModel(private val repository: Repository) :
+ViewModel() {
 
-    internal val data by lazy { repository.queryWords() }
-    internal var loadedWord = ""
+    val data by lazy { repository.queryWords() }
+    var loadedWord = ""
 
 }
 
-internal class MainActivityAdapter(words: List<Word>) :
+private class MainActivityAdapter(words: List<Word>) :
         AdapterViewBaseAdapter<Word, ViewHolder>(words, R.layout.activity_main_item),
         Filterable {
 
@@ -98,7 +100,7 @@ internal class MainActivityAdapter(words: List<Word>) :
 
 }
 
-internal class ViewHolder(override val containerView: View): LayoutContainer {
+private class ViewHolder(override val containerView: View): LayoutContainer {
 
     fun bind(word: Word) {
         imgPhoto.setImageResource(word.photoResId)

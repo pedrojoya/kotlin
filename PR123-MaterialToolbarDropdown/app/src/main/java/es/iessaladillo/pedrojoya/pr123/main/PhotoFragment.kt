@@ -1,9 +1,9 @@
 package es.iessaladillo.pedrojoya.pr123.main
 
 import android.os.Bundle
-import android.support.annotation.IdRes
-import android.support.v4.app.Fragment
-import android.support.v7.widget.PopupMenu
+import androidx.annotation.IdRes
+import androidx.fragment.app.Fragment
+import androidx.appcompat.widget.PopupMenu
 import android.view.*
 import es.iessaladillo.pedrojoya.pr123.R
 import es.iessaladillo.pedrojoya.pr123.utils.BINARY_COLOR_FILTER

@@ -3,10 +3,10 @@ package es.iessaladillo.pedrojoya.pr152.extensions
 
 import android.content.Context
 import android.content.res.Resources
-import android.support.annotation.ArrayRes
-import android.support.annotation.BoolRes
-import android.support.annotation.IntegerRes
-import android.support.annotation.NonNull
+import androidx.annotation.ArrayRes
+import androidx.annotation.BoolRes
+import androidx.annotation.IntegerRes
+import androidx.annotation.NonNull
 
 @NonNull
 @Throws(Resources.NotFoundException::class)

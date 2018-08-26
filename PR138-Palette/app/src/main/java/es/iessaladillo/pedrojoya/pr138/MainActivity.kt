@@ -4,10 +4,10 @@ import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.graphics.Palette
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.palette.graphics.Palette
 import es.iessaladillo.pedrojoya.pr138.extensions.getThemedColor
 import es.iessaladillo.pedrojoya.pr138.extensions.loadUrl
 import kotlinx.android.synthetic.main.activity_main.*
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
     private fun obtainPalette() {
         Palette.from((imgPhoto.drawable as BitmapDrawable).bitmap).generate { palette ->
             this.palette = palette
-            showSwatchs(palette)
+            showSwatchs(palette!!)
         }
     }
 

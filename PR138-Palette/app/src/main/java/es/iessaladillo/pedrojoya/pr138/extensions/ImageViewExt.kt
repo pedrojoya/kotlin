@@ -2,7 +2,7 @@
 
 package es.iessaladillo.pedrojoya.pr138.extensions
 
-import android.support.annotation.DrawableRes
+import androidx.annotation.DrawableRes
 import android.widget.ImageView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso

@@ -8,7 +8,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 
 fun TextView.afterTextChanged(afterTextChanged: (Editable?) -> Unit) {
-    this.addTextChangedListener(object : TextWatcher {
+    addTextChangedListener(object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
         }
 
@@ -16,7 +16,7 @@ fun TextView.afterTextChanged(afterTextChanged: (Editable?) -> Unit) {
         }
 
         override fun afterTextChanged(editable: Editable?) {
-            afterTextChanged.invoke(editable)
+            afterTextChanged(editable)
         }
     })
 }
@@ -26,8 +26,9 @@ fun TextView.onActionDone(action: () -> Unit) {
         if (actionId == EditorInfo.IME_ACTION_DONE) {
             action()
             true
+        } else {
+            false
         }
-        false
     }
 }
 

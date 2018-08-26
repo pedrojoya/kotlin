@@ -10,7 +10,7 @@ import android.view.View
 import android.widget.TextView
 
 fun TextView.afterTextChanged(action: (Editable?) -> Unit) {
-    this.addTextChangedListener(object : TextWatcher {
+    addTextChangedListener(object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
         }
 
@@ -18,7 +18,7 @@ fun TextView.afterTextChanged(action: (Editable?) -> Unit) {
         }
 
         override fun afterTextChanged(editable: Editable?) {
-            action.invoke(editable)
+            action(editable)
         }
     })
 }
@@ -26,15 +26,15 @@ fun TextView.afterTextChanged(action: (Editable?) -> Unit) {
 fun TextView.labelTextView(
         lbl: TextView,
         afterTextChange: (Editable?) -> Unit = {},
-        onFocusChange: (v: View, hasFocus: Boolean) -> Unit = { v, f -> }
+        onFocusChange: (v: View, hasFocus: Boolean) -> Unit = { _, _ -> }
     ) {
-    this.afterTextChanged {
-        lbl.visibility = if (TextUtils.isEmpty(this.text.toString())) View.INVISIBLE else View.VISIBLE
-        afterTextChange.invoke(it)
+    afterTextChanged {
+        lbl.visibility = if (TextUtils.isEmpty(text.toString())) View.INVISIBLE else View.VISIBLE
+        afterTextChange(it)
     }
-    this.setOnFocusChangeListener { v, hasFocus ->
+    setOnFocusChangeListener { v, hasFocus ->
         lbl.typeface = if (hasFocus) Typeface.DEFAULT_BOLD else Typeface.DEFAULT
-        onFocusChange.invoke(v, hasFocus)
+        onFocusChange(v, hasFocus)
     }
 }
 

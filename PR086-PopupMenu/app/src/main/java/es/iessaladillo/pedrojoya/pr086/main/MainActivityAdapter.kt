@@ -12,7 +12,6 @@ import kotlinx.android.synthetic.main.activity_main_item.*
 class MainActivityAdapter(data: List<Student>, private val listener: Callback) :
         AdapterViewBaseAdapter<Student, ViewHolder>(data, R.layout.activity_main_item) {
 
-    // Communication interface
     interface Callback {
 
         fun onCall(student: Student)
@@ -40,11 +39,10 @@ class ViewHolder(override val containerView: View,
     }
 
     private fun showPopup(student: Student, v: View) {
-        with (PopupMenu(v.context, v)) {
+        PopupMenu(v.context, v).apply {
             inflate(R.menu.activity_main_item_popup)
             setOnMenuItemClickListener { menuItem -> onMenuItemClick(student, menuItem) }
-            show()
-        }
+        }.show()
     }
 
     private fun onMenuItemClick(student: Student, menuItem: MenuItem): Boolean =

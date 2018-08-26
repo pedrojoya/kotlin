@@ -5,11 +5,11 @@ import android.animation.ValueAnimator.INFINITE
 import android.animation.ValueAnimator.RESTART
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.animation.BounceInterpolator
 import android.view.animation.LinearInterpolator
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.AppCompatActivity
 import es.iessaladillo.pedrojoya.pr013.extensions.onAnimationEnd
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initViews() {
         btnCheck.setOnClickListener { checkAnswer() }
-        with (lstAnswers) {
+        lstAnswers.apply {
             adapter = mAdapter
             setOnItemClickListener { _, _, _, _ -> btnCheck.isEnabled = true }
         }
@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun animateScore(right: Boolean) {
-        with(lblScore) {
+        lblScore.apply {
             setBackgroundResource(
                     if (right) R.drawable.activity_main_lblscore_background
                     else R.drawable.activity_main_lblscore_background_wrong
@@ -125,8 +125,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun resetScorePosition() {
-
-        with(lblScore) {
+        lblScore.apply {
             visibility = View.INVISIBLE
             scaleX = 1f
             scaleY = 1f

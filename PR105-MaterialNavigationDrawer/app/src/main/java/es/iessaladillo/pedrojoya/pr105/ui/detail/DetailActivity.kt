@@ -1,8 +1,8 @@
 package es.iessaladillo.pedrojoya.pr105.ui.detail
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import es.iessaladillo.pedrojoya.pr105.R
 import kotlinx.android.synthetic.main.activity_detail.*
 
@@ -17,7 +17,7 @@ class DetailActivity : AppCompatActivity() {
 
     private fun initViews() {
         setSupportActionBar(toolbar)
-        with (supportActionBar!!) {
+        supportActionBar?.run {
             setDisplayHomeAsUpEnabled(true)
             setHomeButtonEnabled(true)
         }

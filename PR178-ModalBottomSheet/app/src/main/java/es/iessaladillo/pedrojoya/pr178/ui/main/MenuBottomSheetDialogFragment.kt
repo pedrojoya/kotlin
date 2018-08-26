@@ -2,19 +2,19 @@ package es.iessaladillo.pedrojoya.pr178.ui.main
 
 import android.os.Bundle
 import android.os.Parcelable
-import android.support.design.widget.BottomSheetBehavior
-import android.support.design.widget.BottomSheetDialogFragment
-import android.support.design.widget.CoordinatorLayout
-import android.support.design.widget.NavigationView
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.os.bundleOf
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.navigation.NavigationView
 import es.iessaladillo.pedrojoya.pr178.R
+import es.iessaladillo.pedrojoya.pr178.data.Student
 import es.iessaladillo.pedrojoya.pr178.extensions.toast
 import kotlinx.android.synthetic.main.fragment_bottomsheet.*
-import es.iessaladillo.pedrojoya.pr178.data.Student
 
 private const val ARG_STUDENT = "ARG_STUDENT"
 private const val SHEET_PEAK_HEIGHT = 650
@@ -68,7 +68,7 @@ class MenuBottomSheetDialogFragment : BottomSheetDialogFragment(),
     }
 
     private fun setupNavigationView() {
-        with (navigationView) {
+        navigationView.run {
             setNavigationItemSelectedListener(this@MenuBottomSheetDialogFragment)
             menu.findItem(R.id.mnuTitle).title = student.name
         }
@@ -112,7 +112,7 @@ class MenuBottomSheetDialogFragment : BottomSheetDialogFragment(),
 
     companion object {
 
-        internal fun newInstance(student: Student): MenuBottomSheetDialogFragment =
+        fun newInstance(student: Student): MenuBottomSheetDialogFragment =
                 MenuBottomSheetDialogFragment().apply {
                     arguments = bundleOf(ARG_STUDENT to student)
                 }

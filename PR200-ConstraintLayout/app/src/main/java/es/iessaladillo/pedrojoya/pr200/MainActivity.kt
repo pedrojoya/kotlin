@@ -1,8 +1,8 @@
 package es.iessaladillo.pedrojoya.pr200
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import androidx.core.widget.toast
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import es.iessaladillo.pedrojoya.pr200.extensions.isNotBlank
 import es.iessaladillo.pedrojoya.pr200.extensions.labelTextView
 import es.iessaladillo.pedrojoya.pr200.extensions.onActionDone
@@ -19,15 +19,15 @@ class MainActivity : AppCompatActivity() {
     private fun initViews() {
         btnAcept.setOnClickListener { login() }
         btnCancel.setOnClickListener { resetViews() }
-        txtUsername.labelTextView(lblUsername, { _ -> checkIsValidForm() })
-        txtPassword.labelTextView(lblPassword, { _ -> checkIsValidForm() })
+        txtUsername.labelTextView(lblUsername, afterTextChange = { _ -> checkIsValidForm() })
+        txtPassword.labelTextView(lblPassword, afterTextChange = { _ -> checkIsValidForm() })
         txtPassword.onActionDone { login() }
         // Initial state
         checkIsValidForm()
     }
 
     private fun login() {
-        toast(getString(R.string.conectando_con_el_usuario, txtUsername.text.toString()))
+        Toast.makeText(this, getString(R.string.conectando_con_el_usuario, txtUsername.text.toString()), Toast.LENGTH_SHORT).show()
     }
 
     private fun resetViews() {

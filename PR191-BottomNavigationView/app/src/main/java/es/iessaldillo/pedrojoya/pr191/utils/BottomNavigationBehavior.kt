@@ -1,12 +1,12 @@
 package es.iessaldillo.pedrojoya.pr191.utils
 
 import android.content.Context
-import android.support.design.widget.AppBarLayout
-import android.support.design.widget.BottomNavigationView
-import android.support.design.widget.CoordinatorLayout
-import android.support.design.widget.Snackbar
 import android.util.AttributeSet
 import android.view.View
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 
 @Suppress("unused")
 class BottomNavigationBehavior(context: Context, attrs: AttributeSet) :
@@ -15,9 +15,9 @@ class BottomNavigationBehavior(context: Context, attrs: AttributeSet) :
     private var isSnackbarShowing = false
     private var snackbar: Snackbar.SnackbarLayout? = null
 
-    override fun layoutDependsOn(parent: CoordinatorLayout?,
-                                 child: BottomNavigationView?,
-                                 dependency: View?): Boolean =
+    override fun layoutDependsOn(parent: CoordinatorLayout,
+                                 child: BottomNavigationView,
+                                 dependency: View): Boolean =
         dependency is AppBarLayout || dependency is Snackbar.SnackbarLayout
 
 
@@ -38,13 +38,13 @@ class BottomNavigationBehavior(context: Context, attrs: AttributeSet) :
         super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed, type)
     }
 
-    override fun onDependentViewChanged(parent: CoordinatorLayout?, child: BottomNavigationView?,
-                                        dependency: View?): Boolean {
+    override fun onDependentViewChanged(parent: CoordinatorLayout, child: BottomNavigationView,
+                                        dependency: View): Boolean {
         if (dependency is AppBarLayout) {
             val bottom = dependency.bottom.toFloat()
             val height = dependency.height.toFloat()
             val hidingRate = (height - bottom) / height
-            child!!.translationY = child.height * hidingRate
+            child.translationY = child.height * hidingRate
             return true
         }
         if (dependency is Snackbar.SnackbarLayout) {
@@ -57,8 +57,8 @@ class BottomNavigationBehavior(context: Context, attrs: AttributeSet) :
         return false
     }
 
-    override fun onDependentViewRemoved(parent: CoordinatorLayout?, child: BottomNavigationView?,
-                                        dependency: View?) {
+    override fun onDependentViewRemoved(parent: CoordinatorLayout, child: BottomNavigationView,
+                                        dependency: View) {
         if (dependency is Snackbar.SnackbarLayout) {
             isSnackbarShowing = false
             snackbar = null

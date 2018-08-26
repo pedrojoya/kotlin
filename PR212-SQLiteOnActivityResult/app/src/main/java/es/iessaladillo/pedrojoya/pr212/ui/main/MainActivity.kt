@@ -1,9 +1,9 @@
 package es.iessaladillo.pedrojoya.pr212.ui.main
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import es.iessaladillo.pedrojoya.pr212.R
 import es.iessaladillo.pedrojoya.pr212.data.Repository
 import es.iessaladillo.pedrojoya.pr212.data.model.Student

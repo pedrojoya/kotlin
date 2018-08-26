@@ -2,8 +2,8 @@ package es.iessaladillo.pedrojoya.pr045.main
 
 import android.content.Context
 import android.os.Parcelable
-import android.support.v4.view.PagerAdapter
-import android.support.v4.view.ViewCompat
+import androidx.viewpager.widget.PagerAdapter
+import androidx.core.view.ViewCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

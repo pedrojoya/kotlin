@@ -1,11 +1,9 @@
 package pedrojoya.iessaladillo.es.pr201.ui.main
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import pedrojoya.iessaladillo.es.pr201.R
 import pedrojoya.iessaladillo.es.pr201.base.setOnItemClickListener
@@ -47,20 +45,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        mAdapter = MainActivityAdapter(ArrayList()).also {
-            it.emptyView = lblEmptyView
-            it.setOnItemClickListener { _, item, _, _ -> updateStudent(item) }
-            it.setOnItemLongClickListener { _, item, _, _ ->
+        mAdapter = MainActivityAdapter(ArrayList()).apply {
+            emptyView = lblEmptyView
+            setOnItemClickListener { _, item, _, _ -> updateStudent(item) }
+            setOnItemLongClickListener { _, item, _, _ ->
                 deleteStudent(item)
                 true
             }
         }
-        with (lstStudents) {
+        lstStudents.run {
             setHasFixedSize(true)
             adapter = mAdapter
-            layoutManager = LinearLayoutManager(this@MainActivity,
-                    LinearLayoutManager.VERTICAL, false)
-            itemAnimator = DefaultItemAnimator()
+            layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this@MainActivity,
+                    androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+            itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
         }
         mAdapter.submitList(viewModel.getStudents(false))
     }

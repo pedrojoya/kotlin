@@ -3,8 +3,6 @@ package es.iessaladillo.pedrojoya.pr212.data.model
 import android.content.ContentValues
 import android.database.Cursor
 import androidx.core.content.contentValuesOf
-import androidx.core.database.getLong
-import androidx.core.database.getString
 import androidx.core.database.getStringOrNull
 import es.iessaladillo.pedrojoya.pr212.data.local.DbContract
 
@@ -16,11 +14,11 @@ data class Student(
         var address: String? = null) {
 
     constructor(cursor: Cursor) : this(
-            cursor.getLong(DbContract.Student._ID),
-            cursor.getString(DbContract.Student.NAME),
-            cursor.getString(DbContract.Student.PHONE),
-            cursor.getString(DbContract.Student.GRADE),
-            cursor.getStringOrNull(DbContract.Student.ADDRESS))
+            cursor.getLong(cursor.getColumnIndex(DbContract.Student._ID)),
+            cursor.getString(cursor.getColumnIndex(DbContract.Student.NAME)),
+            cursor.getString(cursor.getColumnIndex(DbContract.Student.PHONE)),
+            cursor.getString(cursor.getColumnIndex(DbContract.Student.GRADE)),
+            cursor.getStringOrNull(cursor.getColumnIndex(DbContract.Student.ADDRESS)))
 
     fun toContentValues(): ContentValues =
             contentValuesOf(

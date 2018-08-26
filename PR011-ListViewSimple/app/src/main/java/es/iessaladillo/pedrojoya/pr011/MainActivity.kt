@@ -1,10 +1,10 @@
 package es.iessaladillo.pedrojoya.pr011
 
-import android.arch.lifecycle.ViewModel
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.widget.ArrayAdapter
-import androidx.core.widget.toast
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
 import es.iessaladillo.pedrojoya.pr011.data.Database
 import es.iessaladillo.pedrojoya.pr011.data.Repository
 import es.iessaladillo.pedrojoya.pr011.data.RepositoryImpl
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initViews() {
         btnAdd.setOnClickListener { addStudent() }
-        with (txtName) {
+        txtName.apply {
             afterTextChanged { checkIsValidForm() }
             onActionDone {
                 if (isValidForm) {
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        with (lstStudents) {
+        lstStudents.apply {
             setOnItemClickListener { _, _, position, _ -> showStudent(mAdapter.getItem(position)) }
             setOnItemLongClickListener { _, _, position, _ ->
                 deleteStudent(position)
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showStudent(student: String) {
-        toast(student)
+        Toast.makeText(this, student, Toast.LENGTH_SHORT).show()
     }
 
     private fun checkIsValidForm() {
@@ -78,7 +78,8 @@ class MainActivity : AppCompatActivity() {
 
 }
 
-class MainActivityViewModel(private val repository: Repository) : ViewModel() {
+private class MainActivityViewModel(private val repository: Repository) :
+ViewModel() {
 
     val data by lazy { repository.queryStudents() }
 

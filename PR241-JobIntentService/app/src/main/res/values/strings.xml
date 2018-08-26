@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">JobIntentService</string>
+    <string name="fragment_main_emptyView">No students yet</string>
+    <string name="main_activity_exported">Report exported successfully</string>
+    <string name="main_activity_open">Open</string>
+    <string name="main_activity_error_permission_required">Action can\'t be
+        done without the required permission</string>
+    <string name="main_activity_permission_required_explanation">We need the
+        external storage write access permission to export the file to
+        external storage</string>
+
+</resources>

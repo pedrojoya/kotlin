@@ -1,7 +1,7 @@
 @file:JvmName("TextInputLayoutExt")
 package es.iessaladillo.pedrojoya.pr149.extensions
 
-import android.support.design.widget.TextInputLayout
+import com.google.android.material.textfield.TextInputLayout
 
 fun TextInputLayout.checkValidAfterTextChange(message: String, test: (String) -> Boolean) {
     editText?.afterTextChanged {

@@ -1,7 +1,7 @@
 @file:JvmName("TextInputLayoutExt")
 package es.iessaladillo.pedrojoya.pr212.extensions
 
-import android.support.design.widget.TextInputLayout
+import com.google.android.material.textfield.TextInputLayout
 
 
 inline fun TextInputLayout.checkValid(errorMessage: String,
