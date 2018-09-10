@@ -21,9 +21,9 @@ fun TextView.afterTextChanged(afterTextChanged: (Editable?) -> Unit) {
     })
 }
 
-fun TextView.onActionDone(action: () -> Unit) {
+fun TextView.onAction(imeActionId: Int = EditorInfo.IME_ACTION_DONE, action: () -> Unit) {
     setOnEditorActionListener { _, actionId, _ ->
-        if (actionId == EditorInfo.IME_ACTION_DONE) {
+        if (actionId == imeActionId) {
             action()
             true
         } else {

@@ -1,5 +1,7 @@
 package es.iessaladillo.pedrojoya.pr017.data
 
+import es.iessaladillo.pedrojoya.pr017.data.local.model.Word
+
 interface Repository {
 
     fun queryWords(): List<Word>
@@ -7,7 +9,3 @@ interface Repository {
     fun deleteWord(position: Int)
 
 }
-
-class RepositoryImpl(private val database: Database) : Repository by database
-
-

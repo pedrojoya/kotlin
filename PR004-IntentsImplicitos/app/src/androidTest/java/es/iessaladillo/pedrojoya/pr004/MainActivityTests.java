@@ -6,6 +6,7 @@ import androidx.test.espresso.intent.matcher.UriMatchers;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.filters.LargeTest;
 import androidx.test.runner.AndroidJUnit4;
+import es.iessaladillo.pedrojoya.pr004.ui.main.MainActivity;
 
 import org.junit.Rule;
 import org.junit.Test;

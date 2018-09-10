@@ -2,8 +2,8 @@ package es.iessaladillo.pedrojoya.pr105.ui.detail
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
 import es.iessaladillo.pedrojoya.pr105.R
+import es.iessaladillo.pedrojoya.pr105.extensions.snackbar
 import kotlinx.android.synthetic.main.activity_detail.*
 
 
@@ -26,8 +26,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun showMessage() {
-        Snackbar.make(nestedScrollView!!, R.string.detail_activity_fab_clicked, Snackbar.LENGTH_SHORT)
-                .show()
+        fab.snackbar(getString(R.string.detail_activity_fab_clicked))
     }
 
     override fun onSupportNavigateUp(): Boolean {

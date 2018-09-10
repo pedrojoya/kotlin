@@ -8,27 +8,27 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.*
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import es.iessaladillo.pedrojoya.pr211.App
 import es.iessaladillo.pedrojoya.pr211.R
 import es.iessaladillo.pedrojoya.pr211.data.Repository
 import es.iessaladillo.pedrojoya.pr211.data.RepositoryImpl
 import es.iessaladillo.pedrojoya.pr211.data.model.Student
-import es.iessaladillo.pedrojoya.pr211.extensions.getViewModel
+import es.iessaladillo.pedrojoya.pr211.extensions.setOnSwipeRightListener
+import es.iessaladillo.pedrojoya.pr211.extensions.viewModelProvider
 import es.iessaladillo.pedrojoya.pr211.ui.student.StudentActivity
 import kotlinx.android.synthetic.main.fragment_main.*
 import java.lang.ref.WeakReference
 
 class MainFragment : Fragment() {
 
-    private val listAdapter: MainFragmentListAdapter by lazy { MainFragmentListAdapter() }
-    private lateinit var repository: Repository
-    private val viewModel: MainActivityViewModel by lazy {
-        requireActivity().getViewModel {
-            MainActivityViewModel(repository)
-        }
-    }
+    private val listAdapter: MainFragmentAdapter by lazy { MainFragmentAdapter() }
+    private val repository: Repository by lazy { RepositoryImpl(App.database.studentDao()) }
+    private val viewModel: MainFragmentViewModel by viewModelProvider { MainFragmentViewModel(repository) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? =
@@ -36,14 +36,13 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        repository = RepositoryImpl(App.database.studentDao())
         initViews()
     }
 
     private fun initViews() {
         setupFab()
         setupRecyclerView()
-        viewModel.getStudents().observe(requireActivity(), Observer<List<Student>> { students ->
+        viewModel.getStudents().observe(viewLifecycleOwner, Observer<List<Student>> { students ->
             if (students != null) {
                 // New data list for listAdapter (with automatic diffcallback calculations).
                 listAdapter.submitList(students)
@@ -63,20 +62,10 @@ class MainFragment : Fragment() {
                 setOnItemClickListener { _, student, _ -> editStudent(student) }
                 setEmptyView(lblEmptyView)
             }
-            layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+            layoutManager = LinearLayoutManager(requireActivity(), RecyclerView.VERTICAL, false)
             addItemDecoration(DividerItemDecoration(requireActivity(), LinearLayoutManager.VERTICAL))
             itemAnimator = DefaultItemAnimator()
-            ItemTouchHelper(
-                    object : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN,
-                            ItemTouchHelper.RIGHT) {
-                        override fun onMove(recyclerView: RecyclerView,
-                                            viewHolder: RecyclerView.ViewHolder, target:
-                                            RecyclerView.ViewHolder): Boolean = false
-
-                        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                            deleteStudent(viewHolder.adapterPosition)
-                        }
-                    }).attachToRecyclerView(this)
+            setOnSwipeRightListener { viewHolder -> deleteStudent(viewHolder.adapterPosition) }
         }
     }
 

@@ -2,27 +2,42 @@ package pedrojoya.iessaladillo.es.pr106.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
 import pedrojoya.iessaladillo.es.pr106.R
 import pedrojoya.iessaladillo.es.pr106.base.setOnItemClickListener
 import pedrojoya.iessaladillo.es.pr106.base.setOnItemLongClickListener
-import pedrojoya.iessaladillo.es.pr106.data.Database
+import pedrojoya.iessaladillo.es.pr106.data.local.Database
 import pedrojoya.iessaladillo.es.pr106.data.RepositoryImpl
-import pedrojoya.iessaladillo.es.pr106.data.Student
-import pedrojoya.iessaladillo.es.pr106.data.newFakeStudent
-import pedrojoya.iessaladillo.es.pr106.extensions.getViewModel
+import pedrojoya.iessaladillo.es.pr106.data.local.model.Student
+import pedrojoya.iessaladillo.es.pr106.data.local.newFakeStudent
 import pedrojoya.iessaladillo.es.pr106.extensions.snackbar
+import pedrojoya.iessaladillo.es.pr106.extensions.viewModelProvider
 
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: MainActivityViewModel
-    private lateinit var mAdapter: MainActivityAdapter
+    private val viewModel: MainActivityViewModel by viewModelProvider {
+        MainActivityViewModel(RepositoryImpl(Database))
+    }
+    private val listAdapter: MainActivityAdapter by lazy {
+        MainActivityAdapter(viewModel.students as ArrayList<Student>).apply {
+            setOnItemClickListener { view, position ->
+                snackbar(view, getString(R.string.main_activity_click_on_student, getItem(position).name))
+            }
+            setOnItemLongClickListener { _, position ->
+                viewModel.deleteStudent(getItem(position))
+                this.notifyItemRemoved(position)
+                true
+            }
+            emptyView = lblEmpty
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        viewModel = getViewModel { MainActivityViewModel(RepositoryImpl(Database)) }
         initViews()
     }
 
@@ -45,30 +60,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        mAdapter = MainActivityAdapter(viewModel.students as ArrayList<Student>).apply {
-            setOnItemClickListener { view, item, _, _ ->
-                snackbar(view, getString(R.string.main_activity_click_on_student, item.name))
-            }
-            setOnItemLongClickListener { _, item, position, _ ->
-                viewModel.deleteStudent(item)
-                this.notifyItemRemoved(position)
-                true
-            }
-            emptyView = lblEmpty
-        }
         lstStudents.run {
             setHasFixedSize(true)
-            adapter = mAdapter
-            layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this@MainActivity,
-                    androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+            adapter = listAdapter
+            layoutManager = LinearLayoutManager(this@MainActivity,
+                    RecyclerView.VERTICAL, false)
             itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
         }
     }
 
     private fun addStudent() {
         viewModel.addStudent(newFakeStudent())
-        mAdapter.notifyItemInserted(mAdapter.itemCount - 1)
-        lstStudents.scrollToPosition(mAdapter.itemCount - 1)
+        listAdapter.notifyItemInserted(listAdapter.itemCount - 1)
+        lstStudents.scrollToPosition(listAdapter.itemCount - 1)
     }
 
 }

@@ -1,0 +1,34 @@
+Proyectos con Picasso
+
+040
+048
+083
+105
+106
+138
+178
+194
+195
+201
+211
+212
+234
+
+
+Proyectos con getInstance
+
+082
+083
+140
+169
+180
+194
+195
+
+Proyectos con ItemTouchHelper
+
+100
+211
+212
+241
+242

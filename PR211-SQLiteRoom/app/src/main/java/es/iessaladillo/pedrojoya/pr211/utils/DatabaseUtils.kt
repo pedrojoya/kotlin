@@ -35,7 +35,7 @@ object DatabaseUtils {
                 }
                 line = reader.readLine()
             }
-        } catch (e: IOException) {
+        } catch (e: Exception) {
             Log.e("DatabaseUtils", "Error reading SQL file", e)
         } finally {
             if (reader != null) {

@@ -5,9 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import androidx.core.content.ContextCompat
-import com.squareup.picasso.Picasso
 import es.iessaladillo.pedrojoya.pr040.R
 import es.iessaladillo.pedrojoya.pr040.data.model.Student
+import es.iessaladillo.pedrojoya.pr040.extensions.loadUrl
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.activity_main_item.*
 import kotlin.properties.Delegates
@@ -44,8 +44,7 @@ class MainActivityAdapter(_data: List<Student> = listOf()) : BaseAdapter() {
                 lblGrade.text = grade
                 lblAge.text = lblAge.context.resources
                         .getQuantityString(R.plurals.main_activity_adapter_years, age, age)
-                Picasso.with(imgPhoto.context).load(photo).placeholder(
-                        R.drawable.placeholder).error(R.drawable.placeholder).into(imgPhoto)
+                imgPhoto.loadUrl(photo, R.drawable.placeholder, R.drawable.placeholder)
                 lblAge.setTextColor(
                         if (age < 18) ContextCompat.getColor(lblAge.context, R.color.accent)
                         else ContextCompat.getColor(lblAge.context, R.color.primary_text))

@@ -8,4 +8,5 @@
     <string name="activity_main_lblDarkVibrant">Vibrante oscuro</string>
     <string name="activity_main_lblLightMuted">Apagado claro</string>
     <string name="activity_main_lblDarkMuted">Apagado oscuro</string>
+    <string name="main_activity_error_loading_image">Error loading the picture</string>
 </resources>

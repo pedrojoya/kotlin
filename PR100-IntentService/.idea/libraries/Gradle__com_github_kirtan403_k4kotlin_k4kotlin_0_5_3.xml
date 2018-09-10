@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.kirtan403.k4kotlin:k4kotlin-0.5.3">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/k4kotlin-0.5.3.aar/40f4b08f67c50a225ec38bd14679bdae/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/k4kotlin-0.5.3.aar/40f4b08f67c50a225ec38bd14679bdae/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-k4kotlin-0.5.3.aar/f562ec2fe8fe8355e9b1bfffdf6f3bef/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-k4kotlin-0.5.3.aar/f562ec2fe8fe8355e9b1bfffdf6f3bef/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

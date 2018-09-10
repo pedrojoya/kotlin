@@ -35,13 +35,14 @@ Integer et sagittis dui. Donec a accumsan libero. Fusce cursus tincidunt purus, 
     <string name="option2_fragment_students">Students</string>
     <string name="option2_fragment_data">TextInput</string>
 
-    <string name="detail_activity_fab_clicked">Fab clicked</string>
+    <string name="detail_activity_fab_clicked">Fab clicked on Detail Activity</string>
 
     <string name="fragment_tab2_txtName">Name</string>
     <string name="fragment_tab2_txtPhone">Phone</string>
     <string name="fragment_tab2_txtAdress">Address</string>
 
-    <string name="option1_fragment_fab_clicked">Fab clicked on Option1Fragment</string>
+    <string name="option1_fragment_fab_clicked">Fab clicked on Option1</string>
     <string name="option2_tab1_fragment_fab_clicked">Fab clicked on Option2 Tab1</string>
+    <string name="option3_fragment_fab_clicked">Fragment clicked on Option3</string>
 
 </resources>

@@ -5,19 +5,17 @@ import android.widget.AbsListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import es.iessaladillo.pedrojoya.pr040.R
 import es.iessaladillo.pedrojoya.pr040.base.Event
 import es.iessaladillo.pedrojoya.pr040.base.RequestState
 import es.iessaladillo.pedrojoya.pr040.data.model.Student
+import es.iessaladillo.pedrojoya.pr040.extensions.viewModelProvider
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private val listAdapter: MainActivityAdapter by lazy { MainActivityAdapter() }
-    private val viewModel: MainActivityViewModel by lazy {
-        ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
-    }
+    private val viewModel: MainActivityViewModel by viewModelProvider()
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.students.observe(this, Observer{ request ->
             @Suppress("UNCHECKED_CAST")
             when (request) {
-                is RequestState.Loading -> swlPanel.isRefreshing = request.isLoading
+                is RequestState.Loading -> swlPanel.post { swlPanel.isRefreshing = request.isLoading }
                 is RequestState.Error -> showErrorLoadingStudents(request.exception)
                 is RequestState.Result<*> -> showStudents((request as RequestState.Result<List<Student>>).data)
             }

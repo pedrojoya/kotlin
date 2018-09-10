@@ -4,17 +4,18 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import es.iessaladillo.pedrojoya.pr156.DEFAULT_AGE
 import es.iessaladillo.pedrojoya.pr156.R
-import es.iessaladillo.pedrojoya.pr156.data.DEFAULT_AGE
-import es.iessaladillo.pedrojoya.pr156.data.Student
+import es.iessaladillo.pedrojoya.pr156.data.models.Student
 import es.iessaladillo.pedrojoya.pr156.ui.student.StudentActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-const val RC_STUDENT = 1
+private const val RC_STUDENT = 1
 
 class MainActivity : AppCompatActivity() {
 
-    private var student = Student("", DEFAULT_AGE)
+    // This should be preserved during configuration change (not explained yet)
+    private var student: Student = Student("", DEFAULT_AGE)
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

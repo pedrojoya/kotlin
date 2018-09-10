@@ -15,20 +15,19 @@ import es.iessaladillo.pedrojoya.pr211.data.Repository
 import es.iessaladillo.pedrojoya.pr211.data.RepositoryImpl
 import es.iessaladillo.pedrojoya.pr211.data.model.Student
 import es.iessaladillo.pedrojoya.pr211.extensions.checkValid
-import es.iessaladillo.pedrojoya.pr211.extensions.getViewModel
+import es.iessaladillo.pedrojoya.pr211.extensions.extraLong
 import es.iessaladillo.pedrojoya.pr211.extensions.onActionDone
+import es.iessaladillo.pedrojoya.pr211.extensions.viewModelProvider
 import kotlinx.android.synthetic.main.fragment_student.*
 import java.lang.ref.WeakReference
 
 class StudentFragment : Fragment() {
 
-    private val studentId: Long by lazy {
-        arguments?.getLong(EXTRA_STUDENT_ID, 0) ?: 0
+    private val studentId: Long by extraLong(EXTRA_STUDENT_ID)
+    private val repository: Repository by lazy { RepositoryImpl(App.database.studentDao()) }
+    private val viewModel: StudentFragmentViewModel by viewModelProvider {
+        StudentFragmentViewModel(repository)
     }
-    private val repository: Repository by lazy {
-        RepositoryImpl(App.database.studentDao())
-    }
-    private lateinit var viewModel: StudentActivityViewModel
 
     private fun isValidForm(): Boolean =
                     tilName.checkValid(getString(R.string.student_fragment_required_field)) &&
@@ -73,10 +72,7 @@ class StudentFragment : Fragment() {
     }
 
     private fun loadStudent(studentId: Long) {
-        viewModel = requireActivity().getViewModel {
-            StudentActivityViewModel(repository)
-        }
-        viewModel.getStudent(studentId).observe(requireActivity(), Observer<Student> { student ->
+        viewModel.getStudent(studentId).observe(viewLifecycleOwner, Observer<Student> { student ->
             if (student != null) showStudent(student)
             else showErrorLoadingStudentAndFinish()
         })

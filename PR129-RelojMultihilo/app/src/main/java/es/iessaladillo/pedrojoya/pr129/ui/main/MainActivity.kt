@@ -4,19 +4,18 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import es.iessaladillo.pedrojoya.pr129.R
-import es.iessaladillo.pedrojoya.pr129.extensions.getViewModel
+import es.iessaladillo.pedrojoya.pr129.extensions.viewModelProvider
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: MainActivityViewModel
+    private val viewModel: MainActivityViewModel by viewModelProvider()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        viewModel = getViewModel()
         initViews()
         viewModel.clockLiveData.observe(this, Observer<String> { updateTime(it) })
     }

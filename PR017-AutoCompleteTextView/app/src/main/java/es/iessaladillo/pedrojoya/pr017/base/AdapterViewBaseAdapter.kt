@@ -7,14 +7,14 @@ import androidx.annotation.LayoutRes
 import es.iessaladillo.pedrojoya.pr017.extensions.inflate
 
 abstract class AdapterViewBaseAdapter<T, VH>
-        protected constructor(protected var data: List<T>,
+        protected constructor(protected var data: List<T> = emptyList(),
                               @LayoutRes private val layoutResId: Int) : BaseAdapter() {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val itemView = convertView ?: parent.inflate(layoutResId)
         @Suppress("UNCHECKED_CAST")
-        val viewHolder: VH = convertView?.tag as? VH ?: onCreateViewHolder(itemView)
-        itemView.tag = viewHolder
+        val viewHolder: VH = convertView?.tag as? VH ?: onCreateViewHolder(itemView).also {
+            itemView.tag = it }
         onBindViewHolder(viewHolder, position)
         return itemView
     }

@@ -6,8 +6,8 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.0-alpha03'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.android.tools.build:gradle:3.3.0-alpha08'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.61"
     }
 }
 
@@ -21,6 +21,4 @@ allprojects {
 ext {
     compileSdkVersion = 28
     minSdkVersion = 21
-    androidstate_version = "1.3.1"
-    activitystarter_version = "1.11-beta"
 }

@@ -5,9 +5,9 @@ package es.iessaladillo.pedrojoya.pr212.extensions
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 
-fun TextView.onActionDone(action: () -> Unit) {
+fun TextView.onAction(imeActionId: Int = EditorInfo.IME_ACTION_DONE, action: () -> Unit) {
     setOnEditorActionListener { _, actionId, _ ->
-        if (actionId == EditorInfo.IME_ACTION_DONE) {
+        if (actionId == imeActionId) {
             action()
             true
         } else false

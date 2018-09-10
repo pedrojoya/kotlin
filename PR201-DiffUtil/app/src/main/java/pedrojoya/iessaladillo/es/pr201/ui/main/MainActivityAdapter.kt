@@ -1,57 +1,36 @@
 package pedrojoya.iessaladillo.es.pr201.ui.main
 
 import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.activity_main_item.*
+import kotlinx.android.synthetic.main.activity_main_item.view.*
 import pedrojoya.iessaladillo.es.pr201.R
-import pedrojoya.iessaladillo.es.pr201.base.BaseListAdapter
-import pedrojoya.iessaladillo.es.pr201.base.BaseViewHolder
-import pedrojoya.iessaladillo.es.pr201.data.Student
-import pedrojoya.iessaladillo.es.pr201.extensions.inflate
+import pedrojoya.iessaladillo.es.pr201.base.BaseAdapter
+import pedrojoya.iessaladillo.es.pr201.data.local.model.Student
 import pedrojoya.iessaladillo.es.pr201.extensions.loadUrl
 
-class MainActivityAdapter(data: List<Student>) : BaseListAdapter<Student, ViewHolder>(data) {
+class MainActivityAdapter(data: List<Student>) :
+        BaseAdapter<Student>(data, R.layout.activity_main_item, diffUtilItemCallback) {
 
-    class DiffStudentsCallback(private val oldStudents: List<Student>, private val newStudents: List<Student>) : DiffUtil.Callback() {
-
-        override fun getOldListSize(): Int = oldStudents.size
-
-        override fun getNewListSize(): Int = newStudents.size
-
-        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-                oldStudents[oldItemPosition].id == newStudents[newItemPosition].id
-
-        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-                oldStudents[oldItemPosition].name == newStudents[newItemPosition].name &&
-                oldStudents[oldItemPosition].address == newStudents[newItemPosition].address
-
-    }
-
-    override fun submitList(newList: List<Student>) {
-        val diffResult = DiffUtil.calculateDiff(
-                DiffStudentsCallback(data, newList))
-        data = newList
-        diffResult.dispatchUpdatesTo(this)
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-            ViewHolder(parent.inflate(R.layout.activity_main_item), this)
-
-}
-
-class ViewHolder(override val containerView: View, adapter: MainActivityAdapter) :
-        BaseViewHolder<Student>(containerView, adapter), LayoutContainer {
-
-
-    override fun bind(item: Student) {
-        with(item) {
+    override fun View.bind(item: Student) {
+        item.run {
             lblName.text = name
             lblAddress.text = address
-            imgAvatar.loadUrl(photoUrl, R.drawable.ic_person_black_24dp, R.drawable
-                    .ic_person_black_24dp)
+            imgAvatar.loadUrl(photoUrl, R.drawable.ic_person_black_24dp, R.drawable.ic_person_black_24dp)
         }
+    }
+
+    companion object {
+
+        private val diffUtilItemCallback = object : DiffUtil.ItemCallback<Student>() {
+            override fun areItemsTheSame(oldItem: Student, newItem: Student): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: Student, newItem: Student): Boolean {
+                return oldItem == newItem
+            }
+        }
+
     }
 
 }

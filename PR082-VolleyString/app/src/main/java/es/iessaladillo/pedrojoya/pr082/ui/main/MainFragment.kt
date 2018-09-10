@@ -20,7 +20,7 @@ class MainFragment : Fragment() {
 
     private val viewModel: MainFragmentViewModel by lazy {
         getViewModel {
-            MainFragmentViewModel(VolleyInstance.getInstance(requireContext()).requestQueue)
+            MainFragmentViewModel(VolleyInstance.getInstance(requireContext().applicationContext).requestQueue)
         }
     }
 

@@ -4,26 +4,49 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
 import pedrojoya.iessaladillo.es.pr201.R
 import pedrojoya.iessaladillo.es.pr201.base.setOnItemClickListener
 import pedrojoya.iessaladillo.es.pr201.base.setOnItemLongClickListener
-import pedrojoya.iessaladillo.es.pr201.data.Database
 import pedrojoya.iessaladillo.es.pr201.data.RepositoryImpl
-import pedrojoya.iessaladillo.es.pr201.data.Student
-import pedrojoya.iessaladillo.es.pr201.extensions.getViewModel
+import pedrojoya.iessaladillo.es.pr201.data.local.Database
+import pedrojoya.iessaladillo.es.pr201.data.local.model.Student
+import pedrojoya.iessaladillo.es.pr201.extensions.viewModelProvider
 
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: MainActivityViewModel
-    private lateinit var mAdapter: MainActivityAdapter
+    private val viewModel: MainActivityViewModel by viewModelProvider {
+        MainActivityViewModel(RepositoryImpl(Database))
+    }
+    private val listAdapter: MainActivityAdapter by lazy {
+        MainActivityAdapter(ArrayList()).apply {
+            emptyView = lblEmptyView
+            setOnItemClickListener { _, position -> updateStudent(getItem(position)) }
+            setOnItemLongClickListener { _, position ->
+                deleteStudent(getItem(position))
+                true
+            }
+        }
+    }
+
+    private var currentStudents: List<Student>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        viewModel = getViewModel { MainActivityViewModel(RepositoryImpl(Database)) }
         initViews()
+        viewModel.students.observe(this, Observer { students ->
+            currentStudents = students
+            listAdapter.submitList(
+                    if (viewModel.order == 1) students.sortedBy { it.name }
+                    else students.sortedByDescending { it.name }
+            )
+        })
     }
 
     private fun initViews() {
@@ -45,27 +68,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        mAdapter = MainActivityAdapter(ArrayList()).apply {
-            emptyView = lblEmptyView
-            setOnItemClickListener { _, item, _, _ -> updateStudent(item) }
-            setOnItemLongClickListener { _, item, _, _ ->
-                deleteStudent(item)
-                true
-            }
-        }
         lstStudents.run {
             setHasFixedSize(true)
-            adapter = mAdapter
-            layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this@MainActivity,
-                    androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
-            itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
+            adapter = listAdapter
+            layoutManager = LinearLayoutManager(this@MainActivity,
+                    RecyclerView.VERTICAL, false)
+            itemAnimator = DefaultItemAnimator()
         }
-        mAdapter.submitList(viewModel.getStudents(false))
     }
 
     private fun addStudent() {
         viewModel.addStudent(Database.newFakeStudent())
-        mAdapter.submitList(viewModel.getStudents(true))
     }
 
     private fun updateStudent(student: Student) {
@@ -73,12 +86,10 @@ class MainActivity : AppCompatActivity() {
             name = reverseName()
         }
         viewModel.updateStudent(student, newStudent)
-        mAdapter.submitList(viewModel.getStudents(true))
     }
 
     private fun deleteStudent(student: Student) {
         viewModel.deleteStudent(student)
-        mAdapter.submitList(viewModel.getStudents(true))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -89,7 +100,12 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.mnuOrdenar) {
             viewModel.toggleOrder()
-            mAdapter.submitList(viewModel.getStudents(true))
+            currentStudents?.run {
+                listAdapter.submitList(
+                        if (viewModel.order == 1) currentStudents!!.sortedBy { it.name }
+                        else currentStudents!!.sortedByDescending { it.name }
+                )
+            }
         }
         return super.onOptionsItemSelected(item)
     }

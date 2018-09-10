@@ -33,19 +33,16 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.0.0-rc01'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.61"
+    implementation 'androidx.appcompat:appcompat:1.0.0-rc02'
     implementation 'com.google.android.material:material:1.0.0-rc01'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0-rc01'
-    implementation "com.facebook.stetho:stetho:$rootProject.ext.stetho_version"
-    implementation "com.amulyakhare:com.amulyakhare.textdrawable:$rootProject.ext.textdrawable_version"
-    implementation "de.hdodenhof:circleimageview:$rootProject.ext.circleimageview_version"
-    implementation "com.squareup.picasso:picasso:$rootProject.ext.picasso_version"
+    implementation 'androidx.recyclerview:recyclerview:1.0.0-rc02'
+    implementation 'androidx.fragment:fragment-ktx:1.0.0-rc02'
+    implementation "com.facebook.stetho:stetho:1.5.0"
+    implementation "com.amulyakhare:com.amulyakhare.textdrawable:1.0.1"
+    implementation "de.hdodenhof:circleimageview:2.2.0"
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-rc01'
     implementation 'androidx.room:room-runtime:2.0.0-rc01'
     kapt 'androidx.room:room-compiler:2.0.0-rc01'
-}
-repositories {
-    mavenCentral()
 }

@@ -20,24 +20,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "androidx.core:core-ktx:1.0.0-beta01"
+    implementation 'androidx.appcompat:appcompat:1.0.0-rc02'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.61"
+    implementation "androidx.core:core-ktx:1.0.0-rc02"
 
-    testImplementation "junit:junit:$rootProject.ext.junit_version"
+    testImplementation "junit:junit:4.12"
 
-    androidTestImplementation 'androidx.annotation:annotation:1.0.0-beta01'
+    androidTestImplementation 'androidx.annotation:annotation:1.0.0-rc02'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
-    androidTestImplementation 'androidx.annotation:annotation:1.0.0-beta01'
+    androidTestImplementation 'androidx.annotation:annotation:1.0.0-rc02'
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.1.0-alpha4'
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
     androidTestImplementation 'androidx.test:rules:1.1.0-alpha4'

@@ -11,10 +11,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import androidx.recyclerview.widget.*
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
 import com.livinglifetechway.quickpermissions_kotlin.util.QuickPermissionsOptions
+import es.iessaladillo.pedrojoya.pr100.extensions.setOnSwipeRightListener
 import es.iessaladillo.pedrojoya.pr241.BuildConfig
 import es.iessaladillo.pedrojoya.pr241.R
 import es.iessaladillo.pedrojoya.pr241.services.ACTION_EXPORTED
@@ -62,21 +66,10 @@ class MainActivity : AppCompatActivity() {
         lstStudents.run {
             setHasFixedSize(true)
             adapter = listAdapter
-            layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
+            layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
             itemAnimator = DefaultItemAnimator()
             addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL))
-            val itemTouchHelper = ItemTouchHelper(
-                    object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
-
-                        override fun onMove(recyclerView: RecyclerView,
-                                            viewHolder: RecyclerView.ViewHolder, target:
-                                            RecyclerView.ViewHolder): Boolean = false
-
-                        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                            deleteStudent(viewHolder.adapterPosition)
-                        }
-                    })
-            itemTouchHelper.attachToRecyclerView(this)
+            setOnSwipeRightListener { viewHolder ->  deleteStudent(viewHolder.adapterPosition) }
         }
     }
 

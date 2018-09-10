@@ -3,6 +3,7 @@ package es.iessaladillo.pedrojoya.pr002;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
+import es.iessaladillo.pedrojoya.pr002.ui.main.MainActivity;
 
 import org.junit.Rule;
 import org.junit.Test;

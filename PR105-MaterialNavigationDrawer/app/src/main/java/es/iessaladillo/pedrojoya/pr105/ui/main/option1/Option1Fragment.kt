@@ -3,13 +3,13 @@ package es.iessaladillo.pedrojoya.pr105.ui.main.option1
 
 import android.content.Context
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import es.iessaladillo.pedrojoya.pr105.R
 import es.iessaladillo.pedrojoya.pr105.base.OnToolbarAvailableListener
+import es.iessaladillo.pedrojoya.pr105.extensions.snackbar
 import kotlinx.android.synthetic.main.fragment_option1.*
 
 
@@ -36,8 +36,7 @@ class Option1Fragment : Fragment() {
     }
 
     private fun showMessage() {
-        Snackbar.make(fab, R.string.option1_fragment_fab_clicked, Snackbar.LENGTH_SHORT)
-                .show()
+        fab.snackbar(R.string.option1_fragment_fab_clicked)
     }
 
     private fun setupToolbar() {

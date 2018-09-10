@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import es.iessaladillo.pedrojoya.pr049.R
-import es.iessaladillo.pedrojoya.pr049.extensions.getViewModel
 import es.iessaladillo.pedrojoya.pr049.extensions.inLandscape
 import kotlinx.android.synthetic.main.fragment_main.*
 
@@ -18,7 +18,9 @@ class MainFragment : Fragment() {
 
     private var listener: Callback? = null
 
-    private lateinit var viewModel: MainActivityViewModel
+    private val viewModel: MainActivityViewModel by lazy {
+        ViewModelProviders.of(requireActivity()).get(MainActivityViewModel::class.java)
+    }
 
     interface Callback {
         fun onItemSelected(item: String)
@@ -31,9 +33,9 @@ class MainFragment : Fragment() {
     override fun onAttach(activity: Context?) {
         super.onAttach(activity)
         try {
-            listener = activity as Callback?
+            listener = activity as Callback
         } catch (e: ClassCastException) {
-            throw ClassCastException(activity!!.toString() + " must implement fragment callback")
+            throw ClassCastException(activity!!::class.java.simpleName + " must implement fragment callback")
         }
 
     }
@@ -45,12 +47,11 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = requireActivity().getViewModel()
         initViews()
     }
 
     private fun initViews() {
-        val itemLayout = if (requireContext().inLandscape())
+        val itemLayout = if (inLandscape())
             android.R.layout.simple_list_item_activated_1
         else
             android.R.layout.simple_list_item_1
@@ -73,7 +74,7 @@ class MainFragment : Fragment() {
     }
 
     private fun selectItem(position: Int) {
-        with(lstItems) {
+        lstItems.run {
             if (position >= 0) {
                 setItemChecked(position, true)
                 setSelection(position)
@@ -85,9 +86,7 @@ class MainFragment : Fragment() {
 
     companion object {
 
-        fun newInstance(): MainFragment {
-            return MainFragment()
-        }
+        fun newInstance(): MainFragment = MainFragment()
 
     }
 

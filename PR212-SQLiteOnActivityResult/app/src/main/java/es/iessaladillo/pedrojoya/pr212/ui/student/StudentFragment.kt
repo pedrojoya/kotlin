@@ -4,13 +4,14 @@ import android.app.Activity
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import es.iessaladillo.pedrojoya.pr212.R
 import es.iessaladillo.pedrojoya.pr212.data.Repository
 import es.iessaladillo.pedrojoya.pr212.data.RepositoryImpl
@@ -18,35 +19,34 @@ import es.iessaladillo.pedrojoya.pr212.data.local.DbHelper
 import es.iessaladillo.pedrojoya.pr212.data.local.StudentDao
 import es.iessaladillo.pedrojoya.pr212.data.model.Student
 import es.iessaladillo.pedrojoya.pr212.extensions.checkValid
-import es.iessaladillo.pedrojoya.pr212.extensions.onActionDone
+import es.iessaladillo.pedrojoya.pr212.extensions.extraLong
+import es.iessaladillo.pedrojoya.pr212.extensions.onAction
 import es.iessaladillo.pedrojoya.pr212.extensions.toast
 import kotlinx.android.synthetic.main.fragment_student.*
 import java.lang.ref.WeakReference
 
 class StudentFragment : Fragment() {
 
-    private lateinit var fab: FloatingActionButton
-    private val studentId: Long by lazy {
-        arguments?.getLong(EXTRA_STUDENT_ID, 0) ?: 0
+    private val fab: FloatingActionButton by lazy {
+        ActivityCompat.requireViewById<FloatingActionButton>(requireActivity(), R.id.fab)
     }
-    private lateinit var repository: Repository
+    private val studentId: Long by extraLong(EXTRA_STUDENT_ID)
+    private val repository: Repository by lazy {
+        RepositoryImpl(StudentDao(requireContext(), DbHelper.getInstance(requireContext().applicationContext)))
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_student, container, false)
-    }
+                              savedInstanceState: Bundle?): View? =
+        inflater.inflate(R.layout.fragment_student, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        repository = RepositoryImpl(StudentDao(requireContext(),
-                DbHelper.getInstance(requireContext().applicationContext)))
         initViews()
     }
 
     private fun initViews() {
-        fab = requireActivity().findViewById(R.id.fab)
         fab.setOnClickListener { saveStudent() }
-        txtAddress.onActionDone {
+        txtAddress.onAction {
             saveStudent()
         }
         //loadGrades()

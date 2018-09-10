@@ -7,9 +7,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.*
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import es.iessaladillo.pedrojoya.pr212.R
 import es.iessaladillo.pedrojoya.pr212.data.Repository
@@ -17,7 +20,9 @@ import es.iessaladillo.pedrojoya.pr212.data.RepositoryImpl
 import es.iessaladillo.pedrojoya.pr212.data.local.DbHelper
 import es.iessaladillo.pedrojoya.pr212.data.local.StudentDao
 import es.iessaladillo.pedrojoya.pr212.data.model.Student
+import es.iessaladillo.pedrojoya.pr212.extensions.setOnSwipeRightListener
 import es.iessaladillo.pedrojoya.pr212.extensions.toast
+import es.iessaladillo.pedrojoya.pr212.extensions.viewModelProvider
 import es.iessaladillo.pedrojoya.pr212.ui.student.StudentActivity
 import kotlinx.android.synthetic.main.fragment_main.*
 import java.lang.ref.WeakReference
@@ -27,22 +32,28 @@ private const val RC_EDIT_STUDENT = 2
 
 class MainFragment : Fragment() {
 
-    private lateinit var fab: FloatingActionButton
-    private lateinit var listAdapter: MainFragmentAdapter
-    private lateinit var repository: Repository
-    private lateinit var viewModel: MainActivityViewModel
+    private val fab: FloatingActionButton by lazy {
+        ActivityCompat.requireViewById<FloatingActionButton>(requireActivity(), R.id.fab)
+    }
+    private val listAdapter: MainFragmentAdapter by lazy {
+        MainFragmentAdapter().apply {
+            setOnItemClickListener { _, student, _ -> editStudent(student) }
+            setEmptyView(lblEmptyView)
+        }
+    }
+    private val repository: Repository by lazy {
+        RepositoryImpl(StudentDao(requireContext(), DbHelper.getInstance(requireContext())))
+    }
+    private val viewModel: MainFragmentViewModel by viewModelProvider {
+        MainFragmentViewModel(RepositoryImpl(StudentDao(requireContext(), DbHelper.getInstance(requireContext()))))
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_main, container, false)
-    }
+                              savedInstanceState: Bundle?): View? =
+            inflater.inflate(R.layout.fragment_main, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        repository = RepositoryImpl(StudentDao(requireContext(), DbHelper
-                .getInstance(requireContext())))
-        viewModel = ViewModelProviders.of(requireActivity(),
-                MainActivityViewModelFactory(repository)).get(MainActivityViewModel::class.java)
         initViews()
         if (savedInstanceState != null) {
             listAdapter.setData(viewModel.getStudents(false))
@@ -57,36 +68,19 @@ class MainFragment : Fragment() {
     }
 
     private fun setupFab() {
-        fab = requireActivity().findViewById(R.id.fab)
         fab.setOnClickListener { addStudent() }
     }
 
     private fun setupRecyclerView() {
-        listAdapter = MainFragmentAdapter().apply {
-            setOnItemClickListener {_, student, _ -> editStudent(student) }
-            setEmptyView(lblEmptyView)
-        }
         lstStudents.run {
             setHasFixedSize(true)
             adapter = listAdapter
-            layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL,
+            layoutManager = LinearLayoutManager(requireActivity(), RecyclerView.VERTICAL,
                     false)
             addItemDecoration(DividerItemDecoration(requireActivity(),
                     LinearLayoutManager.VERTICAL))
             itemAnimator = DefaultItemAnimator()
-            val itemTouchHelper = ItemTouchHelper(
-                    object : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN,
-                            ItemTouchHelper.RIGHT) {
-                        override fun onMove(recyclerView: RecyclerView,
-                                            viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
-                            return false
-                        }
-
-                        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                            deleteStudent(viewHolder.adapterPosition)
-                        }
-                    })
-            itemTouchHelper.attachToRecyclerView(this)
+            setOnSwipeRightListener { viewHolder ->  deleteStudent(viewHolder.adapterPosition) }
         }
     }
 
@@ -129,7 +123,7 @@ class MainFragment : Fragment() {
         }
     }
 
-    private class LoadStudentsTask internal constructor(mainFragment: MainFragment, private val viewModel: MainActivityViewModel) : AsyncTask<Void, Void, List<Student>>() {
+    private class LoadStudentsTask(mainFragment: MainFragment, private val viewModel: MainFragmentViewModel) : AsyncTask<Void, Void, List<Student>>() {
 
         private val mainFragmentWeakReference: WeakReference<MainFragment> = WeakReference(mainFragment)
 
@@ -143,8 +137,7 @@ class MainFragment : Fragment() {
 
     }
 
-    private class DeleteStudentTask internal constructor(mainFragment: MainFragment,
-                                                         private val repository: Repository) :
+    private class DeleteStudentTask(mainFragment: MainFragment, private val repository: Repository) :
             AsyncTask<Student, Void, Boolean>() {
 
         private val mainFragmentWeakReference = WeakReference(mainFragment)
@@ -167,9 +160,7 @@ class MainFragment : Fragment() {
 
     companion object {
 
-        fun newInstance(): MainFragment {
-            return MainFragment()
-        }
+        fun newInstance(): MainFragment = MainFragment()
 
     }
 

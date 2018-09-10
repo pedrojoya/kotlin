@@ -8,6 +8,8 @@ import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 import androidx.core.content.ContextCompat;
+import es.iessaladillo.pedrojoya.pr008.ui.main.MainActivity;
+
 import android.view.View;
 import android.widget.TextView;
 

@@ -3,12 +3,13 @@ package es.iessaladillo.pedrojoya.pr105.ui.main.option3
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import es.iessaladillo.pedrojoya.pr105.R
 import es.iessaladillo.pedrojoya.pr105.base.OnToolbarAvailableListener
+import es.iessaladillo.pedrojoya.pr105.extensions.snackbar
 import kotlinx.android.synthetic.main.fragment_option3.*
 
 
@@ -28,7 +29,17 @@ class Option3Fragment : Fragment() {
     private fun initViews() {
         setupToolbar()
         setupCollapsingToolbar()
+        setupFab()
     }
+
+    private fun setupFab() {
+        fab.setOnClickListener { showMessage() }
+    }
+
+    private fun showMessage() {
+        fab.snackbar(R.string.option3_fragment_fab_clicked)
+    }
+
 
     private fun setupCollapsingToolbar() {
         collapsingToolbar.title = getString(R.string.activity_main_option3)

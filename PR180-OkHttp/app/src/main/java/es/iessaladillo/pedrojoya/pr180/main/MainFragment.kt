@@ -12,14 +12,14 @@ import es.iessaladillo.pedrojoya.pr180.R
 import es.iessaladillo.pedrojoya.pr180.base.Event
 import es.iessaladillo.pedrojoya.pr180.base.RequestState
 import es.iessaladillo.pedrojoya.pr180.data.remote.HttpClient
-import es.iessaladillo.pedrojoya.pr180.extensions.getViewModel
+import es.iessaladillo.pedrojoya.pr180.extensions.viewModelProvider
 import es.iessaladillo.pedrojoya.pr180.utils.hideSoftKeyboard
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {
 
-    private val viewModel: MainActivityViewModel by lazy {
-        getViewModel { MainActivityViewModel(HttpClient.getInstance(context!!)) }
+    private val viewModel: MainActivityViewModel by viewModelProvider {
+        MainActivityViewModel(HttpClient.getInstance(requireContext().applicationContext))
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -77,6 +77,7 @@ class MainFragment : Fragment() {
             when (echoRequest) {
                 is RequestState.Error -> showErrorRequestingEcho(echoRequest)
                 is RequestState.Result<*> -> {
+                    @Suppress("UNCHECKED_CAST")
                     val echoResult = echoRequest as RequestState.Result<Event<String>>
                     val result = echoResult.data.getContentIfNotHandled()
                     if (result != null) {

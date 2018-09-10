@@ -17,16 +17,16 @@ private const val RC_DIALOG_FRAGMENT = 1
 
 class MainFragment : Fragment(), YesNoDialogFragment.Listener {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_main, container, false)
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? =
+        inflater.inflate(R.layout.fragment_main, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        initViews(view)
+        initViews()
     }
 
-    private fun initViews(view: View?) {
+    private fun initViews() {
         btnDelete.setOnClickListener { showConfirmationDialog() }
     }
 

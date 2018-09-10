@@ -14,3 +14,6 @@ inline fun Fragment.toast(@StringRes resId: Int, duration: Int = Toast.LENGTH_SH
     return requireContext().toast(resId, duration)
 }
 
+fun Fragment.extraString(extraId: String, default: String = "") =
+        lazy { arguments?.getString(extraId) ?: default }
+

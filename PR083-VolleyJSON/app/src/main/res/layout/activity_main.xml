@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:id="@+id/swlPanel"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ListView
+        android:id="@+id/lstStudents"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="@dimen/activity_main_lstStudents_dividerHeight"
+        android:padding="@dimen/activity_main_lstStudents_padding"
+        android:scrollbarStyle="outsideOverlay"/>
+
+    <TextView
+        android:id="@+id/lblEmptyView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/activity_main_lblEmptyView"/>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

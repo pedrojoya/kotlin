@@ -1,9 +1,9 @@
 package es.iessaladillo.pedrojoya.pr212.base
 
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
 import android.view.View
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 
 
 abstract class RecyclerListAdapter<M, V : RecyclerListAdapter<M, V>.ViewHolder>(
@@ -65,23 +65,15 @@ abstract class RecyclerListAdapter<M, V : RecyclerListAdapter<M, V>.ViewHolder>(
     abstract inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         init {
-            if (onItemClickListener != null) {
-                itemView.setOnClickListener(
-                        { v ->
-                            onItemClickListener!!.onItemClick(
-                                    this@RecyclerListAdapter, v,
-                                    getItem(adapterPosition),
-                                    adapterPosition, itemId)
-                        })
+            onItemClickListener?.run {
+                itemView.setOnClickListener { v ->
+                    onItemClick(this@RecyclerListAdapter, v, getItem(adapterPosition), adapterPosition, itemId)
+                }
             }
-            if (onItemLongClickListener != null) {
-                itemView.setOnLongClickListener(
-                        { v ->
-                            onItemLongClickListener!!.onItemLongClick(
-                                    this@RecyclerListAdapter, v,
-                                    getItem(adapterPosition), adapterPosition,
-                                    itemId)
-                        })
+            onItemLongClickListener?.run {
+                itemView.setOnLongClickListener { v ->
+                    onItemLongClick(this@RecyclerListAdapter, v, getItem(adapterPosition), adapterPosition, itemId)
+                }
             }
         }
 

@@ -1,4 +1,5 @@
 @file:JvmName("TextViewExt")
+@file:Suppress("unused")
 
 package es.iessaladillo.pedrojoya.pr005.extensions
 

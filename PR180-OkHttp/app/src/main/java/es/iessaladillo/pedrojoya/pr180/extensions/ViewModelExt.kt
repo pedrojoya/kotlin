@@ -6,11 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 
-inline fun <reified T : ViewModel> Fragment.getViewModel(crossinline creator: () -> T): T {
-    return ViewModelProviders.of(this, object : ViewModelProvider.Factory {
-        @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return creator() as T
+inline fun <reified T : ViewModel> Fragment.viewModelProvider(crossinline creator: () ->
+T) =
+        lazy {
+            ViewModelProviders.of(this, object : ViewModelProvider.Factory {
+                @Suppress("UNCHECKED_CAST")
+                override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                    return creator() as T
+                }
+            }).get(T::class.java)
         }
-    }).get(T::class.java)
-}

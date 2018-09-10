@@ -10,7 +10,7 @@
     tools:ignore="UseCompoundDrawables">
 
     <ImageView
-        android:id="@+id/imgFlag"
+        android:id="@+id/imgFlagCollapsed"
         android:layout_width="@dimen/activity_main_item_imgFlag_width"
         android:layout_height="match_parent"
         android:layout_marginEnd="@dimen/activity_main_item_imgFlag_marginRight"
@@ -18,7 +18,7 @@
         tools:src="@sample/countries.json/countries/flag"/>
 
     <TextView
-        android:id="@+id/lblName"
+        android:id="@+id/lblNameCollapsed"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="center_vertical"

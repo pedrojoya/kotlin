@@ -49,3 +49,10 @@ fun newSearchInMapIntent(text: String) = Intent(Intent.ACTION_VIEW, Uri.parse("g
 fun newContactsIntent() = Intent(Intent.ACTION_VIEW, Uri.parse("content://contacts/people/"))
 
 fun newCallIntent(phoneNumber: String) = Intent(Intent.ACTION_CALL, Uri.parse("tel:$phoneNumber"))
+
+fun Activity.extraString(extraId: String, default: String = "") =
+    lazy { intent?.getStringExtra(extraId) ?: default }
+
+fun Activity.extraString(extraId: String, @StringRes defaultStringResId: Int) =
+    lazy { intent?.getStringExtra(extraId) ?: getString(defaultStringResId) }
+

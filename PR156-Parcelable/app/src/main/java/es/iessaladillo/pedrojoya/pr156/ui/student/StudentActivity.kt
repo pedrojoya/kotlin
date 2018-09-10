@@ -6,18 +6,17 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
+import es.iessaladillo.pedrojoya.pr156.DEFAULT_AGE
 import es.iessaladillo.pedrojoya.pr156.R
-import es.iessaladillo.pedrojoya.pr156.data.DEFAULT_AGE
-import es.iessaladillo.pedrojoya.pr156.data.Student
+import es.iessaladillo.pedrojoya.pr156.data.models.Student
+import es.iessaladillo.pedrojoya.pr156.extensions.extra
 import kotlinx.android.synthetic.main.activity_student.*
 
 private const val EXTRA_STUDENT = "EXTRA_STUDENT"
 
 class StudentActivity : AppCompatActivity() {
 
-    private val student by lazy {
-        intent?.getParcelableExtra(EXTRA_STUDENT) ?: Student("", DEFAULT_AGE)
-    }
+    private val student by extra<Student>(EXTRA_STUDENT)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

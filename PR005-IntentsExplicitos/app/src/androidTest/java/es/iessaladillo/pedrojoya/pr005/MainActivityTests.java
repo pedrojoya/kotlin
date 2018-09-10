@@ -14,7 +14,7 @@ import androidx.test.InstrumentationRegistry;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.runner.AndroidJUnit4;
-import es.iessaladillo.pedrojoya.pr005.ui.MainActivity;
+import es.iessaladillo.pedrojoya.pr005.ui.main.MainActivity;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.clearText;

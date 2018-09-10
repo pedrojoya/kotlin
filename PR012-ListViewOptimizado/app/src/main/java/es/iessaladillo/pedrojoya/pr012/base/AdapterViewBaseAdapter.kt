@@ -1,19 +1,20 @@
 package es.iessaladillo.pedrojoya.pr012.base
 
-import androidx.annotation.LayoutRes
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import androidx.annotation.LayoutRes
 import es.iessaladillo.pedrojoya.pr012.extensions.inflate
 
 abstract class AdapterViewBaseAdapter<out T, VH>
-protected constructor(protected val data: List<T>,
+    constructor(private val data: List<T> = emptyList(),
                       @LayoutRes private val layoutResId: Int) : BaseAdapter() {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val itemView = convertView ?: parent.inflate(layoutResId)
-        val viewHolder: VH = convertView?.tag as? VH ?: onCreateViewHolder(itemView)
-        itemView.tag = viewHolder
+        @Suppress("UNCHECKED_CAST")
+        val viewHolder: VH = convertView?.tag as? VH ?: onCreateViewHolder(itemView).also {
+            itemView.tag = it }
         onBindViewHolder(viewHolder, position)
         return itemView
     }

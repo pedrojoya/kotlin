@@ -13,11 +13,11 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.edit
 import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
+import androidx.fragment.app.transaction
 import com.google.android.material.navigation.NavigationView
 import com.squareup.picasso.Picasso
 import es.iessaladillo.pedrojoya.pr105.R
 import es.iessaladillo.pedrojoya.pr105.base.OnToolbarAvailableListener
-import es.iessaladillo.pedrojoya.pr105.extensions.replaceFragment
 import es.iessaladillo.pedrojoya.pr105.ui.detail.DetailActivity
 import es.iessaladillo.pedrojoya.pr105.ui.main.option1.Option1Fragment
 import es.iessaladillo.pedrojoya.pr105.ui.main.option2.Option2Fragment
@@ -69,15 +69,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun showOption(itemId: Int, title: String, menuItem: MenuItem) {
         when (itemId) {
             R.id.mnuOption1 -> {
-                replaceFragment(R.id.flContent, Option1Fragment(), title)
+                supportFragmentManager.transaction { replace(R.id.flContent, Option1Fragment(), title) }
                 menuItem.isChecked = true
             }
             R.id.mnuOption2 -> {
-                replaceFragment(R.id.flContent, Option2Fragment(), title)
+                supportFragmentManager.transaction { replace(R.id.flContent, Option2Fragment(), title) }
                 menuItem.isChecked = true
             }
             R.id.mnuOption3 -> {
-                replaceFragment(R.id.flContent, Option3Fragment(), title)
+                supportFragmentManager.transaction { replace(R.id.flContent, Option3Fragment(), title) }
                 menuItem.isChecked = true
             }
             R.id.mnuDetail -> startActivity(Intent(this, DetailActivity::class.java))
@@ -85,8 +85,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean =
-        actionBarDrawerToggle?.onOptionsItemSelected(item) ?: super.onOptionsItemSelected(
-                item)
+        actionBarDrawerToggle?.onOptionsItemSelected(item) ?: super.onOptionsItemSelected(item)
 
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         showOption(menuItem.itemId, menuItem.title.toString(), menuItem)

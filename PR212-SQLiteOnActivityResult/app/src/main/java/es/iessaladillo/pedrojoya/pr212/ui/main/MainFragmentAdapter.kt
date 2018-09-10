@@ -65,7 +65,7 @@ class MainFragmentAdapter : RecyclerView.Adapter<MainFragmentAdapter.ViewHolder>
     }
 
     override fun onBindViewHolder(viewHolder: MainFragmentAdapter.ViewHolder, position: Int) {
-        viewHolder.bind(data!![position], position)
+        viewHolder.bind(data!![position])
     }
 
     override fun getItemCount(): Int = data?.size ?: 0
@@ -111,7 +111,7 @@ class MainFragmentAdapter : RecyclerView.Adapter<MainFragmentAdapter.ViewHolder>
     inner class ViewHolder(override val containerView: View) :
             RecyclerView.ViewHolder(containerView), LayoutContainer {
 
-        fun bind(student: Student, position: Int) {
+        fun bind(student: Student) {
             student.run {
                 lblName.text = name
                 lblGrade.text = grade
