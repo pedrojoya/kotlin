@@ -3,7 +3,6 @@ package pedrojoya.iessaladillo.es.pr229.ui.main
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -17,11 +16,9 @@ import pedrojoya.iessaladillo.es.pr229.data.RepositoryImpl
 import pedrojoya.iessaladillo.es.pr229.data.local.Database
 import pedrojoya.iessaladillo.es.pr229.data.local.model.Student
 import pedrojoya.iessaladillo.es.pr229.extensions.viewModelProvider
-import pedrojoya.iessaladillo.es.pr229.old.OnItemClickListener
-import pedrojoya.iessaladillo.es.pr229.old.OnItemLongClickListener
 
 
-class MainActivity : AppCompatActivity(), OnItemClickListener<Student>, OnItemLongClickListener<Student> {
+class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainActivityViewModel by viewModelProvider {
         MainActivityViewModel(RepositoryImpl(Database))
@@ -110,16 +107,6 @@ class MainActivity : AppCompatActivity(), OnItemClickListener<Student>, OnItemLo
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-
-    override fun onItemClick(view: View, item: Student, position: Int, id: Long) {
-        updateStudent(item)
-    }
-
-    override fun onItemLongClick(view: View, item: Student, position: Int, id: Long): Boolean {
-        deleteStudent(item)
-        return true
     }
 
 }

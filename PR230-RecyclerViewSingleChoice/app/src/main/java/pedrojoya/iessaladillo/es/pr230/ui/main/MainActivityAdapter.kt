@@ -28,7 +28,7 @@ class MainActivityAdapter : BaseListAdapter<Student, MainActivityAdapter.ViewHol
     }
 
     inner class ViewHolder(itemView: View) :
-            BaseViewHolder(itemView, getOnItemClickListener()), PositionalDetailsLookup.DetailsProvider {
+            BaseViewHolder(itemView, onItemClickListener), PositionalDetailsLookup.DetailsProvider {
 
         override fun getItemDetails(): ItemDetailsLookup.ItemDetails<Long> {
             return PositionalItemDetails(adapterPosition)

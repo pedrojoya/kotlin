@@ -1,27 +1,23 @@
 package pedrojoya.iessaladillo.es.pr201.base
 
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.extensions.LayoutContainer
 
 // Kotlin only supports automatic SAM conversions for Java interfaces.
 // So we create an extension function for conversion, maintaining compatibility
 // with Java.
-fun <M> BaseAdapter<M>.setOnItemClickListener(
+fun <M, VH: BaseViewHolder> BaseListAdapter<M, VH>.setOnItemClickListener(
         action: (View, Int) -> Unit) {
-    onItemClickListener = object: OnItemClickListener {
+    onItemClickListener = object: BaseListAdapter.OnItemClickListener {
         override fun onItemClick(view: View, position: Int) {
             action(view, position)
         }
     }
 }
-fun <M> BaseAdapter<M>.setOnItemLongClickListener(
+fun <M, VH: BaseViewHolder> BaseListAdapter<M, VH>.setOnItemLongClickListener(
         action: (View, Int) -> Boolean) {
-    onItemLongClickListener = object: OnItemLongClickListener {
+    onItemLongClickListener = object: BaseListAdapter.OnItemLongClickListener {
         override fun onItemLongClick(view: View, position: Int): Boolean {
             return action(view, position)
         }
@@ -31,11 +27,10 @@ fun <M> BaseAdapter<M>.setOnItemLongClickListener(
 
 // M is Model type.
 @Suppress("UNUSED")
-abstract class BaseAdapter<M>(
+abstract class BaseListAdapter<M, VH: BaseViewHolder>(
         private var data: List<M> = ArrayList(),
-        @LayoutRes private val layoutResId: Int,
         val diffUtilItemCallback: DiffUtil.ItemCallback<M>
-) : RecyclerView.Adapter<ViewHolder>() {
+) : RecyclerView.Adapter<VH>() {
 
     var onItemClickListener: OnItemClickListener? = null
 
@@ -92,41 +87,12 @@ abstract class BaseAdapter<M>(
 
     fun getItem(position: Int) = data[position]
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(layoutResId, parent, false)
-        val viewHolder = ViewHolder(itemView)
-        onItemClickListener?.let {
-            itemView.setOnClickListener { v ->
-                if (viewHolder.adapterPosition != RecyclerView.NO_POSITION) {
-                    it.onItemClick(v, viewHolder.adapterPosition)
-                }
-            }
-        }
-        onItemLongClickListener?.let {
-            itemView.setOnLongClickListener { v ->
-                if (viewHolder.adapterPosition != RecyclerView.NO_POSITION) {
-                    return@setOnLongClickListener it.onItemLongClick(v, viewHolder.adapterPosition)
-                }
-                false
-            }
-        }
-        return viewHolder
+    interface OnItemClickListener {
+        fun onItemClick(view: View, position: Int)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.itemView.bind(getItem(position))
+    interface OnItemLongClickListener {
+        fun onItemLongClick(view: View, position: Int): Boolean
     }
 
-    abstract fun View.bind(item: M)
-}
-
-class ViewHolder(override val containerView: View) :
-        RecyclerView.ViewHolder(containerView), LayoutContainer
-
-interface OnItemClickListener {
-    fun onItemClick(view: View, position: Int)
-}
-
-interface OnItemLongClickListener {
-    fun onItemLongClick(view: View, position: Int): Boolean
 }

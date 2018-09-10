@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import pedrojoya.iessaladillo.es.pr230.R
 import pedrojoya.iessaladillo.es.pr230.base.PositionalDetailsLookup
 import pedrojoya.iessaladillo.es.pr230.base.PositionalItemKeyProvider
+import pedrojoya.iessaladillo.es.pr230.base.setOnItemClickListener
 import pedrojoya.iessaladillo.es.pr230.data.RepositoryImpl
 import pedrojoya.iessaladillo.es.pr230.data.local.Database
 import pedrojoya.iessaladillo.es.pr230.data.local.model.Student

@@ -6,6 +6,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
+fun <M, VH: RecyclerView.ViewHolder> BaseListAdapter<M, VH>.setOnItemClickListener(action: (View, Int) -> Unit) {
+    onItemClickListener = object: BaseListAdapter.OnItemClickListener {
+        override fun onItemClick(view: View, position: Int) {
+            action(view, position)
+        }
+    }
+}
+
 abstract class BaseListAdapter<M, VH: RecyclerView.ViewHolder>(diffUtilItemCallback: DiffUtil.ItemCallback<M>) :
         ListAdapter<M, VH>(diffUtilItemCallback) {
 
@@ -15,21 +23,7 @@ abstract class BaseListAdapter<M, VH: RecyclerView.ViewHolder>(diffUtilItemCallb
             checkEmptyViewVisibility(itemCount)
         }
 
-    private var onItemClickListener: OnItemClickListener? = null
-
-    fun getOnItemClickListener() = onItemClickListener
-
-    fun setOnItemClickListener(listener: OnItemClickListener) {
-        onItemClickListener = listener
-    }
-
-    fun setOnItemClickListener(action: (View, Int) -> Unit) {
-        onItemClickListener = object: BaseListAdapter.OnItemClickListener {
-            override fun onItemClick(view: View, position: Int) {
-                action(view, position)
-            }
-        }
-    }
+    var onItemClickListener: OnItemClickListener? = null
 
     // El adaptador debe recibir el selectionTracker para que el ViewHolder pueda
     // saber el estado de selección del elemento.
