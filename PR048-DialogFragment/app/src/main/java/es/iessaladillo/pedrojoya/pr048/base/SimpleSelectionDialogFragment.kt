@@ -4,9 +4,12 @@ import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
-import androidx.fragment.app.DialogFragment
 import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
+import androidx.fragment.app.DialogFragment
+import es.iessaladillo.pedrojoya.pr048.extensions.extraCharSequenceArray
+import es.iessaladillo.pedrojoya.pr048.extensions.extraInt
+import es.iessaladillo.pedrojoya.pr048.extensions.extraString
 
 private const val ARG_TITLE = "ARG_TITLE"
 private const val ARG_ITEMS = "ARG_ITEMS"
@@ -16,18 +19,10 @@ private const val ARG_DEFAULT_SELECTED_INDEX = "ARG_DEFAULT_SELECTED_INDEX"
 class SimpleSelectionDialogFragment : DialogFragment() {
 
     private lateinit var listener: Listener
-    private val title by lazy {
-        arguments?.getString(ARG_TITLE) ?: ""
-    }
-    private val items: Array<CharSequence> by lazy {
-        arguments?.getCharSequenceArray(ARG_ITEMS) ?: arrayOf()
-    }
-    private val confirmText by lazy {
-        arguments?.getString(ARG_CONFIRM_TEXT) ?: ""
-    }
-    private val defaultSelectedIndex by lazy {
-        arguments?.getInt(ARG_DEFAULT_SELECTED_INDEX, 0) ?: 0
-    }
+    private val title by extraString(ARG_TITLE)
+    private val items: Array<CharSequence> by extraCharSequenceArray(ARG_ITEMS)
+    private val confirmText by extraString(ARG_CONFIRM_TEXT)
+    private val defaultSelectedIndex by extraInt(ARG_DEFAULT_SELECTED_INDEX)
     private var selectedIndex = 0
 
     interface Listener {

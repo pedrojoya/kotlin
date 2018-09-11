@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
 import pedrojoya.iessaladillo.es.pr231.base.PositionalDetailsLookup
 import pedrojoya.iessaladillo.es.pr231.base.PositionalItemKeyProvider
+import pedrojoya.iessaladillo.es.pr231.base.setOnItemClickListener
 import pedrojoya.iessaladillo.es.pr231.data.RepositoryImpl
 import pedrojoya.iessaladillo.es.pr231.data.local.Database
 import pedrojoya.iessaladillo.es.pr231.extensions.snackbar

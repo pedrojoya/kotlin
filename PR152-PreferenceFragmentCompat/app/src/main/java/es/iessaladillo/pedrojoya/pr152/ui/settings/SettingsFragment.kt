@@ -2,15 +2,15 @@ package es.iessaladillo.pedrojoya.pr152.ui.settings
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.preference.MultiSelectListPreference
 import androidx.appcompat.app.AppCompatActivity
-import androidx.preference.*
 import androidx.core.os.bundleOf
+import androidx.preference.*
 import es.iessaladillo.pedrojoya.pr152.R
 import es.iessaladillo.pedrojoya.pr152.extensions.getBoolean
 
 class SettingsFragment : PreferenceFragmentCompat(),
         SharedPreferences.OnSharedPreferenceChangeListener {
+
     private var preferenceScreenKey: String? = null
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -82,7 +82,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
             getString(R.string.prefSync_key) ->
                 preference.setIcon(
                         if (sharedPreferences.getBoolean(getString(R.string.prefSync_key),
-                                getBoolean(R.bool.prefSync_defaultValue)))
+                                requireContext().getBoolean(R.bool.prefSync_defaultValue)))
                             R.drawable.ic_sync_black_24dp
                         else
                             R.drawable.ic_sync_disabled_black_24dp
@@ -98,7 +98,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
             getString(R.string.prefNetworkMode_key) ->
                 preference.setIcon(
                         if (sharedPreferences.getBoolean(getString(R.string.prefNetworkMode_key),
-                                getBoolean(R.bool.prefNetworkMode_defaultValue)))
+                                requireContext().getBoolean(R.bool.prefNetworkMode_defaultValue)))
                             R.drawable.ic_signal_wifi_4_bar_black_24dp
                         else
                             R.drawable.ic_signal_wifi_off_black_24dp)

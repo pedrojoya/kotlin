@@ -3,16 +3,15 @@ package es.iessaladillo.pedrojoya.pr048.ui.main
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.DialogFragment
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.DialogFragment
 import es.iessaladillo.pedrojoya.pr048.R
-import es.iessaladillo.pedrojoya.pr048.data.Student
-import java.util.*
+import es.iessaladillo.pedrojoya.pr048.data.local.Database
+import es.iessaladillo.pedrojoya.pr048.data.local.model.Student
 
 class StudentsDialogFragment : DialogFragment() {
 
     private lateinit var listener: Callback
-    private val students = createStudentList()
 
     interface Callback {
         fun onListItemClick(dialog: DialogFragment, student: Student)
@@ -21,10 +20,10 @@ class StudentsDialogFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
             AlertDialog.Builder(requireActivity())
                     .setTitle(R.string.adapter_dialog_student)
-                    .setAdapter(StudentsDialogFragmentAdapter(students)) {
+                    .setAdapter(StudentsDialogFragmentAdapter(Database.students)) {
                         _, which ->
                             listener.onListItemClick(
-                                    this@StudentsDialogFragment, students[which])
+                                    this@StudentsDialogFragment, Database.students[which])
                     }
                     .create()
 
@@ -38,15 +37,5 @@ class StudentsDialogFragment : DialogFragment() {
         }
 
     }
-
-    private fun createStudentList() =
-            ArrayList<Student>().apply {
-                for (i in 0..4) {
-                    add(Student(
-                            "Student $i",
-                            "c/ Address, nº $i",
-                            "http://lorempixel.com/100/100/abstract/$i/"))
-                }
-            }
 
 }

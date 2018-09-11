@@ -3,9 +3,9 @@ package es.iessaladillo.pedrojoya.pr152.ui.main
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.preference.PreferenceManager
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import es.iessaladillo.pedrojoya.pr152.R
 import es.iessaladillo.pedrojoya.pr152.extensions.getBoolean
 import es.iessaladillo.pedrojoya.pr152.extensions.getInteger
@@ -16,13 +16,14 @@ import kotlinx.android.synthetic.main.activity_main_content.*
 
 class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
 
-    private lateinit var settings: SharedPreferences
+    private val settings: SharedPreferences by lazy {
+        PreferenceManager.getDefaultSharedPreferences(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initViews()
-        settings = PreferenceManager.getDefaultSharedPreferences(this)
         settings.registerOnSharedPreferenceChangeListener(this)
         showSettings()
     }
@@ -98,7 +99,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
     private fun buildSelectedShiftsString(): String =
             settings.getStringSet(getString(R.string.prefShifts_key),
-                mutableSetOf(*getStringArray(R.array.prefShifts_defaultValue)))
-                    .joinToString(", ")
+                    mutableSetOf(*getStringArray(R.array.prefShifts_defaultValue)))
+                    ?.joinToString(", ")?:""
 
 }

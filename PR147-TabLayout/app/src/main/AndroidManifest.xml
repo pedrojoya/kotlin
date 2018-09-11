@@ -12,7 +12,7 @@
         tools:ignore="GoogleAppIndexingWarning"
         android:fullBackupContent="@xml/backup_descriptor">
         <activity
-            android:name=".main.MainActivity"
+            android:name="es.iessaladillo.pedrojoya.pr147.ui.main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

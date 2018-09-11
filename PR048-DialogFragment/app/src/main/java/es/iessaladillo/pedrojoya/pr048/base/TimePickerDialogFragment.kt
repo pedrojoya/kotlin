@@ -5,8 +5,10 @@ import android.app.TimePickerDialog
 import android.app.TimePickerDialog.OnTimeSetListener
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.DialogFragment
 import androidx.core.os.bundleOf
+import androidx.fragment.app.DialogFragment
+import es.iessaladillo.pedrojoya.pr048.extensions.extraBoolean
+import es.iessaladillo.pedrojoya.pr048.extensions.extraInt
 import java.util.*
 
 private const val ARG_HOURS = "ARG_HOURS"
@@ -17,17 +19,9 @@ class TimePickerDialogFragment : DialogFragment() {
 
     private lateinit var listener: TimePickerDialog.OnTimeSetListener
     private val calendar by lazy { Calendar.getInstance() }
-    private val hours by lazy {
-        arguments?.getInt(ARG_HOURS, calendar.get(Calendar.HOUR_OF_DAY)) ?:
-        calendar.get(Calendar.HOUR_OF_DAY)
-    }
-    private val minutes by lazy {
-        arguments?.getInt(ARG_MINUTES, calendar.get(Calendar.MINUTE)) ?:
-        calendar.get(Calendar.MINUTE)
-    }
-    private val is24Hour by lazy {
-        arguments?.getBoolean(ARG_MINUTES, true) ?: true
-    }
+    private val hours by extraInt(ARG_HOURS, calendar.get(Calendar.HOUR_OF_DAY))
+    private val minutes by extraInt(ARG_MINUTES, calendar.get(Calendar.MINUTE))
+    private val is24Hour by extraBoolean(ARG_MINUTES, true)
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
             TimePickerDialog(requireActivity(), listener, hours, minutes, is24Hour)

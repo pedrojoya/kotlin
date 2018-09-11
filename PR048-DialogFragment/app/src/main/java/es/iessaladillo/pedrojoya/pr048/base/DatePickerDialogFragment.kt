@@ -5,8 +5,9 @@ import android.app.DatePickerDialog.OnDateSetListener
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.DialogFragment
 import androidx.core.os.bundleOf
+import androidx.fragment.app.DialogFragment
+import es.iessaladillo.pedrojoya.pr048.extensions.extraInt
 import java.util.*
 
 private const val ARG_YEAR = "ARG_YEAR"
@@ -17,18 +18,9 @@ class DatePickerDialogFragment : DialogFragment() {
 
     private lateinit var listener: DatePickerDialog.OnDateSetListener
     private val calendar by lazy { Calendar.getInstance() }
-    private val year by lazy {
-        arguments?.getInt(ARG_YEAR, calendar.get(Calendar.YEAR)) ?:
-        calendar.get(Calendar.YEAR)
-    }
-    private val month by lazy {
-        arguments?.getInt(ARG_MONTH, calendar.get(Calendar.MONTH)) ?:
-        calendar.get(Calendar.MONTH)
-    }
-    private val day by lazy {
-        arguments?.getInt(ARG_DAY, calendar.get(Calendar.DAY_OF_MONTH)) ?:
-        calendar.get(Calendar.DAY_OF_MONTH)
-    }
+    private val year by extraInt(ARG_YEAR, calendar.get(Calendar.YEAR))
+    private val month by extraInt(ARG_MONTH, calendar.get(Calendar.MONTH))
+    private val day by extraInt(ARG_DAY, calendar.get(Calendar.DAY_OF_MONTH))
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return DatePickerDialog(requireActivity(), listener, year, month, day)
@@ -62,6 +54,7 @@ class DatePickerDialogFragment : DialogFragment() {
         fun newInstance(): DatePickerDialogFragment {
             return DatePickerDialogFragment()
         }
+
     }
 
 }

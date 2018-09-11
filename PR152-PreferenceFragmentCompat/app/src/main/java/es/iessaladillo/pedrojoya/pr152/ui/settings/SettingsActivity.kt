@@ -4,11 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.transaction
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceScreen
 import es.iessaladillo.pedrojoya.pr152.R
-import es.iessaladillo.pedrojoya.pr152.extensions.findFragmentByTag
-import es.iessaladillo.pedrojoya.pr152.extensions.replaceFragment
+import es.iessaladillo.pedrojoya.pr152.extensions.extraString
 import kotlinx.android.synthetic.main.activity_settings.*
 
 private const val EXTRA_PREFERENCE_SCREEN_KEY = "EXTRA_PREFERENCE_SCREEN_KEY"
@@ -16,13 +16,12 @@ private const val TAG_PREFERENCE_FRAGMENT = "TAG_PREFERENCE_FRAGMENT"
 
 class SettingsActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPreferenceStartScreenCallback {
 
-    private var preferenceScreenKey: String? = null
+    private val preferenceScreenKey: String? by extraString(EXTRA_PREFERENCE_SCREEN_KEY, null)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
         initViews()
-        obtainIntentData()
         showPreferenceFragment()
     }
 
@@ -38,14 +37,11 @@ class SettingsActivity : AppCompatActivity(), PreferenceFragmentCompat.OnPrefere
         }
     }
 
-    private fun obtainIntentData() {
-        preferenceScreenKey = intent?.getStringExtra(EXTRA_PREFERENCE_SCREEN_KEY)
-    }
-
     private fun showPreferenceFragment() {
-        if (findFragmentByTag(TAG_PREFERENCE_FRAGMENT) == null) {
-            replaceFragment(R.id.flContent,
-                    SettingsFragment.newInstance(preferenceScreenKey))
+        if (supportFragmentManager.findFragmentByTag(TAG_PREFERENCE_FRAGMENT) == null) {
+            supportFragmentManager.transaction {
+                replace(R.id.flContent, SettingsFragment.newInstance(preferenceScreenKey))
+            }
         }
     }
 

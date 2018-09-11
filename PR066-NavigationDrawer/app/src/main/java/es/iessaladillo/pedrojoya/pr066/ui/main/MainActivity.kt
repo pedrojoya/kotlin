@@ -2,13 +2,13 @@ package es.iessaladillo.pedrojoya.pr066.ui.main
 
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.fragment.app.transaction
 import com.google.android.material.navigation.NavigationView
 import es.iessaladillo.pedrojoya.pr066.R
-import es.iessaladillo.pedrojoya.pr066.extensions.replaceFragment
+import es.iessaladillo.pedrojoya.pr066.extensions.toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main_appbar.*
 
@@ -54,8 +54,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.mnuOption1, R.id.mnuOption2, R.id.mnuOption3, R.id.mnuOption4 -> {
-                replaceFragment(R.id.flContent, MainFragment
-                        .newInstance(item.title.toString()))
+                supportFragmentManager.transaction {
+                    replace(R.id.flContent, MainFragment.newInstance(item.title.toString()))
+                }
                 item.isChecked = true
             }
             R.id.mnuOption5 -> showOption5Activity()
@@ -65,7 +66,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun showOption5Activity() {
-        Toast.makeText(this, R.string.main_activity_show_option5, Toast.LENGTH_SHORT).show()
+        toast(R.string.main_activity_show_option5)
     }
 
 }

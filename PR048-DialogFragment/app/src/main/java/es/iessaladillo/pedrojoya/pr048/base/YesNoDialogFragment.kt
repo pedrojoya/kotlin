@@ -8,6 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import es.iessaladillo.pedrojoya.pr048.R
+import es.iessaladillo.pedrojoya.pr048.extensions.extraString
 
 private const val ARG_TITLE = "ARG_TITLE"
 private const val ARG_MESSAGE = "ARG_MESSAGE"
@@ -17,18 +18,10 @@ private const val ARG_NO_TEXT = "ARG_NO_TEXT"
 class YesNoDialogFragment : DialogFragment() {
 
     private lateinit var listener: Listener
-    private val title by lazy {
-        arguments?.getString(ARG_TITLE) ?: resources.getString(R.string.confirm_dialog_title)
-    }
-    private val message by lazy {
-        arguments?.getString(ARG_MESSAGE) ?: resources.getString(R.string.confirm_dialog_message)
-    }
-    private val yesText by lazy {
-        arguments?.getString(ARG_YES_TEXT) ?: resources.getString(R.string.confirm_dialog_yes)
-    }
-    private val noText by lazy {
-        arguments?.getString(ARG_NO_TEXT) ?: resources.getString(R.string.confirm_dialog_no)
-    }
+    private val title by extraString(ARG_TITLE, R.string.confirm_dialog_title)
+    private val message by extraString(ARG_MESSAGE, R.string.confirm_dialog_message)
+    private val yesText by extraString(ARG_YES_TEXT, R.string.confirm_dialog_yes)
+    private val noText by extraString(ARG_NO_TEXT, R.string.confirm_dialog_no)
 
     interface Listener {
         fun onPositiveButtonClick(dialog: DialogInterface)

@@ -3,18 +3,19 @@ package es.iessaladillo.pedrojoya.pr235.ui.main;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import androidx.core.app.ActivityCompat;
-import androidx.collection.ArraySet;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.Arrays;
 import java.util.Set;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.collection.ArraySet;
+import androidx.core.app.ActivityCompat;
 import es.iessaladillo.pedrojoya.pr235.R;
 import es.iessaladillo.pedrojoya.pr235.ui.settings.SettingsActivity;
 

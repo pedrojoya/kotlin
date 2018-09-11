@@ -2,26 +2,23 @@ package es.iessaladillo.pedrojoya.pr235.ui.settings;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
+
+import com.takisoft.preferencex.EditTextPreference;
+import com.takisoft.preferencex.PreferenceCategory;
+import com.takisoft.preferencex.PreferenceFragmentCompat;
+
 import androidx.annotation.Nullable;
-import androidx.preference.MultiSelectListPreference;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.ListPreference;
+import androidx.preference.MultiSelectListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SeekBarPreference;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.takisoft.fix.support.v7.preference.EditTextPreference;
-import com.takisoft.fix.support.v7.preference.PreferenceCategory;
-import com.takisoft.fix.support.v7.preference.PreferenceFragmentCompatDividers;
-
 import es.iessaladillo.pedrojoya.pr235.R;
 
-public class SettingsFragment extends PreferenceFragmentCompatDividers implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class SettingsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private String preferenceScreenKey;
 
@@ -39,15 +36,6 @@ public class SettingsFragment extends PreferenceFragmentCompatDividers implement
         setPreferencesFromResource(R.xml.settings, rootKey);
         for (int i = 0; i < getPreferenceScreen().getPreferenceCount(); i++) {
             initSummary(getPreferenceScreen().getPreference(i));
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
-        try {
-            return super.onCreateView(inflater, container, savedInstanceState);
-        } finally {
-            setDividerPreferences(DIVIDER_PADDING_CHILD | DIVIDER_CATEGORY_AFTER_LAST | DIVIDER_CATEGORY_BETWEEN);
         }
     }
 

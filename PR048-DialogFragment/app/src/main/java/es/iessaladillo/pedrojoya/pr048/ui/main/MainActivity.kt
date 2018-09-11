@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import es.iessaladillo.pedrojoya.pr048.R
 import es.iessaladillo.pedrojoya.pr048.base.*
-import es.iessaladillo.pedrojoya.pr048.data.Student
+import es.iessaladillo.pedrojoya.pr048.data.local.model.Student
 import es.iessaladillo.pedrojoya.pr048.extensions.getStringArray
 import kotlinx.android.synthetic.main.activity_main.*
 
