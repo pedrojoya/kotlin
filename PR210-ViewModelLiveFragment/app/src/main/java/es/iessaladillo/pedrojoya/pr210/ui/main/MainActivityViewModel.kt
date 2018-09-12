@@ -8,14 +8,13 @@ import es.iessaladillo.pedrojoya.pr210.ui.detail.DetailFragmentBaseViewModel
 
 private const val STATE_ITEM = "STATE_ITEM"
 
-class MainActivityViewModel(val database: Database) : DetailFragmentBaseViewModel() {
+class MainActivityViewModel(database: Database) : DetailFragmentBaseViewModel() {
 
-    private var items: List<String> = Database.items
+    var items: List<String> = database.items
     private val _currentItem = MutableLiveData<String>()
+    override val currentItem: LiveData<String>
+        get() = _currentItem
 
-    override fun getCurrentItem(): LiveData<String> {
-        return _currentItem
-    }
 
     override fun setCurrentItem(item: String) {
         _currentItem.value = item

@@ -35,7 +35,7 @@ class MainActivity : DetailFragmentBaseActivity<MainActivityViewModel>() {
             }
         }
         viewModel.currentItem.observe(this, Observer{ item ->
-            if (inLandScape()) {
+            if (!inLandScape()) {
                 DetailActivity.start(this, item)
             }
         })
@@ -54,8 +54,7 @@ class MainActivity : DetailFragmentBaseActivity<MainActivityViewModel>() {
         viewModel.onRestoreInstanceState(savedInstanceState)
     }
 
-    override fun getViewModelClass(): Class<MainActivityViewModel> {
-        return MainActivityViewModel::class.java
-    }
+    override val viewModelClass: Class<MainActivityViewModel>
+        get() = MainActivityViewModel::class.java
 
 }

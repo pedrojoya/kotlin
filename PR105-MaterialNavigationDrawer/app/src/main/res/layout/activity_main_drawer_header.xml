@@ -9,6 +9,7 @@
     android:paddingStart="@dimen/activity_main_drawer_rlDrawerHeaderRoot_padding"
     android:paddingEnd="@dimen/activity_main_drawer_rlDrawerHeaderRoot_padding"
     android:paddingBottom="@dimen/activity_main_drawer_rlDrawerHeaderRoot_padding"
+    android:fitsSystemWindows="true"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     tools:ignore="Overdraw">
 

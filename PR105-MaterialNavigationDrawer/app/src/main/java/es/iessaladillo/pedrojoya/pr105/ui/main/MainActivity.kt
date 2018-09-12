@@ -114,6 +114,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return sharedPref.getBoolean(PREF_NAV_DRAWER_OPENED, false)
     }
 
+    // Fragment sends toolbar and title to activity so it can setup it.
     override fun onToolbarAvailable(toolbar: Toolbar, title: String) {
         setSupportActionBar(toolbar)
         setTitle(title)
