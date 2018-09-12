@@ -6,9 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import es.iessaladillo.pedrojoya.pr178.R
 import es.iessaladillo.pedrojoya.pr178.base.setOnItemClickListener
-import es.iessaladillo.pedrojoya.pr178.data.Database
 import es.iessaladillo.pedrojoya.pr178.data.RepositoryImpl
-import es.iessaladillo.pedrojoya.pr178.data.Student
+import es.iessaladillo.pedrojoya.pr178.data.local.Database
+import es.iessaladillo.pedrojoya.pr178.data.local.model.Student
+import es.iessaladillo.pedrojoya.pr178.extensions.toast
 import es.iessaladillo.pedrojoya.pr178.extensions.viewModelProvider
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -18,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     private val listAdapter: MainActivityAdapter by lazy {
         MainActivityAdapter(viewModel.students as ArrayList<Student>).apply {
-            setOnItemClickListener { _, item, _, _ -> showBottomSheetDialogFragment(item) }
+            setOnItemClickListener { _, position -> showBottomSheetDialogFragment(getItem(position)) }
             emptyView = lblEmptyView
         }
     }
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
     private fun initViews() {
         setupToolbar()
         setupRecyclerView()
+        setupFab()
     }
 
     private fun setupToolbar() {
@@ -55,8 +57,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun setupFab() {
+        fab.setOnClickListener {
+            toast(R.string.main_activity_fab_clicked)
+        }
+    }
+
     private fun showBottomSheetDialogFragment(student: Student) {
-        MenuBottomSheetDialogFragment.newInstance(student)
+        MainDialogFragment.newInstance(student)
                 .show(supportFragmentManager, TAG_BOTTOMSHEET_FRAGMENT)
     }
 

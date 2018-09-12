@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatEditText
 import es.iessaladillo.pedrojoya.pr212.R
 
+@Suppress("unused", "MemberVisibilityCanBePrivate")
 class ClickToSelectEditText : AppCompatEditText {
 
     private val mHint: CharSequence

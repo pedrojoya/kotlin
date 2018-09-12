@@ -13,6 +13,7 @@ import es.iessaladillo.pedrojoya.pr138.R
 import es.iessaladillo.pedrojoya.pr138.extensions.getThemedColor
 import es.iessaladillo.pedrojoya.pr138.extensions.loadUrl
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 private const val PHOTO_BASE_URL = "https://picsum.photos/400/200?image="
 
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     private var count = 0
     private var palette: Palette? = null
+    private val random = Random()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadPhoto() {
-        imgPhoto.loadUrl(PHOTO_BASE_URL + (count % 10 + 1), onErrorAction = {
+        imgPhoto.loadUrl("$PHOTO_BASE_URL${random.nextInt(1084)}", onErrorAction = {
             Toast.makeText(this, getString(R.string.main_activity_error_loading_image), Toast.LENGTH_SHORT).show()
         }, onSuccessAction = {
             obtainPalette()

@@ -1,5 +1,7 @@
 package es.iessaladillo.pedrojoya.pr178.data
 
+import es.iessaladillo.pedrojoya.pr178.data.local.model.Student
+
 interface Repository {
 
     fun queryStudents(): List<Student>
@@ -9,7 +11,3 @@ interface Repository {
     fun deleteStudent(student: Student)
 
 }
-
-class RepositoryImpl internal constructor(private val database: Database)
-    : Repository by database
-

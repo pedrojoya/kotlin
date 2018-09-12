@@ -9,9 +9,6 @@ import android.os.Build
 import es.iessaladillo.pedrojoya.pr212.base.SingletonHolder
 import es.iessaladillo.pedrojoya.pr212.utils.executeSqlFromAssetsFile
 
-val Context.database: DbHelper
-    get() = DbHelper.getInstance(applicationContext)
-
 class DbHelper private constructor(context: Context) : SQLiteOpenHelper(context.applicationContext, DbContract.DB_NAME,
         null, DbContract.DB_VERSION) {
 

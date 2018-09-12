@@ -14,5 +14,6 @@
     <string name="menubottomsheetfragment_send_message">Send message to
         %1$s</string>
     <string name="menubottomsheetfragment_see_notes">See notes for %1$s</string>
+    <string name="main_activity_fab_clicked">Fab clicked</string>
 
 </resources>

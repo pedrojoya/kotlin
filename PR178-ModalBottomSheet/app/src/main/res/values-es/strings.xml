@@ -13,5 +13,7 @@
     <string name="menubottomsheetfragment_call">Llamar a %1$s</string>
     <string name="menubottomsheetfragment_send_message">Enviar mensaje a %1$s</string>
     <string name="menubottomsheetfragment_see_notes">Ver notas de %1$s</string>
+    <string name="main_activity_fab_clicked">Se ha hecho click en el Fab</string>
+
 
 </resources>

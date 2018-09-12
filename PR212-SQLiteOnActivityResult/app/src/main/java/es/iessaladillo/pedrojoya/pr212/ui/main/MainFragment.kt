@@ -15,11 +15,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import es.iessaladillo.pedrojoya.pr212.R
+import es.iessaladillo.pedrojoya.pr212.base.setOnItemClickListener
 import es.iessaladillo.pedrojoya.pr212.data.Repository
 import es.iessaladillo.pedrojoya.pr212.data.RepositoryImpl
 import es.iessaladillo.pedrojoya.pr212.data.local.DbHelper
 import es.iessaladillo.pedrojoya.pr212.data.local.StudentDao
-import es.iessaladillo.pedrojoya.pr212.data.model.Student
+import es.iessaladillo.pedrojoya.pr212.data.local.model.Student
 import es.iessaladillo.pedrojoya.pr212.extensions.setOnSwipeRightListener
 import es.iessaladillo.pedrojoya.pr212.extensions.toast
 import es.iessaladillo.pedrojoya.pr212.extensions.viewModelProvider
@@ -37,8 +38,8 @@ class MainFragment : Fragment() {
     }
     private val listAdapter: MainFragmentAdapter by lazy {
         MainFragmentAdapter().apply {
-            setOnItemClickListener { _, student, _ -> editStudent(student) }
-            setEmptyView(lblEmptyView)
+            setOnItemClickListener { _, position -> editStudent(getItem(position)) }
+            emptyView = lblEmptyView
         }
     }
     private val repository: Repository by lazy {
@@ -56,7 +57,7 @@ class MainFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         initViews()
         if (savedInstanceState != null) {
-            listAdapter.setData(viewModel.getStudents(false))
+            listAdapter.submitList(viewModel.getStudents(false))
         } else {
             loadStudents()
         }
@@ -74,12 +75,12 @@ class MainFragment : Fragment() {
     private fun setupRecyclerView() {
         lstStudents.run {
             setHasFixedSize(true)
-            adapter = listAdapter
-            layoutManager = LinearLayoutManager(requireActivity(), RecyclerView.VERTICAL,
+            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL,
                     false)
-            addItemDecoration(DividerItemDecoration(requireActivity(),
+            addItemDecoration(DividerItemDecoration(requireContext(),
                     LinearLayoutManager.VERTICAL))
             itemAnimator = DefaultItemAnimator()
+            adapter = listAdapter
             setOnSwipeRightListener { viewHolder ->  deleteStudent(viewHolder.adapterPosition) }
         }
     }
@@ -93,7 +94,7 @@ class MainFragment : Fragment() {
     }
 
     private fun deleteStudent(position: Int) {
-        DeleteStudentTask(this, repository).execute(listAdapter.getItemAtPosition(position))
+        DeleteStudentTask(this, repository).execute(listAdapter.getItem(position))
     }
 
     private fun loadStudents() {
@@ -109,7 +110,6 @@ class MainFragment : Fragment() {
     }
 
     override fun onDestroy() {
-        listAdapter.onDestroy()
         repository.onDestroy()
         super.onDestroy()
     }
@@ -132,7 +132,7 @@ class MainFragment : Fragment() {
         }
 
         override fun onPostExecute(students: List<Student>) {
-            mainFragmentWeakReference.get()?.listAdapter?.setData(students)
+            mainFragmentWeakReference.get()?.listAdapter?.submitList(students)
         }
 
     }

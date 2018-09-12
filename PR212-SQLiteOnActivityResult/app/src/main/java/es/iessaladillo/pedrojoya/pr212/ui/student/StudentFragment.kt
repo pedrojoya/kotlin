@@ -17,7 +17,7 @@ import es.iessaladillo.pedrojoya.pr212.data.Repository
 import es.iessaladillo.pedrojoya.pr212.data.RepositoryImpl
 import es.iessaladillo.pedrojoya.pr212.data.local.DbHelper
 import es.iessaladillo.pedrojoya.pr212.data.local.StudentDao
-import es.iessaladillo.pedrojoya.pr212.data.model.Student
+import es.iessaladillo.pedrojoya.pr212.data.local.model.Student
 import es.iessaladillo.pedrojoya.pr212.extensions.checkValid
 import es.iessaladillo.pedrojoya.pr212.extensions.extraLong
 import es.iessaladillo.pedrojoya.pr212.extensions.onAction

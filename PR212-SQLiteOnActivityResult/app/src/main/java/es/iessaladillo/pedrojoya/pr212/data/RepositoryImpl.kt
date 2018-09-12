@@ -1,7 +1,7 @@
 package es.iessaladillo.pedrojoya.pr212.data
 
 import es.iessaladillo.pedrojoya.pr212.data.local.StudentDao
-import es.iessaladillo.pedrojoya.pr212.data.model.Student
+import es.iessaladillo.pedrojoya.pr212.data.local.model.Student
 
 class RepositoryImpl (private val studentDao: StudentDao) : Repository {
 

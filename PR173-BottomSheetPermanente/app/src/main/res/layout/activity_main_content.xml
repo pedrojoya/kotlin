@@ -7,5 +7,5 @@
     android:contentDescription="@string/activity_main_bottom_sheet_lblTitle"
     android:scaleType="centerCrop"
     android:src="@drawable/photo"
-    tools:context="es.iessaladillo.pedrojoya.pr173.MainActivity"
+    tools:context="es.iessaladillo.pedrojoya.pr173.ui.main.MainActivity"
     tools:showIn="@layout/activity_main"/>

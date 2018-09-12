@@ -2,6 +2,7 @@ package es.iessaladillo.pedrojoya.pr212.data.local
 
 import android.provider.BaseColumns
 
+@Suppress("unused")
 class DbContract private constructor() {
 
     companion object {

@@ -23,7 +23,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadFragment() {
         if (supportFragmentManager.findFragmentByTag(TAG_MAIN_FRAGMENT) == null) {
-            supportFragmentManager.transaction { replace(R.id.flContent, MainFragment.newInstance(), TAG_MAIN_FRAGMENT) }
+            supportFragmentManager.transaction {
+                replace(R.id.flContent, MainFragment.newInstance(), TAG_MAIN_FRAGMENT)
+            }
         }
     }
 

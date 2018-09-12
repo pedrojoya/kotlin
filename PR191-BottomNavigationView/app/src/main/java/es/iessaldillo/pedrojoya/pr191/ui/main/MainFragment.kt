@@ -9,15 +9,15 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import es.iessaldillo.pedrojoya.pr191.R
+import es.iessaldillo.pedrojoya.pr191.extensions.extraString
+import es.iessaldillo.pedrojoya.pr191.extensions.snackbar
 import kotlinx.android.synthetic.main.fragment_main.*
 
 private const val ARG_OPTION = "ARG_OPTION"
 
 class MainFragment : Fragment() {
 
-    private val option: String by lazy {
-        arguments?.getString(ARG_OPTION) ?: ""
-    }
+    private val option: String by extraString(ARG_OPTION)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? =
@@ -36,7 +36,7 @@ class MainFragment : Fragment() {
     private fun setupFab() {
         ActivityCompat.requireViewById<FloatingActionButton>(requireActivity(), R.id.fab).run {
             setOnClickListener {
-                com.google.android.material.snackbar.Snackbar.make(it, "Me han pulsado", com.google.android.material.snackbar.Snackbar.LENGTH_SHORT).show()
+                it.snackbar(R.string.main_fragment_fab_clicked)
             }
             setImageResource(when (option) {
                 getString(R.string.main_activity_calendar) -> R.drawable.ic_access_time_black_24dp

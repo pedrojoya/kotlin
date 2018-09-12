@@ -5,8 +5,9 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
-import es.iessaladillo.pedrojoya.pr212.data.model.Student
+import es.iessaladillo.pedrojoya.pr212.data.local.model.Student
 
+@Suppress("unused")
 class StudentDao(context: Context, private val dbHelper: DbHelper) {
 
     private val contentResolver: ContentResolver = context.applicationContext.contentResolver

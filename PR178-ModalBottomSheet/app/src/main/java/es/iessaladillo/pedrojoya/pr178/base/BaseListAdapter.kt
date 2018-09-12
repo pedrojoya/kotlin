@@ -1,41 +1,39 @@
 package es.iessaladillo.pedrojoya.pr178.base
 
-import androidx.annotation.CallSuper
-import androidx.recyclerview.widget.RecyclerView
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 import java.util.*
 import kotlin.collections.ArrayList
 
 // Kotlin only supports automatic SAM conversions for Java interfaces.
 // So we create an extension function for conversion, maintaining compatibility
 // with Java.
-fun <M, V: BaseViewHolder<M>> BaseListAdapter<M, V>.setOnItemClickListener(
-        action: (View, M, Int, Long) -> Unit) {
-    onItemClickListener = object: OnItemClickListener<M> {
-        override fun onItemClick(view: View, item: M, position: Int, id: Long) {
-            action(view, item, position, id)
+fun <M, V: BaseViewHolder> BaseListAdapter<M, V>.setOnItemClickListener(
+        action: (View, Int) -> Unit) {
+    onItemClickListener = object: BaseListAdapter.OnItemClickListener {
+        override fun onItemClick(view: View, position: Int) {
+            action(view, position)
         }
     }
 }
 @Suppress("unused")
-fun <M, V: BaseViewHolder<M>> BaseListAdapter<M, V>.setOnItemLongClickListener(
-        action: (View, M, Int, Long) -> Boolean) {
-    onItemLongClickListener = object: OnItemLongClickListener<M> {
-        override fun onItemLongClick(view: View, item: M, position: Int, id: Long): Boolean {
-            return action(view, item, position, id)
+fun <M, V: BaseViewHolder> BaseListAdapter<M, V>.setOnItemLongClickListener(
+        action: (View, Int) -> Boolean) {
+    onItemLongClickListener = object: BaseListAdapter.OnItemLongClickListener {
+        override fun onItemLongClick(view: View, position: Int): Boolean {
+            return action(view, position)
         }
     }
 }
 
-
 // V is ViewModel type, M is Model type.
 @Suppress("UNUSED")
-abstract class BaseListAdapter<M, V : BaseViewHolder<M>>(
+abstract class BaseListAdapter<M, V : BaseViewHolder>(
         private var data: ArrayList<M> = ArrayList()) : RecyclerView.Adapter<V>() {
 
-    var onItemClickListener: OnItemClickListener<M>? = null
+    var onItemClickListener: OnItemClickListener? = null
 
-    var onItemLongClickListener: OnItemLongClickListener<M>? = null
+    var onItemLongClickListener: OnItemLongClickListener? = null
 
     var emptyView: View? = null
         set(value) {
@@ -94,44 +92,11 @@ abstract class BaseListAdapter<M, V : BaseViewHolder<M>>(
         notifyItemMoved(from, to)
     }
 
-    @CallSuper
-    override fun onBindViewHolder(holder: V, position: Int) {
-        holder.bind(getItem(position))
-    }
-}
-
-abstract class BaseViewHolder<M>
-        protected constructor(itemView: View, adapter: BaseListAdapter<M, out BaseViewHolder<M>>) :
-                RecyclerView.ViewHolder(itemView) {
-
-    init {
-        adapter.onItemClickListener?.let {
-            itemView.setOnClickListener { v ->
-                if (adapterPosition != RecyclerView.NO_POSITION) {
-                    it.onItemClick(v, adapter.getItem(adapterPosition), adapterPosition, itemId)
-                }
-            }
-        }
-        adapter.onItemLongClickListener?.let {
-            itemView.setOnLongClickListener { v ->
-                if (adapterPosition != RecyclerView.NO_POSITION) {
-                    return@setOnLongClickListener it.onItemLongClick(v,adapter.getItem(adapterPosition), adapterPosition, itemId)
-                }
-                false
-            }
-        }
+    interface OnItemClickListener {
+        fun onItemClick(view: View, position: Int)
     }
 
-    abstract fun bind(item: M)
-
+    interface OnItemLongClickListener {
+        fun onItemLongClick(view: View, position: Int): Boolean
+    }
 }
-
-interface OnItemClickListener<M> {
-    fun onItemClick(view: View, item: M, position: Int, id:Long)
-}
-
-interface OnItemLongClickListener<M> {
-    fun onItemLongClick(view: View, item: M, position: Int, id:Long): Boolean
-}
-
-
