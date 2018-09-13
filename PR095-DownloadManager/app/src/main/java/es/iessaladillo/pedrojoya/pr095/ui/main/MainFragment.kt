@@ -11,7 +11,6 @@ import android.os.Environment
 import android.view.*
 import android.widget.AdapterView
 import android.widget.ListView
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.getSystemService
 import androidx.core.view.ViewCompat
@@ -19,14 +18,15 @@ import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import es.iessaladillo.pedrojoya.pr095.R
+import es.iessaladillo.pedrojoya.pr095.data.Repository
+import es.iessaladillo.pedrojoya.pr095.data.RepositoryImpl
 import es.iessaladillo.pedrojoya.pr095.data.local.Database
-import es.iessaladillo.pedrojoya.pr095.data.local.Repository
-import es.iessaladillo.pedrojoya.pr095.data.local.RepositoryImpl
 import es.iessaladillo.pedrojoya.pr095.data.model.Song
+import es.iessaladillo.pedrojoya.pr095.extensions.newStandardDownloadsActivityIntent
+import es.iessaladillo.pedrojoya.pr095.extensions.toast
 import es.iessaladillo.pedrojoya.pr095.services.ACTION_SONG_COMPLETED
 import es.iessaladillo.pedrojoya.pr095.services.EXTRA_SONG_PATH
 import es.iessaladillo.pedrojoya.pr095.services.MusicService
-import es.iessaladillo.pedrojoya.pr095.utils.newStandardDownloadsActivityIntent
 import kotlinx.android.synthetic.main.fragment_main.*
 import java.io.File
 
@@ -37,22 +37,24 @@ class MainFragment : Fragment() {
     private lateinit var fab: FloatingActionButton
     private val repository: Repository = RepositoryImpl(Database)
     private val downloadManager: DownloadManager? by lazy {
-        requireActivity().getSystemService<DownloadManager>()
+        requireContext().getSystemService<DownloadManager>()
     }
     private val localBroadcastManager: LocalBroadcastManager by lazy {
-        LocalBroadcastManager.getInstance(requireActivity())
+        LocalBroadcastManager.getInstance(requireContext())
     }
-    private var downloadedSongBroadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            showDownloadState(intent)
-        }
-    }
-    private var completedSongBroadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            val nextSongPosition = (lstSongs.checkedItemPosition + 1) % lstSongs.count
-            playSong(nextSongPosition)
-        }
-    }
+    private val downloadedSongBroadcastReceiver: BroadcastReceiver =
+            object : BroadcastReceiver() {
+                override fun onReceive(context: Context, intent: Intent) {
+                    showDownloadState(intent)
+                }
+            }
+    private val completedSongBroadcastReceiver: BroadcastReceiver =
+            object : BroadcastReceiver() {
+                override fun onReceive(context: Context, intent: Intent) {
+                    val nextSongPosition = (lstSongs.checkedItemPosition + 1) % lstSongs.count
+                    playSong(nextSongPosition)
+                }
+            }
     private val listAdapter: MainFragmentAdapter by lazy {
         MainFragmentAdapter(requireActivity(), repository.querySongs(), lstSongs)
     }
@@ -62,26 +64,24 @@ class MainFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        retainInstance = true
         setHasOptionsMenu(true)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_main, container, false)
-    }
+                              savedInstanceState: Bundle?): View? =
+            inflater.inflate(R.layout.fragment_main, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        initViews(view)
+        initViews()
     }
 
-    private fun initViews(view: View?) {
+    private fun initViews() {
         setupFab()
-        setupListView(view)
+        setupListView()
     }
 
-    private fun setupListView(view: View?) {
+    private fun setupListView() {
         lstSongs.run {
             adapter = listAdapter
             choiceMode = ListView.CHOICE_MODE_SINGLE
@@ -147,29 +147,24 @@ class MainFragment : Fragment() {
     }
 
     private fun showErrorDownloadingSong(reason: String) {
-        Toast.makeText(requireActivity(), getString(R.string.main_fragment_download_failed, reason),
-                Toast.LENGTH_SHORT).show()
+        toast(getString(R.string.main_fragment_download_failed, reason))
     }
 
     private fun downloadSong(song: Song) {
-        val request = DownloadManager.Request(Uri.parse(song.url))
-        request.setAllowedNetworkTypes(
-                DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
-        request.setAllowedOverRoaming(false)
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_MUSIC,
-                song.name + MP3_FILE_EXTENSION)
-        // request.setDestinationInExternalFilesDir(this, Environment.DIRECTORY_DOWNLOADS, song
-        // .getName() + MP3_FILE_EXTENSION);
-        request.setTitle(song.name)
-        request.setDescription(getString(R.string.main_fragment_description, song.name, song.duration))
-        request.allowScanningByMediaScanner()
-        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
-        downloadManager!!.enqueue(request)
+        downloadManager?.enqueue(DownloadManager.Request(Uri.parse(song.url)).apply {
+            setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
+            setAllowedOverRoaming(false)
+            setDestinationInExternalPublicDir(Environment.DIRECTORY_MUSIC, song.name + MP3_FILE_EXTENSION)
+            // setDestinationInExternalFilesDir(this, Environment.DIRECTORY_DOWNLOADS, song.getName() + MP3_FILE_EXTENSION);
+            setTitle(song.name)
+            setDescription(getString(R.string.main_fragment_description, song.name, song.duration))
+            allowScanningByMediaScanner()
+            setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
+        })
     }
 
     private fun showDownloading(song: Song) {
-        Toast.makeText(requireActivity(), getString(R.string.main_fragment_downloading, song.name),
-                Toast.LENGTH_SHORT).show()
+        toast(getString(R.string.main_fragment_downloading, song.name))
     }
 
     private fun playSong(position: Int) {

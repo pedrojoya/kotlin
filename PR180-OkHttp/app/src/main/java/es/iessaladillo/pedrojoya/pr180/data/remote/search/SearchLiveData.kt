@@ -8,15 +8,16 @@ import java.io.IOException
 import java.net.URL
 import java.net.URLEncoder
 
+private const val SEARCH_URL = "https://www.google.es/search?hl=es&q=\""
+
 class SearchLiveData(private val okHttpClient: OkHttpClient) : MutableLiveData<RequestState>() {
+
     private var searchCall: Call? = null
 
     fun search(text: String) {
         try {
             postValue(RequestState.Loading(true))
-            val url = URL(
-                    "https://www.google.es/search?hl=es&q=\"" + URLEncoder.encode(text, "UTF-8")
-                            + "\"")
+            val url = URL("$SEARCH_URL${URLEncoder.encode(text, "UTF-8")}\"")
             val request = Request.Builder().url(url).header("User-Agent",
                     "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5" + ".1)").build()
             searchCall = okHttpClient.newCall(request)
@@ -54,11 +55,9 @@ class SearchLiveData(private val okHttpClient: OkHttpClient) : MutableLiveData<R
         var result = ""
         val ini = content.indexOf("Aproximadamente")
         if (ini != -1) {
-            // Se busca el siguiente espacio en blanco después de
-            // Aproximadamente.
+            // Search for next blank space afeter Aproximadamente.
             val fin = content.indexOf(" ", ini + 16)
-            // El resultado corresponde a lo que sigue a
-            // Aproximadamente, hasta el siguiente espacio en blanco.
+            // Result is after Aproximadamente until next blank space
             result = content.substring(ini + 16, fin)
         }
         return result

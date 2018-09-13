@@ -1,35 +1,25 @@
 package es.iessaladillo.pedrojoya.pr095.ui.main
 
 import android.content.Context
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.ListView
 import es.iessaladillo.pedrojoya.pr095.R
+import es.iessaladillo.pedrojoya.pr095.base.AdapterViewBaseAdapter
 import es.iessaladillo.pedrojoya.pr095.data.model.Song
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.fragment_main_item.*
 
-class MainFragmentAdapter(context: Context, private val songs: List<Song>, private val listView: ListView) : ArrayAdapter<Song>(context, R.layout.fragment_main_item, songs) {
+class MainFragmentAdapter(context: Context, data: List<Song>, private val listView: ListView) :
+        AdapterViewBaseAdapter<Song, MainFragmentAdapter.ViewHolder>(data, R.layout.fragment_main_item) {
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val itemView = convertView?: LayoutInflater.from(context).inflate(R.layout.fragment_main_item, parent, false)
-        val holder = itemView.tag as? ViewHolder ?: onCreateViewHolder(itemView)
-        itemView.tag = holder
-        onBindViewHolder(holder, position)
-        return itemView
+    override fun onCreateViewHolder(itemView: View): ViewHolder = ViewHolder(itemView)
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(getItem(position), position)
     }
 
-    private fun onCreateViewHolder(itemView: View): ViewHolder {
-        return ViewHolder(itemView)
-    }
 
-    private fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.bind(songs[position], position)
-    }
-
-    private inner class ViewHolder(override val containerView: View?): LayoutContainer {
+    inner class ViewHolder(override val containerView: View?): LayoutContainer {
 
         fun bind(song: Song, position: Int) {
             lblName.text = song.name

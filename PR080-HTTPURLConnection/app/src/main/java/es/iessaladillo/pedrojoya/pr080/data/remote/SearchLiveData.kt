@@ -9,6 +9,8 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLEncoder
 
+private const val SEARCH_URL = "https://www.google.es/search?hl=es&q=\""
+
 class SearchLiveData: MutableLiveData<RequestState>() {
 
     private var task: AsyncTask<String, Void, Void?>? = null
@@ -28,8 +30,7 @@ class SearchLiveData: MutableLiveData<RequestState>() {
             postValue(RequestState.Loading(true))
             // Simulate latency
             Thread.sleep(2000)
-            val url = URL("https://www.google.es/search?hl=es&q=\"" +
-                    URLEncoder.encode(params[0], "UTF-8") + "\"")
+            val url = URL("$SEARCH_URL${URLEncoder.encode(params[0], "UTF-8")}\"")
             val connection = url.openConnection() as HttpURLConnection
             try {
                 connection.run {

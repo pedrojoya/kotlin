@@ -42,6 +42,7 @@ class MainFragment : Fragment() {
             when (it) {
                 is RequestState.Error -> showErrorSearching(it)
                 is RequestState.Result<*> -> {
+                    @Suppress("UNCHECKED_CAST")
                     (it as RequestState.Result<Event<String>>).data.getContentIfNotHandled()?.let { result ->
                         showResult(result)
                     }
@@ -53,6 +54,7 @@ class MainFragment : Fragment() {
 
     private fun observeEcho() {
         viewModel.echoLiveData.observe(viewLifecycleOwner, Observer<RequestState> {
+            @Suppress("UNCHECKED_CAST")
             when (it) {
                 is RequestState.Error -> showErrorRequestingEcho(it)
                 is RequestState.Result<*> -> (it as RequestState.Result<Event<String>>).data.getContentIfNotHandled()?.let { result ->

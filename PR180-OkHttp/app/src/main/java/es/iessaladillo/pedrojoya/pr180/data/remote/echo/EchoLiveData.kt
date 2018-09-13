@@ -12,6 +12,8 @@ import java.util.*
 private const val KEY_NAME = "nombre"
 private const val KEY_DATE = "fecha"
 
+private const val ECHO_URL = "http://www.informaticasaladillo.es/echo.php"
+
 class EchoLiveData(private val okHttpClient: OkHttpClient) : MutableLiveData<RequestState>() {
 
     private val simpleDateFormat = SimpleDateFormat(
@@ -21,7 +23,7 @@ class EchoLiveData(private val okHttpClient: OkHttpClient) : MutableLiveData<Req
     fun requestEcho(text: String) {
         try {
             postValue(RequestState.Loading(true))
-            val url = URL("http://www.informaticasaladillo.es/echo.php")
+            val url = URL(ECHO_URL)
             val formBody = FormBody.Builder().addEncoded(KEY_NAME, text).addEncoded(
                     KEY_DATE, simpleDateFormat.format(Date())).build()
             val request = Request.Builder().url(url).post(formBody).build()
@@ -50,8 +52,8 @@ class EchoLiveData(private val okHttpClient: OkHttpClient) : MutableLiveData<Req
                 }
             })
         } catch (e: Exception) {
+            postValue(RequestState.Error(Event(e)))
         }
-
     }
 
     fun cancel() {

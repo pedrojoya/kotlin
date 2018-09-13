@@ -15,6 +15,8 @@ import java.util.*
 private const val KEY_NAME = "nombre"
 private const val KEY_DATE = "fecha"
 
+private const val ECHO_URL = "http://www.informaticasaladillo.es/echo.php"
+
 class EchoLiveData : MutableLiveData<RequestState>() {
 
     private var task: AsyncTask<String, Void, Void?>? = null
@@ -36,8 +38,7 @@ class EchoLiveData : MutableLiveData<RequestState>() {
             postValue(RequestState.Loading(true))
             // Simulate latency
             Thread.sleep(2000)
-            val connection = URL("http://www.informaticasaladillo.es/echo.php").openConnection()
-                    as HttpURLConnection
+            val connection = URL(ECHO_URL).openConnection() as HttpURLConnection
             connection.run {
                 try {
                     requestMethod = "POST"
