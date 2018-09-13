@@ -38,12 +38,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        btnBigTextStyle.setOnClickListener { _ -> notifyBigText() }
-        btnBigPictureStyle.setOnClickListener { _ -> notifyBigPicture() }
-        btnInboxStyle.setOnClickListener { _ -> notifyInbox() }
-        btnProgressBar.setOnClickListener { _ -> notifyProgressBar() }
-        btnIndeterminateProgress.setOnClickListener { _ -> notifyIndeterminateProgress() }
-        btnHeadsUp.setOnClickListener { _ -> notifyHeadsUp() }
+        btnBigTextStyle.setOnClickListener { notifyBigText() }
+        btnBigPictureStyle.setOnClickListener { notifyBigPicture() }
+        btnInboxStyle.setOnClickListener { notifyInbox() }
+        btnProgressBar.setOnClickListener { notifyProgressBar() }
+        btnIndeterminateProgress.setOnClickListener { notifyIndeterminateProgress() }
+        btnHeadsUp.setOnClickListener { notifyHeadsUp() }
     }
 
     private fun notifyBigText() {

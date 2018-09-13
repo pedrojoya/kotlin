@@ -1,6 +1,6 @@
 @file:JvmName("RecyclerViewExt")
 
-package es.iessaladillo.pedrojoya.pr100.extensions
+package es.iessaladillo.pedrojoya.pr241.extensions
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView

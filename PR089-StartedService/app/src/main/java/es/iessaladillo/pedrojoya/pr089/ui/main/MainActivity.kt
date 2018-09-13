@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        btnCalculate.setOnClickListener { _ -> calculate() }
+        btnCalculate.setOnClickListener { calculate() }
     }
 
     private fun calculate() {

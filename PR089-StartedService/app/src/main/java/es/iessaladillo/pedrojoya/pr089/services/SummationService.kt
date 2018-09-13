@@ -59,7 +59,10 @@ class SummationService : Service() {
         val intent = Intent(ACTION_SUMMATION)
         intent.putExtra(EXTRA_NUMBER, number)
         intent.putExtra(EXTRA_RESULT, summation)
-        if (!LocalBroadcastManager.getInstance(applicationContext).sendBroadcast(intent)) {
+        if (!LocalBroadcastManager.getInstance(applicationContext).sendBroadcast(
+                        Intent(ACTION_SUMMATION)
+                        .putExtra(EXTRA_NUMBER, number)
+                        .putExtra(EXTRA_RESULT, summation))) {
             Log.d(TAG, "Summation of $number = $summation")
         }
     }

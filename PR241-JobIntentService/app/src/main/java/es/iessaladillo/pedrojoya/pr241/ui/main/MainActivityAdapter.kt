@@ -3,26 +3,28 @@ package es.iessaladillo.pedrojoya.pr241.ui.main
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.core.view.ViewCompat
 import es.iessaladillo.pedrojoya.pr241.R
 import es.iessaladillo.pedrojoya.pr241.base.BaseListAdapter
 import es.iessaladillo.pedrojoya.pr241.base.BaseViewHolder
+import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.activity_main_item.*
 
-class MainActivityAdapter(data: ArrayList<String>) : BaseListAdapter<String, MainActivityAdapter
-.ViewHolder>(data) {
+class MainActivityAdapter(data: ArrayList<String>) : BaseListAdapter<String, MainActivityAdapter.ViewHolder>(data) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout
-                .activity_main_item, parent, false), this)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+            ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.activity_main_item,
+                    parent, false))
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(getItem(position))
     }
 
-    class ViewHolder(itemView: View,
-                     adapter: BaseListAdapter<String, out BaseViewHolder<String>>) : BaseViewHolder<String>(itemView, adapter) {
 
-        private val lblName: TextView = ViewCompat.requireViewById(itemView, R.id.lblName)
+    inner class ViewHolder(override val containerView: View) : BaseViewHolder(containerView,
+            onItemClickListener,
+            onItemLongClickListener), LayoutContainer {
 
-        override fun bind(item: String) {
+        fun bind(item: String) {
             lblName.text = item
         }
 

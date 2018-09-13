@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import es.iessaladillo.pedrojoya.pr211.App
 import es.iessaladillo.pedrojoya.pr211.R
+import es.iessaladillo.pedrojoya.pr211.base.setOnItemClickListener
 import es.iessaladillo.pedrojoya.pr211.data.Repository
 import es.iessaladillo.pedrojoya.pr211.data.RepositoryImpl
 import es.iessaladillo.pedrojoya.pr211.data.model.Student
@@ -59,8 +60,8 @@ class MainFragment : Fragment() {
         lstStudents.apply {
             setHasFixedSize(true)
             adapter = listAdapter.apply {
-                setOnItemClickListener { _, student, _ -> editStudent(student) }
-                setEmptyView(lblEmptyView)
+                setOnItemClickListener { _, position -> editStudent(getItem(position)) }
+                emptyView = lblEmptyView
             }
             layoutManager = LinearLayoutManager(requireActivity(), RecyclerView.VERTICAL, false)
             addItemDecoration(DividerItemDecoration(requireActivity(), LinearLayoutManager.VERTICAL))
@@ -78,7 +79,7 @@ class MainFragment : Fragment() {
     }
 
     private fun deleteStudent(position: Int) {
-        val student = listAdapter.getItemAtPosition(position)
+        val student = listAdapter.getItem(position)
         DeleteStudentTask(this, repository).execute(student)
     }
 

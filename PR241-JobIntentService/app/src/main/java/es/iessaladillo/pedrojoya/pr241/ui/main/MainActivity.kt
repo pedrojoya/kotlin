@@ -9,7 +9,6 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -18,9 +17,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
 import com.livinglifetechway.quickpermissions_kotlin.util.QuickPermissionsOptions
-import es.iessaladillo.pedrojoya.pr100.extensions.setOnSwipeRightListener
 import es.iessaladillo.pedrojoya.pr241.BuildConfig
 import es.iessaladillo.pedrojoya.pr241.R
+import es.iessaladillo.pedrojoya.pr241.extensions.setOnSwipeRightListener
+import es.iessaladillo.pedrojoya.pr241.extensions.viewModelProvider
 import es.iessaladillo.pedrojoya.pr241.services.ACTION_EXPORTED
 import es.iessaladillo.pedrojoya.pr241.services.EXTRA_FILENAME
 import es.iessaladillo.pedrojoya.pr241.services.ExportToTextFileService
@@ -29,21 +29,31 @@ import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var broadcastReceiver: BroadcastReceiver
-    private lateinit var viewModel: MainActivityViewModel
-    private lateinit var listAdapter: MainActivityAdapter
-    private lateinit var quickPermissionsOption: QuickPermissionsOptions
+    private val broadcastReceiver: BroadcastReceiver by lazy {
+        object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                val uri: Uri = intent.getParcelableExtra(EXTRA_FILENAME)
+                showSnackBar(uri)
+            }
+        }
+    }
+    private val viewModel: MainActivityViewModel by viewModelProvider()
+    private val listAdapter: MainActivityAdapter by lazy {
+        MainActivityAdapter(viewModel.students).apply {
+            emptyView = lblEmptyView
+        }
+    }
+    private val quickPermissionsOption: QuickPermissionsOptions by lazy {
+        QuickPermissionsOptions(
+                rationaleMessage = getString(R.string.main_activity_permission_required_explanation),
+                permanentlyDeniedMessage = getString(R.string.main_activity_error_permission_required)
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
-        quickPermissionsOption = QuickPermissionsOptions(
-                rationaleMessage = getString(R.string.main_activity_permission_required_explanation),
-                permanentlyDeniedMessage = getString(R.string.main_activity_error_permission_required)
-        )
         initViews()
-        setupReceiver()
     }
 
     private fun initViews() {
@@ -57,12 +67,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupFAB() {
-        btnExport.setOnClickListener { _ -> export() }
+        btnExport.setOnClickListener { export() }
     }
 
     private fun setupRecyclerView() {
-        listAdapter = MainActivityAdapter(viewModel.students)
-        listAdapter.emptyView = emptyView
         lstStudents.run {
             setHasFixedSize(true)
             adapter = listAdapter
@@ -78,16 +86,6 @@ class MainActivity : AppCompatActivity() {
         listAdapter.notifyItemRemoved(position)
     }
 
-    private fun setupReceiver() {
-        broadcastReceiver = object : BroadcastReceiver() {
-
-            override fun onReceive(context: Context, intent: Intent) {
-                val uri: Uri = intent.getParcelableExtra(EXTRA_FILENAME)
-                showSnackBar(uri)
-            }
-        }
-    }
-
     public override fun onResume() {
         super.onResume()
         val exportarFilter = IntentFilter(ACTION_EXPORTED)
@@ -96,7 +94,6 @@ class MainActivity : AppCompatActivity() {
 
     public override fun onPause() {
         super.onPause()
-        // Se quita del registro el receptor.
         LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver)
     }
 
@@ -109,13 +106,14 @@ class MainActivity : AppCompatActivity() {
         try {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
                 setDataAndType(FileProvider.getUriForFile(this@MainActivity,
-                                BuildConfig.APPLICATION_ID + ".fileprovider",
-                                File(uri.path!!)), "text/plain")
+                        BuildConfig.APPLICATION_ID + ".fileprovider",
+                        File(uri.path!!)), "text/plain")
                 addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             })
         } catch (e: Exception) {
             e.printStackTrace()
         }
+
     }
 
     private fun export() = runWithPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, options = quickPermissionsOption) {
