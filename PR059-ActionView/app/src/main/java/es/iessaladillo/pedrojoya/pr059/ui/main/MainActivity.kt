@@ -3,18 +3,30 @@ package es.iessaladillo.pedrojoya.pr059.ui.main
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import es.iessaladillo.pedrojoya.pr059.R
-import es.iessaladillo.pedrojoya.pr059.extensions.*
+import es.iessaladillo.pedrojoya.pr059.base.setOnItemClickListener
+import es.iessaladillo.pedrojoya.pr059.extensions.onQueryTextChange
+import es.iessaladillo.pedrojoya.pr059.extensions.setOnActionExpandListener
+import es.iessaladillo.pedrojoya.pr059.extensions.toast
+import es.iessaladillo.pedrojoya.pr059.extensions.viewModelProvider
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainActivityViewModel by viewModelProvider()
-    private val listAdapter: ArrayAdapter<String> by lazy {
-        ArrayAdapter(this, android.R.layout.simple_list_item_1, getStringArray(R.array.students))
+    private val listAdapter: MainActivityAdapter by lazy {
+        MainActivityAdapter().apply {
+            emptyView = lblEmptyView
+            setOnItemClickListener { _, position ->
+                showStudent(getItem(position))
+            }
+        }
     }
     private var mnuSearch: MenuItem? = null
     private var searchView: SearchView? = null
@@ -23,14 +35,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initViews()
+        listAdapter.submitList(viewModel.students)
     }
 
     private fun initViews() {
+        setupRecyclerView()
+    }
+
+    private fun setupRecyclerView() {
         lstStudents.run {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
+            itemAnimator = DefaultItemAnimator()
+            addItemDecoration(DividerItemDecoration(this@MainActivity, LinearLayoutManager.VERTICAL))
             adapter = listAdapter
-            setOnItemClickListener { _, _, position, _ ->
-                showStudent(getItemAtPosition(position) as String)
-            }
         }
     }
 

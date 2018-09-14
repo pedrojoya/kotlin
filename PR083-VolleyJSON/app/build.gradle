@@ -30,9 +30,12 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0-rc02'
     implementation 'androidx.recyclerview:recyclerview:1.0.0-rc02'
     implementation 'com.google.android.material:material:1.0.0-rc02'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.61"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.70"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-rc01'
     implementation "com.google.code.gson:gson:2.8.5"
     implementation "com.squareup.picasso:picasso:2.5.2"
     implementation "com.android.volley:volley:1.1.1"
+    implementation 'androidx.core:core-ktx:1.0.0-rc02'
+    implementation 'androidx.fragment:fragment-ktx:1.0.0-rc02'
+
 }

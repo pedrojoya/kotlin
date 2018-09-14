@@ -9,9 +9,10 @@ import com.squareup.picasso.Picasso
 fun ImageView.loadUrl(url: String?,
                       @DrawableRes placeholderResId: Int? = null,
                       @DrawableRes errorResId: Int? = null) {
-    with (Picasso.with(context).load(url)) {
-        placeholderResId?.let { placeholder(it) }
-        errorResId?.let { error(it) }
-        into(this@loadUrl)
-    }
+    Picasso.with(context).apply { setIndicatorsEnabled(true) }
+            .load(url).run {
+                placeholderResId?.let { placeholder(it) }
+                errorResId?.let { error(it) }
+                into(this@loadUrl)
+            }
 }

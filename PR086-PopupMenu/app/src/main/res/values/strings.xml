@@ -10,4 +10,5 @@
     <string name="main_activity_click_on">Click on %1$s</string>
     <string name="main_activity_call_sb">Call %1$s</string>
     <string name="main_activity_send_message_to">Send message to %1$s</string>
+    <string name="activity_main_lblEmptyView">No students</string>
 </resources>

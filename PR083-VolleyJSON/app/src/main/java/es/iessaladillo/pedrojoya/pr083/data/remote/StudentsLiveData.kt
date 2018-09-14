@@ -15,8 +15,9 @@ import org.json.JSONException
 import java.util.*
 
 private const val TAG_STUDENTS = "TAG_STUDENTS"
+private const val DATA_URL = "http://www.informaticasaladillo.es/datos.json"
 
-class StudentsLiveData(private val requestQueue: RequestQueue, private val urlString: String) : LiveData<RequestState>() {
+class StudentsLiveData(private val requestQueue: RequestQueue) : LiveData<RequestState>() {
 
     init {
         loadData()
@@ -30,7 +31,7 @@ class StudentsLiveData(private val requestQueue: RequestQueue, private val urlSt
     @Suppress("unused")
     private fun sendJsonRequest() {
         postValue(RequestState.Loading(true))
-        val request = JsonArrayRequest(urlString, { response ->
+        val request = JsonArrayRequest(DATA_URL, { response ->
             try {
                 postValue(RequestState.Result(parseJson(response)))
             } catch (e: Exception) {
@@ -48,7 +49,7 @@ class StudentsLiveData(private val requestQueue: RequestQueue, private val urlSt
 
         }.type
 
-        requestQueue.add(GsonArrayRequest<Any>(Request.Method.GET, urlString, type,
+        requestQueue.add(GsonArrayRequest<Any>(Request.Method.GET, DATA_URL, type,
                 Response.Listener { response ->
                     @Suppress("UNCHECKED_CAST")
                     postValue(RequestState.Result(response as List<Student>))

@@ -2,9 +2,13 @@ package es.iessaladillo.pedrojoya.pr086.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import es.iessaladillo.pedrojoya.pr086.R
-import es.iessaladillo.pedrojoya.pr086.data.local.Database
+import es.iessaladillo.pedrojoya.pr086.base.setOnItemClickListener
 import es.iessaladillo.pedrojoya.pr086.data.RepositoryImpl
+import es.iessaladillo.pedrojoya.pr086.data.local.Database
 import es.iessaladillo.pedrojoya.pr086.data.local.model.Student
 import es.iessaladillo.pedrojoya.pr086.extensions.toast
 import es.iessaladillo.pedrojoya.pr086.extensions.viewModelProvider
@@ -15,22 +19,33 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainActivityViewModel by viewModelProvider {
         MainActivityViewModel(RepositoryImpl(Database))
     }
+    private val listAdapter: MainActivityAdapter by lazy {
+        MainActivityAdapter().apply {
+            setOnCallListener { _, position -> callStudent(getItem(position)) }
+            setOnSendMessageListener { _, position -> sendMessageToStudent(getItem(position)) }
+            setOnItemClickListener { _, position -> showStudent(getItem(position)) }
+            emptyView = lblEmptyView
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initViews()
+        listAdapter.submitList(viewModel.getStudents(false))
     }
 
     private fun initViews() {
-        lstStudents.apply {
-            adapter = MainActivityAdapter(viewModel.students).apply {
-                setOnCallListener { _, student, _ -> callStudent(student) }
-                setOnSendMessageListener { _, student, _ -> sendMessageToStudent(student) }
-            }
-            setOnItemClickListener { _, _, position, _ ->
-                showStudent(lstStudents.getItemAtPosition(position) as Student)
-            }
+        setupRecyclerView()
+    }
+
+    private fun setupRecyclerView() {
+        lstStudents.run {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL,
+                    false)
+            itemAnimator = DefaultItemAnimator()
+            adapter = listAdapter
         }
     }
 

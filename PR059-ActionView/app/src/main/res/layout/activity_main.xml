@@ -1,5 +1,26 @@
-<ListView
-    android:id="@+id/lstStudents"
+<merge
+    android:id="@+id/flContent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    android:layout_height="match_parent">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lstStudents"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fadeScrollbars="false"
+        android:paddingBottom="@dimen/activity_main_lstStudents_padding"
+        android:paddingTop="@dimen/activity_main_lstStudents_padding"/>
+
+    <TextView
+        android:id="@+id/lblEmptyView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:drawablePadding="@dimen/activity_main_lblEmpty_drawablePadding"
+        android:drawableTop="@drawable/ic_person_add_black_48dp"
+        android:text="@string/activity_main_lblEmpty"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+</merge>

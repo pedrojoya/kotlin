@@ -1,9 +1,9 @@
 package es.iessaladillo.pedrojoya.pr092.ui.main
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,16 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import es.iessaladillo.pedrojoya.pr092.R
 import es.iessaladillo.pedrojoya.pr092.extensions.viewModelProvider
 import kotlinx.android.synthetic.main.fragment_main.*
-import java.text.SimpleDateFormat
-import java.util.*
-
-private const val SIMULATION_SLEEP_MILI: Long = 2000
 
 class MainFragment : Fragment() {
 
-    private val simpleDateFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
     private val viewModel: MainFragmentViewModel by viewModelProvider()
-    private val listAdapter: MainAdapter by lazy { MainAdapter(viewModel.data) }
+    private val listAdapter: MainFragmentAdapter = MainFragmentAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,15 +27,16 @@ class MainFragment : Fragment() {
             inflater.inflate(R.layout.fragment_main, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
-        initViews()
-        // Initial data load. With post so the animation works properly.
-        if (savedInstanceState == null) {
-            swipeRefreshLayout.post {
-                swipeRefreshLayout.isRefreshing = true
-                refresh()
-            }
-        }
         super.onActivityCreated(savedInstanceState)
+        initViews()
+        // We shouldn't do like this. We should define a state of the request.
+        if (savedInstanceState == null) {
+            swipeRefreshLayout.post { swipeRefreshLayout.isRefreshing = true }
+        }
+        viewModel.data.observe(viewLifecycleOwner, Observer { data ->
+            listAdapter.submitList(data)
+            swipeRefreshLayout.isRefreshing = false
+        })
     }
 
     private fun initViews() {
@@ -65,18 +61,8 @@ class MainFragment : Fragment() {
             setColorSchemeResources(android.R.color.holo_blue_bright,
                     android.R.color.holo_green_light, android.R.color.holo_orange_light,
                     android.R.color.holo_red_light)
-            setOnRefreshListener { refresh() }
+            setOnRefreshListener { viewModel.refresh() }
         }
-    }
-
-    private fun refresh() {
-        // Loading time simulation.
-        Handler().postDelayed({ addData() }, SIMULATION_SLEEP_MILI)
-    }
-
-    private fun addData() {
-        listAdapter.addItem(simpleDateFormat.format(Date()))
-        swipeRefreshLayout.isRefreshing = false
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -88,7 +74,7 @@ class MainFragment : Fragment() {
             when (item?.itemId) {
                 R.id.mnuRefresh -> {
                     swipeRefreshLayout.isRefreshing = true
-                    refresh()
+                    viewModel.refresh()
                     true
                 }
                 else -> super.onOptionsItemSelected(item)

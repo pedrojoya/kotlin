@@ -7,4 +7,5 @@
     <string name="activity_main_item_imgPopupMenu">Menú emergente</string>
     <string name="activity_main_item_popup_mnuCall">Llamar</string>
     <string name="main_activity_click_on">Click en %1$s</string>
+    <string name="activity_main_lblEmptyView">No hay alumnos</string>
 </resources>

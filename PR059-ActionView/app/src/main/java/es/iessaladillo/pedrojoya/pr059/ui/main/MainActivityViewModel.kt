@@ -6,5 +6,7 @@ class MainActivityViewModel : ViewModel() {
 
     var searchQuery: String = ""
     var isSearchViewExpanded = false
+    val students = arrayListOf("Baldomero", "Gervasio", "Filomeno", "Prudencio",
+            "Casimiro", "Fulgencio", "Genaro", "Rigoberto", "Atanasio")
 
 }
