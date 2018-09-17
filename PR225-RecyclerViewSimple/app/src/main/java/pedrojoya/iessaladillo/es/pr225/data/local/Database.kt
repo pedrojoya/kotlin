@@ -5,10 +5,12 @@ import pedrojoya.iessaladillo.es.pr225.data.Repository
 import pedrojoya.iessaladillo.es.pr225.data.local.model.Student
 import java.util.*
 
+private const val BASE_URL = "https://picsum.photos/200/300?image="
+
 object Database: Repository {
 
     private val students = ArrayList<Student>()
-    private var count = 0
+    private val random: Random = Random()
 
     init {
         insertInitialData()
@@ -24,7 +26,7 @@ object Database: Repository {
 
     private fun addFakeStudent() {
         val student = Student(Fakeit.name().name(), Fakeit.address().streetAddress(),
-                "http://lorempixel.com/100/100/abstract/" + (++count % 10 + 1) + "/")
+                "$BASE_URL${random.nextInt(180)}")
         students.add(student)
     }
 

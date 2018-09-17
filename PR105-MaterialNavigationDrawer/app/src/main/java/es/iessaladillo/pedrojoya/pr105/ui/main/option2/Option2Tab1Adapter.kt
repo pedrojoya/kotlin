@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import es.iessaladillo.pedrojoya.pr105.R
-import es.iessaladillo.pedrojoya.pr105.data.local.Student
+import es.iessaladillo.pedrojoya.pr105.data.local.model.Student
 import es.iessaladillo.pedrojoya.pr105.extensions.loadUrl
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.fragment_option2_tab1_item.*

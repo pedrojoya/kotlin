@@ -1,3 +1,3 @@
-package es.iessaladillo.pedrojoya.pr105.data.local
+package es.iessaladillo.pedrojoya.pr105.data.local.model
 
 data class Student(val name: String, val address: String, val photoUrl: String)

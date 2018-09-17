@@ -25,10 +25,10 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.0.0-rc02'
-    implementation 'com.google.android.material:material:1.0.0-rc01'
+    implementation 'com.google.android.material:material:1.0.0-rc02'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
     implementation "com.muddzdev:styleabletoast:2.1.2"
     implementation "com.tapadoo.android:alerter:3.0.0"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.61"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.70"
     implementation 'androidx.core:core-ktx:1.0.0-rc02'
 }

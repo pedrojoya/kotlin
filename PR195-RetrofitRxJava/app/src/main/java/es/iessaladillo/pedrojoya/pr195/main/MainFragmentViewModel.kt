@@ -7,7 +7,7 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class MainActivityViewModel(private val repository: Repository) : ViewModel() {
+class MainFragmentViewModel(private val repository: Repository) : ViewModel() {
 
     private var studentsObservable: Observable<List<Student>> = loadStudents()
 
