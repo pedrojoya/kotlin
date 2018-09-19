@@ -13,7 +13,7 @@ class MainActivityAdapter(words: List<Word>) :
         AdapterViewBaseAdapter<Word, MainActivityAdapter.ViewHolder>(words, R.layout.activity_main_item),
         Filterable {
 
-    private val original = arrayListOf(*words.toTypedArray())
+    private val original = words
 
     override fun onCreateViewHolder(itemView: View) = ViewHolder(itemView)
 
