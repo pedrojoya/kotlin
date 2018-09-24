@@ -22,13 +22,15 @@
       </configuration>
     </facet>
     <facet type="kotlin-language" name="Kotlin">
-      <configuration version="3" platform="JVM 1.6" useProjectSettings="false">
+      <configuration version="3" platform="JVM 1.8" useProjectSettings="false">
         <compilerSettings />
         <compilerArguments>
           <option name="destination" value="$MODULE_DIR$/build/tmp/kotlin-classes/debug" />
+          <option name="classpath" value="$USER_HOME$/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.0-rc02.aar/f7c4060b1f6b8a45764e81adb0f33f67/jars/classes.jar:/Users/pedro/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk7/1.2.70/9318bb9dadaa56534ac8b0728a1ffa2bd0e48b28/kotlin-stdlib-jdk7-1.2.70.jar:/Users/pedro/.gradle/caches/transforms-1/files-1.1/core-ktx-1.0.0-rc02.aar/a18e16390b3ebcf4e847f9308a03b2f2/jars/classes.jar:/Users/pedro/.gradle/caches/transforms-1/files-1.1/fragment-1.0.0-rc02.aar/4f05e4954d4f380aa8760844e1847e9c/jars/classes.jar:/Users/pedro/.gradle/caches/transforms-1/files-1.1/vectordrawable-animated-1.0.0-rc02.aar/da45086d542c5467d9e8ed14466f7704/jars/classes.jar:/Users/pedro/.gradle/caches/transforms-1/files-1.1/legacy-support-core-ui-1.0.0-rc02.aar/f97831583bea606c4b0675f523ed5f77/jars/classes.jar:/Users/pedro/.gradle/caches/transforms-1/files-1.1/legacy-support-core-utils-1.0.0-rc02.aar/b177c1d10fcb65468d9b224cdf6a7fe1/jars/classes.jar:/Users/pedro/.gradle/caches/transforms-1/files-1.1/vectordrawable-1.0.0-rc02.aar/8c9bd7b4c38a2c4d04c96b1ab6256906/jars/classes.jar:/Users/pedro/.gradle/caches/transforms-1/files-1.1/loader-1.0.0-rc02.aar/aa424a402d918aa0b49919b8df957007/jars/classes.jar:/Users/pedro/.gradle/caches/transforms-1/files-1.1/viewpager-1.0.0-rc02.aar/8154ccab42d124fe783e33cedc180d03/jars/classes.jar:/Users/pedro/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-1.0.0-rc02.aar/aff042c78e1efdedb68a5a0d4b58c935/jars/classes.jar:/Users/pedro/.gradle/caches/transforms-1/files-1.1/drawerlayout-1.0.0-rc02.aar/8846f885aac1c54ef8783aa5a8b53e19/jars/classes.jar:/Users/pedro/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-1.0.0-rc02.aar/7584b0f536ea39d500a847637cdca7d8/jars/classes.jar:/Users/pedro/.gradle/caches/transforms-1/files-1.1/customview-1.0.0-rc02.aar/7e708f3711d8638f3b629c29857bb76d/jars/classes.jar:/Users/pedro/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-1.0.0-rc02.aar/db7fdca483035c385ba5b6cb0ba27ef4/jars/classes.jar:/Users/pedro/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-1.0.0-rc02.aar/9c0f5bf48ea4c98d2b16f483d31fbf80/jars/classes.jar:/Users/pedro/.gradle/caches/transforms-1/files-1.1/core-1.0.0-rc02.aar/ef612f51c85acc582550d2ca2e83fde6/jars/classes.jar:/Users/pedro/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.0.0-rc02.aar/c658a2b8ea9dc1fd3951c7e30e05139e/jars/classes.jar:/Users/pedro/.gradle/caches/modules-2/files-2.1/androidx.collection/collection/1.0.0-rc02/a6f2dcbb844fe194f0ea37bc327a3ffab0de9e4f/collection-1.0.0-rc02.jar:/Users/pedro/.gradle/caches/transforms-1/files-1.1/cursoradapter-1.0.0-rc02.aar/2ad26e52c5843df876e78d7e843b41fb/jars/classes.jar:/Users/pedro/.gradle/caches/transforms-1/files-1.1/documentfile-1.0.0-rc02.aar/5f4f9d73a03673fceb596829e56a71f3/jars/classes.jar:/Users/pedro/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-1.0.0-rc02.aar/04866a97edabfb82fa4aad6c3c34fcd5/jars/classes.jar:/Users/pedro/.gradle/caches/transforms-1/files-1.1/print-1.0.0-rc02.aar/e4992c18ed3414ac065bdaeaddc1cdce/jars/classes.jar:/Users/pedro/.gradle/caches/transforms-1/files-1.1/interpolator-1.0.0-rc02.aar/f94b5557578c756f33f1384192e63a70/jars/classes.jar:/Users/pedro/.gradle/caches/modules-2/files-2.1/androidx.annotation/annotation/1.0.0-rc02/d3593590c18777c0721a538a06c6882621ab49fe/annotation-1.0.0-rc02.jar:/Users/pedro/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.2.70/b5b9449f73ce7bf312e89a7560cb3c209a0fa13e/kotlin-stdlib-1.2.70.jar:/Users/pedro/.gradle/caches/transforms-1/files-1.1/lifecycle-runtime-2.0.0-rc01.aar/3e2c839270af2d0c52d72fe43b4bbe5d/jars/classes.jar:/Users/pedro/.gradle/caches/transforms-1/files-1.1/lifecycle-viewmodel-2.0.0-rc01.aar/40a4c6d6199e6cd41383c826ee3f5cd9/jars/classes.jar:/Users/pedro/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.2.70/6ea722d7d0b9451293e739076ddb6a4108d57b6b/kotlin-stdlib-common-1.2.70.jar:/Users/pedro/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar:/Users/pedro/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-core-2.0.0-rc01.aar/3f9178a9c521d982b1d68765ff3ab880/jars/classes.jar:/Users/pedro/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common/2.0.0-rc01/5a3ff8721477d3d67070a6ae0f342bdc0b3dff3/lifecycle-common-2.0.0-rc01.jar:/Users/pedro/.gradle/caches/transforms-1/files-1.1/core-runtime-2.0.0-rc01.aar/0851bcc8fe443522baa62136d5b0bd78/jars/classes.jar:/Users/pedro/.gradle/caches/modules-2/files-2.1/androidx.arch.core/core-common/2.0.0-rc01/b8d58af4adf433117dc96446040f31a0a50fc3fd/core-common-2.0.0-rc01.jar:/Users/pedro/Library/Android/sdk/platforms/android-28/android.jar" />
           <option name="noStdlib" value="true" />
           <option name="noReflect" value="true" />
           <option name="moduleName" value="app_debug" />
+          <option name="jvmTarget" value="1.8" />
           <option name="addCompilerBuiltIns" value="true" />
           <option name="loadBuiltInsFromDependencies" value="true" />
           <option name="languageVersion" value="1.2" />
@@ -42,7 +44,7 @@
           </option>
           <option name="pluginClasspaths">
             <array>
-              <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-android-extensions/1.2.61/564710f8171991001cba1c828c3331d833d9d28b/kotlin-android-extensions-1.2.61.jar" />
+              <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-android-extensions/1.2.70/78e0f7c6cfaa0cae663e43ff6e304707e7855b8e/kotlin-android-extensions-1.2.70.jar" />
             </array>
           </option>
         </compilerArguments>
@@ -116,6 +118,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/assets" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/blame" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/build-info" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/bundle_manifest" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/check-manifest" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/checkDebugClasspath" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/check_manifest_result" />
@@ -125,6 +128,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-runtime-classes" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-verifier" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant-run-apk" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant_app_manifest" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant_run_app_info_output_file" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant_run_main_apk_resources" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant_run_merged_manifests" />
@@ -138,6 +142,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifests" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/merged_assets" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/merged_manifests" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/metadata_feature_manifest" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/prebuild" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/processed_res" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/reload-dex" />
@@ -161,7 +166,7 @@
     <orderEntry type="library" name="Gradle: androidx.appcompat:appcompat-1.0.0-rc02" level="project" />
     <orderEntry type="library" name="Gradle: androidx.arch.core:core-runtime-2.0.0-rc01" level="project" />
     <orderEntry type="library" name="Gradle: androidx.fragment:fragment-1.0.0-rc02" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.2.61@jar" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.2.70@jar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.vectordrawable:vectordrawable-1.0.0-rc02" level="project" />
     <orderEntry type="library" name="Gradle: androidx.legacy:legacy-support-core-utils-1.0.0-rc02" level="project" />
     <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-livedata-core-2.0.0-rc01" level="project" />
@@ -176,18 +181,18 @@
     <orderEntry type="library" name="Gradle: androidx.print:print-1.0.0-rc02" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains:annotations:13.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.swiperefreshlayout:swiperefreshlayout-1.0.0-rc02" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.70@jar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-common:2.0.0-rc01@jar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.core:core-1.0.0-rc02" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.2.70@jar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.slidingpanelayout:slidingpanelayout-1.0.0-rc02" level="project" />
     <orderEntry type="library" name="Gradle: androidx.versionedparcelable:versionedparcelable-1.0.0-rc02" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.61@jar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-viewmodel-2.0.0-rc01" level="project" />
     <orderEntry type="library" name="Gradle: androidx.viewpager:viewpager-1.0.0-rc02" level="project" />
     <orderEntry type="library" name="Gradle: androidx.localbroadcastmanager:localbroadcastmanager-1.0.0-rc02" level="project" />
     <orderEntry type="library" name="Gradle: androidx.legacy:legacy-support-core-ui-1.0.0-rc02" level="project" />
     <orderEntry type="library" name="Gradle: androidx.core:core-ktx-1.0.0-rc02" level="project" />
     <orderEntry type="library" name="Gradle: androidx.loader:loader-1.0.0-rc02" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.2.61@jar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-runtime-2.0.0-rc01" level="project" />
     <orderEntry type="library" name="Gradle: androidx.annotation:annotation:1.0.0-rc02@jar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.cursoradapter:cursoradapter-1.0.0-rc02" level="project" />
