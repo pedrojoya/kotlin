@@ -2,11 +2,12 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rlRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/main_activity_margin"
-    android:paddingRight="@dimen/main_activity_margin"
-    android:paddingTop="@dimen/main_activity_margin">
+    android:paddingLeft="@dimen/main_margin"
+    android:paddingRight="@dimen/main_margin"
+    android:paddingTop="@dimen/main_margin">
 
     <TextView
         android:id="@+id/lblTitle"
@@ -14,15 +15,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:text="@string/activity_main_lblTitle"/>
+        android:text="@string/main_lblTitle"/>
 
     <TextView
         android:id="@+id/lblUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/lblTitle"
-        android:layout_marginTop="@dimen/main_activity_margin"
-        android:text="@string/activity_main_lblUsername"
+        android:layout_marginTop="@dimen/main_margin"
+        android:text="@string/main_lblUsername"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textStyle="bold"
         android:visibility="invisible"
@@ -33,10 +34,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/lblUsername"
-        android:hint="@string/activity_main_txtUsername"
+        android:hint="@string/main_txtUsername"
         android:imeOptions="actionNext"
         android:inputType="text"
-        android:maxLength="@integer/activity_main_txtUsername_maxLength"
+        android:maxLength="@integer/main_txtUsername_maxLength"
         android:maxLines="1"
         android:paddingTop="0dp">
 
@@ -48,8 +49,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtUsername"
-        android:layout_marginTop="@dimen/main_activity_margin"
-        android:text="@string/activity_main_lblPassword"
+        android:layout_marginTop="@dimen/main_margin"
+        android:text="@string/main_lblPassword"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:visibility="invisible"
         tools:visibility="visible"/>
@@ -59,10 +60,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/lblPassword"
-        android:hint="@string/activity_main_txtPassword"
+        android:hint="@string/main_txtPassword"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
-        android:maxLength="@integer/activity_main_txtPassword_maxLength"
+        android:maxLength="@integer/main_txtPassword_maxLength"
         android:maxLines="1"
         android:paddingTop="0dp"/>
 
@@ -86,7 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/activitiy_main_btnCancel"/>
+            android:text="@string/main_btnCancel"/>
 
         <Button
             android:id="@+id/btnLogin"
@@ -94,7 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/activity_main_btnLogin"/>
+            android:text="@string/main_btnLogin"/>
     </LinearLayout>
 
 </RelativeLayout>

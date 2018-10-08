@@ -1,5 +1,6 @@
 package es.iessaladillo.pedrojoya.pr045.ui.main
 
+import android.animation.LayoutTransition
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -15,12 +16,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         setContentView(R.layout.activity_main)
-        initViews()
+        setupViews()
     }
 
-    private fun initViews() {
+    private fun setupViews() {
         imgDetail.setOnClickListener { toggleDetailVisibility() }
         setupPanelState(viewModel.isDetailOpen)
+        // Enable transition when childen size change.
+        flRoot.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
+
     }
 
     private fun setupPanelState(isVisible: Boolean) {

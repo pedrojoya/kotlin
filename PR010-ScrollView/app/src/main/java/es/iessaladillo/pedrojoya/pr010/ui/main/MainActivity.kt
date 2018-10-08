@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
 import es.iessaladillo.pedrojoya.pr010.R
 import es.iessaladillo.pedrojoya.pr010.extensions.afterTextChanged
+import es.iessaladillo.pedrojoya.pr010.extensions.hideSoftKeyboard
 import es.iessaladillo.pedrojoya.pr010.extensions.isNotBlank
 import es.iessaladillo.pedrojoya.pr010.extensions.onAction
 import kotlinx.android.synthetic.main.activity_main.*
@@ -18,10 +19,10 @@ class MainActivity : AppCompatActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initViews()
+        setupViews()
     }
 
-    private fun initViews() {
+    private fun setupViews() {
         txtMessage.apply {
             onAction { sendMessage(text.toString()) }
             afterTextChanged { checkIsValidForm() }
@@ -33,9 +34,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun sendMessage(text: String) {
-        lblText.append(getString(R.string.main_activity_log_message, simpleDateFormat.format(Date()), text))
-        txtMessage.setText("")
-        doScroll(scvText)
+        if (!text.isBlank()) {
+            hideSoftKeyboard()
+            lblText.append(getString(R.string.main_log_message, simpleDateFormat.format(Date()), text))
+            txtMessage.setText("")
+            doScroll(scvText)
+        }
     }
 
     private fun doScroll(scv: NestedScrollView) {

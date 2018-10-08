@@ -37,6 +37,3 @@ fun TextView.labelTextView(
         onFocusChange(v, hasFocus)
     }
 }
-
-fun TextView.isNotBlank() = text.isNotBlank()
-

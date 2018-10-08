@@ -3,7 +3,6 @@ package es.iessaladillo.pedrojoya.pr008.ui.main
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import es.iessaladillo.pedrojoya.pr008.R
-import es.iessaladillo.pedrojoya.pr008.extensions.isNotBlank
 import es.iessaladillo.pedrojoya.pr008.extensions.labelTextView
 import es.iessaladillo.pedrojoya.pr008.extensions.toast
 import kotlinx.android.synthetic.main.activity_main.*
@@ -11,15 +10,15 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private val isValid: Boolean
-        get() = txtUsername.isNotBlank() && txtPassword.isNotBlank()
+        get() = txtUsername.text.isNotBlank() && txtPassword.text.isNotBlank()
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initViews()
+        setupViews()
     }
 
-    private fun initViews() {
+    private fun setupViews() {
         btnLogin.setOnClickListener { signIn() }
         btnCancel.setOnClickListener { resetViews() }
         txtUsername.labelTextView(lblUsername, afterTextChange = { checkIsValidForm() })
@@ -27,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun signIn() {
-        toast(getString(R.string.main_activity_connected, txtUsername.text))
+        toast(getString(R.string.main_connected, txtUsername.text))
     }
 
     private fun resetViews() {

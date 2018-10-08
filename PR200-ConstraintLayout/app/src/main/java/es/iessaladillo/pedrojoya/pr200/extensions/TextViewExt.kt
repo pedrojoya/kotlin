@@ -48,6 +48,3 @@ fun TextView.onActionDone(action: () -> Unit) {
         false
     }
 }
-
-fun TextView.isNotBlank() = text.isNotBlank()
-
