@@ -2,11 +2,10 @@ package es.iessaladillo.pedrojoya.pr011.ui.main
 
 import android.os.Bundle
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import es.iessaladillo.pedrojoya.pr011.R
-import es.iessaladillo.pedrojoya.pr011.data.local.Database
 import es.iessaladillo.pedrojoya.pr011.data.RepositoryImpl
+import es.iessaladillo.pedrojoya.pr011.data.local.Database
 import es.iessaladillo.pedrojoya.pr011.extensions.*
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -20,61 +19,67 @@ class MainActivity : AppCompatActivity() {
         ArrayAdapter(this, android.R.layout.simple_list_item_1, viewModel.data)
     }
 
-    private val isValidForm
-        get() = txtName.isNotBlank()
+    private fun isValidForm() = txtName.text.isNotBlank()
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initViews()
+        setupViews()
+        checkInitialState()
+
     }
 
-    private fun initViews() {
+    private fun setupViews() {
         btnAdd.setOnClickListener { addStudent() }
         txtName.apply {
-            afterTextChanged { checkIsValidForm() }
-            onImeAction {
-                if (isValidForm) {
-                    addStudent()
-                }
-            }
+            setAfterTextChangedListener { checkIsValidForm() }
+            setOnImeActionDone { addStudent() }
         }
         lstStudents.apply {
             setOnItemClickListener { _, _, position, _ ->
                 listAdapter.getItem(position)?.let { showStudent(it) }
             }
             setOnItemLongClickListener { _, _, position, _ ->
-                deleteStudent(position)
+                listAdapter.getItem(position)?.let { deleteStudent(it) }
                 true
             }
-            adapter = listAdapter
             emptyView = lblEmptyView
+            adapter = listAdapter
         }
-        // Initial state
-        checkIsValidForm()
     }
 
     private fun addStudent() {
-        hideKeyboard()
-        viewModel.addStudent(txtName.text.toString())
-        // ArrayAdapter always scroll to bottom on notifyDataSetChanged.
-        listAdapter.notifyDataSetChanged()
+        if (isValidForm()) {
+            hideSoftKeyboard()
+            viewModel.addStudent(txtName.text.toString())
+            // ArrayAdapter always scroll to bottom on notifyDataSetChanged.
+            listAdapter.notifyDataSetChanged()
+            resetForm()
+        }
+    }
+
+    private fun resetForm() {
         txtName.setText("")
+    }
+
+    private fun checkInitialState() {
         checkIsValidForm()
     }
 
-    private fun deleteStudent(position: Int) {
-        viewModel.deleteStudent(position)
+    private fun deleteStudent(student: String) {
+        hideSoftKeyboard()
+        viewModel.deleteStudent(student)
         // ArrayAdapter always scroll to bottom on notifyDataSetChanged.
         listAdapter.notifyDataSetChanged()
     }
 
     private fun showStudent(student: String) {
-        Toast.makeText(this, student, Toast.LENGTH_SHORT).show()
+        hideSoftKeyboard()
+        toast(student)
     }
 
     private fun checkIsValidForm() {
-        btnAdd.isEnabled = isValidForm
+        btnAdd.isEnabled = isValidForm()
     }
 
 }

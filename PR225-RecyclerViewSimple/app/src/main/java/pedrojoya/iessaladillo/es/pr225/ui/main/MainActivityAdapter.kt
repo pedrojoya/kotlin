@@ -10,8 +10,10 @@ import pedrojoya.iessaladillo.es.pr225.data.local.model.Student
 import pedrojoya.iessaladillo.es.pr225.extensions.inflate
 import pedrojoya.iessaladillo.es.pr225.extensions.loadUrl
 
-class MainActivityAdapter(private val data: List<Student> = emptyList()) :
+class MainActivityAdapter :
         RecyclerView.Adapter<MainActivityAdapter.ViewHolder>() {
+
+    private var data: List<Student> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
             ViewHolder(parent.inflate(R.layout.activity_main_item))
@@ -21,6 +23,11 @@ class MainActivityAdapter(private val data: List<Student> = emptyList()) :
     }
 
     override fun getItemCount() = data.size
+
+    fun submitList(newData: List<Student>) {
+        data = newData
+        notifyDataSetChanged()
+    }
 
     class ViewHolder(override val containerView: View) :
             RecyclerView.ViewHolder(containerView), LayoutContainer {

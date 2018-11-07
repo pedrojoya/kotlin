@@ -30,81 +30,69 @@ public class MainActivityTests {
     public IntentsTestRule<MainActivity> mActivityRule = new IntentsTestRule(MainActivity.class);
 
     @Test
-    public void validateNavegar() {
+    public void shouldNavigate() {
         onView(withId(R.id.btnShowInBrowser)).perform(click());
         intended(allOf(
-                //toPackage("com.android.browser"),
-                hasAction(Intent.ACTION_VIEW),
-                hasData(UriMatchers.hasScheme("http"))
-                )
+            //toPackage("com.android.browser"),
+            hasAction(Intent.ACTION_VIEW),
+            hasData(UriMatchers.hasScheme("http"))
+            )
         );
     }
 
     @Test
-    public void validateBuscar() {
+    public void shouldWebSearch() {
         onView(withId(R.id.btnSearch)).perform(click());
         intended(allOf(
-                //toPackage("com.android.quicksearchbox"),
-                hasAction(Intent.ACTION_WEB_SEARCH),
-                hasExtraWithKey(SearchManager.QUERY)
-                )
+            //toPackage("com.android.quicksearchbox"),
+            hasAction(Intent.ACTION_WEB_SEARCH),
+            hasExtraWithKey(SearchManager.QUERY)
+            )
         );
     }
 
     @Test
-    public void validateLlamar() {
-        onView(withId(R.id.btnCall)).perform(click());
-        intended(allOf(
-                //toPackage("com.android.server.telecom"),
-                hasAction(Intent.ACTION_CALL),
-                hasData(UriMatchers.hasScheme("tel"))
-                )
-        );
-    }
-
-    @Test
-    public void validateMarcar() {
+    public void shouldDial() {
         onView(withId(R.id.btnDial)).perform(click());
         intended(allOf(
-                //toPackage("com.android.dialer"),
-                hasData(UriMatchers.hasScheme("tel")),
-                hasAction(Intent.ACTION_DIAL)
-                )
+            //toPackage("com.android.dialer"),
+            hasData(UriMatchers.hasScheme("tel")),
+            hasAction(Intent.ACTION_DIAL)
+            )
         );
     }
 
     @Test
-    public void validateMostrarMapa() {
+    public void shouldShowInMap() {
         onView(withId(R.id.btnShowInMap)).perform(click());
         intended(allOf(
-                //toPackage("com.google.android.apps.maps")
-                hasAction(Intent.ACTION_VIEW),
-                hasData(UriMatchers.hasScheme("geo"))
-                )
+            //toPackage("com.google.android.apps.maps")
+            hasAction(Intent.ACTION_VIEW),
+            hasData(UriMatchers.hasScheme("geo"))
+            )
         );
     }
 
     @Test
-    public void validateBuscarMapa() {
+    public void shouldSearchInMap() {
         onView(withId(R.id.btnSearchInMap)).perform(click());
         intended(allOf(
-                //toPackage("com.google.android.apps.maps")
-                hasAction(Intent.ACTION_VIEW),
-                hasData(UriMatchers.hasScheme("geo"))
-                )
+            //toPackage("com.google.android.apps.maps")
+            hasAction(Intent.ACTION_VIEW),
+            hasData(UriMatchers.hasScheme("geo"))
+            )
         );
     }
 
     @Test
-    public void validateMostrarContactos() {
+    public void shouldShowContacts() {
         onView(withId(R.id.btnShowContacts)).perform(click());
         intended(allOf(
-                //toPackage("com.android.contacts")
-                hasAction(Intent.ACTION_VIEW),
-                hasData(UriMatchers.hasScheme("content"))
-                )
+            //toPackage("com.android.contacts")
+            hasAction(Intent.ACTION_VIEW),
+            hasData(UriMatchers.hasScheme("content"))
+            )
         );
     }
-
 
 }

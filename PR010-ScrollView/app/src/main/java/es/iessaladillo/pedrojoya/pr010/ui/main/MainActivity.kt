@@ -4,10 +4,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
 import es.iessaladillo.pedrojoya.pr010.R
-import es.iessaladillo.pedrojoya.pr010.extensions.afterTextChanged
 import es.iessaladillo.pedrojoya.pr010.extensions.hideSoftKeyboard
-import es.iessaladillo.pedrojoya.pr010.extensions.isNotBlank
-import es.iessaladillo.pedrojoya.pr010.extensions.onAction
+import es.iessaladillo.pedrojoya.pr010.extensions.setAfterTextChangedListener
+import es.iessaladillo.pedrojoya.pr010.extensions.setOnImeActionDone
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -20,21 +19,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupViews()
+        checkInitialState()
+
     }
 
-    private fun setupViews() {
-        txtMessage.apply {
-            onAction { sendMessage(text.toString()) }
-            afterTextChanged { checkIsValidForm() }
-        }
-        btnSend.setOnClickListener { sendMessage(txtMessage.text.toString()) }
-        // Initial state
+    private fun checkInitialState() {
         checkIsValidForm()
         doScroll(scvText)
     }
 
-    private fun sendMessage(text: String) {
-        if (!text.isBlank()) {
+    private fun setupViews() {
+        txtMessage.apply {
+            setAfterTextChangedListener { checkIsValidForm() }
+            setOnImeActionDone { sendMessage() }
+        }
+        btnSend.setOnClickListener { sendMessage() }
+    }
+
+    private fun sendMessage() {
+        val text = txtMessage.text.toString()
+        if (isValidForm()) {
             hideSoftKeyboard()
             lblText.append(getString(R.string.main_log_message, simpleDateFormat.format(Date()), text))
             txtMessage.setText("")
@@ -51,7 +55,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkIsValidForm() {
-        btnSend.isEnabled = txtMessage.isNotBlank()
+        btnSend.isEnabled = isValidForm()
     }
+
+    private fun isValidForm() = txtMessage.text.isNotBlank()
 
 }

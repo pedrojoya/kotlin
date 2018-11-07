@@ -8,8 +8,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import pedrojoya.iessaladillo.es.pr106.R
 import pedrojoya.iessaladillo.es.pr106.base.setOnItemClickListener
 import pedrojoya.iessaladillo.es.pr106.base.setOnItemLongClickListener
-import pedrojoya.iessaladillo.es.pr106.data.local.Database
 import pedrojoya.iessaladillo.es.pr106.data.RepositoryImpl
+import pedrojoya.iessaladillo.es.pr106.data.local.Database
 import pedrojoya.iessaladillo.es.pr106.data.local.model.Student
 import pedrojoya.iessaladillo.es.pr106.data.local.newFakeStudent
 import pedrojoya.iessaladillo.es.pr106.extensions.snackbar
@@ -38,10 +38,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initViews()
+        setupViews()
     }
 
-    private fun initViews() {
+    private fun setupViews() {
         setupToolbar()
         setupRecyclerView()
         setupFab()
@@ -49,10 +49,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupToolbar() {
         setSupportActionBar(toolbar)
-        supportActionBar?.run {
-            setHomeButtonEnabled(true)
-            setDisplayShowHomeEnabled(true)
-        }
     }
 
     private fun setupFab() {

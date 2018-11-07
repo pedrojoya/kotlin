@@ -12,8 +12,8 @@ object Database {
         students.add(student)
     }
 
-    fun deleteStudent(position: Int) {
-        students.removeAt(position)
+    fun deleteStudent(student: String) {
+        students.remove(student)
     }
 
 }

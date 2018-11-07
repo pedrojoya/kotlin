@@ -2,12 +2,12 @@ package es.iessaladillo.pedrojoya.pr016.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import es.iessaladillo.pedrojoya.pr012.data.RepositoryImpl
 import es.iessaladillo.pedrojoya.pr016.R
+import es.iessaladillo.pedrojoya.pr016.data.RepositoryImpl
 import es.iessaladillo.pedrojoya.pr016.data.local.Database
 import es.iessaladillo.pedrojoya.pr016.data.local.model.Student
 import es.iessaladillo.pedrojoya.pr016.extensions.toast
-import es.iessaladillo.pedrojoya.pr097.extensions.viewModelProvider
+import es.iessaladillo.pedrojoya.pr016.extensions.viewModelProvider
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -20,10 +20,10 @@ class MainActivity : AppCompatActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initViews()
+        setupViews()
     }
 
-    private fun initViews() {
+    private fun setupViews() {
         lstStudents.run {
             setAdapter(listAdapter)
             // All groups initially expanded.

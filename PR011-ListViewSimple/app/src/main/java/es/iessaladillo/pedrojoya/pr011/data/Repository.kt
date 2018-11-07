@@ -4,6 +4,6 @@ interface Repository {
 
     fun queryStudents(): List<String>
     fun addStudent(student: String)
-    fun deleteStudent(position: Int)
+    fun deleteStudent(student: String)
 
 }

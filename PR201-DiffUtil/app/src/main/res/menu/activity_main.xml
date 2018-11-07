@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/mnuOrdenar"
-        android:title="@string/ordenar"
+        android:id="@+id/mnuSort"
+        android:title="@string/main_mnuSort"
         android:icon="@drawable/ic_sort_by_alpha"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom|withText"/>
 </menu>

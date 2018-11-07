@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     private val listAdapter: MainActivityAdapter by lazy {
         MainActivityAdapter(viewModel.students as ArrayList<Student>).apply {
             setOnItemClickListener { view, position ->
-                snackbar(view, getString(R.string.main_activity_click_on_student, getItem(position).name))
+                snackbar(view, getString(R.string.main_click_on_student, getItem(position).name))
             }
             emptyView = lblEmpty
         }
@@ -34,10 +34,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initViews()
+        setupViews()
     }
 
-    private fun initViews() {
+    private fun setupViews() {
         setupToolbar()
         setupRecyclerView()
         setupFab()
@@ -45,10 +45,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupToolbar() {
         setSupportActionBar(toolbar)
-        supportActionBar?.run {
-            setHomeButtonEnabled(true)
-            setDisplayShowHomeEnabled(true)
-        }
     }
 
     private fun setupFab() {

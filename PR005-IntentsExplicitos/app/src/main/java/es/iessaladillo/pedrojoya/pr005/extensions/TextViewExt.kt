@@ -7,7 +7,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.TextView
 
-fun TextView.afterTextChanged(action: (Editable?) -> Unit) {
+fun TextView.addAfterTextChanged(action: (Editable?) -> Unit) {
     this.addTextChangedListener(object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
         }
@@ -42,7 +42,7 @@ fun TextView.addTextChangeListener(init: TextWatcherHelper.() -> Unit) {
 // las lambdas correspondientes.
 class TextWatcherHelper : TextWatcher {
 
-    // Para configurar el afterTextChanged
+    // Para configurar el addAfterTextChanged
 
     private var afterTextChangeLambda: ((editable: Editable?) -> Unit)? = null
 

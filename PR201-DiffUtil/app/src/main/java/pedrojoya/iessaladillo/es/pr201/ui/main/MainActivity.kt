@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initViews()
+        setupViews()
         viewModel.students.observe(this, Observer { students ->
             currentStudents = students
             listAdapter.submitList(
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun initViews() {
+    private fun setupViews() {
         setupToolbar()
         setupRecyclerView()
         setupFab()
@@ -57,14 +57,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupToolbar() {
         setSupportActionBar(toolbar)
-        supportActionBar?.run {
-            setHomeButtonEnabled(true)
-            setDisplayShowHomeEnabled(true)
-        }
     }
 
     private fun setupFab() {
-        fabAccion.setOnClickListener { addStudent() }
+        fab.setOnClickListener { addStudent() }
     }
 
     private fun setupRecyclerView() {
@@ -98,7 +94,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.mnuOrdenar) {
+        if (item.itemId == R.id.mnuSort) {
             viewModel.toggleOrder()
             currentStudents?.run {
                 listAdapter.submitList(

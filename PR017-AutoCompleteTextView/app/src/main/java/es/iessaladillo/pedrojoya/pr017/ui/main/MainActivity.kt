@@ -21,39 +21,42 @@ class MainActivity : AppCompatActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initViews()
+        setupViews()
+        checkInitialState()
     }
 
-    private fun initViews() {
-        txtWord.apply {
-            setAdapter(MainActivityAdapter(viewModel.data))
-            afterTextChanged { checkIsValidForm() }
-            onImeAction(EditorInfo.IME_ACTION_SEARCH) {
-                if (txtWord.isNotBlank()) {
-                    searchWord(txtWord.text.toString())
-                }
-            }
-        }
-        wvWeb.onPageFinished { _, _ -> wvWeb.visibility = View.VISIBLE }
-        btnTranslate.setOnClickListener {
-            searchWord(txtWord.text.toString())
-        }
-        // Initial state.
+    private fun checkInitialState() {
         checkIsValidForm()
         if (viewModel.loadedWord.isNotBlank()) {
-            searchWord(viewModel.loadedWord)
+            searchWord()
         }
     }
 
-    private fun searchWord(word: String) {
-        hideKeyboard()
-        viewModel.loadedWord = word
-        wvWeb.loadUrl(BASE_URL + word)
+    private fun setupViews() {
+        txtWord.apply {
+            setAdapter(MainActivityAdapter(viewModel.data))
+            setText(viewModel.loadedWord)
+            setAfterTextChangedListener { checkIsValidForm() }
+            setOnImeAction(EditorInfo.IME_ACTION_SEARCH) { searchWord() }
+        }
+        wvWeb.onPageFinished { _, _ -> wvWeb.visibility = View.VISIBLE }
+        btnTranslate.setOnClickListener { searchWord() }
+    }
+
+    private fun searchWord() {
+        val word = txtWord.text.toString().trim()
+        if (isValidForm()) {
+            hideKeyboard()
+            viewModel.loadedWord = word
+            wvWeb.loadUrl(BASE_URL + word)
+        }
     }
 
     private fun checkIsValidForm() {
-        btnTranslate.isEnabled = txtWord.isNotBlank()
+        btnTranslate.isEnabled = isValidForm()
     }
+
+    private fun isValidForm() = txtWord.text.isNotBlank()
 
 }
 

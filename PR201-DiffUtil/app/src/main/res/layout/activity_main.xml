@@ -26,8 +26,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fadeScrollbars="false"
-        android:paddingBottom="@dimen/main_activity_lstStudents_padding"
-        android:paddingTop="@dimen/main_activity_lstStudents_padding"
+        android:paddingBottom="@dimen/main_lstStudents_padding"
+        android:paddingTop="@dimen/main_lstStudents_padding"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     <TextView
@@ -35,19 +35,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:drawablePadding="@dimen/main_activity_emptyView_drawablePadding"
-        android:drawableTop="@drawable/ic_person_add_black_24dp"
-        android:text="@string/no_hay_alumnos"
+        android:drawablePadding="@dimen/main_lblEmptyView_drawablePadding"
+        android:drawableTop="@drawable/ic_person_add_black_48dp"
+        android:text="@string/main_lblEmptyView"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAccion"
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginBottom="@dimen/fab_margin"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:elevation="@dimen/fab_elevation"
+        android:layout_marginBottom="@dimen/main_fab_margin"
+        android:layout_marginEnd="@dimen/main_fab_margin"
+        android:elevation="@dimen/main_fab_elevation"
         app:srcCompat="@drawable/ic_add_black_24dp"
         android:tint="@color/white"/>
 

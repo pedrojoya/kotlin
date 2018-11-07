@@ -7,8 +7,8 @@ import android.text.TextWatcher
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 
-fun TextView.afterTextChanged(afterTextChanged: (Editable?) -> Unit) {
-    this.addTextChangedListener(object : TextWatcher {
+inline fun TextView.setAfterTextChangedListener(crossinline action: (Editable?) -> Unit) {
+    addTextChangedListener(object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
         }
 
@@ -16,20 +16,16 @@ fun TextView.afterTextChanged(afterTextChanged: (Editable?) -> Unit) {
         }
 
         override fun afterTextChanged(editable: Editable?) {
-            afterTextChanged.invoke(editable)
+            action(editable)
         }
     })
 }
 
-fun TextView.onImeAction(imeAction: Int = EditorInfo.IME_ACTION_DONE, action: () -> Unit) {
+inline fun TextView.setOnImeActionDone(crossinline action: () -> Unit) {
     setOnEditorActionListener { _, actionId, _ ->
-        if (actionId == imeAction) {
+        if (actionId == EditorInfo.IME_ACTION_DONE) {
             action()
             true
-        } else {
-            false
-        }
+        } else false
     }
 }
-
-fun TextView.isNotBlank() = text.isNotBlank()

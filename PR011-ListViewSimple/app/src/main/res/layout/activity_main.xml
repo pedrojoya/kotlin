@@ -57,7 +57,8 @@
         android:layout_toStartOf="@+id/btnAdd"
         android:hint="@string/main_activity_txtName"
         android:imeOptions="actionDone"
-        android:inputType="textPersonName">
+        android:inputType="textPersonName"
+        tools:ignore="Autofill">
 
         <requestFocus />
     </EditText>

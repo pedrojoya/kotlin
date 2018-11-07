@@ -11,9 +11,13 @@ import es.iessaladillo.pedrojoya.pr169.base.Event
 import es.iessaladillo.pedrojoya.pr169.base.RequestState
 import es.iessaladillo.pedrojoya.pr169.data.models.TranslateResponse
 import es.iessaladillo.pedrojoya.pr169.data.remote.ApiService
-import es.iessaladillo.pedrojoya.pr169.extensions.*
+import es.iessaladillo.pedrojoya.pr169.extensions.hideSoftKeyboard
+import es.iessaladillo.pedrojoya.pr169.extensions.setAfterTextChangedListener
+import es.iessaladillo.pedrojoya.pr169.extensions.setOnImeActionListener
+import es.iessaladillo.pedrojoya.pr169.extensions.viewModelProvider
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main_content.*
+import java.net.HttpURLConnection
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,9 +35,9 @@ class MainActivity : AppCompatActivity() {
     private fun initViews() {
         setupToolbar()
         setupFab()
-        txtWord.onAction(EditorInfo.IME_ACTION_SEARCH) { translate() }
-        txtWord.afterTextChanged {
-            if (txtTranslation.isNotBlank()) {
+        txtWord.setOnImeActionListener(EditorInfo.IME_ACTION_SEARCH) { translate() }
+        txtWord.setAfterTextChangedListener {
+            if (txtTranslation.text.isNotBlank()) {
                 txtTranslation.setText("")
             }
         }
@@ -48,9 +52,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun translate() {
-        hideKeyboard()
+        hideSoftKeyboard()
         resetViews()
-        if (txtWord.isNotBlank()) {
+        if (txtWord.text.isNotBlank()) {
             viewModel.translateFromApi(txtWord.text.toString().trim())
         }
     }
@@ -62,18 +66,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun observeTranslation() {
         viewModel.translation.observe(this, Observer { request ->
-            @Suppress("UNCHECKED_CAST")
             when (request) {
                 is RequestState.Loading -> pbTranslating.visibility = if (request.isLoading) View.VISIBLE else View.INVISIBLE
                 is RequestState.Error -> showRequestError(request.exception)
-                is RequestState.Result<*> -> showTranslation((request as RequestState.Result<TranslateResponse>).data)
+                is RequestState.Result<TranslateResponse> -> showTranslation(request.data)
             }
         })
     }
 
     private fun showTranslation(response: TranslateResponse) {
         pbTranslating.visibility = View.INVISIBLE
-        if (response.code == 200) {
+        if (response.code == HttpURLConnection.HTTP_OK) {
             txtTranslation.setText(response.text.joinToString(", "))
         } else {
             showTranslationError()

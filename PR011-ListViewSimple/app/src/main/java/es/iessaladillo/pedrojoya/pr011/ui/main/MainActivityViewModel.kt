@@ -12,8 +12,8 @@ class MainActivityViewModel(private val repository: Repository) :
         repository.addStudent(student)
     }
 
-    fun deleteStudent(position: Int) {
-        repository.deleteStudent(position)
+    fun deleteStudent(student: String) {
+        repository.deleteStudent(student)
     }
 
 }

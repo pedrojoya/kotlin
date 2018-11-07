@@ -22,25 +22,29 @@ class StudentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_student)
-        initViews()
+        setupViews()
     }
 
-    private fun initViews() {
+    private fun setupViews() {
         txtName.run {
             setText(name)
             // Opción más completa porque permite especifcar más listeners del TextWatcher
-            // además de afterTextChanged.
+            // además de addAfterTextChanged.
             addTextChangeListener {
                 afterTextChanged {
-                    btnSend.isEnabled = isValidForm()
+                    checkIsValidForm()
                 }
             }
         }
         txtAge.run {
             setText(age.toString())
-            afterTextChanged { btnSend.isEnabled = isValidForm() }
+            addAfterTextChanged { checkIsValidForm() }
         }
         btnSend.setOnClickListener { sendResult() }
+    }
+
+    private fun checkIsValidForm() {
+        btnSend.isEnabled = isValidForm()
     }
 
     private fun isValidForm() =

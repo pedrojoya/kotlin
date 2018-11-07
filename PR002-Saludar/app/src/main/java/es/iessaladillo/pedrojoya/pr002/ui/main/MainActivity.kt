@@ -12,10 +12,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initViews()
+        setupViews()
     }
 
-    private fun initViews() {
+    private fun setupViews() {
         chkPolite.setOnCheckedChangeListener { _, isChecked -> changeText(isChecked) }
         btnGreet.setOnClickListener { greet() }
     }
@@ -23,16 +23,16 @@ class MainActivity : AppCompatActivity() {
     private fun greet() {
         hideKeyboard()
         toast(StringBuilder()
-                .append(getString(R.string.main_activity_good_morning))
-                .append(if (chkPolite.isChecked) getString(R.string.main_activity_nice_to_meet_you) else "")
+                .append(getString(R.string.main_good_morning))
+                .append(if (chkPolite.isChecked) getString(R.string.main_nice_to_meet_you) else "")
                 .append(" ")
                 .append(txtName.text).toString())
     }
 
     private fun changeText(isChecked: Boolean) {
         chkPolite.text = getString(
-                if (isChecked) R.string.main_activity_polite_mode
-                else R.string.main_activity_impolite_mode
+                if (isChecked) R.string.main_polite_mode
+                else R.string.main_impolite_mode
         )
     }
 

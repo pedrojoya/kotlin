@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:text="@string/main_lblTitle"/>
+        android:text="@string/main_lblLogin"/>
 
     <TextView
         android:id="@+id/lblUsername"
@@ -25,7 +25,6 @@
         android:layout_marginTop="@dimen/main_margin"
         android:text="@string/main_lblUsername"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textStyle="bold"
         android:visibility="invisible"
         tools:visibility="visible"/>
 
@@ -39,7 +38,8 @@
         android:inputType="text"
         android:maxLength="@integer/main_txtUsername_maxLength"
         android:maxLines="1"
-        android:paddingTop="0dp">
+        android:paddingTop="0dp"
+        tools:ignore="Autofill">
 
         <requestFocus/>
     </EditText>
@@ -65,7 +65,8 @@
         android:inputType="textPassword"
         android:maxLength="@integer/main_txtPassword_maxLength"
         android:maxLines="1"
-        android:paddingTop="0dp"/>
+        android:paddingTop="0dp"
+        tools:ignore="Autofill"/>
 
     <View
         android:id="@+id/divider"

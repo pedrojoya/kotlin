@@ -7,7 +7,5 @@ import androidx.core.content.getSystemService
 fun Activity.hideSoftKeyboard() {
     val imm = getSystemService<InputMethodManager>()
     val view = currentFocus
-    if (view != null) {
-        imm?.hideSoftInputFromWindow(view.windowToken, 0)
-    }
+    view?.let { imm?.hideSoftInputFromWindow(it.windowToken, 0) }
 }

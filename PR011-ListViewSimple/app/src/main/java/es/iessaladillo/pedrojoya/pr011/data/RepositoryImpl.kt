@@ -12,8 +12,8 @@ class RepositoryImpl(private val database: Database) : Repository {
         database.addStudent(student)
     }
 
-    override fun deleteStudent(position: Int) {
-        database.deleteStudent(position)
+    override fun deleteStudent(student: String) {
+        database.deleteStudent(student)
     }
 
 }

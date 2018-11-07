@@ -5,6 +5,6 @@ import pedrojoya.iessaladillo.es.pr225.data.Repository
 
 class MainActivityViewModel(private val repository: Repository) : ViewModel() {
 
-    val data by lazy { repository.queryStudents() }
+    val students by lazy { repository.queryStudents() }
 
 }

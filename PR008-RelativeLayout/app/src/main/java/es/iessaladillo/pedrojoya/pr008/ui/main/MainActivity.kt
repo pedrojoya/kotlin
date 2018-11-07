@@ -1,32 +1,71 @@
 package es.iessaladillo.pedrojoya.pr008.ui.main
 
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.TextUtils
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import es.iessaladillo.pedrojoya.pr008.R
-import es.iessaladillo.pedrojoya.pr008.extensions.labelTextView
+import es.iessaladillo.pedrojoya.pr008.extensions.hideSoftKeyboard
+import es.iessaladillo.pedrojoya.pr008.extensions.setAfterTextChangedListener
+import es.iessaladillo.pedrojoya.pr008.extensions.setOnImeActionDone
 import es.iessaladillo.pedrojoya.pr008.extensions.toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val isValid: Boolean
-        get() = txtUsername.text.isNotBlank() && txtPassword.text.isNotBlank()
-
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupViews()
+        checkInitialState()
     }
 
     private fun setupViews() {
-        btnLogin.setOnClickListener { signIn() }
+        btnLogin.setOnClickListener { logIn() }
         btnCancel.setOnClickListener { resetViews() }
-        txtUsername.labelTextView(lblUsername, afterTextChange = { checkIsValidForm() })
-        txtPassword.labelTextView(lblPassword, afterTextChange = { checkIsValidForm() })
+        txtUsername.setOnFocusChangeListener { _, hasFocus ->
+            lblUsername.typeface = if (hasFocus) Typeface.DEFAULT_BOLD else Typeface.DEFAULT
+        }
+        txtPassword.setOnFocusChangeListener { _, hasFocus ->
+            lblPassword.typeface = if (hasFocus) Typeface.DEFAULT_BOLD else Typeface.DEFAULT
+        }
+        txtUsername.setAfterTextChangedListener {
+            lblUsername.visibility = if (txtUsername.text.isBlank()) View.INVISIBLE else View.VISIBLE
+            checkIsValidForm()
+        }
+        txtPassword.setAfterTextChangedListener {
+            lblPassword.visibility = if (txtPassword.text.isBlank()) View.INVISIBLE else View.VISIBLE
+            checkIsValidForm()
+        }
+        txtPassword.setOnImeActionDone { logIn() }
     }
 
-    private fun signIn() {
-        toast(getString(R.string.main_connected, txtUsername.text))
+    override fun onResume() {
+        super.onResume()
+        currentFocus?.let { checkCurrentFocusedView(it) }
+    }
+
+    private fun checkCurrentFocusedView(view: View) {
+        when (view.id) {
+            R.id.txtUsername -> lblUsername.typeface = Typeface.DEFAULT_BOLD
+            R.id.txtPassword -> lblPassword.typeface = Typeface.DEFAULT_BOLD
+        }
+    }
+
+    private fun checkInitialState() {
+        checkIsValidForm()
+        lblUsername.visibility = if (TextUtils.isEmpty(txtUsername.text)) View.INVISIBLE else View.VISIBLE
+        lblPassword.visibility = if (TextUtils.isEmpty(txtPassword.text)) View.INVISIBLE else View.VISIBLE
+    }
+
+    private fun isValidForm(): Boolean = txtUsername.text.isNotBlank() && txtPassword.text.isNotBlank()
+
+    private fun logIn() {
+        if (isValidForm()) {
+            hideSoftKeyboard()
+            toast(getString(R.string.main_login, txtUsername.text))
+        }
     }
 
     private fun resetViews() {
@@ -35,7 +74,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkIsValidForm() {
-        btnLogin.isEnabled = isValid
+        btnLogin.isEnabled = isValidForm()
     }
 
 }

@@ -10,7 +10,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class YandexLiveData(private val api: Api) : MutableLiveData<RequestState>() {
+class YandexLiveData(private val api: Api) : MutableLiveData<RequestState<TranslateResponse>>() {
 
     private var call: Call<TranslateResponse>? = null
 

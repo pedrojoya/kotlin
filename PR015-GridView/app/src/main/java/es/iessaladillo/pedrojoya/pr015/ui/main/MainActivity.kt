@@ -19,10 +19,10 @@ class MainActivity : AppCompatActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initViews()
+        setupViews()
     }
 
-    private fun initViews() {
+    private fun setupViews() {
         grdWords.apply {
             adapter = MainActivityAdapter(viewModel.data)
             setOnItemClickListener { _, _, position, _ ->
