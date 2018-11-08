@@ -24,14 +24,14 @@ class MainActivity : AppCompatActivity() {
     private val listAdapter: MainActivityAdapter by lazy {
         MainActivityAdapter(viewModel.students as ArrayList<Student>).apply {
             setOnItemClickListener { view, position ->
-                snackbar(view, getString(R.string.main_activity_click_on_student, getItem(position).name))
+                snackbar(view, getString(R.string.main_click_on_student, getItem(position).name))
             }
             setOnItemLongClickListener { _, position ->
                 viewModel.deleteStudent(getItem(position))
                 this.notifyItemRemoved(position)
                 true
             }
-            emptyView = lblEmpty
+            emptyView = lblEmptyView
         }
     }
 
