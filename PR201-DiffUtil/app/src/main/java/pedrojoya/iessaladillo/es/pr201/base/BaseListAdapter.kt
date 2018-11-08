@@ -24,68 +24,29 @@ fun <M, VH: BaseViewHolder> BaseListAdapter<M, VH>.setOnItemLongClickListener(
     }
 }
 
-
 // M is Model type.
-@Suppress("UNUSED")
-abstract class BaseListAdapter<M, VH: BaseViewHolder>(
-        private var data: List<M> = ArrayList(),
-        val diffUtilItemCallback: DiffUtil.ItemCallback<M>
-) : RecyclerView.Adapter<VH>() {
+abstract class BaseListAdapter<M, VH: BaseViewHolder> : RecyclerView.Adapter<VH>() {
+
+    private var data: List<M> = ArrayList()
 
     var onItemClickListener: OnItemClickListener? = null
 
     var onItemLongClickListener: OnItemLongClickListener? = null
 
-    var emptyView: View? = null
-        set(value) {
-            field?.let { unregisterAdapterDataObserver(adapterDataObserver) }
-            field = value
-            registerAdapterDataObserver(adapterDataObserver)
-            checkEmptyViewVisibility()
-        }
-
-    private val adapterDataObserver = object : RecyclerView.AdapterDataObserver() {
-        override fun onChanged() {
-            super.onChanged()
-            checkEmptyViewVisibility()
-        }
-
-        override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
-            super.onItemRangeInserted(positionStart, itemCount)
-            checkEmptyViewVisibility()
-        }
-
-        override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
-            super.onItemRangeRemoved(positionStart, itemCount)
-            checkEmptyViewVisibility()
-        }
-    }
-
-    fun submitList(newList: List<M>) {
-        val diffUtilCallback = object: DiffUtil.Callback() {
-
-            override fun getOldListSize(): Int = data.size
-
-            override fun getNewListSize(): Int = newList.size
-
-            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-                    diffUtilItemCallback.areItemsTheSame(data[oldItemPosition], newList[newItemPosition])
-
-            override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-                    diffUtilItemCallback.areContentsTheSame(data[oldItemPosition], newList[newItemPosition])
-
-        }
-        val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
-        data = newList
+    fun submitList(newData: List<M>) {
+        val diffResult = DiffUtil.calculateDiff(
+                BaseDiffUtilCallback(data, newData), true)
+        data = newData
         diffResult.dispatchUpdatesTo(this)
     }
-
-    private fun checkEmptyViewVisibility() =
-            emptyView?.let { it.visibility = if (itemCount == 0) View.VISIBLE else View.INVISIBLE }
 
     override fun getItemCount() = data.size
 
     fun getItem(position: Int) = data[position]
+
+    abstract fun areItemsTheSame(oldItem: M, newItem: M): Boolean
+
+    abstract fun areContentsTheSame(oldItem: M, newItem: M): Boolean
 
     interface OnItemClickListener {
         fun onItemClick(view: View, position: Int)
@@ -93,6 +54,24 @@ abstract class BaseListAdapter<M, VH: BaseViewHolder>(
 
     interface OnItemLongClickListener {
         fun onItemLongClick(view: View, position: Int): Boolean
+    }
+
+    private inner class BaseDiffUtilCallback(private val oldData: List<M>, private val newData: List<M>) : DiffUtil.Callback() {
+
+        override fun getOldListSize(): Int = oldData.size
+
+        override fun getNewListSize(): Int = newData.size
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return this@BaseListAdapter.areItemsTheSame(oldData[oldItemPosition],
+                    newData[newItemPosition])
+        }
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return this@BaseListAdapter.areContentsTheSame(oldData[oldItemPosition],
+                    newData[newItemPosition])
+        }
+
     }
 
 }
