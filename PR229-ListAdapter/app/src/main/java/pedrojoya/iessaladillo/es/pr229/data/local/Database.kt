@@ -15,37 +15,50 @@ object Database: Repository {
     private val students: ArrayList<Student> = ArrayList()
     private val random: Random = Random()
     private val studentsLiveData: MutableLiveData<List<Student>> = MutableLiveData()
+    private val studentsLiveDataDesc = MutableLiveData<List<Student>>()
     private var autonumeric: Int = 1
 
     init {
-        // Create initial students.
+        updateLiveDatas()
+        insertInitialData()
+    }
+
+    private fun updateLiveDatas() {
+        studentsLiveData.postValue(orderByName(students, false))
+        studentsLiveDataDesc.postValue(orderByName(students, true))
+    }
+
+    private fun insertInitialData() {
         for (i in 0..4) {
-            students.add(newFakeStudent())
+            insertStudent(newFakeStudent())
         }
     }
 
-    override fun queryStudents(): LiveData<List<Student>> = studentsLiveData.apply { value =
-            ArrayList(students) }
+    private fun orderByName(students: List<Student>, desc: Boolean): List<Student> =
+            if (desc)
+                students.sortedByDescending { it.name }
+            else
+                students.sortedBy { it.name }
 
-    @Synchronized
+    override fun queryStudentsOrderedByName(desc: Boolean): LiveData<List<Student>> =
+            if (desc) studentsLiveDataDesc else studentsLiveData
+
+    override fun insertStudent(student: Student) {
+        students.add(student)
+        updateLiveDatas()
+    }
+
     override fun deleteStudent(student: Student) {
         students.remove(student)
-        studentsLiveData.value = ArrayList(students)
+        updateLiveDatas()
     }
 
-    @Synchronized
-    override fun addStudent(student: Student) {
-        students.add(student)
-        studentsLiveData.value = ArrayList(students)
-    }
-
-    @Synchronized
     override fun updateStudent(student: Student, newStudent: Student) {
         val index = students.indexOf(student)
         if (index >= 0) {
             students[index] = newStudent
         }
-        studentsLiveData.value = ArrayList(students)
+        updateLiveDatas()
     }
 
     fun newFakeStudent(): Student {

@@ -33,24 +33,6 @@ abstract class BaseListAdapter<M, VH: BaseViewHolder>(
 
     var onItemClickListener: OnItemClickListener? = null
     var onItemLongClickListener: OnItemLongClickListener? = null
-    var emptyView: View? = null
-        set(value) {
-            field = value
-            checkEmptyViewVisibility(itemCount)
-        }
-
-    init {
-        checkEmptyViewVisibility(itemCount)
-    }
-
-    private fun checkEmptyViewVisibility(size: Int) {
-        emptyView?.run { visibility = if (size == 0) View.VISIBLE else View.INVISIBLE }
-    }
-
-    override fun submitList(list: List<M>?) {
-        checkEmptyViewVisibility(list?.size ?: 0)
-        super.submitList(list)
-    }
 
     public override fun getItem(position: Int): M {
         return super.getItem(position)

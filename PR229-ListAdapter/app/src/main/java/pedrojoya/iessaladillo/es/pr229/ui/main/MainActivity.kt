@@ -3,11 +3,11 @@ package pedrojoya.iessaladillo.es.pr229.ui.main
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import pedrojoya.iessaladillo.es.pr229.R
 import pedrojoya.iessaladillo.es.pr229.base.setOnItemClickListener
@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
     }
     private val listAdapter: MainActivityAdapter by lazy {
         MainActivityAdapter().apply {
-            emptyView = lblEmptyView
             setOnItemClickListener { _, position -> updateStudent(getItem(position)) }
             setOnItemLongClickListener { _, position ->
                 deleteStudent(getItem(position))
@@ -34,22 +33,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private var currentStudents: List<Student>? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initViews()
-        viewModel.students.observe(this, Observer { students ->
-            currentStudents = students
-            listAdapter.submitList(
-                    if (viewModel.order == 1) students.sortedBy { it.name }
-                    else students.sortedByDescending { it.name }
-            )
-        })
+        setupViews()
+        observeStudents()
     }
 
-    private fun initViews() {
+    private fun setupViews() {
         setupToolbar()
         setupRecyclerView()
         setupFab()
@@ -57,27 +48,33 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupToolbar() {
         setSupportActionBar(toolbar)
-        supportActionBar?.run {
-            setHomeButtonEnabled(true)
-            setDisplayShowHomeEnabled(true)
-        }
     }
 
     private fun setupFab() {
-        fab.setOnClickListener { _ -> addStudent() }
+        fab.setOnClickListener { addStudent() }
     }
 
     private fun setupRecyclerView() {
         lstStudents.run {
             setHasFixedSize(true)
             adapter = listAdapter
-            layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
+            layoutManager = GridLayoutManager(this@MainActivity,
+                    resources.getInteger(R.integer.main_lstStudents_columns))
             itemAnimator = DefaultItemAnimator()
         }
     }
 
+    private fun observeStudents() {
+        viewModel.getStudents().observe(this, Observer { students ->
+            listAdapter.submitList(students)
+        })
+        viewModel.isListEmpty().observe(this, Observer { isEmpty ->
+            lblEmptyView.visibility = if (isEmpty) View.VISIBLE else View.INVISIBLE
+        })
+    }
+
     private fun addStudent() {
-        viewModel.addStudent(Database.newFakeStudent())
+        viewModel.insertStudent(Database.newFakeStudent())
     }
 
     private fun updateStudent(student: Student) {
@@ -98,15 +95,24 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.mnuSort) {
-            viewModel.toggleOrder()
-            currentStudents?.run {
-                listAdapter.submitList(
-                        if (viewModel.order == 1) currentStudents!!.sortedBy { it.name }
-                        else currentStudents!!.sortedByDescending { it.name }
-                )
-            }
+            toggleOrder()
+            return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        val mnuSort = menu?.findItem(R.id.mnuSort)
+        val desc = viewModel.isInDescendentOrder()
+        mnuSort?.setIcon(
+                if (desc) R.drawable.ic_sort_ascending_white_24dp
+                else R.drawable.ic_sort_descending_white_24dp)
+        return super.onPrepareOptionsMenu(menu)
+    }
+
+    private fun toggleOrder() {
+        viewModel.toggleOrder()
+        invalidateOptionsMenu()
     }
 
 }

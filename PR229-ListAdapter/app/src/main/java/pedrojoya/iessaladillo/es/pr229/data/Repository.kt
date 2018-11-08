@@ -5,9 +5,9 @@ import pedrojoya.iessaladillo.es.pr229.data.local.model.Student
 
 interface Repository {
 
-    fun queryStudents(): LiveData<List<Student>>
+    fun queryStudentsOrderedByName(desc: Boolean): LiveData<List<Student>>
 
-    fun addStudent(student: Student)
+    fun insertStudent(student: Student)
 
     fun deleteStudent(student: Student)
 
