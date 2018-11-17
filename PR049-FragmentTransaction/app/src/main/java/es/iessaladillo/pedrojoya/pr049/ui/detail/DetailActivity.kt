@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.transaction
+import androidx.fragment.app.commit
 import es.iessaladillo.pedrojoya.pr049.R
 import es.iessaladillo.pedrojoya.pr049.extensions.extraString
 import es.iessaladillo.pedrojoya.pr049.extensions.inLandscape
@@ -20,7 +20,7 @@ class DetailActivity : AppCompatActivity() {
             // Not posible in landscape orientation.
             onBackPressed()
         } else {
-            supportFragmentManager.transaction {
+            supportFragmentManager.commit {
                 replace(R.id.flDetail, DetailFragment.newInstance(item), TAG_DETAIL_FRAGMENT )
             }
         }

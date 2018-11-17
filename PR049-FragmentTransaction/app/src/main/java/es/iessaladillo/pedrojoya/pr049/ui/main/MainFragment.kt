@@ -30,12 +30,12 @@ class MainFragment : Fragment() {
                               savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.fragment_main, container, false)
 
-    override fun onAttach(activity: Context?) {
+    override fun onAttach(activity: Context) {
         super.onAttach(activity)
         try {
             listener = activity as Callback
         } catch (e: ClassCastException) {
-            throw ClassCastException(activity!!::class.java.simpleName + " must implement fragment callback")
+            throw ClassCastException(activity::class.java.simpleName + " must implement fragment callback")
         }
 
     }
@@ -47,15 +47,16 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        initViews()
+        setupViews()
     }
 
-    private fun initViews() {
+    private fun setupViews() {
         val itemLayout = if (inLandscape())
             android.R.layout.simple_list_item_activated_1
         else
             android.R.layout.simple_list_item_1
         val data = viewModel.items
+        // TODO: Use RecyclerView instead of ListView
         lstItems.adapter = ArrayAdapter(requireContext(), itemLayout, data)
         if (inLandscape()) {
             val selectedIndex = data.indexOf(viewModel.selectedItem)

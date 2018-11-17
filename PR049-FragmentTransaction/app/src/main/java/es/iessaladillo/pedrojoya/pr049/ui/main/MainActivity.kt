@@ -2,7 +2,7 @@ package es.iessaladillo.pedrojoya.pr049.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.transaction
+import androidx.fragment.app.commit
 import es.iessaladillo.pedrojoya.pr049.R
 import es.iessaladillo.pedrojoya.pr049.extensions.inLandscape
 import es.iessaladillo.pedrojoya.pr049.extensions.viewModelProvider
@@ -24,12 +24,12 @@ class MainActivity : AppCompatActivity(), MainFragment.Callback {
         // if we rotate being in DetailActivity.
         savedInstanceState?.let { viewModel.onRestoreInstanceState(it) }
         if (supportFragmentManager.findFragmentByTag(TAG_MAIN_FRAGMENT) == null) {
-            supportFragmentManager.transaction {
+            supportFragmentManager.commit {
                 replace(R.id.flMain, MainFragment.newInstance(), TAG_MAIN_FRAGMENT)
             }
         }
         if (inLandscape()) {
-            supportFragmentManager.transaction {
+            supportFragmentManager.commit {
                 replace(R.id.flDetail, DetailFragment.newInstance(viewModel.selectedItem), TAG_DETAIL_FRAGMENT)
             }
         } else if (viewModel.selectedItem != noItem) {
