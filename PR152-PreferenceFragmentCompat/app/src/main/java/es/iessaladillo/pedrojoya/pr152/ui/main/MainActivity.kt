@@ -1,20 +1,42 @@
 package es.iessaladillo.pedrojoya.pr152.ui.main
 
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.preference.PreferenceManager
-import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.app.ActivityCompat
+import androidx.fragment.app.commit
 import es.iessaladillo.pedrojoya.pr152.R
-import es.iessaladillo.pedrojoya.pr152.extensions.getBoolean
-import es.iessaladillo.pedrojoya.pr152.extensions.getInteger
-import es.iessaladillo.pedrojoya.pr152.extensions.getStringArray
-import es.iessaladillo.pedrojoya.pr152.ui.settings.SettingsActivity
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main_content.*
 
-class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        setupToolbar()
+        // Load initial fragment
+        if (savedInstanceState == null) {
+            supportFragmentManager.commit {
+                replace(R.id.flContent,
+                        MainFragment(), MainFragment::class.java.simpleName)
+            }
+        }
+    }
+
+    private fun setupToolbar() {
+        val toolbar = ActivityCompat.requireViewById<Toolbar>(this, R.id.toolbar)
+        setSupportActionBar(toolbar)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
+}
+
+
+
+/*class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
 
     private val settings: SharedPreferences by lazy {
         PreferenceManager.getDefaultSharedPreferences(this)
@@ -102,4 +124,6 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                     mutableSetOf(*getStringArray(R.array.prefShifts_defaultValue)))
                     ?.joinToString(", ")?:""
 
-}
+}*/
+
+

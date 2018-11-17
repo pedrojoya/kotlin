@@ -1,4 +1,4 @@
-package es.iessaladillo.pedrojoya.pr152.oldpreferences;
+package es.iessaladillo.pedrojoya.pr152.deprecated;
 
 import android.annotation.TargetApi;
 import android.os.Build;
