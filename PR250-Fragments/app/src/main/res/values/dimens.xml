@@ -1,0 +1,3 @@
+<resources>
+    <dimen name="main_txtLorem_padding">16dp</dimen>
+</resources>
