@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_main.*
 
 class ListFragment : Fragment() {
 
-    private lateinit var listener: ListFragment.OnItemSelectedListener
+    private var listener: ListFragment.OnItemSelectedListener? = null
     private val listAdapter: ListFragmentAdapter by lazy { ListFragmentAdapter() }
     private val viewModel: ListFragmentViewModel by viewModelProvider {
         ListFragmentViewModel(RepositoryImpl(Database))
@@ -38,7 +38,11 @@ class ListFragment : Fragment() {
             throw ClassCastException(
                     activity.toString() + " must implement ListFragment.OnItemSelectedListener")
         }
+    }
 
+    override fun onDetach() {
+        listener = null
+        super.onDetach()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
