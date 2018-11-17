@@ -47,7 +47,7 @@ class ListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setupViews(view!!)
+        setupViews()
         refreshData()
     }
 
@@ -57,9 +57,9 @@ class ListFragment : Fragment() {
         lblEmptyView.visibility = if (students.isNotEmpty()) View.INVISIBLE else View.VISIBLE
     }
 
-    private fun setupViews(view: View) {
+    private fun setupViews() {
         setupToolbar()
-        setupRecyclerView(view)
+        setupRecyclerView()
     }
 
     private fun setupToolbar() {
@@ -69,9 +69,9 @@ class ListFragment : Fragment() {
         }
     }
 
-    private fun setupRecyclerView(view: View) {
+    private fun setupRecyclerView() {
         listAdapter.setOnItemClickListener { _, position ->
-            listener.onItemSelected(listAdapter.getItem(position))
+            listener!!.onItemSelected(listAdapter.getItem(position))
         }
         lstItems.run {
             setHasFixedSize(true)
