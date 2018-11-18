@@ -20,7 +20,7 @@
         </activity>
         <activity
             android:name="es.iessaladillo.pedrojoya.pr050.ui.preferences.PreferencesActivity"
-            android:label="@string/activity_preferences_title"
+            android:label="@string/preferences_title"
             android:parentActivityName="es.iessaladillo.pedrojoya.pr050.ui.main.MainActivity">
         </activity>
     </application>

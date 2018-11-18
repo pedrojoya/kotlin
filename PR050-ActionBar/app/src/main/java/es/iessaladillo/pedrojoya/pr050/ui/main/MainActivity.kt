@@ -5,22 +5,28 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
-import androidx.fragment.app.transaction
+import androidx.fragment.app.commit
 import es.iessaladillo.pedrojoya.pr050.R
+import es.iessaladillo.pedrojoya.pr050.ui.info.InfoFragment
+import es.iessaladillo.pedrojoya.pr050.ui.photo.PhotoFragment
 import es.iessaladillo.pedrojoya.pr050.ui.preferences.PreferencesActivity
 
-private const val TAG_MAIN_FRAGMENT = "TAG_MAIN_FRAGMENT"
-private const val TAG_INFO_FRAGMENT = "TAG_INFO_FRAGMENT"
-
-class MainActivity : AppCompatActivity(), PhotoFragment.Callback, InfoFragment.Callback {
+class MainActivity : AppCompatActivity(), PhotoFragment.Callback {
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        if (supportFragmentManager.findFragmentByTag(TAG_MAIN_FRAGMENT) == null) {
-            supportFragmentManager.transaction {
-                replace(R.id.flContent, PhotoFragment.newInstance(), TAG_MAIN_FRAGMENT)
+        setupActionBar()
+        if (supportFragmentManager.findFragmentByTag(PhotoFragment::class.java.simpleName) == null) {
+            supportFragmentManager.commit {
+                replace(R.id.flContent, PhotoFragment.newInstance(), PhotoFragment::class.java.simpleName)
             }
+        }
+    }
+
+    private fun setupActionBar() {
+        supportActionBar?.run {
+            setIcon(R.drawable.ic_arrow_back_white_24dp)
         }
     }
 
@@ -30,7 +36,9 @@ class MainActivity : AppCompatActivity(), PhotoFragment.Callback, InfoFragment.C
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.mnuPreferences -> { showPreferences(); true }
+        R.id.mnuPreferences -> {
+            showPreferences(); true
+        }
         else -> super.onOptionsItemSelected(item)
     }
 
@@ -39,29 +47,17 @@ class MainActivity : AppCompatActivity(), PhotoFragment.Callback, InfoFragment.C
     }
 
     override fun onInfoClicked() {
-        if (supportFragmentManager.findFragmentByTag(TAG_INFO_FRAGMENT) ==  null) {
-            supportFragmentManager.transaction {
-                replace(R.id.flContent,
-                        InfoFragment.newInstance(), TAG_INFO_FRAGMENT)
-                addToBackStack(TAG_INFO_FRAGMENT)
-                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-            }
-        } else {
-            onBackPressed()
+        supportFragmentManager.commit {
+            replace(R.id.flContent,
+                    InfoFragment.newInstance(), InfoFragment::class.java.simpleName)
+            addToBackStack(InfoFragment::class.java.simpleName)
+            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
         }
     }
 
-    override fun onPhotoClicked() {
-        if (supportFragmentManager.findFragmentByTag(TAG_MAIN_FRAGMENT) == null) {
-            supportFragmentManager.transaction {
-                replace(R.id.flContent,
-                        PhotoFragment.newInstance(), TAG_MAIN_FRAGMENT)
-                addToBackStack(TAG_MAIN_FRAGMENT)
-                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-            }
-        } else {
-            onBackPressed()
-        }
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
 }
