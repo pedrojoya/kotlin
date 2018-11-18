@@ -1,25 +1,8 @@
-<merge
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/flStudents"
+    android:id="@+id/flContent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/lstStudents"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/activity_main_item_padding"
-        tools:listitem="@layout/activity_main_item"/>
-
-    <TextView
-        android:id="@+id/lblEmptyView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:drawablePadding="@dimen/activity_main_lblEmptyView_drawablePadding"
-        android:drawableTop="@drawable/ic_person_add_black_24dp"
-        android:gravity="center"
-        android:text="@string/activity_main_lblEmptyView"/>
-
-</merge>
+    android:layout_height="match_parent"
+    tools:ignore="MergeRootFrame" />

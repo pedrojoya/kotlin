@@ -1,22 +1,55 @@
 package es.iessaladillo.pedrojoya.pr086.data.local
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.mooveit.library.Fakeit
 import es.iessaladillo.pedrojoya.pr086.data.Repository
 import es.iessaladillo.pedrojoya.pr086.data.local.model.Student
+import java.util.*
 
-object Database: Repository {
+object Database : Repository {
 
-    private val students: ArrayList<Student> = arrayListOf(
-            Student("Baldomero Llégate Ligero", "La casa de Baldomero", "956956956",
-                    "2º CFGS DAM"),
-            Student("Germán Ginés de todos los Santos", "La casa de Germán",
-                    "678678678", "1º CFGS DAM"),
-            Student("Dolores Fuertes de Barriga", "La casa de Dolores", "666666666",
-                    "1º CFGM SMR"),
-            Student("Jorge Javier Jiménez Jaén", "La casa de Jorge", "688688688",
-                    "1º CFGM SMR"),
-            Student("Fabián Gonzáles Palomino", "La casa de Fabián", "999999999",
-                    "2º CFGM SMR")
-    )
+    private const val BASE_URL = "https://picsum.photos/200/300?image="
+    private val random = Random()
+    private val students = ArrayList<Student>()
+    private val studentsLiveData = MutableLiveData<List<Student>>()
+    private var studentsAutoId: Long = 0
 
-    override fun queryStudents() = students
+    init {
+        insertInitialData()
+    }
+
+    fun newFakeStudent(): Student {
+        return Student(0, Fakeit.name().name(), Fakeit.address().streetAddress(),
+                Fakeit.phone().formats(), Fakeit.gameOfThrones().house(), BASE_URL + random.nextInt(1084),
+                random.nextInt(10) + 16, random.nextBoolean())
+    }
+
+    private fun insertInitialData() {
+        for (i in 0..9) {
+            insertStudent(newFakeStudent())
+        }
+    }
+
+    override fun queryStudents(): LiveData<List<Student>> {
+        return studentsLiveData
+    }
+
+    @Synchronized
+    override fun insertStudent(student: Student) {
+        student.id = ++studentsAutoId
+        students.add(student)
+        updateStudentsLiveData()
+    }
+
+    @Synchronized
+    override fun deleteStudent(student: Student) {
+        students.remove(student)
+        updateStudentsLiveData()
+    }
+
+    private fun updateStudentsLiveData() {
+        studentsLiveData.postValue(ArrayList(students).sortedBy { student -> student.name })
+    }
+
 }

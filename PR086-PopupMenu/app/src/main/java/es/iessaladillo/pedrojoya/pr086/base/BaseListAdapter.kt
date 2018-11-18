@@ -17,15 +17,6 @@ fun <M, VH: BaseViewHolder> BaseListAdapter<M, VH>.setOnItemClickListener(
         }
     }
 }
-fun <M, VH: BaseViewHolder> BaseListAdapter<M, VH>.setOnItemLongClickListener(
-        action: (View, Int) -> Boolean) {
-    onItemLongClickListener = object: BaseListAdapter.OnItemLongClickListener {
-        override fun onItemLongClick(view: View, position: Int): Boolean {
-            return action(view, position)
-        }
-    }
-}
-
 
 // M is Model type.
 @Suppress("UNUSED")
@@ -34,25 +25,6 @@ abstract class BaseListAdapter<M, VH: BaseViewHolder>(
         ListAdapter<M, VH>(diffUtilItemCallback) {
 
     var onItemClickListener: OnItemClickListener? = null
-    var onItemLongClickListener: OnItemLongClickListener? = null
-    var emptyView: View? = null
-        set(value) {
-            field = value
-            checkEmptyViewVisibility(itemCount)
-        }
-
-    init {
-        checkEmptyViewVisibility(itemCount)
-    }
-
-    private fun checkEmptyViewVisibility(size: Int) {
-        emptyView?.run { visibility = if (size == 0) View.VISIBLE else View.INVISIBLE }
-    }
-
-    override fun submitList(list: List<M>?) {
-        checkEmptyViewVisibility(list?.size ?: 0)
-        super.submitList(list)
-    }
 
     public override fun getItem(position: Int): M {
         return super.getItem(position)
@@ -60,10 +32,6 @@ abstract class BaseListAdapter<M, VH: BaseViewHolder>(
 
     interface OnItemClickListener {
         fun onItemClick(view: View, position: Int)
-    }
-
-    interface OnItemLongClickListener {
-        fun onItemLongClick(view: View, position: Int): Boolean
     }
 
 }
