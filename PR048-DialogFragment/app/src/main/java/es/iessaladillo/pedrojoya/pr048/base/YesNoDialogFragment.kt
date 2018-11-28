@@ -29,6 +29,11 @@ class YesNoDialogFragment : DialogFragment() {
         fun onNegativeButtonClick(dialog: DialogInterface)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        isCancelable = false
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
             AlertDialog.Builder(requireActivity())
                     .setTitle(title)

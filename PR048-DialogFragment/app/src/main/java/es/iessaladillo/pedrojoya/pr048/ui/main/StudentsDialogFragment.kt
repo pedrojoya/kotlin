@@ -17,6 +17,11 @@ class StudentsDialogFragment : DialogFragment() {
         fun onListItemClick(dialog: DialogFragment, student: Student)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        isCancelable = false
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
             AlertDialog.Builder(requireActivity())
                     .setTitle(R.string.adapter_dialog_student)
@@ -31,7 +36,7 @@ class StudentsDialogFragment : DialogFragment() {
         super.onAttach(activity)
         try {
             listener = activity as Callback
-        } catch (e: ClassCastException) {
+        } catch (t: Throwable) {
             throw ClassCastException(activity!!.toString() +
                     " must implement StudentsDialogFragment.Listener")
         }

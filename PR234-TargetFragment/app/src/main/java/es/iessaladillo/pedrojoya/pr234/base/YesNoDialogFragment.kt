@@ -4,9 +4,9 @@ import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
-import androidx.fragment.app.DialogFragment
 import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
+import androidx.fragment.app.DialogFragment
 
 private const val ARG_TITLE = "ARG_TITLE"
 private const val ARG_MESSAGE = "ARG_MESSAGE"
@@ -27,6 +27,11 @@ class YesNoDialogFragment : DialogFragment() {
         fun onNegativeButtonClick(dialog: DialogInterface)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        isCancelable = false
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
             AlertDialog.Builder(requireActivity())
                     .setTitle(title)
@@ -39,7 +44,7 @@ class YesNoDialogFragment : DialogFragment() {
                     }
                     .create()
 
-    override fun onAttach(activity: Context?) {
+    override fun onAttach(activity: Context) {
         super.onAttach(activity)
         listener = try {
             if (targetFragment != null) {
@@ -47,7 +52,7 @@ class YesNoDialogFragment : DialogFragment() {
             } else {
                 activity as Listener
             }
-        } catch (e: ClassCastException) {
+        } catch (e: Throwable) {
             throw ClassCastException("Listener must implement YesNoDialogFragment.Listener")
         }
 

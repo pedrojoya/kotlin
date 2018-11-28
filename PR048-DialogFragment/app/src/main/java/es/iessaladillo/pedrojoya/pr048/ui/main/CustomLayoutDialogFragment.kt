@@ -4,10 +4,9 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.DialogFragment
-import androidx.appcompat.app.AlertDialog
 import android.view.LayoutInflater
-
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.DialogFragment
 import es.iessaladillo.pedrojoya.pr048.R
 
 class CustomLayoutDialogFragment : DialogFragment() {
@@ -18,6 +17,11 @@ class CustomLayoutDialogFragment : DialogFragment() {
         fun onLoginClick(dialog: DialogFragment)
 
         fun onCancelClick(dialog: DialogFragment)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        isCancelable = false
     }
 
     @SuppressLint("InflateParams")

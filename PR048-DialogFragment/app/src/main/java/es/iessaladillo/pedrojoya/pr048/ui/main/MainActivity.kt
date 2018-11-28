@@ -24,10 +24,10 @@ class MainActivity : AppCompatActivity(), OnDateSetListener, OnTimeSetListener,
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initViews()
+        setupViews()
     }
 
-    private fun initViews() {
+    private fun setupViews() {
         btnDatePicker.setOnClickListener { showDatePickerDialog() }
         btnTimePicker.setOnClickListener { showTimePickerDialog() }
         btnYesNoAlert.setOnClickListener { showConfirmDeletionDialog() }

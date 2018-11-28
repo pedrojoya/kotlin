@@ -12,6 +12,7 @@ protected constructor(protected val data: List<T>,
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val itemView = convertView ?: parent.inflate(layoutResId)
+        @Suppress("UNCHECKED_CAST")
         val viewHolder: VH = convertView?.tag as? VH ?: onCreateViewHolder(itemView)
         itemView.tag = viewHolder
         onBindViewHolder(viewHolder, position)

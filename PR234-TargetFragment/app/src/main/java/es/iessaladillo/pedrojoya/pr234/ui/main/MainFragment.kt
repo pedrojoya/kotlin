@@ -23,10 +23,10 @@ class MainFragment : Fragment(), YesNoDialogFragment.Listener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        initViews()
+        setupViews()
     }
 
-    private fun initViews() {
+    private fun setupViews() {
         btnDelete.setOnClickListener { showConfirmationDialog() }
     }
 

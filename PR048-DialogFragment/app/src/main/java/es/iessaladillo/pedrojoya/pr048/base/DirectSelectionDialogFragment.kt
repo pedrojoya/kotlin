@@ -22,6 +22,11 @@ class DirectSelectionDialogFragment : DialogFragment() {
         fun onItemSelected(dialog: DialogFragment, which: Int)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        isCancelable = false
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
         AlertDialog.Builder(requireContext())
         .setTitle(title)
