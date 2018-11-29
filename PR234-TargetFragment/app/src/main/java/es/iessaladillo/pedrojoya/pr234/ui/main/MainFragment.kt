@@ -19,7 +19,7 @@ class MainFragment : Fragment(), YesNoDialogFragment.Listener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? =
-        inflater.inflate(R.layout.fragment_main, container, false)
+            inflater.inflate(R.layout.fragment_main, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

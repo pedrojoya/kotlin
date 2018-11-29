@@ -62,14 +62,14 @@ class YesNoDialogFragment : DialogFragment() {
 
         fun newInstance(title: String, message: String, yesText: String,
                         noText: String): YesNoDialogFragment =
-            YesNoDialogFragment().apply {
-                arguments = bundleOf(
-                        ARG_TITLE to title,
-                        ARG_MESSAGE to message,
-                        ARG_YES_TEXT to yesText,
-                        ARG_NO_TEXT to noText
-                )
-            }
+                YesNoDialogFragment().apply {
+                    arguments = bundleOf(
+                            ARG_TITLE to title,
+                            ARG_MESSAGE to message,
+                            ARG_YES_TEXT to yesText,
+                            ARG_NO_TEXT to noText
+                    )
+                }
 
     }
 
