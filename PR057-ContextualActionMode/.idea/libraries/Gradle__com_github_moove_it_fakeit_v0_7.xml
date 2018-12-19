@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.moove-it:fakeit-v0.7">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/fakeit-v0.7.aar/ac37ee0db362f5c52bce2521dd94363a/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/fakeit-v0.7.aar/ac37ee0db362f5c52bce2521dd94363a/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
