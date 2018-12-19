@@ -5,10 +5,10 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doAfterTextChanged
 import es.iessaladillo.pedrojoya.pr008.R
+import es.iessaladillo.pedrojoya.pr008.extensions.doOnImeAction
 import es.iessaladillo.pedrojoya.pr008.extensions.hideSoftKeyboard
-import es.iessaladillo.pedrojoya.pr008.extensions.setAfterTextChangedListener
-import es.iessaladillo.pedrojoya.pr008.extensions.setOnImeActionDone
 import es.iessaladillo.pedrojoya.pr008.extensions.toast
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -30,27 +30,15 @@ class MainActivity : AppCompatActivity() {
         txtPassword.setOnFocusChangeListener { _, hasFocus ->
             lblPassword.typeface = if (hasFocus) Typeface.DEFAULT_BOLD else Typeface.DEFAULT
         }
-        txtUsername.setAfterTextChangedListener {
+        txtUsername.doAfterTextChanged {
             lblUsername.visibility = if (txtUsername.text.isBlank()) View.INVISIBLE else View.VISIBLE
             checkIsValidForm()
         }
-        txtPassword.setAfterTextChangedListener {
+        txtPassword.doAfterTextChanged {
             lblPassword.visibility = if (txtPassword.text.isBlank()) View.INVISIBLE else View.VISIBLE
             checkIsValidForm()
         }
-        txtPassword.setOnImeActionDone { logIn() }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        currentFocus?.let { checkCurrentFocusedView(it) }
-    }
-
-    private fun checkCurrentFocusedView(view: View) {
-        when (view.id) {
-            R.id.txtUsername -> lblUsername.typeface = Typeface.DEFAULT_BOLD
-            R.id.txtPassword -> lblPassword.typeface = Typeface.DEFAULT_BOLD
-        }
+        txtPassword.doOnImeAction { logIn() }
     }
 
     private fun checkInitialState() {
