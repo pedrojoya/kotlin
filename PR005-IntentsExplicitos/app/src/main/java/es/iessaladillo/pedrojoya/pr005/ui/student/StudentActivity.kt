@@ -5,10 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
+import androidx.core.widget.doAfterTextChanged
 import es.iessaladillo.pedrojoya.pr005.DEFAULT_AGE
 import es.iessaladillo.pedrojoya.pr005.MAX_AGE
 import es.iessaladillo.pedrojoya.pr005.R
-import es.iessaladillo.pedrojoya.pr005.extensions.*
+import es.iessaladillo.pedrojoya.pr005.extensions.extraInt
+import es.iessaladillo.pedrojoya.pr005.extensions.extraString
 import kotlinx.android.synthetic.main.activity_student.*
 
 private const val EXTRA_NAME = "EXTRA_NAME"
@@ -28,17 +30,11 @@ class StudentActivity : AppCompatActivity() {
     private fun setupViews() {
         txtName.run {
             setText(name)
-            // Opción más completa porque permite especifcar más listeners del TextWatcher
-            // además de addAfterTextChanged.
-            addTextChangeListener {
-                afterTextChanged {
-                    checkIsValidForm()
-                }
-            }
+            doAfterTextChanged { checkIsValidForm() }
         }
         txtAge.run {
             setText(age.toString())
-            addAfterTextChanged { checkIsValidForm() }
+            doAfterTextChanged { checkIsValidForm() }
         }
         btnSend.setOnClickListener { sendResult() }
     }
@@ -48,7 +44,8 @@ class StudentActivity : AppCompatActivity() {
     }
 
     private fun isValidForm() =
-            txtName.isNotBlank() && txtAge.text.toString().toIntOrNull() ?: MAX_AGE + 1 <= MAX_AGE
+            txtName.text.isNotBlank() && txtAge.text.toString().toIntOrNull() ?: MAX_AGE + 1 <=
+                    MAX_AGE
 
     private fun sendResult() {
         createResult()
