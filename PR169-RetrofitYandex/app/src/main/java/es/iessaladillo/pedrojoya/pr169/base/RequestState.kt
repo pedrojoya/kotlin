@@ -1,10 +1,10 @@
 package es.iessaladillo.pedrojoya.pr169.base
 
-sealed class RequestState <T> {
+sealed class RequestState<out T> {
 
-    class Error<T>(val exception: Event<Exception>) : RequestState<T>()
+    class Error(val exception: Event<Exception>) : RequestState<Nothing>()
 
-    class Loading<T>(val isLoading: Boolean) : RequestState<T>()
+    object Loading : RequestState<Nothing>()
 
     class Result<T>(val data: T) : RequestState<T>()
 

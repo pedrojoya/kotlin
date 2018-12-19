@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import es.iessaladillo.pedrojoya.pr169.R
@@ -11,9 +12,8 @@ import es.iessaladillo.pedrojoya.pr169.base.Event
 import es.iessaladillo.pedrojoya.pr169.base.RequestState
 import es.iessaladillo.pedrojoya.pr169.data.models.TranslateResponse
 import es.iessaladillo.pedrojoya.pr169.data.remote.ApiService
+import es.iessaladillo.pedrojoya.pr169.extensions.doOnImeAction
 import es.iessaladillo.pedrojoya.pr169.extensions.hideSoftKeyboard
-import es.iessaladillo.pedrojoya.pr169.extensions.setAfterTextChangedListener
-import es.iessaladillo.pedrojoya.pr169.extensions.setOnImeActionListener
 import es.iessaladillo.pedrojoya.pr169.extensions.viewModelProvider
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main_content.*
@@ -28,15 +28,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setupViews()
         observeTranslation()
-        initViews()
     }
 
-    private fun initViews() {
+    private fun setupViews() {
         setupToolbar()
         setupFab()
-        txtWord.setOnImeActionListener(EditorInfo.IME_ACTION_SEARCH) { translate() }
-        txtWord.setAfterTextChangedListener {
+        txtWord.doOnImeAction(EditorInfo.IME_ACTION_SEARCH) { translate() }
+        txtWord.doAfterTextChanged {
             if (txtTranslation.text.isNotBlank()) {
                 txtTranslation.setText("")
             }
@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
     private fun observeTranslation() {
         viewModel.translation.observe(this, Observer { request ->
             when (request) {
-                is RequestState.Loading -> pbTranslating.visibility = if (request.isLoading) View.VISIBLE else View.INVISIBLE
+                is RequestState.Loading -> pbTranslating.visibility = View.VISIBLE
                 is RequestState.Error -> showRequestError(request.exception)
                 is RequestState.Result<TranslateResponse> -> showTranslation(request.data)
             }

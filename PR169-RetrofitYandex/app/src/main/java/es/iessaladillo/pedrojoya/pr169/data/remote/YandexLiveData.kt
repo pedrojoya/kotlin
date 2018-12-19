@@ -15,7 +15,7 @@ class YandexLiveData(private val api: Api) : MutableLiveData<RequestState<Transl
     private var call: Call<TranslateResponse>? = null
 
     fun translate(word: String) {
-        postValue(RequestState.Loading(true))
+        postValue(RequestState.Loading)
         call = api.getTranslation(BuildConfig.YANDEX_API_KEY, word, LANG)
         call?.enqueue(object : Callback<TranslateResponse> {
             override fun onResponse(call: Call<TranslateResponse>,
