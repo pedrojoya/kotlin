@@ -4,10 +4,14 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doAfterTextChanged
 import es.iessaladillo.pedrojoya.pr017.R
 import es.iessaladillo.pedrojoya.pr017.data.RepositoryImpl
 import es.iessaladillo.pedrojoya.pr017.data.local.Database
-import es.iessaladillo.pedrojoya.pr017.extensions.*
+import es.iessaladillo.pedrojoya.pr017.extensions.doOnImeAction
+import es.iessaladillo.pedrojoya.pr017.extensions.hideSoftKeyboard
+import es.iessaladillo.pedrojoya.pr017.extensions.onPageFinished
+import es.iessaladillo.pedrojoya.pr017.extensions.viewModelProvider
 import kotlinx.android.synthetic.main.activity_main.*
 
 private const val BASE_URL = "http://www.wordreference.com/es/translation.asp?tranword="
@@ -36,8 +40,8 @@ class MainActivity : AppCompatActivity() {
         txtWord.apply {
             setAdapter(MainActivityAdapter(viewModel.data))
             setText(viewModel.loadedWord)
-            setAfterTextChangedListener { checkIsValidForm() }
-            setOnImeAction(EditorInfo.IME_ACTION_SEARCH) { searchWord() }
+            doAfterTextChanged { checkIsValidForm() }
+            doOnImeAction(EditorInfo.IME_ACTION_SEARCH) { searchWord() }
         }
         wvWeb.onPageFinished { _, _ -> wvWeb.visibility = View.VISIBLE }
         btnTranslate.setOnClickListener { searchWord() }
@@ -46,7 +50,7 @@ class MainActivity : AppCompatActivity() {
     private fun searchWord() {
         val word = txtWord.text.toString().trim()
         if (isValidForm()) {
-            hideKeyboard()
+            hideSoftKeyboard()
             viewModel.loadedWord = word
             wvWeb.loadUrl(BASE_URL + word)
         }
