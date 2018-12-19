@@ -2,6 +2,7 @@ package es.iessaladillo.pedrojoya.pr149.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doAfterTextChanged
 import es.iessaladillo.pedrojoya.pr149.R
 import es.iessaladillo.pedrojoya.pr149.extensions.*
 import kotlinx.android.synthetic.main.activity_main_content.*
@@ -16,11 +17,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupViews() {
-        txtName.addAfterTextChangedListener { checkIsValidName() }
-        txtPhone.addAfterTextChangedListener { checkIsValidPhone() }
-        txtEmail.addAfterTextChangedListener { checkIsValidEmail() }
-        txtPassword.addAfterTextChangedListener { checkIsValidPassword() }
-        txtPassword.setOnImeActionDone { signUp() }
+        txtName.doAfterTextChanged { checkIsValidName() }
+        txtPhone.doAfterTextChanged { checkIsValidPhone() }
+        txtEmail.doAfterTextChanged { checkIsValidEmail() }
+        txtPassword.doAfterTextChanged { checkIsValidPassword() }
+        txtPassword.doOnImeAction { signUp() }
         btnSignUp.setOnClickListener { signUp() }
         btnReset.setOnClickListener { reset() }
     }
@@ -33,9 +34,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun isValidForm(): Boolean {
-        return isValidName() && isValidPhone() && isValidEmail() && isValidPassword()
-    }
+    private fun isValidForm(): Boolean =
+            isValidName() && isValidPhone() && isValidEmail() && isValidPassword()
 
     private fun reset() {
         txtName.setText("")
@@ -44,21 +44,13 @@ class MainActivity : AppCompatActivity() {
         txtPassword.setText("")
     }
 
-    private fun isValidName(): Boolean {
-        return txtName.text != null && txtName.text.toString().isNotBlank()
-    }
+    private fun isValidName(): Boolean = txtName.text != null && txtName.text.toString().isNotBlank()
 
-    private fun isValidPhone(): Boolean {
-        return txtPhone.text != null && txtPhone.text.toString().isValidSpanishPhoneNumber()
-    }
+    private fun isValidPhone(): Boolean = txtPhone.text != null && txtPhone.text.toString().isValidSpanishPhoneNumber()
 
-    private fun isValidEmail(): Boolean {
-        return txtEmail.text != null && txtEmail.text.toString().isValidEmail()
-    }
+    private fun isValidEmail(): Boolean = txtEmail.text != null && txtEmail.text.toString().isValidEmail()
 
-    private fun isValidPassword(): Boolean {
-        return txtPassword.text != null && txtPassword.text.toString().isNotBlank()
-    }
+    private fun isValidPassword(): Boolean = txtPassword.text != null && txtPassword.text.toString().isNotBlank()
 
     private fun checkIsValidForm() {
         checkIsValidName()
