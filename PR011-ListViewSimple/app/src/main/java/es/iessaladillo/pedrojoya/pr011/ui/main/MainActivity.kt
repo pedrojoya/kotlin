@@ -3,10 +3,14 @@ package es.iessaladillo.pedrojoya.pr011.ui.main
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doAfterTextChanged
 import es.iessaladillo.pedrojoya.pr011.R
 import es.iessaladillo.pedrojoya.pr011.data.RepositoryImpl
 import es.iessaladillo.pedrojoya.pr011.data.local.Database
-import es.iessaladillo.pedrojoya.pr011.extensions.*
+import es.iessaladillo.pedrojoya.pr011.extensions.doOnImeAction
+import es.iessaladillo.pedrojoya.pr011.extensions.hideSoftKeyboard
+import es.iessaladillo.pedrojoya.pr011.extensions.toast
+import es.iessaladillo.pedrojoya.pr011.extensions.viewModelProvider
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -32,8 +36,8 @@ class MainActivity : AppCompatActivity() {
     private fun setupViews() {
         btnAdd.setOnClickListener { addStudent() }
         txtName.apply {
-            setAfterTextChangedListener { checkIsValidForm() }
-            setOnImeActionDone { addStudent() }
+            doAfterTextChanged { checkIsValidForm() }
+            doOnImeAction { addStudent() }
         }
         lstStudents.apply {
             setOnItemClickListener { _, _, position, _ ->
