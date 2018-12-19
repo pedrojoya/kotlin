@@ -3,10 +3,10 @@ package es.iessaladillo.pedrojoya.pr010.ui.main
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
+import androidx.core.widget.doAfterTextChanged
 import es.iessaladillo.pedrojoya.pr010.R
+import es.iessaladillo.pedrojoya.pr010.extensions.doOnImeAction
 import es.iessaladillo.pedrojoya.pr010.extensions.hideSoftKeyboard
-import es.iessaladillo.pedrojoya.pr010.extensions.setAfterTextChangedListener
-import es.iessaladillo.pedrojoya.pr010.extensions.setOnImeActionDone
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -30,8 +30,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupViews() {
         txtMessage.apply {
-            setAfterTextChangedListener { checkIsValidForm() }
-            setOnImeActionDone { sendMessage() }
+            doAfterTextChanged { checkIsValidForm() }
+            doOnImeAction { sendMessage() }
         }
         btnSend.setOnClickListener { sendMessage() }
     }
