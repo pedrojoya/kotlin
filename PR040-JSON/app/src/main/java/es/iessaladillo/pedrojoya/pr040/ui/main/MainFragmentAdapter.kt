@@ -1,5 +1,6 @@
 package es.iessaladillo.pedrojoya.pr040.ui.main
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -8,21 +9,32 @@ import es.iessaladillo.pedrojoya.pr040.R
 import es.iessaladillo.pedrojoya.pr040.base.BaseListAdapter
 import es.iessaladillo.pedrojoya.pr040.base.BaseViewHolder
 import es.iessaladillo.pedrojoya.pr040.data.model.Student
-import es.iessaladillo.pedrojoya.pr040.extensions.inflate
 import es.iessaladillo.pedrojoya.pr040.extensions.loadUrl
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.fragment_main_item.*
 
-class MainFragmentAdapter : BaseListAdapter<Student, MainFragmentAdapter.ViewHolder>(diffUtilItemCallback) {
+class MainFragmentAdapter : BaseListAdapter<Student, MainFragmentAdapter.ViewHolder>(object : DiffUtil.ItemCallback<Student>() {
+    override fun areItemsTheSame(oldItem: Student, newItem: Student): Boolean {
+        return oldItem.name == newItem.name
+    }
+
+    override fun areContentsTheSame(oldItem: Student, newItem: Student): Boolean {
+        return oldItem.photo == newItem.photo &&
+                oldItem.grade == newItem.grade &&
+                oldItem.address == newItem.address &&
+                oldItem.isRepeater == newItem.isRepeater
+    }
+}) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-            ViewHolder(parent.inflate(R.layout.fragment_main_item))
+            ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout
+                    .fragment_main_item, parent, false))
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    inner class ViewHolder(override val containerView: View): BaseViewHolder(containerView, onItemClickListener, onItemLongClickListener), LayoutContainer {
+    inner class ViewHolder(override val containerView: View) : BaseViewHolder(containerView, onItemClickListener, onItemLongClickListener), LayoutContainer {
 
         fun bind(student: Student) {
             student.run {
@@ -35,23 +47,6 @@ class MainFragmentAdapter : BaseListAdapter<Student, MainFragmentAdapter.ViewHol
                         if (age < 18) ContextCompat.getColor(lblAge.context, R.color.accent)
                         else ContextCompat.getColor(lblAge.context, R.color.primary_text))
                 lblRepeater.visibility = if (isRepeater) View.VISIBLE else View.INVISIBLE
-            }
-        }
-
-    }
-
-    companion object {
-
-        private val diffUtilItemCallback = object : DiffUtil.ItemCallback<Student>() {
-            override fun areItemsTheSame(oldItem: Student, newItem: Student): Boolean {
-                return oldItem.name == newItem.name
-            }
-
-            override fun areContentsTheSame(oldItem: Student, newItem: Student): Boolean {
-                return oldItem.photo == newItem.photo &&
-                        oldItem.grade == newItem.grade &&
-                        oldItem.address == newItem.address &&
-                        oldItem.isRepeater == newItem.isRepeater
             }
         }
 

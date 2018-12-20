@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -15,7 +16,6 @@ import es.iessaladillo.pedrojoya.pr040.base.Event
 import es.iessaladillo.pedrojoya.pr040.base.RequestState
 import es.iessaladillo.pedrojoya.pr040.data.model.Student
 import es.iessaladillo.pedrojoya.pr040.extensions.toast
-import es.iessaladillo.pedrojoya.pr040.extensions.viewModelProvider
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment: Fragment() {
@@ -25,7 +25,7 @@ class MainFragment: Fragment() {
             emptyView = lblEmptyView
         }
     }
-    private val viewModel: MainFragmentViewModel by viewModelProvider()
+    private val viewModel: MainFragmentViewModel by viewModels { MainFragmentViewModelFactory() }
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?,
                               savedInstanceState: Bundle?): View? =
@@ -53,8 +53,7 @@ class MainFragment: Fragment() {
     private fun setupRecyclerView() {
         lstStudents.run {
             setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(requireActivity(), RecyclerView.VERTICAL,
-                    false)
+            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
             addItemDecoration(DividerItemDecoration(requireActivity(), LinearLayoutManager.VERTICAL))
             itemAnimator = DefaultItemAnimator()
             adapter = listAdapter
