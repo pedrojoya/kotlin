@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +14,6 @@ import es.iessaladillo.pedrojoya.pr195.data.RepositoryImpl
 import es.iessaladillo.pedrojoya.pr195.data.model.Student
 import es.iessaladillo.pedrojoya.pr195.data.remote.ApiService
 import es.iessaladillo.pedrojoya.pr195.extensions.toast
-import es.iessaladillo.pedrojoya.pr195.extensions.viewModelProvider
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -21,11 +21,14 @@ import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {
 
-    private val listAdapter: MainFragmentAdapter by lazy { MainFragmentAdapter().apply {
-        emptyView = lblEmptyView }
+    private val listAdapter: MainFragmentAdapter by lazy {
+        MainFragmentAdapter().apply {
+            emptyView = lblEmptyView
+        }
     }
-    private val viewModel: MainFragmentViewModel by viewModelProvider {
-        MainFragmentViewModel(RepositoryImpl(ApiService.getInstance(requireContext().applicationContext).api))
+    private val viewModel: MainFragmentViewModel by viewModels {
+        MainFragmentViewModelFactory(RepositoryImpl(ApiService.getInstance(requireContext()
+                .applicationContext).api))
     }
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 

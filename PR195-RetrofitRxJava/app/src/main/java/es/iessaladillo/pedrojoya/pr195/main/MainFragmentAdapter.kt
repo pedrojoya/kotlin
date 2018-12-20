@@ -1,5 +1,6 @@
 package es.iessaladillo.pedrojoya.pr195.main
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -8,7 +9,6 @@ import es.iessaladillo.pedrojoya.pr195.R
 import es.iessaladillo.pedrojoya.pr195.base.BaseListAdapter
 import es.iessaladillo.pedrojoya.pr195.base.BaseViewHolder
 import es.iessaladillo.pedrojoya.pr195.data.model.Student
-import es.iessaladillo.pedrojoya.pr195.extensions.inflate
 import es.iessaladillo.pedrojoya.pr195.extensions.loadUrl
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.fragment_main_item.*
@@ -16,7 +16,8 @@ import kotlinx.android.synthetic.main.fragment_main_item.*
 class MainFragmentAdapter : BaseListAdapter<Student, MainFragmentAdapter.ViewHolder>(diffUtilItemCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-            ViewHolder(parent.inflate(R.layout.fragment_main_item))
+            ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.fragment_main_item,
+                    parent, false))
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))

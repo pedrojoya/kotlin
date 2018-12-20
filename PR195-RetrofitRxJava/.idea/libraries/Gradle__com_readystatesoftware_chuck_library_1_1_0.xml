@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.readystatesoftware.chuck:library-1.1.0">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-library-1.1.0.aar/8501585de037bc94bbb60d08b18a6d1a/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-library-1.1.0.aar/8501585de037bc94bbb60d08b18a6d1a/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-library-1.1.0.aar/dafccdfa94a8fd349f1d1bbc0a1cb678/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-library-1.1.0.aar/dafccdfa94a8fd349f1d1bbc0a1cb678/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
