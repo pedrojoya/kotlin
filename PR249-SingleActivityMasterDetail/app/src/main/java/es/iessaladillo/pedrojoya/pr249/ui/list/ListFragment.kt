@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,15 +16,14 @@ import es.iessaladillo.pedrojoya.pr249.R
 import es.iessaladillo.pedrojoya.pr249.base.setOnItemClickListener
 import es.iessaladillo.pedrojoya.pr249.data.RepositoryImpl
 import es.iessaladillo.pedrojoya.pr249.data.local.Database
-import es.iessaladillo.pedrojoya.pr249.extensions.viewModelProvider
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class ListFragment : Fragment() {
 
     private var listener: ListFragment.OnItemSelectedListener? = null
     private val listAdapter: ListFragmentAdapter by lazy { ListFragmentAdapter() }
-    private val viewModel: ListFragmentViewModel by viewModelProvider {
-        ListFragmentViewModel(RepositoryImpl(Database))
+    private val viewModel: ListFragmentViewModel by viewModels {
+        ListFragmentViewModelFactory(RepositoryImpl(Database))
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
