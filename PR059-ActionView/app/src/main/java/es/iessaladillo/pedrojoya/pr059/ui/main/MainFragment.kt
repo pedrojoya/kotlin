@@ -6,6 +6,7 @@ import android.text.TextUtils
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,13 +16,12 @@ import es.iessaladillo.pedrojoya.pr059.base.setOnItemClickListener
 import es.iessaladillo.pedrojoya.pr059.data.RepositoryImpl
 import es.iessaladillo.pedrojoya.pr059.data.local.Database
 import es.iessaladillo.pedrojoya.pr059.extensions.toast
-import es.iessaladillo.pedrojoya.pr059.extensions.viewModelProvider
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {
 
-    private val viewModel: MainFragmentViewModel by viewModelProvider {
-        MainFragmentViewModel(RepositoryImpl(Database))
+    private val viewModel: MainFragmentViewModel by viewModels {
+        MainFragmentViewModelFactory(RepositoryImpl(Database))
     }
     private val listAdapter: MainFragmentAdapter by lazy {
         MainFragmentAdapter().apply {
