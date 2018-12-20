@@ -5,14 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import es.iessaldillo.pedrojoya.pr160.R
 import es.iessaldillo.pedrojoya.pr160.base.OnFabClickListener
-import es.iessaldillo.pedrojoya.pr160.extensions.viewModelProvider
 import kotlinx.android.synthetic.main.fragment_page.*
 
 class PageFragment : Fragment(), OnFabClickListener {
 
-    private val viewModel: PageFragmentViewModel by viewModelProvider()
+    private val viewModel: PageFragmentViewModel by viewModels { PageFragmentViewModelFactory() }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? =
