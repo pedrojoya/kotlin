@@ -3,18 +3,18 @@ package es.iessaladillo.pedrojoya.pr092.ui.main
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import es.iessaladillo.pedrojoya.pr092.R
-import es.iessaladillo.pedrojoya.pr092.extensions.viewModelProvider
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {
 
-    private val viewModel: MainFragmentViewModel by viewModelProvider()
+    private val viewModel: MainFragmentViewModel by viewModels { MainFragmentViewModelFactory() }
     private val listAdapter: MainFragmentAdapter = MainFragmentAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,13 +65,13 @@ class MainFragment : Fragment() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater?.inflate(R.menu.activity_main, menu)
+        inflater.inflate(R.menu.activity_main, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean =
-            when (item?.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean =
+            when (item.itemId) {
                 R.id.mnuRefresh -> {
                     swipeRefreshLayout.isRefreshing = true
                     viewModel.refresh()
