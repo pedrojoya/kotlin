@@ -11,10 +11,10 @@
         android:layout_height="match_parent" />
 
     <TextView
-        android:id="@+id/lblEmpty"
+        android:id="@+id/lblEmptyView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="@string/activity_main_lblEmpty"/>
+        android:text="@string/main_lblEmpty"/>
 
 </FrameLayout>
