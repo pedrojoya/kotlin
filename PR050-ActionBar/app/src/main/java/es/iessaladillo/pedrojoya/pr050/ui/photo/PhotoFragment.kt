@@ -6,8 +6,8 @@ import android.view.*
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import es.iessaladillo.pedrojoya.pr050.R
-import es.iessaladillo.pedrojoya.pr050.extensions.viewModelProvider
 import es.iessaladillo.pedrojoya.pr050.utils.BINARY_COLOR_FILTER
 import es.iessaladillo.pedrojoya.pr050.utils.GREY_COLOR_FILTER
 import es.iessaladillo.pedrojoya.pr050.utils.INVERTED_COLOR_FILTER
@@ -16,7 +16,9 @@ import kotlinx.android.synthetic.main.fragment_photo.*
 
 class PhotoFragment : Fragment() {
 
-    private val viewModel: PhotoFragmentViewModel by viewModelProvider()
+    private val viewModel: PhotoFragmentViewModel by viewModels {
+        PhotoFragmentViewModelFactory()
+    }
     private var listener: Callback? = null
 
     interface Callback {
