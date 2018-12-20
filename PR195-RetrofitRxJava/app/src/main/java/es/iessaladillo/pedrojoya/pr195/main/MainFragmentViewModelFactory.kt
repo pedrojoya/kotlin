@@ -8,6 +8,6 @@ class MainFragmentViewModelFactory(private val repository: Repository) : ViewMod
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-            MainFragmentViewModelFactory(repository) as T
+            MainFragmentViewModel(repository) as T
 
 }
