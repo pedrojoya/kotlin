@@ -2,7 +2,7 @@ package es.iessaladillo.pedrojoya.pr180.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.transaction
+import androidx.fragment.app.commit
 import es.iessaladillo.pedrojoya.pr180.R
 
 private const val TAG_MAIN_FRAGMENT = "TAG_MAIN_FRAGMENT"
@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         if (supportFragmentManager.findFragmentById(R.id.flContent) == null) {
-            supportFragmentManager.transaction {
+            supportFragmentManager.commit {
                 replace(R.id.flContent, MainFragment.newInstance(), TAG_MAIN_FRAGMENT)
             }
         }

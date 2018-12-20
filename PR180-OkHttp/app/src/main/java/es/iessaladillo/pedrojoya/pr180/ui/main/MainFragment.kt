@@ -7,19 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import es.iessaladillo.pedrojoya.pr180.R
 import es.iessaladillo.pedrojoya.pr180.base.Event
 import es.iessaladillo.pedrojoya.pr180.base.RequestState
 import es.iessaladillo.pedrojoya.pr180.data.remote.HttpClient
-import es.iessaladillo.pedrojoya.pr180.extensions.viewModelProvider
 import es.iessaladillo.pedrojoya.pr180.extensions.hideSoftKeyboard
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {
 
-    private val viewModel: MainActivityViewModel by viewModelProvider {
-        MainActivityViewModel(HttpClient.getInstance(requireContext().applicationContext))
+    private val viewModel: MainFragmentViewModel by viewModels {
+        MainFragmentViewModelFactory(HttpClient.getInstance(requireContext().applicationContext))
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -29,14 +29,14 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        initViews()
+        setupViews()
         observeSearch()
         observeEcho()
     }
 
-    private fun initViews() {
-        btnSearch.setOnClickListener { _ -> search() }
-        btnEcho.setOnClickListener { _ -> echo() }
+    private fun setupViews() {
+        btnSearch.setOnClickListener { search() }
+        btnEcho.setOnClickListener { echo() }
     }
 
     private fun search() {
