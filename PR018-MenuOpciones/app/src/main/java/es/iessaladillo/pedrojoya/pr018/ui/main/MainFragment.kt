@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.view.*
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import es.iessaladillo.pedrojoya.pr018.R
 import es.iessaladillo.pedrojoya.pr018.extensions.toast
-import es.iessaladillo.pedrojoya.pr018.extensions.viewModelProvider
 import es.iessaladillo.pedrojoya.pr018.utils.BINARY_COLOR_FILTER
 import es.iessaladillo.pedrojoya.pr018.utils.GREY_COLOR_FILTER
 import es.iessaladillo.pedrojoya.pr018.utils.INVERTED_COLOR_FILTER
@@ -16,8 +16,8 @@ import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {
 
-    private val viewModel: MainFragmentViewModel by viewModelProvider {
-        MainFragmentViewModel(R.id.mnuOriginal)
+    private val viewModel: MainFragmentViewModel by viewModels {
+        MainFragmentViewModelFactory(R.id.mnuOriginal)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
