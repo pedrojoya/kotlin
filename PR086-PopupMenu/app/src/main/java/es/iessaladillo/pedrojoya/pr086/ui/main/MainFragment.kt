@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
@@ -16,7 +17,6 @@ import es.iessaladillo.pedrojoya.pr086.data.RepositoryImpl
 import es.iessaladillo.pedrojoya.pr086.data.local.Database
 import es.iessaladillo.pedrojoya.pr086.data.local.model.Student
 import es.iessaladillo.pedrojoya.pr086.extensions.toast
-import es.iessaladillo.pedrojoya.pr086.extensions.viewModelProvider
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {
@@ -30,8 +30,8 @@ class MainFragment : Fragment() {
             setOnSendMessageListener { position -> sendMessage(getItem(position)) }
         }
     }
-    private val viewModel: MainFragmentViewModel by viewModelProvider {
-        MainFragmentViewModel(RepositoryImpl(Database))
+    private val viewModel: MainFragmentViewModel by viewModels {
+        MainFragmentViewModelFactory(RepositoryImpl(Database))
     }
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?,

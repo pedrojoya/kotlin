@@ -11,8 +11,8 @@ import es.iessaladillo.pedrojoya.pr086.R
 import es.iessaladillo.pedrojoya.pr086.base.BaseListAdapter
 import es.iessaladillo.pedrojoya.pr086.base.BaseViewHolder
 import es.iessaladillo.pedrojoya.pr086.data.local.model.Student
-import es.iessaladillo.pedrojoya.pr086.extensions.loadUrl
 import es.iessaladillo.pedrojoya.pr086.extensions.enableIcons
+import es.iessaladillo.pedrojoya.pr086.extensions.loadUrl
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.fragment_main_item.*
 
