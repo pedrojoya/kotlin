@@ -3,14 +3,15 @@ package es.iessaladillo.pedrojoya.pr152.deprecated;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.preference.MultiSelectListPreference;
-import androidx.appcompat.app.AlertDialog;
-import androidx.preference.DialogPreference;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceDialogFragmentCompat;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.preference.DialogPreference;
+import androidx.preference.MultiSelectListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceDialogFragmentCompat;
 
 /**
  * This class is a hack to allow us to use a MultiSelectListPreference with the v7
@@ -26,7 +27,7 @@ import java.util.Set;
  * This code was partially obtained from Android Studio's decompiling of
  * MultiSelectListPreferenceDialogFragment.
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "unchecked"})
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class MultiSelectListPreferenceDialogFragmentCompat extends PreferenceDialogFragmentCompat
         implements DialogPreference.TargetFragment {

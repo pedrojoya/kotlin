@@ -2,7 +2,10 @@ package es.iessaladillo.pedrojoya.pr152.ui.settings
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.EditTextPreference
+import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import es.iessaladillo.pedrojoya.pr152.R
 
@@ -21,6 +24,7 @@ class SettingsOthers : PreferenceFragmentCompat() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupActionBar()
+        setupPasswordPreference()
         // Set icons according to current settings.
         updateIcons()
     }
@@ -31,6 +35,14 @@ class SettingsOthers : PreferenceFragmentCompat() {
             setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp)
             setDisplayHomeAsUpEnabled(true)
 
+        }
+    }
+
+    private fun setupPasswordPreference() {
+        val preference: EditTextPreference? = findPreference(getString(R.string.prefPassword_key))
+        preference?.setOnBindEditTextListener { editText ->
+            editText.inputType = EditorInfo.TYPE_CLASS_TEXT or EditorInfo
+                    .TYPE_TEXT_VARIATION_PASSWORD
         }
     }
 
@@ -54,7 +66,7 @@ class SettingsOthers : PreferenceFragmentCompat() {
         val gaugeResIds = intArrayOf(R.drawable.ic_gauge_empty_black_24dp,
                 R.drawable.ic_gauge_low_black_24dp, R.drawable.ic_gauge_high_black_24dp,
                 R.drawable.ic_gauge_full_black_24dp)
-        val preference = findPreference(key)
+        val preference: Preference? = findPreference(key)
         if (preference != null) {
             when (preference.key) {
                 getString(R.string.prefNetworkMode_key) ->
