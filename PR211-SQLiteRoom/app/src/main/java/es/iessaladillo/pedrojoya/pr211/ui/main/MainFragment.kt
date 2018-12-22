@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -20,7 +21,6 @@ import es.iessaladillo.pedrojoya.pr211.data.Repository
 import es.iessaladillo.pedrojoya.pr211.data.RepositoryImpl
 import es.iessaladillo.pedrojoya.pr211.data.model.Student
 import es.iessaladillo.pedrojoya.pr211.extensions.setOnSwipeRightListener
-import es.iessaladillo.pedrojoya.pr211.extensions.viewModelProvider
 import es.iessaladillo.pedrojoya.pr211.ui.student.StudentActivity
 import kotlinx.android.synthetic.main.fragment_main.*
 import java.lang.ref.WeakReference
@@ -29,7 +29,7 @@ class MainFragment : Fragment() {
 
     private val listAdapter: MainFragmentAdapter by lazy { MainFragmentAdapter() }
     private val repository: Repository by lazy { RepositoryImpl(App.database.studentDao()) }
-    private val viewModel: MainFragmentViewModel by viewModelProvider { MainFragmentViewModel(repository) }
+    private val viewModel: MainFragmentViewModel by viewModels { MainFragmentViewModelFactory(repository) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? =
@@ -53,7 +53,7 @@ class MainFragment : Fragment() {
 
     private fun setupFab() {
         val fab = requireActivity().findViewById<FloatingActionButton>(R.id.fab)
-        fab.setOnClickListener { _ -> addStudent() }
+        fab.setOnClickListener { addStudent() }
     }
 
     private fun setupRecyclerView() {

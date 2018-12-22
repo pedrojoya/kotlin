@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import es.iessaladillo.pedrojoya.pr211.App
@@ -15,9 +16,8 @@ import es.iessaladillo.pedrojoya.pr211.data.Repository
 import es.iessaladillo.pedrojoya.pr211.data.RepositoryImpl
 import es.iessaladillo.pedrojoya.pr211.data.model.Student
 import es.iessaladillo.pedrojoya.pr211.extensions.checkValid
+import es.iessaladillo.pedrojoya.pr211.extensions.doOnImeAction
 import es.iessaladillo.pedrojoya.pr211.extensions.extraLong
-import es.iessaladillo.pedrojoya.pr211.extensions.onActionDone
-import es.iessaladillo.pedrojoya.pr211.extensions.viewModelProvider
 import kotlinx.android.synthetic.main.fragment_student.*
 import java.lang.ref.WeakReference
 
@@ -25,8 +25,8 @@ class StudentFragment : Fragment() {
 
     private val studentId: Long by extraLong(EXTRA_STUDENT_ID)
     private val repository: Repository by lazy { RepositoryImpl(App.database.studentDao()) }
-    private val viewModel: StudentFragmentViewModel by viewModelProvider {
-        StudentFragmentViewModel(repository)
+    private val viewModel: StudentFragmentViewModel by viewModels {
+        StudentFragmentViewModelFactory(repository)
     }
 
     private fun isValidForm(): Boolean =
@@ -47,8 +47,8 @@ class StudentFragment : Fragment() {
 
     private fun initViews(view: View?) {
         val fab = requireActivity().findViewById<FloatingActionButton>(R.id.fab)
-        fab.setOnClickListener { _ -> saveStudent() }
-        txtAddress.onActionDone { saveStudent() }
+        fab.setOnClickListener { saveStudent() }
+        txtAddress.doOnImeAction { saveStudent() }
 //        loadGrades()
         updateTitle()
         if (studentId != 0L) {
