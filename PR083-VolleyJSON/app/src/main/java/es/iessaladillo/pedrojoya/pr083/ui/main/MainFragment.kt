@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -16,7 +17,6 @@ import es.iessaladillo.pedrojoya.pr083.base.RequestState
 import es.iessaladillo.pedrojoya.pr083.data.model.Student
 import es.iessaladillo.pedrojoya.pr083.data.remote.VolleyInstance
 import es.iessaladillo.pedrojoya.pr083.extensions.toast
-import es.iessaladillo.pedrojoya.pr083.extensions.viewModelProvider
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment: Fragment() {
@@ -26,8 +26,8 @@ class MainFragment: Fragment() {
             emptyView = lblEmptyView
         }
     }
-    private val viewModel: MainFragmentViewModel by viewModelProvider {
-        MainFragmentViewModel(VolleyInstance.getInstance(requireContext()).requestQueue)
+    private val viewModel: MainFragmentViewModel by viewModels {
+        MainFragmentViewModelFactory(VolleyInstance.getInstance(requireContext()).requestQueue)
     }
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?,
@@ -36,7 +36,7 @@ class MainFragment: Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        initViews()
+        setupViews()
         viewModel.students.observe(viewLifecycleOwner, Observer { request ->
             @Suppress("UNCHECKED_CAST")
             when (request) {
@@ -48,7 +48,7 @@ class MainFragment: Fragment() {
 
     }
 
-    private fun initViews() {
+    private fun setupViews() {
         setupPanel()
         setupRecyclerView()
     }
