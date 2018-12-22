@@ -14,7 +14,16 @@ import pedrojoya.iessaladillo.es.pr230.base.PositionalItemDetails
 import pedrojoya.iessaladillo.es.pr230.data.local.model.Student
 import pedrojoya.iessaladillo.es.pr230.extensions.loadUrl
 
-class MainActivityAdapter : BaseListAdapter<Student, MainActivityAdapter.ViewHolder>(diffUtilItemCallback) {
+class MainActivityAdapter : BaseListAdapter<Student, MainActivityAdapter.ViewHolder>(object : DiffUtil.ItemCallback<Student>() {
+
+    override fun areItemsTheSame(oldItem: Student, newItem: Student): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: Student, newItem: Student): Boolean =
+            oldItem.name == newItem.name && oldItem.address == newItem.address
+
+}) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
             ViewHolder(LayoutInflater.from(parent.context)
@@ -39,21 +48,6 @@ class MainActivityAdapter : BaseListAdapter<Student, MainActivityAdapter.ViewHol
             lblName.text = student.name
             lblAddress.text = student.address
             imgAvatar.loadUrl(student.photoUrl, R.drawable.ic_person_black_24dp, R.drawable.ic_person_black_24dp)
-        }
-
-    }
-
-    companion object {
-
-        private val diffUtilItemCallback = object : DiffUtil.ItemCallback<Student>() {
-
-            override fun areItemsTheSame(oldItem: Student, newItem: Student): Boolean {
-                return oldItem.id == newItem.id
-            }
-
-            override fun areContentsTheSame(oldItem: Student, newItem: Student): Boolean =
-                    oldItem.name == newItem.name && oldItem.address == newItem.address
-
         }
 
     }

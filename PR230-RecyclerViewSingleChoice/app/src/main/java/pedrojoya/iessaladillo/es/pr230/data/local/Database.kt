@@ -23,18 +23,10 @@ object Database: Repository {
         return ArrayList(students)
     }
 
-    override fun addStudent(student: Student) {
-        students.add(student)
-    }
-
     private fun newFakeStudent(): Student {
         val num = autonumeric++
         return Student(num, Fakeit.name().name(), Fakeit.address().streetAddress(),
                 "$BASE_URL${random.nextInt(1084)}")
-    }
-
-    override fun deleteStudent(student: Student) {
-        students.remove(student)
     }
 
 }

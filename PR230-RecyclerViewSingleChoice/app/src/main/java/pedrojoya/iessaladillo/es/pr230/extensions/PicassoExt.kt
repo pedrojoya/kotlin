@@ -1,4 +1,4 @@
-@file:JvmName("ImageViewExt")
+@file:JvmName("PicassoExt")
 
 package pedrojoya.iessaladillo.es.pr230.extensions
 

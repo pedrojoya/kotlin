@@ -28,10 +28,10 @@ class MainActivity : AppCompatActivity() {
     private val selectionTracker: SelectionTracker<Long> by lazy {
         SelectionTracker.Builder(
                 "lstStudentsSelection",
-                lstStudents!!,
+                lstStudents,
                 PositionalItemKeyProvider(),
-                PositionalDetailsLookup(lstStudents!!),
-                // Las claves son long.
+                PositionalDetailsLookup(lstStudents),
+                // Las claves son de tipo Long.
                 StorageStrategy.createLongStorage())
                 // Selección simple
                 .withSelectionPredicate(SelectionPredicates.createSelectSingleAnything())
@@ -41,6 +41,9 @@ class MainActivity : AppCompatActivity() {
         MainActivityAdapter().apply {
             emptyView = lblEmpty
             setOnItemClickListener { _, position ->
+                // La propiedad selectionTracker del adapter forzosamente debe tener un tipo
+                // nullable porque el selectionTracker debe ser asignado al adaptador más adelante,
+                // una vez que se ha asignado el adaptador al recyclerview.
                 if (!selectionTracker!!.hasSelection()) {
                     selectionTracker!!.select(position.toLong())
                 }
@@ -51,7 +54,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initViews()
+        setupViews()
         // Debe recuperarse el estado del selectionTracker una vez haya sido creado,
         // por lo que no se puede hacer en onRestoreInstanceState().
         if (savedInstanceState != null) {
@@ -59,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun initViews() {
+    private fun setupViews() {
         setupToolbar()
         setupRecyclerView()
         setupFab()
@@ -74,7 +77,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupFab() {
-        fab.setOnClickListener { _ -> showSelectedStudent() }
+        fab.setOnClickListener { showSelectedStudent() }
     }
 
     private fun setupRecyclerView() {
@@ -111,6 +114,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
+        // Se debe guardar el estado del selectionTracker al cambiar la configuración.
         selectionTracker.onSaveInstanceState(outState)
     }
 
