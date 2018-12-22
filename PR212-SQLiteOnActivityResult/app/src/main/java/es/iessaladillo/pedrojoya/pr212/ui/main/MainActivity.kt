@@ -2,7 +2,7 @@ package es.iessaladillo.pedrojoya.pr212.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.transaction
+import androidx.fragment.app.commit
 import es.iessaladillo.pedrojoya.pr212.R
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadFragment() {
         if (supportFragmentManager.findFragmentByTag(TAG_MAIN_FRAGMENT) == null) {
-            supportFragmentManager.transaction {
+            supportFragmentManager.commit {
                 replace(R.id.flContent, MainFragment.newInstance(), TAG_MAIN_FRAGMENT)
             }
         }

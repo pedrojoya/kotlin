@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,7 +24,6 @@ import es.iessaladillo.pedrojoya.pr212.data.local.StudentDao
 import es.iessaladillo.pedrojoya.pr212.data.local.model.Student
 import es.iessaladillo.pedrojoya.pr212.extensions.setOnSwipeRightListener
 import es.iessaladillo.pedrojoya.pr212.extensions.toast
-import es.iessaladillo.pedrojoya.pr212.extensions.viewModelProvider
 import es.iessaladillo.pedrojoya.pr212.ui.student.StudentActivity
 import kotlinx.android.synthetic.main.fragment_main.*
 import java.lang.ref.WeakReference
@@ -45,8 +45,8 @@ class MainFragment : Fragment() {
     private val repository: Repository by lazy {
         RepositoryImpl(StudentDao(requireContext(), DbHelper.getInstance(requireContext())))
     }
-    private val viewModel: MainFragmentViewModel by viewModelProvider {
-        MainFragmentViewModel(RepositoryImpl(StudentDao(requireContext(), DbHelper.getInstance(requireContext()))))
+    private val viewModel: MainFragmentViewModel by viewModels {
+        MainFragmentViewModelFactory(repository)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

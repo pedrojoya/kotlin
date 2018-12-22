@@ -20,7 +20,7 @@ import es.iessaladillo.pedrojoya.pr212.data.local.StudentDao
 import es.iessaladillo.pedrojoya.pr212.data.local.model.Student
 import es.iessaladillo.pedrojoya.pr212.extensions.checkValid
 import es.iessaladillo.pedrojoya.pr212.extensions.extraLong
-import es.iessaladillo.pedrojoya.pr212.extensions.onAction
+import es.iessaladillo.pedrojoya.pr212.extensions.doOnImeAction
 import es.iessaladillo.pedrojoya.pr212.extensions.toast
 import kotlinx.android.synthetic.main.fragment_student.*
 import java.lang.ref.WeakReference
@@ -46,7 +46,7 @@ class StudentFragment : Fragment() {
 
     private fun initViews() {
         fab.setOnClickListener { saveStudent() }
-        txtAddress.onAction {
+        txtAddress.doOnImeAction {
             saveStudent()
         }
         //loadGrades()
