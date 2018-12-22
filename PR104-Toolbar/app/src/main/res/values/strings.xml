@@ -2,10 +2,11 @@
 <resources>
 
     <string name="app_name">Toolbar</string>
-    <string name="activity_main_mnuSettings">Settings</string>
-    <string name="activity_main_mnuNext">Next</string>
-    <string name="secondary_activity_title">Secondary activity</string>
-    <string name="activity_main_lblTitle">Main activity</string>
-    <string name="activity_secundary_lblTitle">Secondary activity</string>
+    <string name="main_mnuSettings">Settings</string>
+    <string name="main_mnuNext">Next</string>
+    <string name="secondary_title">Secondary activity</string>
+    <string name="main_lblTitle">Main activity</string>
+    <string name="secondary_lblTitle">Secondary activity</string>
+    <string name="main_title">Toolbar</string>
 
 </resources>
