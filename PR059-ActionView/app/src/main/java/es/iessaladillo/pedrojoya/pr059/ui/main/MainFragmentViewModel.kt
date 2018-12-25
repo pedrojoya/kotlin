@@ -2,8 +2,8 @@ package es.iessaladillo.pedrojoya.pr059.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations.switchMap
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.switchMap
 import es.iessaladillo.pedrojoya.pr059.data.Repository
 
 class MainFragmentViewModel(repository: Repository) : ViewModel() {
@@ -16,7 +16,7 @@ class MainFragmentViewModel(repository: Repository) : ViewModel() {
     var isSearchViewExpanded: Boolean = false
 
     init {
-        students = switchMap(searchQueryLiveData) { criteria -> repository.queryStudents(criteria) }
+        students = searchQueryLiveData.switchMap { criteria -> repository.queryStudents(criteria) }
         searchQueryLiveData.postValue("")
     }
 
