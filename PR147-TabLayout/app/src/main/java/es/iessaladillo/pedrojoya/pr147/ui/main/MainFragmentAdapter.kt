@@ -4,17 +4,18 @@ import android.content.Context
 import androidx.annotation.DrawableRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-
+import androidx.fragment.app.FragmentPagerAdapter
 import es.iessaladillo.pedrojoya.pr147.R
-import es.iessaladillo.pedrojoya.pr147.base.CachedFragmentPagerAdapter
+import es.iessaladillo.pedrojoya.pr147.ui.likes.LikesFragment
+import es.iessaladillo.pedrojoya.pr147.ui.lorem.LoremFragment
 
 private const val FRAGMENT_COUNT = 2
 
-internal class MainActivityAdapter(fm: FragmentManager, private val context: Context) :
-        CachedFragmentPagerAdapter(fm) {
+class MainFragmentAdapter(fm: FragmentManager, private val context: Context) :
+        FragmentPagerAdapter(fm) {
 
-    private val mTitleResIds = intArrayOf(R.string.lorem_fragment_title, R.string
-            .likes_fragment_title)
+    private val mTitleResIds = intArrayOf(R.string.lorem_title, R.string
+            .likes_title)
     private val mIconResIds = intArrayOf(R.drawable.ic_share_white_24dp,
             R.drawable.ic_thumb_up_white_24dp)
 

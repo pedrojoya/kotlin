@@ -1,10 +1,9 @@
 @file:JvmName("ToastExt")
 package es.iessaladillo.pedrojoya.pr147.extensions
 
+import android.content.Context
 import android.widget.Toast
-import androidx.annotation.StringRes
-import androidx.fragment.app.Fragment
 
-fun Fragment.toast(@StringRes messageResId: Int, duration: Int = Toast.LENGTH_SHORT) {
-    Toast.makeText(requireContext(), messageResId, duration).show()
+fun Context.toast(message: String, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(this, message, duration).show()
 }

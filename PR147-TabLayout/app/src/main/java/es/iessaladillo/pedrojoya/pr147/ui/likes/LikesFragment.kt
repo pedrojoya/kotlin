@@ -1,4 +1,4 @@
-package es.iessaladillo.pedrojoya.pr147.ui.main
+package es.iessaladillo.pedrojoya.pr147.ui.likes
 
 
 import android.os.Bundle
@@ -8,15 +8,14 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import es.iessaladillo.pedrojoya.pr147.R
 import kotlinx.android.synthetic.main.fragment_likes.*
 
 class LikesFragment : Fragment() {
 
-    // It can't be initialized lazily because activity is not ready yet when
-    // the fab variable must be initialized (even lazily).
-    private var fab: FloatingActionButton? = null
+    private lateinit var fab: FloatingActionButton
     private val viewModel: LikesFragmentViewModel by viewModels { LikesFragmentViewModelFactory() }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -25,38 +24,32 @@ class LikesFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        initViews()
-    }
-
-    private fun initViews() {
         fab = ActivityCompat.requireViewById(requireActivity(), R.id.fab)
         setupFab()
-        lblLikes.text = viewModel.likes.toString()
+        observeLikes()
     }
 
-    private fun like() {
-        viewModel.likes++
-        lblLikes.text = viewModel.likes.toString()
+    private fun observeLikes() {
+        viewModel.likes.observe(viewLifecycleOwner, Observer {
+            likes ->  lblLikes.text = likes.toString()
+        })
     }
 
     // Hack to know if the fragment is currently visible in viewpager.
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        if (isVisibleToUser) {
+        if (isVisibleToUser && isVisible) {
             setupFab()
         }
     }
 
     private fun setupFab() {
-        fab?.setImageResource(R.drawable.ic_thumb_up_white_24dp)
-        fab?.setOnClickListener { like() }
+        fab.setOnClickListener { viewModel.incrementLikes() }
     }
 
     companion object {
 
-        fun newInstance(): LikesFragment {
-            return LikesFragment()
-        }
+        fun newInstance(): LikesFragment = LikesFragment()
 
     }
 

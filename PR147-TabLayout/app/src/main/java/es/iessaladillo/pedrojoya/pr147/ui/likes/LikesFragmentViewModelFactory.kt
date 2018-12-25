@@ -1,4 +1,4 @@
-package es.iessaladillo.pedrojoya.pr147.ui.main
+package es.iessaladillo.pedrojoya.pr147.ui.likes
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
