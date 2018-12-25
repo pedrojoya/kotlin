@@ -1,9 +1,6 @@
 package pedrojoya.iessaladillo.es.pr229.ui.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import pedrojoya.iessaladillo.es.pr229.data.Repository
 import pedrojoya.iessaladillo.es.pr229.data.local.model.Student
 
@@ -15,11 +12,8 @@ class MainActivityViewModel(private val repository: Repository) :
     private var emptyListLiveData: LiveData<Boolean>
 
     init {
-        studentsLiveData = Transformations.switchMap(descLiveData) { desc -> repository
-                .queryStudentsOrderedByName(desc) }
-        emptyListLiveData = Transformations.map(studentsLiveData) {
-            students -> students == null || students.isEmpty()
-        }
+        studentsLiveData = descLiveData.switchMap { desc -> repository.queryStudentsOrderedByName(desc) }
+        emptyListLiveData = studentsLiveData.map { students -> students.isEmpty() }
         descLiveData.postValue(false)
     }
 
