@@ -5,12 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import es.iessaladillo.pedrojoya.pr249.base.BaseListAdapter
-import es.iessaladillo.pedrojoya.pr249.base.BaseViewHolder
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.support_simple_spinner_dropdown_item.*
 
-class ListFragmentAdapter : BaseListAdapter<String, ListFragmentAdapter.ViewHolder>(object : DiffUtil.ItemCallback<String>() {
+class ListFragmentAdapter(val viewModel: ListFragmentViewModel) : ListAdapter<String,
+        ListFragmentAdapter.ViewHolder>(object : DiffUtil.ItemCallback<String>() {
     override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
         return TextUtils.equals(oldItem, newItem)
     }
@@ -29,8 +30,12 @@ class ListFragmentAdapter : BaseListAdapter<String, ListFragmentAdapter.ViewHold
         viewHolder.bind(getItem(position))
     }
 
-    inner class ViewHolder(override val containerView: View) : BaseViewHolder(containerView,
-            onItemClickListener), LayoutContainer {
+    inner class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder
+    (containerView), LayoutContainer {
+
+        init {
+            containerView.setOnClickListener { viewModel.onItemSelected(getItem(adapterPosition)) }
+        }
 
         fun bind(item: String) {
             text1.text = item

@@ -1,17 +1,18 @@
 package es.iessaladillo.pedrojoya.pr249.ui.list
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import es.iessaladillo.pedrojoya.pr249.base.Event
 import es.iessaladillo.pedrojoya.pr249.data.Repository
 
-class ListFragmentViewModel(private val repository: Repository) : ViewModel() {
+class ListFragmentViewModel(repository: Repository) : ViewModel() {
 
-    private var students: List<String>? = null
+    val students: LiveData<List<String>> = repository.queryStudents()
+    val navigateToDetail: MutableLiveData<Event<String>> = MutableLiveData()
 
-    fun getStudents(forceLoad: Boolean): List<String> {
-        if (students == null || forceLoad) {
-            students = repository.queryStudents()
-        }
-        return students!!
+    fun onItemSelected(item: String) {
+        navigateToDetail.postValue(Event(item))
     }
 
 }

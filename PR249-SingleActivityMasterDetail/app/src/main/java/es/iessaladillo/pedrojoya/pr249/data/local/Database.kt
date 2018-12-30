@@ -1,13 +1,18 @@
 package es.iessaladillo.pedrojoya.pr249.data.local
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import java.util.*
+import kotlin.collections.ArrayList
 
 object Database {
 
     private val students = ArrayList<String>()
+    private val studentsLiveData: MutableLiveData<List<String>> = MutableLiveData()
 
     init {
         insertInitialData()
+        studentsLiveData.postValue(ArrayList<String>(students))
     }
 
     private fun insertInitialData() {
@@ -17,6 +22,6 @@ object Database {
                         "Filomeno", "Fulgencio", "Ambrosio"))
     }
 
-    fun queryStudents(): List<String> = ArrayList(students)
+    fun queryStudents(): LiveData<List<String>> = studentsLiveData
 
 }

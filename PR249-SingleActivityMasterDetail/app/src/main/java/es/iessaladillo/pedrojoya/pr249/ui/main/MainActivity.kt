@@ -2,30 +2,23 @@ package es.iessaladillo.pedrojoya.pr249.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.commit
 import es.iessaladillo.pedrojoya.pr249.R
-import es.iessaladillo.pedrojoya.pr249.ui.detail.DetailFragment
 import es.iessaladillo.pedrojoya.pr249.ui.list.ListFragment
 
-class MainActivity : AppCompatActivity(), ListFragment.OnItemSelectedListener {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        // We load initial fragment
         if (savedInstanceState == null) {
-            supportFragmentManager.commit {
-                replace(R.id.flContent, ListFragment.newInstance(), ListFragment::class.java.simpleName)
-            }
+            navigateToInitialFragment()
         }
     }
 
-    override fun onItemSelected(item: String) {
+    private fun navigateToInitialFragment() {
         supportFragmentManager.commit {
-            replace(R.id.flContent, DetailFragment.newInstance(item), DetailFragment::class.java.simpleName)
-            addToBackStack(DetailFragment::class.java.simpleName)
-            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            replace(R.id.flContent, ListFragment.newInstance(), ListFragment::class.java.simpleName)
         }
     }
 
