@@ -27,13 +27,13 @@ class SecondaryFragment : Fragment() {
             setNavigationOnClickListener { requireActivity().onBackPressed() }
             inflateMenu(R.menu.fragment_secondary)
             setOnMenuItemClickListener {
-                showSettings()
+                navigateToSettings()
                 true
             }
         }
     }
 
-    private fun showSettings() {
+    private fun navigateToSettings() {
         toast(getString(R.string.main_settings))
     }
 

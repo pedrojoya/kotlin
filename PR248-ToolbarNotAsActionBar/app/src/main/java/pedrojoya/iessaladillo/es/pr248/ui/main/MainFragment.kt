@@ -30,11 +30,11 @@ class MainFragment : Fragment() {
             setOnMenuItemClickListener { item ->
                 when (item.itemId) {
                     R.id.mnuNext -> {
-                        showSecondaryFragment()
+                        navigateToSecondary()
                         true
                     }
                     R.id.mnuSettings -> {
-                        showSettings()
+                        navigateToSettings()
                         true
                     }
                     else -> false
@@ -43,7 +43,7 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun showSecondaryFragment() {
+    private fun navigateToSecondary() {
         requireFragmentManager().commit {
             replace(R.id.flContent, SecondaryFragment.newInstance(), SecondaryFragment::class.java.simpleName)
             addToBackStack(SecondaryFragment::class.java.simpleName)
@@ -51,7 +51,7 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun showSettings() {
+    private fun navigateToSettings() {
         toast(getString(R.string.main_settings))
     }
 

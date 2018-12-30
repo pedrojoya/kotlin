@@ -13,11 +13,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         if (savedInstanceState == null) {
-            loadInitialFragment()
+            navigateToStartFragment()
         }
     }
 
-    private fun loadInitialFragment() {
+    private fun navigateToStartFragment() {
         supportFragmentManager.commit {
             replace(R.id.flContent,
                     MainFragment.newInstance(), MainFragment::class.java.simpleName)
