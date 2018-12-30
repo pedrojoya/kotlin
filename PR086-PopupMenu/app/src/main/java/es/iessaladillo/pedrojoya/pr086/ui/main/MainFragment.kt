@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import es.iessaladillo.pedrojoya.pr086.R
-import es.iessaladillo.pedrojoya.pr086.base.setOnItemClickListener
+import es.iessaladillo.pedrojoya.pr086.base.EventObserver
 import es.iessaladillo.pedrojoya.pr086.data.RepositoryImpl
 import es.iessaladillo.pedrojoya.pr086.data.local.Database
 import es.iessaladillo.pedrojoya.pr086.data.local.model.Student
@@ -21,18 +21,10 @@ import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {
 
-    private val listAdapter: MainFragmentAdapter by lazy {
-        MainFragmentAdapter().apply {
-            setOnItemClickListener { v, position -> showStudent(getItem(position)) }
-            setOnShowAssignmentsListener { position -> showAssignments(getItem(position)) }
-            setOnShowMarksListener { position -> showMarks(getItem(position)) }
-            setOnCallListener { position -> call(getItem(position)) }
-            setOnSendMessageListener { position -> sendMessage(getItem(position)) }
-        }
-    }
     private val viewModel: MainFragmentViewModel by viewModels {
         MainFragmentViewModelFactory(RepositoryImpl(Database))
     }
+    private val listAdapter: MainFragmentAdapter by lazy { MainFragmentAdapter(viewModel) }
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?,
                               savedInstanceState: Bundle?): View? =
@@ -41,10 +33,7 @@ class MainFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupViews()
-        viewModel.students.observe(viewLifecycleOwner, Observer { students ->
-            listAdapter.submitList(students)
-            lblEmptyView.visibility = if (students.size > 0) View.INVISIBLE else View.VISIBLE
-        })
+        observeViewModel()
     }
 
     private fun setupViews() {
@@ -53,7 +42,7 @@ class MainFragment : Fragment() {
     }
 
     private fun setupListView() {
-        lblEmptyView.setOnClickListener { v -> viewModel.addStudent(Database.newFakeStudent()) }
+        lblEmptyView.setOnClickListener { viewModel.addStudent(Database.newFakeStudent()) }
         lstStudents.run {
             setHasFixedSize(true)
             layoutManager = GridLayoutManager(requireContext(),
@@ -80,6 +69,31 @@ class MainFragment : Fragment() {
         fab.setOnClickListener { viewModel.addStudent(Database.newFakeStudent()) }
     }
 
+    private fun observeViewModel() {
+        observeStudents()
+        observeNavigation()
+    }
+
+    private fun observeStudents() {
+        viewModel.students.observe(viewLifecycleOwner, Observer { students ->
+            listAdapter.submitList(students)
+            lblEmptyView.visibility = if (students.isEmpty()) View.VISIBLE else View.INVISIBLE
+        })
+    }
+
+    private fun observeNavigation() {
+        viewModel.navigateToStudentDetail.observe(viewLifecycleOwner,
+                EventObserver { showStudent(it) })
+        viewModel.navigateToStudentAssignments.observe(viewLifecycleOwner,
+                EventObserver { showAssignments(it) })
+        viewModel.navigateToStudentMarks.observe(viewLifecycleOwner,
+                EventObserver { showMarks(it) })
+        viewModel.navigateToCallStudent.observe(viewLifecycleOwner,
+                EventObserver { call(it) })
+        viewModel.navigateToSendMessageToStudent.observe(viewLifecycleOwner,
+                EventObserver { sendMessage(it) })
+    }
+
     private fun showStudent(student: Student) {
         toast(getString(R.string.main_activity_click_on, student.name))
     }
@@ -102,9 +116,7 @@ class MainFragment : Fragment() {
 
     companion object {
 
-        fun newInstance(): MainFragment {
-            return MainFragment()
-        }
+        fun newInstance(): MainFragment = MainFragment()
 
     }
 

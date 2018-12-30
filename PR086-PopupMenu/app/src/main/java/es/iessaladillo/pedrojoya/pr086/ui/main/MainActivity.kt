@@ -10,11 +10,14 @@ class MainActivity : AppCompatActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        // Load initial fragment.
         if (savedInstanceState == null) {
-            supportFragmentManager.commit {
-                replace(R.id.flContent, MainFragment.newInstance(), MainFragment::class.java.simpleName)
-            }
+            navigateToStartFragment()
+        }
+    }
+
+    private fun navigateToStartFragment() {
+        supportFragmentManager.commit {
+            replace(R.id.flContent, MainFragment.newInstance(), MainFragment::class.java.simpleName)
         }
     }
 
