@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setupToolbar()
         if (savedInstanceState == null) {
-            loadInitialFragment()
+            navigateToStartFragment()
         }
     }
 
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp)
     }
 
-    private fun loadInitialFragment() {
+    private fun navigateToStartFragment() {
         supportFragmentManager.commit {
             replace(R.id.flContent, MainFragment.newInstance(), MainFragment::class.java.simpleName)
         }
@@ -40,13 +40,13 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean =
         when (item?.itemId) {
             R.id.mnuSettings -> {
-                showSettings()
+                navigateToSettings()
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
 
-    private fun showSettings() {
+    private fun navigateToSettings() {
         toast(getString(R.string.main_mnuSettings))
     }
 

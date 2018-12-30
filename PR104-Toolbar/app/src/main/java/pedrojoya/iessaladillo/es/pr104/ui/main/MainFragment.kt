@@ -40,13 +40,13 @@ class MainFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean =
         when (item.itemId) {
             R.id.mnuNext -> {
-                showSecondaryFragment()
+                navigateToSecondary()
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
 
-    private fun showSecondaryFragment() {
+    private fun navigateToSecondary() {
         requireActivity().supportFragmentManager.commit {
             replace(R.id.flContent, SecondaryFragment.newInstance(), SecondaryFragment::class.java
                     .simpleName)
@@ -60,6 +60,5 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
 
     }
-
 
 }
