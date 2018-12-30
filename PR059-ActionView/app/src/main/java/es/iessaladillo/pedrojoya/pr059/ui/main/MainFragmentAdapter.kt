@@ -4,13 +4,15 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
-import es.iessaladillo.pedrojoya.pr059.base.BaseListAdapter
-import es.iessaladillo.pedrojoya.pr059.base.BaseViewHolder
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import es.iessaladillo.pedrojoya.pr059.R
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.support_simple_spinner_dropdown_item.*
 
-class MainFragmentAdapter : BaseListAdapter<String, MainFragmentAdapter.ViewHolder>(object : DiffUtil.ItemCallback<String>() {
+class MainFragmentAdapter : ListAdapter<String, MainFragmentAdapter.ViewHolder>(object : DiffUtil.ItemCallback<String>() {
     override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
         return TextUtils.equals(oldItem, newItem)
     }
@@ -29,11 +31,24 @@ class MainFragmentAdapter : BaseListAdapter<String, MainFragmentAdapter.ViewHold
         holder.bind(getItem(position))
     }
 
-    inner class ViewHolder(override val containerView: View) : BaseViewHolder(containerView,
-            onItemClickListener), LayoutContainer {
+    public override fun getItem(position: Int): String {
+        return super.getItem(position)
+    }
+
+    inner class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
+
+        init {
+            containerView.setOnClickListener { showStudent(getItem(adapterPosition)) }
+        }
 
         fun bind(student: String) {
             text1.text = student
+        }
+
+        private fun showStudent(student: String) {
+            Toast.makeText(itemView.context,
+                    itemView.context.getString(R.string.main_student_clicked, student),
+                    Toast.LENGTH_SHORT).show()
         }
 
     }

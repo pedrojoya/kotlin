@@ -12,10 +12,8 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import es.iessaladillo.pedrojoya.pr059.R
-import es.iessaladillo.pedrojoya.pr059.base.setOnItemClickListener
 import es.iessaladillo.pedrojoya.pr059.data.RepositoryImpl
 import es.iessaladillo.pedrojoya.pr059.data.local.Database
-import es.iessaladillo.pedrojoya.pr059.extensions.toast
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {
@@ -23,11 +21,7 @@ class MainFragment : Fragment() {
     private val viewModel: MainFragmentViewModel by viewModels {
         MainFragmentViewModelFactory(RepositoryImpl(Database))
     }
-    private val listAdapter: MainFragmentAdapter by lazy {
-        MainFragmentAdapter().apply {
-            setOnItemClickListener { _, position -> showStudent(getItem(position)) }
-        }
-    }
+    private val listAdapter: MainFragmentAdapter by lazy { MainFragmentAdapter() }
     private var searchView: SearchView? = null
     private var mnuSearch: MenuItem? = null
 
@@ -85,8 +79,6 @@ class MainFragment : Fragment() {
                 }
 
                 override fun onQueryTextChange(query: String): Boolean {
-                    // filter adapter when text is changed
-                    // listAdapter.getFilter().filter(query);
                     viewModel.searchQuery = query
                     return false
                 }
@@ -119,9 +111,6 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun showStudent(student: String) {
-        requireContext().toast(getString(R.string.main_student_clicked, student))
-    }
 
     companion object {
 
