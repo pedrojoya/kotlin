@@ -8,13 +8,18 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import es.iessaladillo.pedrojoya.pr092.R
+import es.iessaladillo.pedrojoya.pr092.base.RequestState
+import es.iessaladillo.pedrojoya.pr092.data.RepositoryImpl
+import es.iessaladillo.pedrojoya.pr092.data.local.Database
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {
 
-    private val viewModel: MainFragmentViewModel by viewModels { MainFragmentViewModelFactory() }
+    private val viewModel: MainFragmentViewModel by viewModels {
+        MainFragmentViewModelFactory(RepositoryImpl(Database))
+    }
     private val listAdapter: MainFragmentAdapter = MainFragmentAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,28 +33,23 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        initViews()
-        // We shouldn't do like this. We should define a state of the request.
+        setupViews()
+        observeData()
+        observeRefreshState()
         if (savedInstanceState == null) {
-            swipeRefreshLayout.post { swipeRefreshLayout.isRefreshing = true }
+            swipeRefreshLayout.post { viewModel.refresh() }
         }
-        viewModel.data.observe(viewLifecycleOwner, Observer { data ->
-            listAdapter.submitList(data)
-            swipeRefreshLayout.isRefreshing = false
-        })
     }
 
-    private fun initViews() {
+    private fun setupViews() {
         setupPanel()
         setupRecyclerView()
     }
 
     private fun setupRecyclerView() {
-        listAdapter.emptyView = lblEmptyView
         lstList.run {
             setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(requireActivity(), RecyclerView.VERTICAL,
-                    false)
+            layoutManager = LinearLayoutManager(requireActivity())
             addItemDecoration(DividerItemDecoration(requireActivity(), LinearLayoutManager.VERTICAL))
             itemAnimator = DefaultItemAnimator()
             adapter = listAdapter
@@ -64,6 +64,35 @@ class MainFragment : Fragment() {
             setOnRefreshListener { viewModel.refresh() }
         }
     }
+
+    private fun observeRefreshState() {
+        viewModel.refreshState.observe(viewLifecycleOwner, Observer { requestState ->
+            when (requestState) {
+                is RequestState.Loading -> swipeRefreshLayout.isRefreshing = true
+                is RequestState.Error -> {
+                    showError(requestState)
+                    swipeRefreshLayout.isRefreshing = false
+                }
+                else -> swipeRefreshLayout.isRefreshing = false
+            }
+        })
+    }
+
+    private fun observeData() {
+        viewModel.data.observe(viewLifecycleOwner, Observer { items ->
+            listAdapter.submitList(items)
+            lblEmptyView.visibility = if (items.isEmpty()) View.VISIBLE else View.INVISIBLE
+        })
+    }
+
+    private fun showError(requestState: RequestState.Error) {
+        val exceptionEvent = requestState.exception
+        val exception = exceptionEvent.getContentIfNotHandled()
+        if (exception != null) {
+            Snackbar.make(lblEmptyView, exception.message!!, Snackbar.LENGTH_SHORT).show()
+        }
+    }
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -85,4 +114,5 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
 
     }
+
 }

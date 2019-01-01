@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import es.iessaladillo.pedrojoya.pr092.base.BaseListAdapter
-import es.iessaladillo.pedrojoya.pr092.base.BaseViewHolder
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.support_simple_spinner_dropdown_item.*
 
-class MainFragmentAdapter : BaseListAdapter<String, MainFragmentAdapter.ViewHolder>(object : DiffUtil.ItemCallback<String>() {
+class MainFragmentAdapter : ListAdapter<String, MainFragmentAdapter.ViewHolder>(object : DiffUtil.ItemCallback<String>() {
     override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
         return oldItem == newItem
     }
@@ -27,9 +27,7 @@ class MainFragmentAdapter : BaseListAdapter<String, MainFragmentAdapter.ViewHold
         holder.bind(getItem(position))
     }
 
-    inner class ViewHolder(override val containerView: View) :
-            BaseViewHolder(containerView, onItemClickListener, onItemLongClickListener),
-            LayoutContainer {
+    inner class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
         fun bind(item: String) {
             text1.text = item
