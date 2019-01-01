@@ -7,17 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import es.iessaladillo.pedrojoya.pr105.R
-import es.iessaladillo.pedrojoya.pr105.base.OnFragmentShownListener
 import es.iessaladillo.pedrojoya.pr105.base.OnToolbarAvailableListener
 import es.iessaladillo.pedrojoya.pr105.extensions.snackbar
+import es.iessaladillo.pedrojoya.pr105.ui.main.MainActivityViewModel
+import es.iessaladillo.pedrojoya.pr105.ui.main.MainActivityViewModelFactory
 import kotlinx.android.synthetic.main.fragment_option3.*
 
 
 class Option3Fragment : Fragment() {
 
     private lateinit var onToolbarAvailableListener: OnToolbarAvailableListener
-    private lateinit var onFragmentShownListener: OnFragmentShownListener
+    private val activityViewModel: MainActivityViewModel by activityViewModels { MainActivityViewModelFactory }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? =
@@ -26,6 +28,7 @@ class Option3Fragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupViews()
+        activityViewModel.setCurrentOption(R.id.mnuOption3)
     }
 
     private fun setupViews() {
@@ -58,11 +61,6 @@ class Option3Fragment : Fragment() {
             onToolbarAvailableListener = activity as OnToolbarAvailableListener
         } catch (e: Exception) {
             throw ClassCastException(activity.toString() + " must implement OnToolbarAvailableListener")
-        }
-        try {
-            onFragmentShownListener = activity as OnFragmentShownListener
-        } catch (e: Exception) {
-            throw ClassCastException(activity.toString() + " must implement OnFragmentShownListener")
         }
     }
 

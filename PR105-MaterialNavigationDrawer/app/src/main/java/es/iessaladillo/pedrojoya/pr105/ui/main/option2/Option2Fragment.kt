@@ -7,12 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.google.android.material.tabs.TabLayout
 import es.iessaladillo.pedrojoya.pr105.R
-import es.iessaladillo.pedrojoya.pr105.base.OnFragmentShownListener
 import es.iessaladillo.pedrojoya.pr105.base.OnToolbarAvailableListener
 import es.iessaladillo.pedrojoya.pr105.extensions.forEachIndexed
 import es.iessaladillo.pedrojoya.pr105.extensions.onTabSelected
+import es.iessaladillo.pedrojoya.pr105.ui.main.MainActivityViewModel
+import es.iessaladillo.pedrojoya.pr105.ui.main.MainActivityViewModelFactory
 import es.iessaladillo.pedrojoya.pr105.ui.main.option2.tab1.Option2Tab1Fragment
 import es.iessaladillo.pedrojoya.pr105.ui.main.option2.tab2.Option2Tab2Fragment
 import kotlinx.android.synthetic.main.fragment_option2.*
@@ -21,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_option2.*
 class Option2Fragment : Fragment() {
 
     private lateinit var onToolbarAvailableListener: OnToolbarAvailableListener
-    private lateinit var onFragmentShownListener: OnFragmentShownListener
+    private val activityViewModel: MainActivityViewModel by activityViewModels { MainActivityViewModelFactory }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? =
@@ -31,6 +33,7 @@ class Option2Fragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupViews()
+        activityViewModel.setCurrentOption(R.id.mnuOption2)
     }
 
     private fun setupViews() {
@@ -50,12 +53,6 @@ class Option2Fragment : Fragment() {
         } catch (e: Exception) {
             throw ClassCastException(activity.toString() + " must implement OnToolbarAvailableListener")
         }
-        try {
-            onFragmentShownListener = activity as OnFragmentShownListener
-        } catch (e: Exception) {
-            throw ClassCastException(activity.toString() + " must implement OnFragmentShownListener")
-        }
-
     }
 
     private fun setupViewPager() {

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
@@ -15,9 +16,8 @@ import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.commit
-import com.google.android.material.navigation.NavigationView
+import androidx.lifecycle.Observer
 import es.iessaladillo.pedrojoya.pr105.R
-import es.iessaladillo.pedrojoya.pr105.base.OnFragmentShownListener
 import es.iessaladillo.pedrojoya.pr105.base.OnToolbarAvailableListener
 import es.iessaladillo.pedrojoya.pr105.extensions.loadUrl
 import es.iessaladillo.pedrojoya.pr105.ui.detail.DetailActivity
@@ -29,15 +29,16 @@ import kotlinx.android.synthetic.main.activity_main.*
 private const val PREFERENCES_FILE = "prefs"
 private const val PREF_NAV_DRAWER_OPENED = "navdrawerOpened"
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
-        OnToolbarAvailableListener, OnFragmentShownListener {
+class MainActivity : AppCompatActivity(), OnToolbarAvailableListener {
 
     private var actionBarDrawerToggle: ActionBarDrawerToggle? = null
+    private val viewModel: MainActivityViewModel by viewModels { MainActivityViewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupViews()
+        observeCurrentOption()
         // if just lunched, select default menu item in drawer.
         if (savedInstanceState == null) {
             navigateToStartOption()
@@ -45,11 +46,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun navigateToStartOption() {
-        navigateToOption(navigationView.menu.findItem(R.id.mnuOption1))
+        supportFragmentManager.commit {
+            replace(R.id.flContent, Option1Fragment.newInstance(), Option1Fragment::class.java.simpleName)
+            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+        }
     }
 
     private fun setupViews() {
         setupNavigationDrawer()
+        addOnBackPressedCallback { closeDrawerIfOpen() }
+    }
+
+    private fun closeDrawerIfOpen(): Boolean {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+            return true
+        }
+        return false
     }
 
     private fun setupNavigationDrawer() {
@@ -64,7 +77,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 getString(
                         R.string.main_activity_also_not_downloaded), Toast.LENGTH_SHORT).show()
         }
-        navigationView.setNavigationItemSelectedListener(this)
+        navigationView.setNavigationItemSelectedListener { onNavItemSelected(it) }
         if (!readShownPreference()) {
             drawerLayout.openDrawer(GravityCompat.START)
             saveShownPreference()
@@ -72,20 +85,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun navigateToOption(menuItem: MenuItem) {
-        when (menuItem.itemId) {
-            R.id.mnuOption1 -> {
-                replaceFragment(Option1Fragment.newInstance(), Option1Fragment::class.java.simpleName)
-                menuItem.isChecked = true
+        val currentOption = viewModel.currentOption.value
+        if (currentOption == null || currentOption != menuItem.itemId) {
+            when (menuItem.itemId) {
+                R.id.mnuOption1 -> {
+                    replaceFragment(Option1Fragment.newInstance(), Option1Fragment::class.java.simpleName)
+                    menuItem.isChecked = true
+                }
+                R.id.mnuOption2 -> {
+                    replaceFragment(Option2Fragment.newInstance(), Option2Fragment::class.java.simpleName)
+                    menuItem.isChecked = true
+                }
+                R.id.mnuOption3 -> {
+                    replaceFragment(Option3Fragment.newInstance(), Option3Fragment::class.java.simpleName)
+                    menuItem.isChecked = true
+                }
+                R.id.mnuDetail -> DetailActivity.start(this)
             }
-            R.id.mnuOption2 -> {
-                replaceFragment(Option2Fragment.newInstance(), Option2Fragment::class.java.simpleName)
-                menuItem.isChecked = true
-            }
-            R.id.mnuOption3 -> {
-                replaceFragment(Option3Fragment.newInstance(), Option3Fragment::class.java.simpleName)
-                menuItem.isChecked = true
-            }
-            R.id.mnuDetail -> DetailActivity.start(this)
         }
     }
 
@@ -101,18 +117,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             (actionBarDrawerToggle?.onOptionsItemSelected(item) ?: false) ||
                     super.onOptionsItemSelected(item)
 
-    override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
+    private fun onNavItemSelected(menuItem: MenuItem): Boolean {
         navigateToOption(menuItem)
         drawerLayout.closeDrawers()
         return true
-    }
-
-    override fun onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
-        }
     }
 
     private fun saveShownPreference() {
@@ -143,8 +151,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         actionBarDrawerToggle!!.syncState()
     }
 
-    override fun onFragmentShown(menuItemResId: Int) {
-        navigationView.menu.findItem(menuItemResId)?.isChecked = true
+    private fun observeCurrentOption() {
+        viewModel.currentOption.observe(this, Observer { option ->
+            navigationView.menu.findItem(option)?.isChecked = true
+        })
     }
 
 }
