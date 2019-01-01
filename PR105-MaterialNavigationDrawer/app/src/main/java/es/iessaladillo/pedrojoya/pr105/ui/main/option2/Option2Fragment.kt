@@ -9,15 +9,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import es.iessaladillo.pedrojoya.pr105.R
+import es.iessaladillo.pedrojoya.pr105.base.OnFragmentShownListener
 import es.iessaladillo.pedrojoya.pr105.base.OnToolbarAvailableListener
 import es.iessaladillo.pedrojoya.pr105.extensions.forEachIndexed
 import es.iessaladillo.pedrojoya.pr105.extensions.onTabSelected
+import es.iessaladillo.pedrojoya.pr105.ui.main.option2.tab1.Option2Tab1Fragment
+import es.iessaladillo.pedrojoya.pr105.ui.main.option2.tab2.Option2Tab2Fragment
 import kotlinx.android.synthetic.main.fragment_option2.*
 
 
 class Option2Fragment : Fragment() {
 
-    private lateinit var listener: OnToolbarAvailableListener
+    private lateinit var onToolbarAvailableListener: OnToolbarAvailableListener
+    private lateinit var onFragmentShownListener: OnFragmentShownListener
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? =
@@ -26,24 +30,30 @@ class Option2Fragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        initViews()
+        setupViews()
     }
 
-    private fun initViews() {
+    private fun setupViews() {
         setupToolbar()
         setupViewPager()
     }
 
     private fun setupToolbar() {
-        listener.onToolbarAvailable(toolbar, getString(R.string.activity_main_option2))
+        toolbar.title = getString(R.string.activity_main_option2)
+        onToolbarAvailableListener.onToolbarAvailable(toolbar)
     }
 
-    override fun onAttach(activity: Context?) {
+    override fun onAttach(activity: Context) {
         super.onAttach(activity)
         try {
-            listener = activity as OnToolbarAvailableListener
+            onToolbarAvailableListener = activity as OnToolbarAvailableListener
         } catch (e: Exception) {
-            throw ClassCastException(activity!!.toString() + " debe implementar la interfaz OnToolbarAvailableListener")
+            throw ClassCastException(activity.toString() + " must implement OnToolbarAvailableListener")
+        }
+        try {
+            onFragmentShownListener = activity as OnFragmentShownListener
+        } catch (e: Exception) {
+            throw ClassCastException(activity.toString() + " must implement OnFragmentShownListener")
         }
 
     }
@@ -60,6 +70,13 @@ class Option2Fragment : Fragment() {
             onTabSelected { tab: TabLayout.Tab -> if (tab.position == 0) fab.show() else fab.hide() }
         }
     }
+
+    companion object {
+
+        fun newInstance() = Option2Fragment()
+
+    }
+
 
 }
 

@@ -1,7 +1,6 @@
 package es.iessaladillo.pedrojoya.pr105.ui.main
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ImageView
@@ -13,11 +12,14 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.edit
 import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
-import androidx.fragment.app.transaction
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.commit
 import com.google.android.material.navigation.NavigationView
-import com.squareup.picasso.Picasso
 import es.iessaladillo.pedrojoya.pr105.R
+import es.iessaladillo.pedrojoya.pr105.base.OnFragmentShownListener
 import es.iessaladillo.pedrojoya.pr105.base.OnToolbarAvailableListener
+import es.iessaladillo.pedrojoya.pr105.extensions.loadUrl
 import es.iessaladillo.pedrojoya.pr105.ui.detail.DetailActivity
 import es.iessaladillo.pedrojoya.pr105.ui.main.option1.Option1Fragment
 import es.iessaladillo.pedrojoya.pr105.ui.main.option2.Option2Fragment
@@ -27,37 +29,40 @@ import kotlinx.android.synthetic.main.activity_main.*
 private const val PREFERENCES_FILE = "prefs"
 private const val PREF_NAV_DRAWER_OPENED = "navdrawerOpened"
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, OnToolbarAvailableListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
+        OnToolbarAvailableListener, OnFragmentShownListener {
 
     private var actionBarDrawerToggle: ActionBarDrawerToggle? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initViews()
+        setupViews()
         // if just lunched, select default menu item in drawer.
         if (savedInstanceState == null) {
-            onNavigationItemSelected(navigationView.menu.getItem(0))
+            navigateToStartOption()
         }
     }
 
-    private fun initViews() {
+    private fun navigateToStartOption() {
+        navigateToOption(navigationView.menu.findItem(R.id.mnuOption1))
+    }
+
+    private fun setupViews() {
         setupNavigationDrawer()
     }
 
     private fun setupNavigationDrawer() {
-        //val navigationView: NavigationView = ActivityCompat.requireViewById(this, R.id
-        //        .navigationView)
         val imgProfile: ImageView = ViewCompat.requireViewById(navigationView.getHeaderView(0), R.id.imgProfile)
-        Picasso.with(this).load("http://lorempixel.com/200/200/people/").into(imgProfile)
+        imgProfile.loadUrl("http://lorempixel.com/200/200/people/")
         val swDownloadedOnly = navigationView.menu.findItem(
                 R.id.mnuDownloaded).actionView as SwitchCompat
         swDownloadedOnly.setOnCheckedChangeListener { _, isChecked ->
             Toast.makeText(this, if (isChecked)
-                        getString(R.string.main_activity_downloaded_only)
-                    else
-                        getString(
-                                R.string.main_activity_also_not_downloaded), Toast.LENGTH_SHORT).show()
+                getString(R.string.main_activity_downloaded_only)
+            else
+                getString(
+                        R.string.main_activity_also_not_downloaded), Toast.LENGTH_SHORT).show()
         }
         navigationView.setNavigationItemSelectedListener(this)
         if (!readShownPreference()) {
@@ -66,29 +71,38 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    private fun showOption(itemId: Int, title: String, menuItem: MenuItem) {
-        when (itemId) {
+    private fun navigateToOption(menuItem: MenuItem) {
+        when (menuItem.itemId) {
             R.id.mnuOption1 -> {
-                supportFragmentManager.transaction { replace(R.id.flContent, Option1Fragment(), title) }
+                replaceFragment(Option1Fragment.newInstance(), Option1Fragment::class.java.simpleName)
                 menuItem.isChecked = true
             }
             R.id.mnuOption2 -> {
-                supportFragmentManager.transaction { replace(R.id.flContent, Option2Fragment(), title) }
+                replaceFragment(Option2Fragment.newInstance(), Option2Fragment::class.java.simpleName)
                 menuItem.isChecked = true
             }
             R.id.mnuOption3 -> {
-                supportFragmentManager.transaction { replace(R.id.flContent, Option3Fragment(), title) }
+                replaceFragment(Option3Fragment.newInstance(), Option3Fragment::class.java.simpleName)
                 menuItem.isChecked = true
             }
-            R.id.mnuDetail -> startActivity(Intent(this, DetailActivity::class.java))
+            R.id.mnuDetail -> DetailActivity.start(this)
+        }
+    }
+
+    private fun replaceFragment(fragment: Fragment, tag: String) {
+        supportFragmentManager.commit {
+            replace(R.id.flContent, fragment, tag)
+            addToBackStack(tag)
+            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
         }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean =
-        actionBarDrawerToggle?.onOptionsItemSelected(item) ?: super.onOptionsItemSelected(item)
+            (actionBarDrawerToggle?.onOptionsItemSelected(item) ?: false) ||
+                    super.onOptionsItemSelected(item)
 
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
-        showOption(menuItem.itemId, menuItem.title.toString(), menuItem)
+        navigateToOption(menuItem)
         drawerLayout.closeDrawers()
         return true
     }
@@ -101,12 +115,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-
     private fun saveShownPreference() {
         val sharedPref = applicationContext.getSharedPreferences(
                 PREFERENCES_FILE, Context.MODE_PRIVATE)
         sharedPref.edit(true) { putBoolean(PREF_NAV_DRAWER_OPENED, true) }
     }
+
 
     private fun readShownPreference(): Boolean {
         val sharedPref = applicationContext.getSharedPreferences(
@@ -114,10 +128,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return sharedPref.getBoolean(PREF_NAV_DRAWER_OPENED, false)
     }
 
-    // Fragment sends toolbar and title to activity so it can setup it.
-    override fun onToolbarAvailable(toolbar: Toolbar, title: String) {
+    // Fragment sends toolbar to activity so it can setup it.
+    override fun onToolbarAvailable(toolbar: Toolbar) {
         setSupportActionBar(toolbar)
-        setTitle(title)
         supportActionBar?.run {
             setDisplayHomeAsUpEnabled(true)
             setHomeButtonEnabled(true)
@@ -128,6 +141,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 R.string.main_activity_navigation_drawer_open, R.string.main_activity_navigation_drawer_close)
         drawerLayout.addDrawerListener(actionBarDrawerToggle!!)
         actionBarDrawerToggle!!.syncState()
+    }
+
+    override fun onFragmentShown(menuItemResId: Int) {
+        navigationView.menu.findItem(menuItemResId)?.isChecked = true
     }
 
 }

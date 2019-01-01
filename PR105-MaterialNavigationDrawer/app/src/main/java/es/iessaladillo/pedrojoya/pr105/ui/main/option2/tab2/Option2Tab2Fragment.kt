@@ -1,4 +1,4 @@
-package es.iessaladillo.pedrojoya.pr105.ui.main.option2
+package es.iessaladillo.pedrojoya.pr105.ui.main.option2.tab2
 
 
 import android.os.Bundle

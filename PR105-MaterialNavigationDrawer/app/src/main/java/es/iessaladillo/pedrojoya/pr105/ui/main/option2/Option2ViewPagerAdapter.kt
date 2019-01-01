@@ -21,6 +21,8 @@ class ViewPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment = fragments[position]
 
+    operator fun get(position: Int) = getItem(position)
+
     override fun getCount(): Int = fragments.size
 
     override fun getPageTitle(position: Int): CharSequence? = "  " + titles[position]
