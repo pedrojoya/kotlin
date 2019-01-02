@@ -46,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
+        android:layout_margin="@dimen/main_fab_margin"
         app:layout_behavior="es.iessaldillo.pedrojoya.pr191.base.ScrollAwareFabBehavior"
         android:tint="@color/colorWhite"
         app:srcCompat="@android:drawable/ic_dialog_email"/>

@@ -19,9 +19,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="@dimen/activity_main_txtLorem_padding"
+            android:padding="@dimen/main_txtLorem_padding"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            tools:text="@string/fragment_main_lblOption"/>
+            tools:text="@string/main_lblOption"/>
 
         <TextView
             android:id="@+id/txtLorem"
@@ -30,8 +30,8 @@
             android:layout_below="@+id/lblOption"
             android:layout_alignParentBottom="true"
             android:textSize="20sp"
-            android:padding="@dimen/activity_main_txtLorem_padding"
-            android:text="@string/activity_main_txtLorem"/>
+            android:padding="@dimen/main_txtLorem_padding"
+            android:text="@string/main_txtLorem"/>
 
     </RelativeLayout>
 

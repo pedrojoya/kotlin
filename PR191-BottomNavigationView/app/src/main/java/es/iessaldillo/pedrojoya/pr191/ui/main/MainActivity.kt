@@ -1,72 +1,75 @@
 package es.iessaldillo.pedrojoya.pr191.ui.main
 
 import android.os.Bundle
+import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.transaction
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.commit
+import androidx.lifecycle.Observer
 import es.iessaldillo.pedrojoya.pr191.R
-import es.iessaldillo.pedrojoya.pr191.extensions.viewModelProvider
 import kotlinx.android.synthetic.main.activity_main.*
-
-private const val TAG_FAVORITES = "TAG_FAVORITES"
-private const val TAG_CALENDAR = "TAG_CALENDAR"
-private const val TAG_MUSIC = "TAG_MUSIC"
 
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel: MainActivityViewModel by viewModelProvider()
+    private val viewModel: MainActivityViewModel by viewModels { MainActivityViewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initViews()
-        // We simulate click on first option.
+        setupViews()
+        observeCurrentOption()
         if (savedInstanceState == null) {
-            bottomNavigationView.selectedItemId = viewModel.currentItemId
-            // bottomNavigationView.findViewById(currentItemId).performClick();
+            navigateToStartFragment()
         }
     }
 
-    private fun initViews() {
+    private fun observeCurrentOption() {
+        viewModel.currentOption.observe(this,
+                Observer { option -> bottomNavigationView.menu.findItem(option)?.isChecked = true })
+    }
+
+    private fun navigateToStartFragment() {
+        supportFragmentManager.commit {
+            replace(R.id.flContent, MainFragment.newInstance(R.id.mnuFavorites, R.drawable.ic_favorite_black_24dp,
+                    getString(R.string.main_favorites)))
+            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+        }
+    }
+
+    private fun setupViews() {
         setSupportActionBar(toolbar)
         setupBottomNavigationView()
     }
 
     private fun setupBottomNavigationView() {
-        bottomNavigationView.run {
-            menu.findItem(R.id.mnuMusic).isEnabled =
-                    viewModel.currentItemId != R.id.mnuFavorites
-            setOnNavigationItemSelectedListener { item ->
-                when (item.itemId) {
-                    R.id.mnuFavorites -> showFavorites()
-                    R.id.mnuCalendar -> showCalendar()
-                    R.id.mnuMusic -> showMusic()
-                }
-                viewModel.currentItemId = item.itemId
-                true
+        bottomNavigationView.setOnNavigationItemSelectedListener {
+            navigateToOption(it)
+            true
+        }
+    }
+
+    private fun navigateToOption(item: MenuItem) {
+        val currentOption = viewModel.currentOption.value
+        if (currentOption == null || currentOption != item.itemId) {
+            when (item.itemId) {
+                R.id.mnuFavorites -> replaceFragment(MainFragment.newInstance(R.id.mnuFavorites, R.drawable.ic_favorite_black_24dp,
+                        getString(R.string.main_favorites)), getString(R.string.main_favorites))
+                R.id.mnuCalendar -> replaceFragment(MainFragment.newInstance(R.id.mnuCalendar, R.drawable.ic_access_time_black_24dp,
+                        getString(R.string.main_calendar)), getString(R.string.main_calendar))
+                R.id.mnuMusic -> replaceFragment(MainFragment.newInstance(R.id.mnuMusic, R.drawable.ic_audiotrack_black_24dp,
+                        getString(R.string.main_music)), getString(R.string.main_music))
             }
         }
     }
 
-    private fun showFavorites() {
-        supportFragmentManager.transaction {
-            replace(R.id.flContent, MainFragment.newInstance(getString(R.string.main_activity_favorites)), TAG_FAVORITES)
-        }
-        // Disable music option.
-        bottomNavigationView.menu.findItem(R.id.mnuMusic).isEnabled = false
-    }
-
-    private fun showCalendar() {
-        supportFragmentManager.transaction {
-            replace(R.id.flContent, MainFragment.newInstance(getString(R.string.main_activity_calendar)), TAG_CALENDAR)
-        }
-        // Enable music option.
-        bottomNavigationView.menu.findItem(R.id.mnuMusic).isEnabled = true
-    }
-
-    private fun showMusic() {
-        supportFragmentManager.transaction {
-            replace(R.id.flContent, MainFragment.newInstance(getString(R.string.main_activity_music)), TAG_MUSIC)
-        }
+    private fun replaceFragment(fragment: Fragment, tag: String) {
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.flContent, fragment, tag)
+                .addToBackStack(tag)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .commit()
     }
 
 }
