@@ -4,20 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/rlRoot"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?android:attr/selectableItemBackground"
     android:minHeight="@dimen/two_line_tile_height"
     android:orientation="vertical">
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imgAvatar"
         android:layout_width="@dimen/two_line_avatar_width"
         android:layout_height="@dimen/two_line_avatar_height"
-        android:id="@+id/imgAvatar"
         android:layout_alignParentStart="true"
         android:layout_marginStart="@dimen/two_line_avatar_marginLeft"
         android:layout_marginTop="@dimen/two_line_avatar_marginTop"
-        android:contentDescription="@string/activity_main_item_imgAvatar"
+        android:contentDescription="@string/main_item_imgAvatar"
         app:srcCompat="@drawable/ic_person_black_24dp"/>
 
     <TextView
@@ -36,9 +35,9 @@
         tools:text="@tools:sample/full_names"/>
 
     <TextView
+        android:id="@+id/lblAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/lblAddress"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/lblName"

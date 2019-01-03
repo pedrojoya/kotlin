@@ -2,16 +2,16 @@ package es.iessaladillo.pedrojoya.pr178.base
 
 import android.animation.Animator
 import android.content.Context
-import androidx.coordinatorlayout.widget.CoordinatorLayout
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import androidx.core.view.ViewCompat
 import android.util.AttributeSet
 import android.view.View
-
-private const val ANIMATION_DURATION: Long = 200
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.view.ViewCompat
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 @Suppress("unused", "UNUSED_PARAMETER")
 class ScrollAwareFabBehavior(context: Context, attrs: AttributeSet) : FloatingActionButton.Behavior() {
+
+    private val animationDuration: Long = 200
 
     private var isHidden: Boolean = false
 
@@ -37,7 +37,7 @@ class ScrollAwareFabBehavior(context: Context, attrs: AttributeSet) : FloatingAc
                 dyUnconsumed, type)
         if (dyConsumed > 0 && !isHidden) {
             child.animate().scaleX(0f).scaleY(0f).rotation(-90f)
-                    .setDuration(ANIMATION_DURATION)
+                    .setDuration(animationDuration)
                     .setListener(
                             object : Animator.AnimatorListener {
                                 override fun onAnimationStart(animation: Animator) {
@@ -53,7 +53,7 @@ class ScrollAwareFabBehavior(context: Context, attrs: AttributeSet) : FloatingAc
 
         } else if (dyConsumed < 0 && isHidden) {
             child.animate().scaleX(1f).scaleY(1f).rotation(0f)
-                    .setDuration(ANIMATION_DURATION)
+                    .setDuration(animationDuration)
                     .setListener(
                             object : Animator.AnimatorListener {
                                 override fun onAnimationStart(animation: Animator) {
