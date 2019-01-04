@@ -38,7 +38,11 @@ class MainFragmentAdapter internal constructor() : ListAdapter<Student, MainFrag
     inner class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
         init {
-            itemView.setOnClickListener { showBottomSheetDialogFragment(getItem(adapterPosition)) }
+            itemView.setOnClickListener {
+                if (adapterPosition != RecyclerView.NO_POSITION) {
+                    showBottomSheetDialogFragment(getItem(adapterPosition))
+                }
+            }
         }
 
         fun bind(student: Student) {
