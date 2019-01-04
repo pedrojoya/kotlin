@@ -1,4 +1,4 @@
-package es.iessaladillo.pedrojoya.pr211.ui.views
+package es.iessaladillo.pedrojoya.pr211.views
 
 import android.content.Context
 import android.graphics.Canvas
@@ -49,7 +49,6 @@ class ClickToSelectEditText : AppCompatEditText {
             a.recycle()
         }
     }
-
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)

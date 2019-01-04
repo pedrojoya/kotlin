@@ -1,4 +1,4 @@
-package es.iessaladillo.pedrojoya.pr211.data.model
+package es.iessaladillo.pedrojoya.pr211.data.local.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

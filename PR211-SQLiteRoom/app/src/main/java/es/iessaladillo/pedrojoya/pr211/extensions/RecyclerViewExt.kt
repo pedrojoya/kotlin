@@ -28,7 +28,7 @@ fun RecyclerView.onTouch(dragDirs: Int, swipeDirs: Int, init: OnItemTouchHelper.
     }).attachToRecyclerView(this)
 }
 
-fun RecyclerView.setOnSwipeRightListener(action: (viewHolder: RecyclerView.ViewHolder) -> Unit) {
+fun RecyclerView.doOnSwiped(action: (viewHolder: RecyclerView.ViewHolder) -> Unit) {
     ItemTouchHelper(
             object : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN,
                     ItemTouchHelper.RIGHT) {

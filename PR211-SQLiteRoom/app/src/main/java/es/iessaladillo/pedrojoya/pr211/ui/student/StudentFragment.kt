@@ -1,86 +1,71 @@
 package es.iessaladillo.pedrojoya.pr211.ui.student
 
-import android.os.AsyncTask
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import es.iessaladillo.pedrojoya.pr211.App
 import es.iessaladillo.pedrojoya.pr211.R
-import es.iessaladillo.pedrojoya.pr211.data.Repository
 import es.iessaladillo.pedrojoya.pr211.data.RepositoryImpl
-import es.iessaladillo.pedrojoya.pr211.data.model.Student
+import es.iessaladillo.pedrojoya.pr211.data.local.AppDatabase
+import es.iessaladillo.pedrojoya.pr211.data.local.model.Student
 import es.iessaladillo.pedrojoya.pr211.extensions.checkValid
 import es.iessaladillo.pedrojoya.pr211.extensions.doOnImeAction
 import es.iessaladillo.pedrojoya.pr211.extensions.extraLong
 import kotlinx.android.synthetic.main.fragment_student.*
-import java.lang.ref.WeakReference
+
+private const val EXTRA_STUDENT_ID: String = "EXTRA_STUDENT_ID"
 
 class StudentFragment : Fragment() {
 
     private val studentId: Long by extraLong(EXTRA_STUDENT_ID)
-    private val repository: Repository by lazy { RepositoryImpl(App.database.studentDao()) }
     private val viewModel: StudentFragmentViewModel by viewModels {
-        StudentFragmentViewModelFactory(repository)
+        StudentFragmentViewModelFactory(RepositoryImpl(AppDatabase.getInstance(requireContext()).studentDao()))
     }
-
-    private fun isValidForm(): Boolean =
-                    tilName.checkValid(getString(R.string.student_fragment_required_field)) &&
-                    tilGrade.checkValid(getString(R.string.student_fragment_required_field)) &&
-                    tilPhone.checkValid(getString(R.string.student_fragment_required_field))
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_student, container, false)
-    }
+                              savedInstanceState: Bundle?): View? =
+            inflater.inflate(R.layout.fragment_student, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        initViews(view)
+        setupViews()
     }
 
-    private fun initViews(view: View?) {
-        val fab = requireActivity().findViewById<FloatingActionButton>(R.id.fab)
-        fab.setOnClickListener { saveStudent() }
+    private fun setupViews() {
+        setupToolbar()
+        setupFab()
         txtAddress.doOnImeAction { saveStudent() }
-//        loadGrades()
-        updateTitle()
         if (studentId != 0L) {
-            loadStudent(studentId)
+            observeStudent()
         }
     }
 
-/*
-    private fun loadGrades() {
-        txtGrade.run {
-            setAdapter(ArrayAdapter.createFromResource(requireActivity(),
-                    R.array.grades, android.R.layout.simple_list_item_1))
-            setOnItemSelectedListener { item, _ -> txtGrade.setText(item.toString()) }
+    private fun setupFab() {
+        val fab = requireActivity().findViewById<FloatingActionButton>(R.id.fab)
+        fab.run {
+            setImageResource(R.drawable.ic_save_white_24dp)
+            setOnClickListener { saveStudent() }
         }
     }
-*/
 
-    private fun updateTitle() {
-        requireActivity().setTitle(if (studentId != 0L) R.string.student_fragment_edit_student else R.string
-                .student_fragment_add_student)
+    private fun observeStudent() {
+        viewModel.getStudent(studentId).observe(viewLifecycleOwner, Observer { showStudent(it) })
     }
 
-    private fun loadStudent(studentId: Long) {
-        viewModel.getStudent(studentId).observe(viewLifecycleOwner, Observer<Student> { student ->
-            if (student != null) showStudent(student)
-            else showErrorLoadingStudentAndFinish()
-        })
-    }
-
-    private fun showErrorLoadingStudentAndFinish() {
-        Toast.makeText(requireActivity(), R.string.student_fragment_error_loading_student, Toast.LENGTH_LONG).show()
-        requireActivity().finish()
+    private fun setupToolbar() {
+        val actionBar = (requireActivity() as AppCompatActivity).supportActionBar
+        actionBar?.run {
+            title = if (studentId != 0L)
+                getString(R.string.student_edit_student)
+            else
+                getString(R.string.student_add_student)
+            setDisplayHomeAsUpEnabled(false)
+        }
     }
 
     private fun saveStudent() {
@@ -88,41 +73,17 @@ class StudentFragment : Fragment() {
             val student = createStudent()
             if (studentId != 0L) {
                 student.id = studentId
-                updateStudent(student)
+                viewModel.updateStudent(student)
             } else {
-                addStudent(student)
+                viewModel.insertStudent(student)
             }
         }
     }
 
-    private fun addStudent(student: Student) {
-        AddStudentTask(this, repository).execute(student)
-    }
-
-    private fun showSuccessAddingStudent() {
-        Toast.makeText(requireActivity(), getString(R.string.student_fragment_student_added),
-                Toast.LENGTH_SHORT).show()
-    }
-
-    private fun showErrorAddingStudent() {
-        Toast.makeText(requireActivity(), getString(R.string.student_fragment_error_adding_student),
-                Toast.LENGTH_SHORT).show()
-    }
-
-    private fun updateStudent(student: Student) {
-        EditStudentTask(this, repository).execute(student)
-    }
-
-    private fun showSucessUpdatingStudent() {
-        Toast.makeText(requireActivity(), getString(R.string.student_fragment_student_updated),
-                Toast.LENGTH_SHORT).show()
-
-    }
-
-    private fun showErrorUpdatingStudent() {
-        Toast.makeText(requireActivity(), getString(R.string.student_fragment_error_updating_student),
-                Toast.LENGTH_SHORT).show()
-    }
+    private fun isValidForm(): Boolean =
+            tilName.checkValid(getString(R.string.student_required_field)) &&
+                    tilGrade.checkValid(getString(R.string.student_required_field)) &&
+                    tilPhone.checkValid(getString(R.string.student_required_field))
 
     private fun showStudent(student: Student) {
         student.run {
@@ -139,54 +100,8 @@ class StudentFragment : Fragment() {
                     txtGrade.text.toString(),
                     txtAddress.text.toString())
 
-    private class AddStudentTask(studentFragment: StudentFragment, private val repository: Repository)
-        : AsyncTask<Student, Void, Long>() {
-
-        private val studentFragmentWeakReference: WeakReference<StudentFragment> = WeakReference(studentFragment)
-
-        override fun doInBackground(vararg students: Student): Long {
-            return repository.insertStudent(students[0])
-        }
-
-        override fun onPostExecute(studentId: Long) {
-            studentFragmentWeakReference.get()?.run {
-                if (studentId >= 0) {
-                    showSuccessAddingStudent()
-                } else {
-                    showErrorAddingStudent()
-                }
-                requireActivity().finish()
-            }
-        }
-
-    }
-
-    private class EditStudentTask(studentFragment: StudentFragment, private val repository:
-    Repository) : AsyncTask<Student, Void, Int>() {
-
-        private val studentFragmentWeakReference: WeakReference<StudentFragment> = WeakReference(studentFragment)
-
-
-        override fun doInBackground(vararg students: Student): Int? {
-            return repository.updateStudent(students[0])
-        }
-
-        override fun onPostExecute(updates: Int) {
-            studentFragmentWeakReference.get()?.run {
-                if (updates == 1) {
-                    showSucessUpdatingStudent()
-                } else {
-                    showErrorUpdatingStudent()
-                }
-                requireActivity().finish()
-            }
-        }
-
-    }
-
     companion object {
 
-        @Suppress("unused")
         fun newInstance(): StudentFragment {
             return StudentFragment()
         }

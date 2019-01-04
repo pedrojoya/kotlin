@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 
 import es.iessaladillo.pedrojoya.pr211.data.Repository
-import es.iessaladillo.pedrojoya.pr211.data.model.Student
+import es.iessaladillo.pedrojoya.pr211.data.local.model.Student
 
 class StudentFragmentViewModel(private val repository: Repository) : ViewModel() {
 
@@ -12,9 +12,17 @@ class StudentFragmentViewModel(private val repository: Repository) : ViewModel()
 
     fun getStudent(studentId: Long): LiveData<Student> {
         if (student == null) {
-            student = repository.getStudent(studentId)
+            student = repository.queryStudent(studentId)
         }
         return student!!
+    }
+
+    fun insertStudent(student: Student) {
+        repository.insertStudent(student)
+    }
+
+    fun updateStudent(student: Student) {
+        repository.updateStudent(student)
     }
 
 }
