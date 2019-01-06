@@ -1,27 +1,26 @@
 package es.iessaladillo.pedrojoya.pr040.ui.main
 
-import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.switchMap
+import es.iessaladillo.pedrojoya.pr040.base.Resource
+import es.iessaladillo.pedrojoya.pr040.data.Repository
+import es.iessaladillo.pedrojoya.pr040.data.model.Student
 
-import es.iessaladillo.pedrojoya.pr040.base.RequestState
-import es.iessaladillo.pedrojoya.pr040.data.remote.StudentsLiveData
+class MainFragmentViewModel(private val repository: Repository) : ViewModel() {
 
-@SuppressLint("StaticFieldLeak")
-class MainFragmentViewModel : ViewModel() {
-
-    private val _studentsLiveData: StudentsLiveData = StudentsLiveData()
-
-    val students: LiveData<RequestState>
-        get() = _studentsLiveData
-
-    fun forceLoadStudents() {
-        _studentsLiveData.loadData()
+    private val queryStudentsTrigger = MutableLiveData<Boolean>()
+    val students: LiveData<Resource<List<Student>>> = queryStudentsTrigger.switchMap {
+        repository.queryStudents()
     }
 
-    override fun onCleared() {
-        _studentsLiveData.cancel()
-        super.onCleared()
+    init {
+        refreshStudents()
+    }
+
+    fun refreshStudents() {
+        queryStudentsTrigger.postValue(true)
     }
 
 }
