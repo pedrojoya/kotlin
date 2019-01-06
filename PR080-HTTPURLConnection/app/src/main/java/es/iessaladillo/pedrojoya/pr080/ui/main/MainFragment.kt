@@ -2,103 +2,106 @@ package es.iessaladillo.pedrojoya.pr080.ui.main
 
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import es.iessaladillo.pedrojoya.pr080.R
 import es.iessaladillo.pedrojoya.pr080.base.Event
-import es.iessaladillo.pedrojoya.pr080.base.RequestState
-import es.iessaladillo.pedrojoya.pr080.extensions.hideKeyboard
+import es.iessaladillo.pedrojoya.pr080.data.RepositoryImpl
+import es.iessaladillo.pedrojoya.pr080.data.echo.EchoDataSourceImpl
+import es.iessaladillo.pedrojoya.pr080.data.search.SearchDataSourceImpl
+import es.iessaladillo.pedrojoya.pr080.extensions.hideSoftKeyboard
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {
 
-    private lateinit var viewModel: MainActivityViewModel
+    private val viewModel: MainFragmentViewModel by viewModels {
+        MainFragmentViewModelFactory(RepositoryImpl(SearchDataSourceImpl(), EchoDataSourceImpl()))
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.fragment_main, container, false)
 
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
-        initViews()
-        observeSearch()
-        observeEcho()
+        setupViews()
+        observeSearchResult()
+        observeEchoResult()
     }
 
-    private fun initViews() {
-        btnSearch.setOnClickListener { _ -> search() }
-        btnEcho.setOnClickListener { _ -> echo() }
-    }
-
-    private fun observeSearch() {
-        viewModel.searchLiveData.observe(viewLifecycleOwner, Observer<RequestState> {
-            when (it) {
-                is RequestState.Error -> showErrorSearching(it)
-                is RequestState.Result<*> -> {
-                    @Suppress("UNCHECKED_CAST")
-                    (it as RequestState.Result<Event<String>>).data.getContentIfNotHandled()?.let { result ->
-                        showResult(result)
-                    }
-                }
-                is RequestState.Loading -> pbProgress.visibility = if (it.isLoading) View.VISIBLE else View.INVISIBLE
-            }
-        })
-    }
-
-    private fun observeEcho() {
-        viewModel.echoLiveData.observe(viewLifecycleOwner, Observer<RequestState> {
-            @Suppress("UNCHECKED_CAST")
-            when (it) {
-                is RequestState.Error -> showErrorRequestingEcho(it)
-                is RequestState.Result<*> -> (it as RequestState.Result<Event<String>>).data.getContentIfNotHandled()?.let { result ->
-                    showResult(result) }
-                is RequestState.Loading -> pbProgress.visibility = if (it.isLoading) View.VISIBLE else View.INVISIBLE
-            }
-        })
+    private fun setupViews() {
+        btnSearch.setOnClickListener { search() }
+        btnEcho.setOnClickListener { echo() }
     }
 
     private fun search() {
         val text = txtName.text.toString()
-        if (text.isBlank()) return
-        requireActivity().hideKeyboard()
+        if (TextUtils.isEmpty(text.trim { it <= ' ' })) return
+        requireActivity().hideSoftKeyboard()
         viewModel.search(text)
     }
 
     private fun echo() {
         val text = txtName.text.toString()
-        if (text.isBlank()) return
-        requireActivity().hideKeyboard()
+        if (TextUtils.isEmpty(text.trim { it <= ' ' })) return
+        requireActivity().hideSoftKeyboard()
         viewModel.requestEcho(text)
     }
 
-    private fun showErrorSearching(searchError: RequestState.Error) {
-        searchError.exception.getContentIfNotHandled()?.run {
+    private fun observeSearchResult() {
+        viewModel.searchResultLiveData.observe(viewLifecycleOwner, Observer { resource ->
+            when {
+                resource.isLoading -> pbProgress.visibility = View.VISIBLE
+                resource.hasError() -> showErrorSearching(resource.exception!!)
+                resource.hasSuccess() -> showResult(resource.data!!)
+            }
+        })
+    }
+
+    private fun observeEchoResult() {
+        viewModel.echoResultLiveData.observe(viewLifecycleOwner, Observer { resource ->
+            when {
+                resource.isLoading -> pbProgress.visibility = View.VISIBLE
+                resource.hasError() -> showErrorRequestingEcho(resource.exception!!)
+                resource.hasSuccess() -> showResult(resource.data!!)
+            }
+        })
+    }
+
+    private fun showErrorSearching(exceptionEvent: Event<Exception>) {
+        val exception = exceptionEvent.getContentIfNotHandled()
+        if (exception != null) {
             pbProgress.visibility = View.INVISIBLE
-            Toast.makeText(requireActivity(), message,
-                    Toast.LENGTH_SHORT).show()
+            var message: String? = exception.message
+            if (message == null) message = getString(R.string.main_error_searching)
+            Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun showErrorRequestingEcho(echoError: RequestState.Error) {
-        echoError.exception.getContentIfNotHandled()?.run {
+    private fun showErrorRequestingEcho(exceptionEvent: Event<Exception>) {
+        val exception = exceptionEvent.getContentIfNotHandled()
+        if (exception != null) {
             pbProgress.visibility = View.INVISIBLE
-            Toast.makeText(requireActivity(), message,
-                    Toast.LENGTH_SHORT).show()
+            var message: String? = exception.message
+            if (message == null) message = getString(R.string.main_error_requesting_echo)
+            Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun showResult(result: String) {
-        pbProgress.visibility = View.INVISIBLE
-        Toast.makeText(requireActivity(),
-                if (result.isNotBlank()) result else getString(R.string.main_fragment_not_found),
-                Toast.LENGTH_SHORT).show()
+    private fun showResult(result: Event<String>) {
+        val message = result.getContentIfNotHandled()
+        if (message != null) {
+            pbProgress.visibility = View.INVISIBLE
+            Toast.makeText(requireContext(),
+                    if (!TextUtils.isEmpty(message)) message else getString(R.string.main_no_results),
+                    Toast.LENGTH_SHORT).show()
+        }
     }
 
     companion object {

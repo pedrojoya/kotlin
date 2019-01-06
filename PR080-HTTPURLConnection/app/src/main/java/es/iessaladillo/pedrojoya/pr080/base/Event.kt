@@ -1,14 +1,9 @@
 package es.iessaladillo.pedrojoya.pr080.base
 
-open class Event<out T>(private val content: T) {
+class Event<out T>(private val content: T) {
 
-    @Suppress("MemberVisibilityCanBePrivate")
-    var hasBeenHandled = false
-        private set // Allow external read but not write
+    private var hasBeenHandled = false
 
-    /**
-     * Returns the content and prevents its use again.
-     */
     fun getContentIfNotHandled(): T? {
         return if (hasBeenHandled) {
             null
@@ -18,9 +13,4 @@ open class Event<out T>(private val content: T) {
         }
     }
 
-    @Suppress("unused")
-            /**
-     * Returns the content, even if it's already been handled.
-     */
-    fun peekContent(): T = content
 }

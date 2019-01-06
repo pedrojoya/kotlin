@@ -2,10 +2,12 @@
 package es.iessaladillo.pedrojoya.pr080.extensions
 
 import android.app.Activity
-import android.content.Context
 import android.view.inputmethod.InputMethodManager
+import androidx.core.content.getSystemService
 
-fun Activity.hideKeyboard() {
-    (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
-            .hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
+fun Activity.hideSoftKeyboard() {
+    val inputMethodManager = getSystemService<InputMethodManager>()
+    if (inputMethodManager != null && currentFocus != null) {
+        inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+    }
 }
