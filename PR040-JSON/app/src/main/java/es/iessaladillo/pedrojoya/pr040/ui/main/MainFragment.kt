@@ -7,9 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import es.iessaladillo.pedrojoya.pr040.R
 import es.iessaladillo.pedrojoya.pr040.base.Event
 import es.iessaladillo.pedrojoya.pr040.data.RepositoryImpl
@@ -45,7 +43,6 @@ class MainFragment: Fragment() {
             setHasFixedSize(true)
             layoutManager = GridLayoutManager(requireContext(), requireContext().resources
                     .getInteger(R.integer.main_lstStudents_columns))
-            addItemDecoration(DividerItemDecoration(requireActivity(), LinearLayoutManager.VERTICAL))
             itemAnimator = DefaultItemAnimator()
             adapter = listAdapter
         }

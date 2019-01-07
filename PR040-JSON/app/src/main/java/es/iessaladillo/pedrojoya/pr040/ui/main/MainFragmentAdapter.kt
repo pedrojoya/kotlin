@@ -22,7 +22,7 @@ class MainFragmentAdapter : ListAdapter<Student, MainFragmentAdapter.ViewHolder>
         return oldItem.photo == newItem.photo &&
                 oldItem.grade == newItem.grade &&
                 oldItem.address == newItem.address &&
-                oldItem.isRepeater == newItem.isRepeater
+                oldItem.repeater == newItem.repeater
     }
 }) {
 
@@ -46,7 +46,7 @@ class MainFragmentAdapter : ListAdapter<Student, MainFragmentAdapter.ViewHolder>
                 lblAge.setTextColor(
                         if (age < 18) ContextCompat.getColor(lblAge.context, R.color.accent)
                         else ContextCompat.getColor(lblAge.context, R.color.primary_text))
-                lblRepeater.visibility = if (isRepeater) View.VISIBLE else View.INVISIBLE
+                lblRepeater.visibility = if (repeater) View.VISIBLE else View.INVISIBLE
             }
         }
 

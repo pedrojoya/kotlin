@@ -7,4 +7,4 @@ data class Student(
         val grade: String? = null,
         val address: String? = null,
         val phone: String? = null,
-        val isRepeater: Boolean = false)
+        val repeater: Boolean = false)
