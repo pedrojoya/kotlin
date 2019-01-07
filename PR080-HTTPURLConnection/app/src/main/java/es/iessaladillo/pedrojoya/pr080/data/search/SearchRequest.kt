@@ -1,6 +1,6 @@
 package es.iessaladillo.pedrojoya.pr080.data.search
 
-import es.iessaladillo.pedrojoya.pr080.base.AsyncLiveTask
+import es.iessaladillo.pedrojoya.pr080.base.Call
 import es.iessaladillo.pedrojoya.pr080.base.Event
 import es.iessaladillo.pedrojoya.pr080.base.Resource
 import java.net.HttpURLConnection
@@ -9,7 +9,7 @@ import java.net.URLEncoder
 
 private const val SEARCH_URL = "https://www.google.es/search?hl=es&q=\""
 
-class SearchRequest(private val text: String) : AsyncLiveTask<Resource<Event<String>>>() {
+class SearchRequest(private val text: String) : Call<Resource<Event<String>>>() {
 
     override fun doAsync() {
         postValue(Resource.loading())

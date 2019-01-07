@@ -1,6 +1,6 @@
 package es.iessaladillo.pedrojoya.pr080.data.echo
 
-import es.iessaladillo.pedrojoya.pr080.base.AsyncLiveTask
+import es.iessaladillo.pedrojoya.pr080.base.Call
 import es.iessaladillo.pedrojoya.pr080.base.Event
 import es.iessaladillo.pedrojoya.pr080.base.Resource
 import java.io.PrintWriter
@@ -14,7 +14,7 @@ private const val KEY_NAME = "nombre"
 private const val KEY_DATE = "fecha"
 private const val ECHO_URL = "http://www.informaticasaladillo.es/echo.php"
 
-class EchoRequest(private val text: String) : AsyncLiveTask<Resource<Event<String>>>() {
+class EchoRequest(private val text: String) : Call<Resource<Event<String>>>() {
 
     private val simpleDateFormat = SimpleDateFormat(
             "dd/MM/yyyy " + "HH:mm:ss", Locale.getDefault())

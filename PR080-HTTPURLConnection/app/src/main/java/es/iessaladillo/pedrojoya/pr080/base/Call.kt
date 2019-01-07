@@ -7,7 +7,7 @@ import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 
-abstract class AsyncLiveTask<T> protected constructor() : LiveData<T>() {
+abstract class Call<T> protected constructor() : LiveData<T>() {
 
     @SuppressLint("StaticFieldLeak")
     private val asyncTask = object : AsyncTask<Void, Void, Void>() {
