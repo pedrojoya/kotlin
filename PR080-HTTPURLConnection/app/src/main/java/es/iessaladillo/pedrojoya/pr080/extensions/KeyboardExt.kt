@@ -1,4 +1,4 @@
-@file:JvmName("ActivityExt")
+@file:JvmName("KeyboardExt")
 package es.iessaladillo.pedrojoya.pr080.extensions
 
 import android.app.Activity
