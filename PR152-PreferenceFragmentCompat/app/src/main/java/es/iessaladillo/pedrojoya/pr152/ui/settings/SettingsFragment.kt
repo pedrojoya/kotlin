@@ -16,10 +16,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
             SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
                 this.updateIcon(sharedPreferences, key)
             }
-    private var onMultiListChangeListener: SharedPreferences.OnSharedPreferenceChangeListener =
-            SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
-                updateMultiListSummary(sharedPreferences, key)
-            }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.settings, rootKey)
@@ -28,10 +24,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupActionBar()
-        // TODO: It should update summary automatically but it doesn't. Bug in library?
-        // setupMultiListSummaryProvider();
+        setupMultiListSummaryProvider();
         // Initial state
-        updateMultiListSummary(preferenceScreen.sharedPreferences, getString(R.string.prefShifts_key))
         updateIcons()
     }
 
@@ -56,14 +50,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
         super.onResume()
         sharedPreferences.apply {
             registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener)
-            registerOnSharedPreferenceChangeListener(onMultiListChangeListener)
         }
     }
 
     override fun onPause() {
         sharedPreferences.apply {
             unregisterOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener)
-            unregisterOnSharedPreferenceChangeListener(onMultiListChangeListener)
             super.onPause()
         }
     }
@@ -96,16 +88,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
                     preference.setIcon(iconResId)
                 }
             }
-        }
-    }
-
-    private fun updateMultiListSummary(sharedPreferences: SharedPreferences, key: String) {
-        if (key == getString(R.string.prefShifts_key)) {
-            val preference = findPreference(
-                    getString(R.string.prefShifts_key)) as MultiSelectListPreference
-            val summary = if (preference.values.isEmpty()) getString(R.string.prefShifts_summary)
-                            else preference.values.toString()
-            preference.summary = summary
         }
     }
 

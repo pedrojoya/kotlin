@@ -13,12 +13,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupToolbar()
-        // Load initial fragment
         if (savedInstanceState == null) {
-            supportFragmentManager.commit {
-                replace(R.id.flContent,
-                        MainFragment(), MainFragment::class.java.simpleName)
-            }
+            loadInitialFragment()
+        }
+    }
+
+    private fun loadInitialFragment() {
+        supportFragmentManager.commit {
+            replace(R.id.flContent,
+                    MainFragment(), MainFragment::class.java.simpleName)
         }
     }
 
