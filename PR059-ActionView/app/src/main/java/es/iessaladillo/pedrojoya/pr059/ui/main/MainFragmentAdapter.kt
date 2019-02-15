@@ -4,13 +4,14 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import es.iessaladillo.pedrojoya.pr059.R
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.support_simple_spinner_dropdown_item.*
 
 class MainFragmentAdapter : ListAdapter<String, MainFragmentAdapter.ViewHolder>(object : DiffUtil.ItemCallback<String>() {
     override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
@@ -37,8 +38,14 @@ class MainFragmentAdapter : ListAdapter<String, MainFragmentAdapter.ViewHolder>(
 
     inner class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
+        private var text1: TextView = ViewCompat.requireViewById(containerView, android.R.id.text1)
+
         init {
-            containerView.setOnClickListener { showStudent(getItem(adapterPosition)) }
+            containerView.setOnClickListener {
+                if (adapterPosition != adapterPosition) {
+                    showStudent(getItem(adapterPosition))
+                }
+            }
         }
 
         fun bind(student: String) {
