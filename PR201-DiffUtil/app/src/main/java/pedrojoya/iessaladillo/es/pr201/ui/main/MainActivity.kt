@@ -105,8 +105,8 @@ class MainActivity : AppCompatActivity() {
         val mnuSort = menu?.findItem(R.id.mnuSort)
         val desc = viewModel.isInDescendentOrder()
         mnuSort?.setIcon(
-                if (desc) R.drawable.ic_sort_ascending_white_24dp
-                else R.drawable.ic_sort_descending_white_24dp)
+                if (desc) R.drawable.ic_sort_ascending_black_24dp
+                else R.drawable.ic_sort_descending_black_24dp)
         return super.onPrepareOptionsMenu(menu)
     }
 
