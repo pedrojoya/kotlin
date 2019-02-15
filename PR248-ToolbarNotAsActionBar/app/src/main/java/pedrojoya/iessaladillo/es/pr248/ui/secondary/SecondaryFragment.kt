@@ -23,7 +23,7 @@ class SecondaryFragment : Fragment() {
     private fun setupToolbar() {
         toolbar.run {
             setTitle(R.string.secondary_title)
-            setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
+            setNavigationIcon(R.drawable.ic_arrow_back_black_24dp)
             setNavigationOnClickListener { requireActivity().onBackPressed() }
             inflateMenu(R.menu.fragment_secondary)
             setOnMenuItemClickListener {
