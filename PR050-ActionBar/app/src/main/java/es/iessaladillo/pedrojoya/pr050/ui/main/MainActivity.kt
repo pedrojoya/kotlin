@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupActionBar() {
         supportActionBar?.run {
-            setIcon(R.drawable.ic_arrow_back_white_24dp)
+            setIcon(R.drawable.ic_arrow_back_black_24dp)
         }
     }
 
