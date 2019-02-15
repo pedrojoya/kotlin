@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.commit
 import es.iessaladillo.pedrojoya.pr018.R
 import es.iessaladillo.pedrojoya.pr018.extensions.toast
@@ -15,9 +16,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         // Load initial fragment.
         if (savedInstanceState == null) {
-            supportFragmentManager.commit {
-                replace(R.id.flContent, MainFragment.newInstance(), MainFragment::class.java.simpleName)
-            }
+            loadInitialFragment()
+        }
+    }
+
+    private fun loadInitialFragment() {
+        supportFragmentManager.commit {
+            replace(R.id.flContent, MainFragment.newInstance(), MainFragment::class.java.simpleName)
+            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
         }
     }
 
