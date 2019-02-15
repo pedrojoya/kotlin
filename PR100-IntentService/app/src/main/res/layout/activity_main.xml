@@ -42,7 +42,8 @@
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="@dimen/activity_main_fab_margin"
         android:layout_marginEnd="@dimen/activity_main_fab_margin"
-        android:src="@drawable/ic_action_send"
+        android:tint="@color/white"
+        android:src="@drawable/ic_send_black_24dp"
         app:elevation="@dimen/activity_main_fab_elevation"
         app:pressedTranslationZ="@dimen/activity_main_fab_pressedTranslationZ"/>
 
