@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:contentDescription="@string/activity_main_expand"
+            android:tint="@color/white"
             app:srcCompat="@drawable/ic_expand_more_white_24dp"/>
     </LinearLayout>
 
