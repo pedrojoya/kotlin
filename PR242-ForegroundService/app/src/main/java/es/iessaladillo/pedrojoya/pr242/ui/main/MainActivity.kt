@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showSnackBar(uri: Uri) {
         Snackbar.make(lstStudents!!, R.string.main_activity_exported, Snackbar.LENGTH_LONG).setAction(
-                R.string.main_activity_open) { _ -> showFile(uri) }.show()
+                R.string.main_activity_open) { showFile(uri) }.show()
     }
 
     private fun showFile(uri: Uri) {
