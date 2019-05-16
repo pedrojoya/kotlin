@@ -22,11 +22,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun greet() {
         hideKeyboard()
-        toast(StringBuilder()
-                .append(getString(R.string.main_good_morning))
-                .append(if (chkPolite.isChecked) getString(R.string.main_nice_to_meet_you) else "")
-                .append(" ")
-                .append(txtName.text).toString())
+        val morning = getString(R.string.main_good_morning)
+        val polite = if (chkPolite.isChecked) getString(R.string.main_nice_to_meet_you) else ""
+        val name = txtName.text
+        val message = "$morning $polite $name"
+        toast(message)
     }
 
     private fun changeText(isChecked: Boolean) {
