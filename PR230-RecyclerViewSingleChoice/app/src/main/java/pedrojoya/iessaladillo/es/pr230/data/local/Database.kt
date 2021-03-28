@@ -25,7 +25,7 @@ object Database: Repository {
 
     private fun newFakeStudent(): Student {
         val num = autonumeric++
-        return Student(num, Fakeit.name().name(), Fakeit.address().streetAddress(),
+        return Student(num.toLong(), Fakeit.name().name(), Fakeit.address().streetAddress(),
                 "$BASE_URL${random.nextInt(1084)}")
     }
 

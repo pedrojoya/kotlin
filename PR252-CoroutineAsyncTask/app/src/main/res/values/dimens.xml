@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="main_margin">10dp</dimen>
+    <dimen name="main_prbBar_padding">4dp</dimen>
+</resources>

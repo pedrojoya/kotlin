@@ -1,0 +1,97 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME}#end
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+
+class ${NAME} : ListAdapter<${Entity}, ${NAME}.ViewHolder>(
+    object ${Entity}DiffCallback : DiffUtil.ItemCallback<${Entity}>() {
+
+        override fun areItemsTheSame(oldItem: ${Entity}, newItem: ${Entity}): Boolean =
+                oldItem.${EntityKeyPropertyName} == newItem.${EntityKeyPropertyName}
+
+        override fun areContentsTheSame(oldItem: ${Entity}, newItem: ${Entity}): Boolean =
+                oldItem == newItem
+
+    }) {
+
+    private var onItemClickListener: ((position: Int) -> Unit)? = null
+    var selectionTracker: SelectionTracker<${EntityKeyType}>? = null
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val itemView = layoutInflater.inflate(R.layout.${LayoutName}, parent, false)
+        return ViewHolder(itemView, onItemClickListener)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = getItem(position)
+        holder.bind(item, position, selectionTracker?.isSelected(item.${EntityKeyPropertyName}) ?: false)
+    }
+
+    fun setOnItemClickListener(onItemClickListener: (position: Int) -> Unit) {
+        this.onItemClickListener = onItemClickListener
+    }
+
+    public override fun getItem(position: Int): ${Entity} = super.getItem(position)
+
+    fun getKey(position: Int): Long = getItem(position).${EntityKeyPropertyName}
+
+    fun getPosition(key: Long): Int {
+        val position = currentList.indexOfFirst { it.${EntityKeyPropertyName} == key }
+        return if (position >= 0) position else NO_POSITION
+    }
+
+    class KeyProvider(
+            private val adapter: ${NAME}
+    ) : ItemKeyProvider<${EntityKeyType}>(SCOPE_MAPPED) {
+        override fun getKey(position: Int): ${EntityKeyType} = adapter.getKey(position)
+        override fun getPosition(key: ${EntityKeyType}): Int = adapter.getPosition(key)
+    }
+
+    class ItemDetails : ItemDetailsLookup.ItemDetails<${EntityKeyType}>() {
+        var pos = 0
+        var key: ${EntityKeyType}? = null
+        override fun getPosition() = pos
+        override fun getSelectionKey() = key
+        override fun inSelectionHotspot(e: MotionEvent) = true
+    }
+
+    class DetailsLookup(
+            private val recyclerView: RecyclerView
+    ) : ItemDetailsLookup<${EntityKeyType}>() {
+        override fun getItemDetails(e: MotionEvent): ItemDetails<${EntityKeyType}>? =
+                recyclerView.findChildViewUnder(e.x, e.y)
+                        ?.let { (recyclerView.getChildViewHolder(it) as ViewHolder).details }
+    }
+
+    class ViewHolder(override val containerView: View, onItemClickListener: ((position: Int) -> Unit)?) :
+            RecyclerView.ViewHolder(containerView), LayoutContainer {
+
+        init {
+            containerView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    onItemClickListener?.invoke(position)
+                }
+            }
+        }
+
+        val details: ItemDetails = ItemDetails()
+
+        fun bind(item: Student, position: Int, isSelected: Boolean) {
+            itemView.isActivated = isSelected
+            details.pos = position
+            details.key = item.${EntityKeyPropertyName}
+            item.run {
+                // TODO: Bind entity properties to views
+            }
+        }
+
+    }
+
+}

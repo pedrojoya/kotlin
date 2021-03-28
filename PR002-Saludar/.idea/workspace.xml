@@ -6,8 +6,58 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="30bbc5fe-cc6e-4ae7-9eb9-10b8b29bff25" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jetbrains_kotlin_kotlin_android_extensions_runtime_1_3_31_jar.xml" afterDir="false" />
+    <list default="true" id="254be160-f440-4545-a46d-8960f07854ae" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_activity_activity_1_0_0_alpha08_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_annotation_annotation_1_1_0_rc01_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_appcompat_appcompat_1_1_0_alpha05_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_appcompat_appcompat_resources_1_1_0_alpha05_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_arch_core_core_common_2_1_0_beta01_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_arch_core_core_runtime_2_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_asynclayoutinflater_asynclayoutinflater_1_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_cardview_cardview_1_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_collection_collection_1_1_0_rc01_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_concurrent_concurrent_futures_1_0_0_beta01_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_coordinatorlayout_coordinatorlayout_1_1_0_alpha01_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_core_core_1_2_0_alpha01_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_core_core_ktx_1_2_0_alpha01_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_cursoradapter_cursoradapter_1_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_customview_customview_1_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_documentfile_documentfile_1_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_drawerlayout_drawerlayout_1_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_fragment_fragment_1_1_0_alpha08_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_interpolator_interpolator_1_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_legacy_legacy_support_core_ui_1_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_legacy_legacy_support_core_utils_1_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_lifecycle_lifecycle_common_2_2_0_alpha01_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_lifecycle_lifecycle_livedata_2_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_lifecycle_lifecycle_livedata_core_2_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_lifecycle_lifecycle_runtime_2_2_0_alpha01_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_lifecycle_lifecycle_viewmodel_2_2_0_alpha01_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_loader_loader_1_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_localbroadcastmanager_localbroadcastmanager_1_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_print_print_1_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_recyclerview_recyclerview_1_1_0_alpha03_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_savedstate_savedstate_1_0_0_beta01_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_slidingpanelayout_slidingpanelayout_1_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_swiperefreshlayout_swiperefreshlayout_1_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_test_core_1_1_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_test_espresso_espresso_core_3_1_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_test_espresso_espresso_idling_resource_3_1_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_test_espresso_espresso_intents_3_1_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_test_monitor_1_1_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_test_rules_1_1_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_test_runner_1_1_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_transition_transition_1_0_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_vectordrawable_vectordrawable_1_1_0_beta01_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_vectordrawable_vectordrawable_animated_1_1_0_beta01_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_versionedparcelable_versionedparcelable_1_1_0_beta01_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_viewpager2_viewpager2_1_0_0_alpha02_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_viewpager_viewpager_1_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__com_google_android_material_material_1_1_0_alpha06_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__com_google_guava_listenablefuture_1_0_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__org_jetbrains_kotlin_kotlin_android_extensions_runtime_1_3_31_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__org_jetbrains_kotlin_kotlin_stdlib_1_3_31_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_appcompat_appcompat_1_0_2_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_appcompat_appcompat_1_0_2_aar.xml" afterDir="false" />
@@ -75,11 +125,68 @@
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_uiautomator_uiautomator_v18_2_1_3_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_uiautomator_uiautomator_v18_2_1_3_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_material_material_1_0_0_alpha1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_material_material_1_0_0_alpha1_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_schibsted_spain_barista_2_7_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_schibsted_spain_barista_2_7_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jetbrains_kotlin_kotlin_stdlib_1_3_21_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jetbrains_kotlin_kotlin_stdlib_1_3_31_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jetbrains_kotlin_kotlin_stdlib_common_1_3_21_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jetbrains_kotlin_kotlin_stdlib_common_1_3_31_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jetbrains_kotlin_kotlin_stdlib_jdk7_1_3_21_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__org_jetbrains_kotlin_kotlin_stdlib_jdk7_1_3_21_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PR002-Saludar.iml" beforeDir="false" afterPath="$PROJECT_DIR$/PR002-Saludar.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/es/iessaladillo/pedrojoya/pr002/ui/main/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/es/iessaladillo/pedrojoya/pr002/ui/main/MainActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/checkstyle-idea.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/checkstyle-idea.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_annotation_annotation_1_0_0_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_appcompat_appcompat_1_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_arch_core_core_common_2_0_0_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_arch_core_core_runtime_2_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_asynclayoutinflater_asynclayoutinflater_1_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_cardview_cardview_1_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_collection_collection_1_0_0_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_coordinatorlayout_coordinatorlayout_1_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_core_core_1_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_core_core_ktx_1_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_cursoradapter_cursoradapter_1_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_customview_customview_1_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_documentfile_documentfile_1_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_drawerlayout_drawerlayout_1_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_fragment_fragment_1_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_interpolator_interpolator_1_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_legacy_legacy_support_core_ui_1_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_legacy_legacy_support_core_utils_1_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_lifecycle_lifecycle_common_2_0_0_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_lifecycle_lifecycle_livedata_2_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_lifecycle_lifecycle_livedata_core_2_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_lifecycle_lifecycle_runtime_2_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_lifecycle_lifecycle_viewmodel_2_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_loader_loader_1_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_localbroadcastmanager_localbroadcastmanager_1_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_print_print_1_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_recyclerview_recyclerview_1_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_slidingpanelayout_slidingpanelayout_1_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_swiperefreshlayout_swiperefreshlayout_1_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_test_espresso_espresso_core_3_1_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_test_espresso_espresso_idling_resource_3_1_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_test_espresso_espresso_intents_3_1_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_test_monitor_1_1_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_test_rules_1_1_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_test_runner_1_1_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_transition_transition_1_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_vectordrawable_vectordrawable_1_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_vectordrawable_vectordrawable_animated_1_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_versionedparcelable_versionedparcelable_1_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__androidx_viewpager_viewpager_1_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__com_google_android_material_material_1_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__org_jetbrains_kotlin_kotlin_stdlib_1_2_71_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__org_jetbrains_kotlin_kotlin_stdlib_common_1_2_71_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__org_jetbrains_kotlin_kotlin_stdlib_common_1_3_31_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/libraries/Gradle__org_jetbrains_kotlin_kotlin_stdlib_jdk7_1_2_71_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jetbrains_kotlin_kotlin_stdlib_jdk7_1_3_31_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/app/src/main/java/es/iessaladillo/pedrojoya/pr004/ui/main/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/app/src/main/java/es/iessaladillo/pedrojoya/pr004/ui/main/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PR004-IntentsImplicitos/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../PR004-IntentsImplicitos/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../PR007-LinearLayout/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PR007-LinearLayout/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../PR007-LinearLayout/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PR007-LinearLayout/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../PR016-ExpandableListView/.idea/libraries/Gradle__androidx_appcompat_appcompat_1_0_0.xml" beforeDir="false" />
@@ -446,10 +553,15 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/build.gradle">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/es/iessaladillo/pedrojoya/pr002/ui/main/MainActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="11" selection-start-line="11" selection-end-line="11" />
+            <state relative-caret-position="222">
+              <caret line="28" column="59" lean-forward="true" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="59" />
+              <folding>
+                <element signature="e#49#335#0" expanded="true" />
+                <element signature="e#908#945#0" expanded="true" />
+                <element signature="e#992#1033#1" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -463,19 +575,17 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/app/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/java/es/iessaladillo/pedrojoya/pr002/ui/main/MainActivity.kt" />
         <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/java/es/iessaladillo/pedrojoya/pr002/ui/main/MainActivity.kt" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="203" />
+    <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="877" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -532,6 +642,16 @@
               <item name="iessaladillo" type="462c0819:PsiDirectoryNode" />
               <item name="pedrojoya" type="462c0819:PsiDirectoryNode" />
               <item name="pr002" type="462c0819:PsiDirectoryNode" />
+              <item name="extensions" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PR002-Saludar" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="es" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="iessaladillo" type="462c0819:PsiDirectoryNode" />
+              <item name="pedrojoya" type="462c0819:PsiDirectoryNode" />
+              <item name="pr002" type="462c0819:PsiDirectoryNode" />
               <item name="ui" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -544,30 +664,6 @@
               <item name="pr002" type="462c0819:PsiDirectoryNode" />
               <item name="ui" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PR002-Saludar" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-            </path>
-            <path>
-              <item name="PR002-Saludar" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
-            <path>
-              <item name="PR002-Saludar" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="values" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
-            <path>
-              <item name="PR002-Saludar" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="values" type="ddeffd01:AndroidResFolderTypeNode" />
-              <item name="strings" type="c431d0b8:AndroidResGroupNode" />
             </path>
             <path>
               <item name="PR002-Saludar" type="1abcf292:AndroidViewProjectNode" />
@@ -589,7 +685,6 @@
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
-    <property name="device.picker.selection" value="Nexus_5X_API_26" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="not.eligible.for.single.variant.sync" value="true" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -643,7 +738,7 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="app" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
@@ -703,6 +798,7 @@
       </method>
     </configuration>
     <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="moduleWithDependencies" />
@@ -719,11 +815,11 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="30bbc5fe-cc6e-4ae7-9eb9-10b8b29bff25" name="Default Changelist" comment="" />
-      <created>1557863853434</created>
+      <changelist id="254be160-f440-4545-a46d-8960f07854ae" name="Default Changelist" comment="" />
+      <created>1558510263244</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1557863853434</updated>
+      <updated>1558510263244</updated>
     </task>
     <servers />
   </component>
@@ -731,82 +827,52 @@
     <frame x="0" y="23" width="1440" height="877" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Capture Tool" />
-      <window_info content_ui="combo" id="Project" visible="true" weight="0.22246066" />
+      <window_info active="true" content_ui="combo" id="Project" visible="true" weight="0.3297568" />
       <window_info id="Structure" side_tool="true" />
       <window_info id="Build Variants" side_tool="true" />
       <window_info id="Image Layers" />
       <window_info id="Designer" />
       <window_info id="Resources Explorer" />
+      <window_info id="Capture Tool" />
       <window_info id="Favorites" side_tool="true" />
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Run" />
-      <window_info active="true" anchor="bottom" id="Inspection Results" visible="true" weight="0.3297362" />
+      <window_info anchor="bottom" id="Inspection Results" visible="true" weight="0.3297362" />
       <window_info anchor="bottom" id="CheckStyle" />
-      <window_info anchor="bottom" id="TODO" />
-      <window_info anchor="bottom" id="Android Profiler" />
-      <window_info anchor="bottom" id="Debug" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" sideWeight="0.5007153" side_tool="true" weight="0.3297362" />
-      <window_info anchor="bottom" id="Find" />
       <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Build" sideWeight="0.49928468" weight="0.16786571" />
+      <window_info anchor="bottom" id="TODO" />
+      <window_info anchor="bottom" id="Android Profiler" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Find" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Build" weight="0.3297362" />
       <window_info anchor="bottom" id="Logcat" />
       <window_info anchor="right" id="Device File Explorer" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" />
       <window_info anchor="right" id="Gradle" />
       <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Preview" />
-      <window_info anchor="right" id="Assistant" weight="0.3297568" />
       <window_info anchor="right" id="Palette&#9;" />
     </layout>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="36" column="29" selection-start-line="36" selection-start-column="29" selection-end-line="36" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-38" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/dimens.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values-es/strings.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/iessaladillo/pedrojoya/pr002/ui/main/MainActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="29" column="5" lean-forward="true" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
-          <folding>
-            <element signature="e#800#837#0" expanded="true" />
-            <element signature="e#884#925#1" expanded="true" />
-            <element signature="e#1173#1198#1" expanded="true" />
-            <element signature="e#1220#1247#1" expanded="true" />
-          </folding>
+        <state relative-caret-position="171">
+          <caret line="9" column="22" lean-forward="true" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/es/iessaladillo/pedrojoya/pr002/ui/main/MainActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        <state relative-caret-position="222">
+          <caret line="28" column="59" lean-forward="true" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="59" />
+          <folding>
+            <element signature="e#49#335#0" expanded="true" />
+            <element signature="e#908#945#0" expanded="true" />
+            <element signature="e#992#1033#1" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

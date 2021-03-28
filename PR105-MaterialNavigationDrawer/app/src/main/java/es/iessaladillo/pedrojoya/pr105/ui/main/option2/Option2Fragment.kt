@@ -11,8 +11,6 @@ import androidx.fragment.app.activityViewModels
 import com.google.android.material.tabs.TabLayout
 import es.iessaladillo.pedrojoya.pr105.R
 import es.iessaladillo.pedrojoya.pr105.base.OnToolbarAvailableListener
-import es.iessaladillo.pedrojoya.pr105.extensions.forEachIndexed
-import es.iessaladillo.pedrojoya.pr105.extensions.onTabSelected
 import es.iessaladillo.pedrojoya.pr105.ui.main.MainActivityViewModel
 import es.iessaladillo.pedrojoya.pr105.ui.main.MainActivityViewModelFactory
 import es.iessaladillo.pedrojoya.pr105.ui.main.option2.tab1.Option2Tab1Fragment
@@ -57,8 +55,8 @@ class Option2Fragment : Fragment() {
 
     private fun setupViewPager() {
         val adapter = ViewPagerAdapter(childFragmentManager).apply {
-            addFragment(Option2Tab1Fragment(), getString(R.string.option2_fragment_students), R.drawable.ic_face_white_24dp)
-            addFragment(Option2Tab2Fragment(), getString(R.string.option2_fragment_data), R.drawable.ic_message_white_24dp)
+            addFragment(Option2Tab1Fragment(), getString(R.string.option2_fragment_students), R.drawable.ic_face_black_24dp)
+            addFragment(Option2Tab2Fragment(), getString(R.string.option2_fragment_data), R.drawable.ic_message_black_24dp)
         }
         viewPager.adapter = adapter
         tabLayout.run {

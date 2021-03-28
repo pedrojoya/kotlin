@@ -1,0 +1,122 @@
+<!--suppress AndroidUnknownAttribute -->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="es.iessaladillo.pedrojoya.pr244.main.MainActivityViewModel"/>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imgPhoto"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/main_imgPhoto"
+            android:onClick="@{v -> vm.changePhoto()}"
+            android:scaleType="centerCrop"
+            app:error="@{@drawable/placeholder}"
+            app:imageUrl="@{vm.photoUrl}"
+            app:layout_constraintDimensionRatio="w,9:16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars"/>
+
+        <TextView
+            android:id="@+id/lblName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_main_margin"
+            android:layout_marginEnd="@dimen/activity_main_margin"
+            android:layout_marginStart="@dimen/activity_main_margin"
+            android:labelFor="@+id/txtName"
+            android:text="@{vm.lblNameText}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imgPhoto"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <EditText
+            android:id="@+id/txtName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/activity_main_margin"
+            android:layout_marginStart="@dimen/activity_main_margin"
+            android:inputType="text|textPersonName"
+            android:text="@={vm.name}"
+            android:imeOptions="actionDone"
+            android:onEditorAction="@{(textView, actionId, keyEvent) -> vm.done()}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imgPhoto"
+            app:layout_constraintTop_toBottomOf="@+id/lblName"
+            tools:ignore="Autofill">
+
+            <requestFocus/>
+        </EditText>
+
+        <CheckBox
+            android:id="@+id/chkPolite"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_main_margin"
+            android:layout_marginEnd="@dimen/activity_main_margin"
+            android:layout_marginStart="@dimen/activity_main_margin"
+            android:checked="@={vm.polite}"
+            android:text="@string/main_chkPolite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imgPhoto"
+            app:layout_constraintTop_toBottomOf="@+id/txtName"/>
+
+        <TextView
+            android:id="@+id/lblTreatment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:labelFor="@+id/spnTreatment"
+            android:paddingEnd="@dimen/activity_main_margin"
+            android:paddingStart="@dimen/activity_main_margin"
+            android:layout_marginTop="@dimen/activity_main_margin"
+            android:text="@string/main_lblTreatment"
+            app:visible="@{vm.polite}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imgPhoto"
+            app:layout_constraintTop_toBottomOf="@+id/chkPolite"/>
+
+        <Spinner
+            android:id="@+id/spnTreatment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/activity_main_margin"
+            android:layout_marginStart="@dimen/activity_main_margin"
+            android:entries="@array/activity_main_treatments"
+            android:selectedItemPosition="@={vm.treatmentIndex}"
+            app:visible="@{vm.polite}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imgPhoto"
+            app:layout_constraintTop_toBottomOf="@+id/lblTreatment"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_main_margin"
+            android:layout_marginEnd="@dimen/activity_main_margin"
+            android:enabled="@{vm.valid}"
+            android:backgroundTint="@color/fab_background"
+            android:onClick="@{v -> vm.greet()}"
+            android:onLongClick="@{v -> vm.insult()}"
+            app:srcCompat="@drawable/ic_record_voice_over_white_24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

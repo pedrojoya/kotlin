@@ -142,7 +142,7 @@ class MainActivity : AppCompatActivity(), OnToolbarAvailableListener {
         supportActionBar?.run {
             setDisplayHomeAsUpEnabled(true)
             setHomeButtonEnabled(true)
-            setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp)
+//            setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp)
         }
         actionBarDrawerToggle?.let { drawerLayout.removeDrawerListener(actionBarDrawerToggle!!) }
         actionBarDrawerToggle = ActionBarDrawerToggle(this, drawerLayout,

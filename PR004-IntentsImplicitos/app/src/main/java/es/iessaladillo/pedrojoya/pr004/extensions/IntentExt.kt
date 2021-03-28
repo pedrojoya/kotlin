@@ -11,8 +11,9 @@ import android.webkit.WebView.SCHEME_TEL
 
 fun newViewUriIntent(uri: Uri) = Intent(Intent.ACTION_VIEW, uri)
 
-fun newWebSearchIntent(text: String): Intent = Intent(Intent.ACTION_WEB_SEARCH)
-        .putExtra(SearchManager.QUERY, text)
+fun newWebSearchIntent(text: String): Intent =
+        Intent(Intent.ACTION_WEB_SEARCH)
+                .putExtra(SearchManager.QUERY, text)
 
 fun newDialIntent(phoneNumber: String) = Intent(Intent.ACTION_DIAL,
         Uri.parse("$SCHEME_TEL${phoneNumber.trim()}"))

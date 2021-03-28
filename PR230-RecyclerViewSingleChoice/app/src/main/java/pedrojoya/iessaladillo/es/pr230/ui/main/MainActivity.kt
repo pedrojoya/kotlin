@@ -1,18 +1,15 @@
 package pedrojoya.iessaladillo.es.pr230.ui.main
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.selection.SelectionPredicates
 import androidx.recyclerview.selection.SelectionTracker
-import androidx.recyclerview.selection.StorageStrategy
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
 import pedrojoya.iessaladillo.es.pr230.R
-import pedrojoya.iessaladillo.es.pr230.base.PositionalDetailsLookup
-import pedrojoya.iessaladillo.es.pr230.base.PositionalItemKeyProvider
-import pedrojoya.iessaladillo.es.pr230.base.setOnItemClickListener
+import pedrojoya.iessaladillo.es.pr230.base.StableIdListAdapter
 import pedrojoya.iessaladillo.es.pr230.data.RepositoryImpl
 import pedrojoya.iessaladillo.es.pr230.data.local.Database
 import pedrojoya.iessaladillo.es.pr230.data.local.model.Student
@@ -26,30 +23,51 @@ class MainActivity : AppCompatActivity() {
         MainActivityViewModel(RepositoryImpl(Database))
     }
     private val selectionTracker: SelectionTracker<Long> by lazy {
-        SelectionTracker.Builder(
-                "lstStudentsSelection",
-                lstStudents,
-                PositionalItemKeyProvider(),
-                PositionalDetailsLookup(lstStudents),
-                // Las claves son de tipo Long.
-                StorageStrategy.createLongStorage())
-                // Selección simple
-                .withSelectionPredicate(SelectionPredicates.createSelectSingleAnything())
+        //        SelectionTracker.Builder(
+//                "lstStudentsSelection",
+//                lstStudents,
+//                PositionalItemKeyProvider(),
+//                PositionalDetailsLookup(lstStudents),
+//                // Las claves son de tipo Long.
+//                StorageStrategy.createLongStorage())
+//                // Selección simple
+//                .withSelectionPredicate(SelectionPredicates.createSelectSingleAnything())
+//                .build()
+
+//        MainActivityAdapter2.newSelectionTrackerBuilder("lstStudentsSelection",
+//                lstStudents, listAdapter)
+//                .withSelectionPredicate(SelectionPredicates.createSelectSingleAnything())
+//                .build()
+
+        StableIdListAdapter.newSingleSelectionTrackerBuilder("lstStudentsSelection",
+                lstStudents)
                 .build()
+
+//        SelectionTracker.Builder(
+//                "lstStudentsSelection",
+//                lstStudents,
+//                MainActivityAdapter2.KeyProvider(listAdapter),
+//                MainActivityAdapter2.DetailsLookup(lstStudents),
+//                // Las claves son de tipo Long.
+//                StorageStrategy.createLongStorage())
+//                // Selección simple
+//                .withSelectionPredicate(SelectionPredicates.createSelectSingleAnything())
+//                .build()
     }
-    private val listAdapter: MainActivityAdapter by lazy {
-        MainActivityAdapter().apply {
-            emptyView = lblEmpty
-            setOnItemClickListener { _, position ->
-                // La propiedad selectionTracker del adapter forzosamente debe tener un tipo
-                // nullable porque el selectionTracker debe ser asignado al adaptador más adelante,
-                // una vez que se ha asignado el adaptador al recyclerview.
-                if (!selectionTracker!!.hasSelection()) {
-                    selectionTracker!!.select(position.toLong())
-                }
-            }
-        }
-    }
+    //    private val listAdapter: MainActivityAdapter by lazy {
+//        MainActivityAdapter().apply {
+//            emptyView = lblEmpty
+//            setOnItemClickListener { _, position ->
+//                // La propiedad selectionTracker del adapter forzosamente debe tener un tipo
+//                // nullable porque el selectionTracker debe ser asignado al adaptador más adelante,
+//                // una vez que se ha asignado el adaptador al recyclerview.
+//                if (!selectionTracker!!.hasSelection()) {
+//                    selectionTracker!!.select(position.toLong())
+//                }
+//            }
+//        }
+//    }
+    private val listAdapter: MainActivityAdapter3 = MainActivityAdapter3()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,6 +106,7 @@ class MainActivity : AppCompatActivity() {
             adapter = listAdapter
         }
         listAdapter.submitList(viewModel.getStudents(false))
+        lblEmpty.visibility = View.INVISIBLE
         // LA ASIGNACIÓN DEL TRACKER DEBE HACERSE SIEMPRE DESPUÉS DE HABER ASIGNADO EL ADAPTADOR AL
         // RECYCLERVIEW.
         listAdapter.selectionTracker = selectionTracker
@@ -96,7 +115,8 @@ class MainActivity : AppCompatActivity() {
     private fun showSelectedStudent() {
         if (selectionTracker.hasSelection()) {
             for (key in selectionTracker.selection) {
-                showStudent(listAdapter.getItem((key as Long).toInt()))
+//                showStudent(listAdapter.getItem((key as Long).toInt()))
+                showStudent(listAdapter.getItem(key))
             }
 
         } else {

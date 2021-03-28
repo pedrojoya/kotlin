@@ -16,8 +16,8 @@ class MainFragmentAdapter(fm: FragmentManager, private val context: Context) :
 
     private val mTitleResIds = intArrayOf(R.string.lorem_title, R.string
             .likes_title)
-    private val mIconResIds = intArrayOf(R.drawable.ic_share_white_24dp,
-            R.drawable.ic_thumb_up_white_24dp)
+    private val mIconResIds = intArrayOf(R.drawable.ic_share_black_24dp,
+            R.drawable.ic_thumb_up_black_24dp)
 
     override fun getItem(position: Int): Fragment =
             when (position) {

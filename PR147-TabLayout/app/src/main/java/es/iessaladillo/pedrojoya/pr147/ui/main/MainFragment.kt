@@ -32,7 +32,7 @@ class MainFragment : Fragment() {
     }
 
     private fun setupViewPager() {
-        fab.setImageResource(R.drawable.ic_share_white_24dp)
+        fab.setImageResource(R.drawable.ic_share_black_24dp)
         fab.show()
         val adapter = MainFragmentAdapter(requireFragmentManager(),
                 requireContext())
@@ -55,10 +55,10 @@ class MainFragment : Fragment() {
                     // Al colocarse en un página, dependiendo de la página de la que se trate
                     // se actualiza el icono del fab y se muestra.
                     if (viewPager.currentItem == 0) {
-                        fab.setImageResource(R.drawable.ic_share_white_24dp)
+                        fab.setImageResource(R.drawable.ic_share_black_24dp)
                         fab.show()
                     } else {
-                        fab.setImageResource(R.drawable.ic_thumb_up_white_24dp)
+                        fab.setImageResource(R.drawable.ic_thumb_up_black_24dp)
                         fab.show()
                     }
                 }
@@ -69,10 +69,10 @@ class MainFragment : Fragment() {
                 // Al cambiar la pestaña, dependiendo de la que sea se actualiza
                 // el icono del fab y se muestra.
                 if (tab.position == 0) {
-                    fab.setImageResource(R.drawable.ic_share_white_24dp)
+                    fab.setImageResource(R.drawable.ic_share_black_24dp)
                     fab.show()
                 } else {
-                    fab.setImageResource(R.drawable.ic_thumb_up_white_24dp)
+                    fab.setImageResource(R.drawable.ic_thumb_up_black_24dp)
                     fab.show()
                 }
             }

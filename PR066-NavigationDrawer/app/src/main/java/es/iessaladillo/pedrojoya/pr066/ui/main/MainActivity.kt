@@ -7,12 +7,11 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.commit
-import com.google.android.material.navigation.NavigationView
 import es.iessaladillo.pedrojoya.pr066.R
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main_content.*
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +19,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setupViews()
         // if just lunched, select default menu item in drawer.
         if (savedInstanceState == null) {
-            onNavigationItemSelected(navigationView.menu.getItem(0))
+            onNavItemSelected(navigationView.menu.getItem(0))
         }
 
     }
@@ -40,7 +39,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             drawerLayout.addDrawerListener(this)
             syncState()
         }
-        navigationView.setNavigationItemSelectedListener(this)
+        navigationView.setNavigationItemSelectedListener { onNavItemSelected(it) }
     }
 
     override fun onBackPressed() {
@@ -51,7 +50,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+    private fun onNavItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.mnuOption1, R.id.mnuOption2, R.id.mnuOption3, R.id.mnuOption4 -> {
                 navigateToOption(item.title.toString())
